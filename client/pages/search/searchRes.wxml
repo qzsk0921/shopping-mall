@@ -1,0 +1,13 @@
+<!--pages/search/searchRes.wxml-->
+<!-- <text>pages/search/searchRes.wxml</text> -->
+<view class="container-searchRes container">
+  <view class="fixed">
+    <top-navigation navigationBarTitleText="{{navigationBarTitleText}}" navHeight="{{compatibleInfo.navHeight}}"
+      navTop="{{compatibleInfo.menuButtonObject.top}}" menuButtonHeight="{{compatibleInfo.menuButtonObject.height}}"
+      status="{{navStatus}}" color="#333" bgColor="#fff" />
+  </view>
+  <view class="section1">
+    <input class="search" name="search" value="{{searchKeyword}}" bindinput="inputHandle" confirm-type="search"
+      bindconfirm="bindconfirmHandle" />
+  </view>
+</view>

@@ -1,0 +1,58 @@
+{
+  "pages": [
+    "pages/index/index",
+    "pages/logs/logs",
+    "pages/profile/profile",
+    "pages/category/category",
+    "pages/shopping/shopping",
+    "pages/search/search",
+    "pages/search/searchRes",
+    "pages/location/index/index"
+  ],
+  "window": {
+    "backgroundTextStyle": "light",
+    "navigationBarBackgroundColor": "#fff",
+    "navigationBarTitleText": "Weixin",
+    "navigationBarTextStyle": "black"
+  },
+  "style": "v2",
+  "sitemapLocation": "sitemap.json",
+  "tabBar": {
+    "custom": true,
+    "color": "#AAAAAA",
+    "selectedColor": "#2872EC",
+    "borderStyle": "black",
+    "backgroundColor": "#ffffff",
+    "list": [
+      {
+        "pagePath": "pages/index/index",
+        "text": "首页",
+        "iconPath": "assets/images/nav_icon_car_uncheck.png",
+        "selectedIconPath": "assets/images/nav_icon_car_check.png"
+      },
+      {
+        "pagePath": "pages/category/category",
+        "text": "分类",
+        "iconPath": "/assets/images/nav_icon_car_uncheck.png",
+        "selectedIconPath": "/assets/images/nav_icon_car_check.png"
+      },
+      {
+        "pagePath": "pages/shopping/shopping",
+        "text": "购物车",
+        "iconPath": "/assets/images/nav_icon_car_uncheck.png",
+        "selectedIconPath": "/assets/images/nav_icon_car_check.png"
+      },
+      {
+        "pagePath": "pages/profile/profile",
+        "text": "个人中心",
+        "iconPath": "assets/images/nav_icon_my_uncheck.png",
+        "selectedIconPath": "assets/images/nav_icon_my_check.png"
+      }
+    ]
+  },
+  "permission": {
+    "scope.userLocation": {
+      "desc": "你的位置信息将用于小程序位置接口的效果展示"
+    }
+  }
+}

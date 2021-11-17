@@ -1,0 +1,20 @@
+<!--pages/index/index.wxml-->
+<!-- <text>pages/index/index.wxml</text> -->
+<view class="container-index container">
+  <view class="fixed">
+    <top-navigation navigationBarTitleText="{{navigationBarTitleText}}" navHeight="{{compatibleInfo.navHeight}}"
+      navTop="{{compatibleInfo.menuButtonObject.top}}" menuButtonHeight="{{compatibleInfo.menuButtonObject.height}}"
+      status="{{navStatus}}" location="{{location}}" color="#333" bgColor="#fff" />
+  </view>
+  <view class="section1" bindtap="searchHandle">
+    <input class="search" name="search" placeholder="火锅减20" placeholder-class="search-placeholder" />
+    <view class="btn btn-search">搜索</view>
+  </view>
+  <view class="section2" bindtap="a">
+    banner
+  </view>
+  <view class="section3">分类列表</view>
+  <view class="section4">预收专栏</view>
+  <view class="section5">新品上市</view>
+  <view class="section6">热门推荐</view>
+</view>

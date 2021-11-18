@@ -3,13 +3,13 @@
 <view class="container-search">
   <view class="fixed">
     <top-navigation navigationBarTitleText="{{navigationBarTitleText}}" navHeight="{{compatibleInfo.navHeight}}"
-      navTop="{{compatibleInfo.menuButtonObject.top}}" menuButtonHeight="{{compatibleInfo.menuButtonObject.height}}" status="{{navStatus}}"
-      color="#333" bgColor="#fff" />
-    <view class="input-box section1">
-      <input class="search" name="search" placeholder="请输入您想搜索的商品" placeholder-class="search-placeholder"
-        value="{{searchKeyword}}" bindinput="inputHandle" confirm-type="search" bindconfirm="bindconfirmHandle" />
-      <view class="btn btn-search" bindtap="btnSearchCancelHandle">取消</view>
-    </view>
+      navTop="{{compatibleInfo.menuButtonObject.top}}" menuButtonHeight="{{compatibleInfo.menuButtonObject.height}}"
+      status="{{navStatus}}" color="#333" bgColor="#fff" />
+  </view>
+  <view class="input-box section1">
+    <input class="search" name="search" placeholder="请输入您想搜索的商品" placeholder-class="search-placeholder"
+      value="{{searchKeyword}}" bindinput="inputHandle" confirm-type="search" bindconfirm="bindconfirmHandle" />
+    <view class="btn btn-search" bindtap="btnSearchCancelHandle">取消</view>
   </view>
   <view wx:if="{{searchHistory.length}}" class="search-history">
     <view class="tit">
@@ -17,7 +17,8 @@
       <image class="icon-del" mode="aspectFill" src="/assets/images/search_del.png" bindtap="clearSearchHandle"></image>
     </view>
     <view class="item-box">
-      <view class="btn btn-search-item" wx:for="{{searchHistory}}" bindtap="searchHandle" data-keyword="{{item.name}}">{{item.name}}</view>
+      <view class="btn btn-search-item" wx:for="{{searchHistory}}" bindtap="searchHandle" data-keyword="{{item.name}}">
+        {{item.name}}</view>
     </view>
   </view>
 </view>

@@ -1,0 +1,23 @@
+{
+  "condition": {
+    "plugin": {
+      "list": []
+    },
+    "game": {
+      "list": []
+    },
+    "gamePlugin": {
+      "list": []
+    },
+    "miniprogram": {
+      "list": [
+        {
+          "name": "pages/search/searchRes",
+          "pathName": "pages/search/searchRes",
+          "query": "",
+          "scene": null
+        }
+      ]
+    }
+  }
+}

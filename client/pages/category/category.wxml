@@ -1,3 +1,9 @@
 <!--pages/category/category.wxml-->
 <!-- <text>pages/category/category.wxml</text> -->
-<view class="container container-category"></view>
+<view class="container container-category">
+  <view class="fixed">
+    <top-navigation navigationBarTitleText="{{navigationBarTitleText}}" navHeight="{{compatibleInfo.navHeight}}"
+      navTop="{{compatibleInfo.menuButtonObject.top}}" menuButtonHeight="{{compatibleInfo.menuButtonObject.height}}"
+      status="{{navStatus}}" location="{{location}}" color="#333" bgColor="#fff" />
+  </view>
+</view>

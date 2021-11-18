@@ -10,7 +10,7 @@
 		<view wx:elif="{{status==='isEmpty'}}"></view>
 		<!-- 地址 -->
 		<view class="box-location" wx:elif="{{status==='location'}}">
-			<view data-el="location">
+			<view class="text" data-el="location">
 				{{location.formatted_addresses.recommend?location.formatted_addresses.recommend:'定位中...'}}
 			</view>
 			<view class="triangle"></view>

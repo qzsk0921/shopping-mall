@@ -16,7 +16,9 @@ create(store, {
     deliveryAddress: [],
 
     searchKeyword: '',
-    pois: []
+    pois: [],
+
+    availablePoi: false, //是否可配送地址
   },
   inputHandle(e) {
     const _this = this
@@ -43,13 +45,19 @@ create(store, {
   searchKeyword(keyword) {
     // console.log(keyword)
     const vm = this
+
+    let location = null
+    if (vm.store.data.location.location) {
+      location = {
+        latitude: vm.store.data.location.location.lat,
+        longitude: vm.store.data.location.location.lng
+      }
+    }
+
     // qqmapsdk.search({
     qqmapsdk.getSuggestion({
       keyword, //搜索关键词
-      location: {
-        latitude: vm.store.data.location.location.lat ? vm.store.data.location.location.lat : null,
-        longitude: vm.store.data.location.location.lng ? vm.store.data.location.location.lng : null,
-      },
+      location,
       // location: `${vm.data.latitude},${vm.data.longitude}`,
       // rectangle: `${vm.data.latitude-2},${vm.data.longitude-2},${vm.data.longitude+2},${vm.data.longitude+2}`,
       // auto_extend: '1',
@@ -58,6 +66,8 @@ create(store, {
       success: function (res) {
         console.log(res, '搜索位置');
         const pois = res.data
+        // 可配送范围处理
+        // do something
         if (pois.length === 0) return
         vm.setData({
           pois
@@ -70,6 +80,12 @@ create(store, {
         console.log(res);
       }
     });
+  },
+  poiTapHandle(e) {
+    // console.log(444)
+    console.log(e)
+    const ind = e.target.dataset.index
+    // this.data.pois[ind]
   },
   /**
    * 生命周期函数--监听页面加载
@@ -100,7 +116,6 @@ create(store, {
         listH: that.store.data.compatibleInfo.systemInfo.windowHeight - rect.height - that.store.data.compatibleInfo.navHeight,
       })
     }).exec();
-
   },
 
   /**

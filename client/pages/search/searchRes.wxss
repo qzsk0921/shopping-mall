@@ -1,1 +1,58 @@
 /* pages/search/searchRes.wxss */
+.container-searchRes {}
+
+.section2 {}
+
+.section2 .l1 {
+  display: flex;
+}
+
+.section2 .l1>view {
+  flex: 1;
+  text-align: center;
+}
+
+.section2 .l1 .price {
+  display: flex;
+  justify-content: center;
+}
+
+.section2 .l1 .price text {
+  /* display: inline-block; */
+}
+
+.section2 .triangle-box {
+  /* display: inline-block; */
+  /* width: 40rpx; */
+  height: 100%;
+  margin-left: 5rpx;
+}
+
+.section2 .triangle-box .triangle {
+  /* display: inline-block; */
+  width: 0;
+  height: 0;
+}
+
+.section2 .triangle-t {
+  border-top: 10rpx solid transparent;
+  border-bottom: 10rpx solid #333333;
+  border-left: 7rpx solid transparent;
+  border-right: 7rpx solid transparent;
+}
+
+.section2 .triangle-b {
+  border-top: 10rpx solid #333333;
+  border-bottom: 10rpx solid transparent;
+  border-left: 7rpx solid transparent;
+  border-right: 7rpx solid transparent;
+}
+
+.section2 .l2 {}
+
+.section2 .l2 .list .item .item-image {
+  width: 100rpx;
+  height: 100rpx;
+}
+
+.section2 .l2 .list .item .item-content {}

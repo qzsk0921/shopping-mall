@@ -11,7 +11,7 @@
       value="{{searchKeyword}}" bindinput="inputHandle" />
   </view>
   <view wx:if="{{searchKeyword}}" class="list" style="height:{{listH}}px">
-    <view class="btn-item btn-poi" wx:for="{{pois}}" wx:key="unique" bindtap='poiTapHandle' data-index='{{index}}'>
+    <view class="btn-item btn-poi {{availablePoi?'btn-active':''}}" wx:for="{{pois}}" wx:key="unique" bindtap='poiTapHandle' data-index='{{index}}'>
       <view class="title" data-index='{{index}}'>{{item.title}}</view>
       <view class='address' data-index='{{index}}'>{{item.address}}</view>
     </view>

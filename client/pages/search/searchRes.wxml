@@ -6,8 +6,33 @@
       navTop="{{compatibleInfo.menuButtonObject.top}}" menuButtonHeight="{{compatibleInfo.menuButtonObject.height}}"
       status="{{navStatus}}" color="#333" bgColor="#fff" />
   </view>
-  <view class="section1">
-    <input class="search" name="search" value="{{searchKeyword}}" bindinput="inputHandle" confirm-type="search"
-      bindconfirm="bindconfirmHandle" />
+  <view class="input-box section1">
+    <input class="search" name="search" placeholder="请输入您想搜索的商品" placeholder-class="search-placeholder"
+      value="{{searchKeyword}}" bindinput="inputHandle" confirm-type="search" bindconfirm="bindconfirmHandle" />
+    <view class="btn btn-search" bindtap="btnSearchCancelHandle">取消</view>
+  </view>
+  <view class="section2">
+    <view class="l1">
+      <view>综合</view>
+      <view>销量</view>
+      <view class="price">
+        <text>价格</text>
+        <view class="triangle-box">
+          <view class="triangle triangle-t"></view>
+          <view class="triangle triangle-b"></view>
+        </view>
+      </view>
+    </view>
+    <view class="l2">
+      <view class="list">
+        <view class="item">
+          <image class="item-image" mode="aspectFit" src="/assets/images/nav_icon_car_check.png"></image>
+          <view class="item-content">
+            <view class="l1">天萃庭原切谷饲肥牛卷 300g</view>
+            <view class="cart">购物车</view>
+          </view>
+        </view>
+      </view>
+    </view>
   </view>
 </view>

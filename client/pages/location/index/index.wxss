@@ -60,3 +60,7 @@
 .list .btn-item {
   height: 100rpx;
 }
+
+.list .btn-poi.btn-active {
+  color: red;
+}

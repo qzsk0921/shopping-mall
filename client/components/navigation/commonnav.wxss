@@ -53,12 +53,25 @@
   align-items: center;
 }
 
+.box-location .text {
+  font-size: 36rpx;
+  font-weight: 500;
+  color: #FFFFFF;
+}
+
 .box-location .triangle {
-  display: inline-block;
+  /* display: inline-block;
   width: 0;
   height: 0;
   border-top: 10rpx solid #333333;
   border-bottom: 10rpx solid transparent;
   border-left: 7rpx solid transparent;
-  border-right: 7rpx solid transparent;
+  border-right: 7rpx solid transparent; */
+  width: 12rpx;
+  height: 12rpx;
+  transform: rotate(45deg);
+  border: 3rpx solid #FFFFFF;
+  border-left-color: transparent;
+  border-bottom-color: transparent;
+  margin-left: 10rpx;
 }

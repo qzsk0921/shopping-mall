@@ -12,7 +12,8 @@
 } */
 
 .section1 {
-  padding-top: 20rpx;
+  /* padding-top: 20rpx; */
+  margin: 31rpx 24rpx 0;
   position: relative;
   z-index: 3;
   background: #FFFFFF;
@@ -22,17 +23,15 @@
   display: flex;
   justify-content: flex-start;
   align-items: center;
-  padding-left: 32rpx;
 }
 
 .search {
-  height: 72rpx;
-  width: 594rpx;
-  background: #F2F4F9;
-  border-radius: 8rpx;
-  border-radius: 8rpx;
-  padding-left: 76rpx;
+  padding-left: 70rpx;
   position: relative;
+  width: 702rpx;
+  height: 68rpx;
+  background: #F6F6F6;
+  border-radius: 36rpx;
 }
 
 .search::before {
@@ -52,16 +51,23 @@
 
 .search-placeholder {
   font-size: 30rpx;
-  color: #969AAA;
+  color: #999999;
+  background: #F6F6F6;
 }
 
 .btn-search {
+  position: absolute;
+  width: 120rpx;
+  height: 56rpx;
+  background: #22B862;
+  border-radius: 27rpx;
+  font-size: 26rpx;
+  color: #FFFFFF;
   text-align: center;
-  width: 124rpx;
-  font-size: 30rpx;
-  font-weight: 500;
-  line-height: 72rpx;
-  color: #333333;
+  line-height: 56rpx;
+  right: 6rpx;
+  top: 6rpx;
+  z-index: 1;
 }
 
 /* .search-box {
@@ -91,17 +97,18 @@
 .btn-search {
   background-color: red;
 } */
+
 .search-history {
   margin-top: 61rpx;
   padding: 0 32rpx;
 }
 
 .search-history .tit {
-  font-size: 32rpx;
-  font-weight: 500;
-  color: #333333;
   display: flex;
   justify-content: space-between;
+  font-size: 28rpx;
+  font-weight: bold;
+  color: #333333;
 }
 
 .search-history .tit .icon-del {
@@ -119,10 +126,8 @@
 .btn-search-item {
   margin-top: 16rpx;
   padding: 19rpx 24rpx;
-  /* height: 64rpx;
-  line-height: 64rpx; */
   background: #F7F8FC;
-  border-radius: 4rpx;
+  border-radius: 32rpx;
   font-size: 26rpx;
   color: #333333;
 }

@@ -2,14 +2,16 @@
 import {
   setTabBar
 } from '../../utils/business'
+import store from '../../store/common'
+import create from '../../utils/create'
 
-Page({
-
+// Page({
+create(store, {
   /**
    * 页面的初始数据
    */
   data: {
-
+    compatibleInfo: null, //navHeight menuButtonObject systemInfo isIphoneX
   },
 
   /**
@@ -32,7 +34,11 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-
+    if (!this.data.compatibleInfo.navHeight) {
+      this.setData({
+        compatibleInfo: this.store.data.compatibleInfo
+      })
+    }
   },
 
   /**

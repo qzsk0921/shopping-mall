@@ -6,10 +6,13 @@
       navTop="{{compatibleInfo.menuButtonObject.top}}" menuButtonHeight="{{compatibleInfo.menuButtonObject.height}}"
       status="{{navStatus}}" color="#333" bgColor="#fff" />
   </view>
-  <view class="input-box section1">
-    <input class="search" name="search" placeholder="请输入您想搜索的商品" placeholder-class="search-placeholder"
-      value="{{searchKeyword}}" bindinput="inputHandle" confirm-type="search" bindconfirm="bindconfirmHandle" />
-    <view class="btn btn-search" bindtap="btnSearchCancelHandle">取消</view>
+  <view class="section1">
+    <view class="input-box">
+      <input class="search" name="search" placeholder="请输入您想搜索的商品" placeholder-class="search-placeholder"
+        value="{{searchKeyword}}" bindinput="inputHandle" confirm-type="search" bindconfirm="bindconfirmHandle" />
+      <view class="btn btn-search" bindtap="btnSearchCancelHandle">取消</view>
+    </view>
+    <image class="icon-cart" src="/assets/images/search_icon_shop.png" mode="aspectFill" bindtap="cartClickHandle"></image>
   </view>
   <view class="section2">
     <view class="l1">

@@ -1,6 +1,12 @@
 /* pages/search/searchRes.wxss */
 .container-searchRes {}
-
+.section1 {
+  
+}
+.section1 .icon-cart {
+  width: 62rpx;
+  height: 62rpx;
+}
 .section2 {}
 
 .section2 .l1 {
@@ -25,7 +31,7 @@
   /* display: inline-block; */
   /* width: 40rpx; */
   height: 100%;
-  margin-left: 5rpx;
+  margin-left: 12rpx;
 }
 
 .section2 .triangle-box .triangle {
@@ -36,16 +42,17 @@
 
 .section2 .triangle-t {
   border-top: 10rpx solid transparent;
-  border-bottom: 10rpx solid #333333;
-  border-left: 7rpx solid transparent;
-  border-right: 7rpx solid transparent;
+  border-bottom: 10rpx solid #BBBBBB;
+  border-left: 12rpx solid transparent;
+  border-right: 12rpx solid transparent;
+  margin-bottom: 9rpx;
 }
 
 .section2 .triangle-b {
-  border-top: 10rpx solid #333333;
+  border-top: 10rpx solid #BBBBBB;
   border-bottom: 10rpx solid transparent;
-  border-left: 7rpx solid transparent;
-  border-right: 7rpx solid transparent;
+  border-left: 12rpx solid transparent;
+  border-right: 12rpx solid transparent;
 }
 
 .section2 .l2 {}

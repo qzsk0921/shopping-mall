@@ -28,7 +28,7 @@ create(store, {
       })
       return false
     }
-    
+
     this.store.data.searchKeyword = this.data.searchKeyword
     this.update()
 
@@ -42,7 +42,7 @@ create(store, {
     })
   },
   btnSearchCancelHandle() {
-    // 情况并返回
+    // 清空并返回
     wx.navigateBack()
   },
   searchHandle(e) {

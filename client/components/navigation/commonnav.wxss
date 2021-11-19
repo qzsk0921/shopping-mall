@@ -57,6 +57,7 @@
   font-size: 36rpx;
   font-weight: 500;
   color: #FFFFFF;
+  max-width: 65%;
 }
 
 .box-location .triangle {

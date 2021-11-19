@@ -19,10 +19,13 @@ create(store, {
     pois: [],
 
     availablePoi: false, //是否可配送地址
+
+    deliveryAddressBoxH: null, //我的收货地址列表超过高度滚动
+    currentAddressId: null,
   },
   inputHandle(e) {
     const _this = this
-    console.log(e)
+    // console.log(e)
     this.data.searchKeyword = e.detail.value
     this.setData({
       searchKeyword: e.detail.value
@@ -87,6 +90,26 @@ create(store, {
     const ind = e.target.dataset.index
     // this.data.pois[ind]
   },
+  addrClickHandle(e) {
+    // console.log(e)
+    // 当前收货地址存后台
+    // 请求当前收货地址接口
+    // 请求成功
+    const id = e.currentTarget.dataset.id
+    this.setData({
+      currentAddressId: id
+    })
+    // 导航链接，跳转至首页 首页显示定位信息标题
+    wx.switchTab({
+      url: '../../index/index',
+    })
+  },
+  addAddrHandle() {
+    // 导航至新增收货地址页
+    wx.navigateTo({
+      url: '../add/add',
+    })
+  },
   /**
    * 生命周期函数--监听页面加载
    */
@@ -114,6 +137,13 @@ create(store, {
     query.select('.section1').boundingClientRect(function (rect) {
       that.setData({
         listH: that.store.data.compatibleInfo.systemInfo.windowHeight - rect.height - that.store.data.compatibleInfo.navHeight,
+      })
+    }).exec();
+
+    query.select('.deliveryAddress-box').boundingClientRect(function (rect) {
+      // console.log(rect)
+      that.setData({
+        deliveryAddressBoxH: that.store.data.compatibleInfo.systemInfo.windowHeight - rect.top
       })
     }).exec();
   },

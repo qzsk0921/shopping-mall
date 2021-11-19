@@ -1,7 +1,8 @@
 /* pages/index/index.wxss */
 .container-index {}
+
 .section1 {
-  background:red;
+  background: red;
   height: 100rpx;
   position: relative;
   z-index: 3;

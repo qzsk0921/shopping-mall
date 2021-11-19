@@ -7,7 +7,8 @@
     "pages/shopping/shopping",
     "pages/search/search",
     "pages/search/searchRes",
-    "pages/location/index/index"
+    "pages/location/index/index",
+    "pages/location/add/add"
   ],
   "window": {
     "backgroundTextStyle": "light",

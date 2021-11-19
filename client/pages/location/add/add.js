@@ -1,25 +1,16 @@
-// pages/search/searchRes.js
-import store from '../../store/common'
-import create from '../../utils/create'
-
+// pages/location/add/add.js
+import store from '../../../store/common'
+import create from '../../../utils/create'
 // Page({
 create(store, {
-
   /**
    * 页面的初始数据
    */
   data: {
-    navigationBarTitleText: '搜索',
-
     compatibleInfo: null, //navHeight menuButtonObject systemInfo isIphoneX
+    navigationBarTitleText: '收货地址',
   },
-  inputHandle(e) {
-    console.log(e)
-    this.data.searchKeyword = e.detail.value
-  },
-  cartClickHandle() {
-    console.log('cartClickHandle')
-  },
+
   /**
    * 生命周期函数--监听页面加载
    */

@@ -3,6 +3,7 @@ export default {
   // baseUrl:'https://mbapp-test.xcmbkj.com', //测试
   contentType: 'application/json',
   tencentKey: 'NMUBZ-KWM6V-E5IPZ-UARUF-6CKRH-FFBM2',
+  // tencentKey: 'SIIBZ-BL36R-R54WV-WXKZM-OUTBQ-ZWFPR',
   tabBar: {
     list: [{
       "pagePath": "/pages/index/index",

@@ -1,5 +1,7 @@
 <!--pages/location/index/index.wxml-->
 <!-- <text>pages/location/index/index.wxml</text> -->
+<wxs module="tools" src="../../../wxs/common.wxs"></wxs>
+
 <view class="container-location container">
   <view class="fixed">
     <top-navigation navigationBarTitleText="{{navigationBarTitleText}}" navHeight="{{compatibleInfo.navHeight}}"
@@ -9,13 +11,20 @@
   <view class="section1">
     <input class="search" name="search" placeholder="搜索小区/写字楼等" placeholder-class="search-placeholder"
       value="{{searchKeyword}}" bindinput="inputHandle" />
-    <view class="btn btn-search">搜索</view>
+    <view wx:if="{{!searchKeyword}}" class="btn btn-search" bindtap="searchClickHandle">搜索</view>
+    <image wx:else class="btn btn-close" src="/assets/images/search_icon_close.png" mode="aspectFill" bindtap="searchCloseHandle"></image>
   </view>
   <view wx:if="{{searchKeyword}}" class="list" style="height:{{listH}}px">
     <view class="btn-item btn-poi {{availablePoi?'btn-active':''}}" wx:for="{{pois}}" wx:key="unique"
       bindtap='poiTapHandle' data-index='{{index}}'>
-      <view class="title" data-index='{{index}}'>{{item.title}}</view>
-      <view class='address' data-index='{{index}}'>{{item.address}}</view>
+      <view class="btn-item-l">
+        <view class="title" data-index='{{index}}'>{{item.title}}</view>
+        <view class='address' data-index='{{index}}'>{{tools.parseAddress(item.address,item.province, item.city)}}
+        </view>
+      </view>
+      <view class="btn-item-r">
+        {{tools.parseMeter(item._distance)}}
+      </view>
     </view>
   </view>
   <block wx:else>
@@ -27,6 +36,7 @@
           <view class="l2-l-l2 number">10-2号302-1室</view>
         </view>
         <view class="l2-r">
+          <image class="icon-location" src="/assets/images/add_icon_location.png" mode="aspectFill"></image>
           <view class="btn btn-relocate">重新定位</view>
         </view>
       </view>
@@ -41,11 +51,11 @@
             <view class="l2-l-l3 phone">{{item.name}} {{item.phone}}</view>
           </view>
           <view class="l2-r">
-            <view wx:if="{{item.id===currentAddressId||item.current}}">狗狗</view>
+            <view class="symbol-hook" wx:if="{{item.id===currentAddressId||item.current}}"></view>
           </view>
         </view>
       </view>
     </view>
   </block>
-  <view class="footer" bindtap="addAddrHandle">添加新地址</view>
+  <view class="footer" wx:if="{{!searchKeyword}}" bindtap="addAddrHandle">添加新地址</view>
 </view>

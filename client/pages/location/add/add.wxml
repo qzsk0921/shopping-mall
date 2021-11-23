@@ -6,4 +6,66 @@
       navTop="{{compatibleInfo.menuButtonObject.top}}" menuButtonHeight="{{compatibleInfo.menuButtonObject.height}}"
       status="{{navStatus}}" color="#333" bgColor="#fff" />
   </view>
+  <view class="content">
+    <form bindsubmit="formSubmit" bindreset="formReset">
+      <view class="form-section">
+        <view
+          class="form-item form-item-shop {{actionSheetShow?'action-sheet':''}} {{generateOrderSuccess?'hidee':''}}">
+          <label>联系人</label>
+          <view bindtap="shopHandle" class="select-shop {{shop_name?'normal-style':'placeholder-style'}}">
+            {{shop_name?shop_name:'请编辑您的店铺信息'}}</view>
+        </view>
+      </view>
+      <view class="form-section">
+        <view class="form-item form-item-title">
+          <label>手机号</label>
+          <textarea value="{{activityData.title}}" maxlength="30" bindblur="bindTextAreaBlur" placeholder="请输入标题(1~30字）"
+            placeholder-style="color: #B2B2B2;font-size: 30rpx;font-weight: 400;" data-mode="title"></textarea>
+        </view>
+      </view>
+      <view class="form-section">
+        <view class="form-item">
+          <label for="customer">原价</label>
+          <input id="customer" type="digit" name="original_price" placeholder="请输入"
+            placeholder-class="input-placeholder" value="{{activityData.original_price}}" bindblur="handleInputChange"
+            disabled="{{generateOrderSuccess}}" />
+        </view>
+        <view class="form-item">
+          <label for="customer">{{activityData.type==='1'?'引流价':'促销价'}}</label>
+          <input id="customer" type="digit" name="price" placeholder="请输入" placeholder-class="input-placeholder"
+            value="{{activityData.price}}" bindblur="handleInputChange" disabled="{{generateOrderSuccess}}" />
+        </view>
+        <view class="form-item">
+          <label for="customer">直接分享奖励</label>
+          <input id="customer" type="digit" name="direct_reward_amount" placeholder="请输入"
+            placeholder-class="input-placeholder" value="{{activityData.direct_reward_amount}}"
+            bindblur="handleInputChange" disabled="{{generateOrderSuccess}}" />
+        </view>
+        <view class="form-item">
+          <label for="customer">间接分享奖励</label>
+          <input id="customer" type="digit" name="indirect_reward_amount" placeholder="请输入"
+            placeholder-class="input-placeholder" value="{{activityData.indirect_reward_amount}}"
+            bindblur="handleInputChange" disabled="{{generateOrderSuccess}}" />
+        </view>
+        <view class="form-item form-item-calendar">
+          <label for="calendar">优惠时间</label>
+          <input id="calendar" disabled="true" placeholder="开始时间  —  结束时间" placeholder-class="input-placeholder"
+            value="{{date}}" bindblur="handleInputChange" bindtap="calendarHandle" />
+        </view>
+      </view>
+      <!-- <view class="from-item">
+        <input type="text" placeholder="请填写姓名">
+      </view>
+      <view class="from-item">
+        <input type="text" placeholder="请填写手机号">
+      </view>
+      <view class="from-item">
+        <input type="text" placeholder="请填写收货地址">
+      </view>
+      <view class="from-item">
+        <input type="text" placeholder="例：10号楼808室">
+      </view> -->
+      <button class="btn-submit btn" form-type="submit">保存收获地址</button>
+    </form>
+  </view>
 </view>

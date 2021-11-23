@@ -10,9 +10,12 @@
     <view class="input-box">
       <input class="search" name="search" placeholder="请输入您想搜索的商品" placeholder-class="search-placeholder"
         value="{{searchKeyword}}" bindinput="inputHandle" confirm-type="search" bindconfirm="bindconfirmHandle" />
-      <view class="btn btn-search" bindtap="btnSearchCancelHandle">取消</view>
+      <image class="icon-search" src="/assets/images/search_icon_search.png" mode="aspectFill"></image>
+      <image class="icon-close" src="/assets/images/search_icon_close.png" mode="aspectFill"></image>
+      <!-- <view class="btn btn-search" bindtap="btnSearchCancelHandle">取消</view> -->
     </view>
-    <image class="icon-cart" src="/assets/images/search_icon_shop.png" mode="aspectFill" bindtap="cartClickHandle"></image>
+    <image class="icon-cart" src="/assets/images/search_icon_shop.png" mode="aspectFill" bindtap="cartClickHandle">
+    </image>
   </view>
   <view class="section2">
     <view class="l1">
@@ -32,7 +35,17 @@
           <image class="item-image" mode="aspectFit" src="/assets/images/nav_icon_car_check.png"></image>
           <view class="item-content">
             <view class="l1">天萃庭原切谷饲肥牛卷 300g</view>
-            <view class="cart">购物车</view>
+            <!-- <view class="cart">购物车</view> -->
+            <view class="l2">
+              <view class="price-box">
+                <view class="price"><text>￥</text><text>13.9</text></view>
+                <view class="del-price">￥25.9</view>
+              </view>
+              <view class="image-box">
+                <image class="icon-cart-g" src="/assets/images/search_icon_cart.png" mode="aspectFit"></image>
+                <view class="tip">2</view>
+              </view>
+            </view>
           </view>
         </view>
       </view>

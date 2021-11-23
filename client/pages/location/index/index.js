@@ -64,6 +64,7 @@ create(store, {
       // location: `${vm.data.latitude},${vm.data.longitude}`,
       // rectangle: `${vm.data.latitude-2},${vm.data.longitude-2},${vm.data.longitude+2},${vm.data.longitude+2}`,
       // auto_extend: '1',
+      policy: 1,
       page_size: 20,
       page_index: 1,
       success: function (res) {
@@ -108,6 +109,15 @@ create(store, {
     // 导航至新增收货地址页
     wx.navigateTo({
       url: '../add/add',
+    })
+  },
+  searchClickHandle() {
+    console.log('searchClickHandle')
+  },
+  searchCloseHandle() {
+    console.log('searchCloseHandle')
+    this.setData({
+      searchKeyword: ''
     })
   },
   /**

@@ -40,10 +40,8 @@ class Request {
           method,
           url,
           data
-        }).then(res => {
-          res => {
-            resolve(res.data)
-          }
+        }).then(ress => {
+          resolve(ress)
         })
       })
     })
@@ -95,7 +93,9 @@ class Request {
             if (res.data.code === 101 || res.data.code === 102) {
               // 101	未登录授权(无效,过期)
               if (token) wx.removeStorageSync('token')
-              that.loginWhenLoseSession(resolve, method, url, data)
+              that.loginWhenLoseSession(resolve, method, url, data).then(res => {
+                resolve(res.data)
+              })
             } else {
               wx.showToast({
                 title: res.data.msg ? res.data.msg : url,

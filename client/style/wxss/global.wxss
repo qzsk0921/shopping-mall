@@ -1,6 +1,6 @@
 .btn { font-size: 32rpx; margin: 0; }
 
-page { --primary-color: #4A74F6; background-color: #F2F3F6; font-family: Source Han Sans CN; overflow-y: auto; }
+page { --primary-color: #FF723A; --primary-linear-start: #FF9B74; --primary-linear-end: #FF521D; background-color: #F2F3F6; font-family: Source Han Sans CN; overflow-y: auto; }
 
 page image { width: 100%; height: 100%; vertical-align: middle; }
 

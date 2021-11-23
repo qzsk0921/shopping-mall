@@ -8,7 +8,7 @@ create(store, {
    */
   data: {
     compatibleInfo: null, //navHeight menuButtonObject systemInfo isIphoneX
-    navigationBarTitleText: '收货地址',
+    navigationBarTitleText: '添加新地址',
   },
 
   /**

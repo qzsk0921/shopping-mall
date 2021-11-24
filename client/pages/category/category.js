@@ -12,6 +12,7 @@ create(store, {
    */
   data: {
     compatibleInfo: null, //navHeight menuButtonObject systemInfo isIphoneX
+    navStatus: 'category'
   },
 
   /**

@@ -1,9 +1,79 @@
 /* pages/index/index.wxss */
 .container-index {}
 
+.content {
+  position: relative;
+}
+
+.bg {
+  position: absolute;
+  width: 100%;
+  height: 513rpx;
+  background: linear-gradient(180deg, var(--primary-color) 0%, var(--primary-color-a) 100%);
+}
+
 .section1 {
-  background: red;
-  height: 100rpx;
   position: relative;
   z-index: 3;
+}
+
+.section1 {
+  margin: 0 24rpx;
+}
+
+.input-box {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  position: relative;
+}
+
+.search {
+  padding-left: 70rpx;
+  position: relative;
+  width: 702rpx;
+  height: 68rpx;
+  background: #FFFFFF;
+  border-radius: 36rpx;
+}
+
+/* .search::before {
+  position: absolute;
+  left: 24rpx;
+  top: 50%;
+  transform: translateY(-50%);
+  content: '';
+  background-size: 100% 100%;
+} */
+
+.search::before {
+  position: absolute;
+  left: 24rpx;
+  top: 50%;
+  transform: translateY(-50%);
+  content: '';
+  background-size: 100% 100%;
+  width: 32rpx;
+  height: 30rpx;
+  background-image: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAB4AAAAeCAMAAAAM7l6QAAAAAXNSR0IArs4c6QAAAF1QTFRFAAAAr6+vp6enqqqqq6urq6urqampqampqqqqqqqqq6urq6urqampqampqqqqqqqqqampqampqqqqqqqqqqqqqqqqqampqampqqqqqqqqqqqqqqqqqqqqqampqqqqJj3L0QAAAB10Uk5TABAgMEBPUF9gb3B/gI+Qn6CvsL/Az9Df4O/w9vcagU4rAAAA/UlEQVQYGX3BCWKCMABFwZ9FmirKIovQ9t3/mE1ElKV2RjP7eW2hv54P2rMVT/2HNk6stEYLpiBq8szKH8sRGJxeCmD0ejA1MDjNcqA2eslGaI0mFqi14oBSkwpGo7UcsEos4LXVwUXJERrtZNAraSDXjgGcohYy7d3AKwKs9moIigD9oYRc0Qheey14RQ0ctQd4RRcoteMAJRkMRlsXqHV3g0obHgi6C0CmFdNDp4cOBqcFUwBeD3YETnryPfAVNHMj0B6MEncm+oGgmetI+qpoufsmCpqZkoXOB5KgJ3u5MamDpEAStOB8yL3XJBANVu8EIqe3wkipf1gn/QIJzRzJL95vWgAAAABJRU5ErkJggg==");
+}
+
+.search-placeholder {
+  font-size: 30rpx;
+  color: #999999;
+}
+
+.btn-search {
+  position: absolute;
+  font-size: 26rpx;
+  color: #FFFFFF;
+  text-align: center;
+  line-height: 56rpx;
+  right: 6rpx;
+  top: 6rpx;
+  z-index: 2;
+  width: 120rpx;
+  height: 56rpx;
+  background: linear-gradient(90deg, var(--primary-linear-start) 0%, var(--primary-linear-end) 100%);
+  border-radius: 40rpx;
 }

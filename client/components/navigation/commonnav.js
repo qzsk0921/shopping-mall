@@ -73,6 +73,13 @@ create({
               url: '/pages/location/index/index',
             })
           }
+        } else if (_data.status === 'category') {
+          // 分类页面
+          if (el) {
+            wx.navigateTo({
+              url: '/pages/search/search',
+            })
+          }
         } else {
           if (el) {
             wx.navigateBack({

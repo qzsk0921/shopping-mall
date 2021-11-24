@@ -23,6 +23,12 @@
           "pathName": "pages/search/searchRes",
           "query": "",
           "scene": null
+        },
+        {
+          "name": "pages/location/add/add",
+          "pathName": "pages/location/add/add",
+          "query": "",
+          "scene": null
         }
       ]
     }

@@ -60,10 +60,10 @@
   position: absolute;
   width: 120rpx;
   height: 56rpx;
-  background: #22B862;
+  /* background: #22B862; */
   border-radius: 27rpx;
   font-size: 26rpx;
-  color: #FFFFFF;
+  color: #4B4B4B;
   text-align: center;
   line-height: 56rpx;
   right: 6rpx;

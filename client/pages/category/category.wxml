@@ -6,4 +6,8 @@
       navTop="{{compatibleInfo.menuButtonObject.top}}" menuButtonHeight="{{compatibleInfo.menuButtonObject.height}}"
       status="{{navStatus}}" location="{{location}}" color="#333" bgColor="#fff" />
   </view>
+  <view class="content">
+    <view class="section1">全部</view>
+    <view class="section2">分类</view>
+  </view>
 </view>

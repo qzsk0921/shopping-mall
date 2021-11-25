@@ -7,7 +7,66 @@
       status="{{navStatus}}" location="{{location}}" color="#333" bgColor="#fff" />
   </view>
   <view class="content">
-    <view class="section1">全部</view>
-    <view class="section2">分类</view>
+    <dropdown-menu-category opened="{{categoryOpened}}"
+      bindsubClickable="subClickableHandle" />
+    <view class="section1">
+      <view class="category-box hide-scrollbar">
+        <view class="item {{currentCategoryId===item.id?'category-active':''}}" wx:for="{{categoryData}}">
+          <image class="icon-category" src="{{item.url}}" mode="aspectFill"></image>
+          <view class="text-category">{{item.name}}</view>
+        </view>
+        <view class="extend" bindtap="extendHandle">
+          <view class="text-box"><text>全</text><text>部</text></view>
+          <view class="arrow"></view>
+        </view>
+      </view>
+    </view>
+    <view class="section2">
+      <view
+        style="height:{{compatibleInfo.isIphoneX?compatibleInfo.systemInfo.screenHeight-(50+32+section1H+fixed)+'px':compatibleInfo.systemInfo.screenHeight-(50+section1H+fixed)+'px'}}"
+        class="tree-select {{compatibleInfo.isIphoneX?'isIphoneX':''}}">
+        <view class="tree-select__nav hide-scrollbar" bindtap="itemTapHandle">
+          <view class="sidebar-item tree-select__nav-item {{currentCategoryId===item.id?'sidebar-item--select': ''}}"
+            wx:for="{{categoryData}}" wx:key="unique" data-id="{{item.id}}">{{item.name}}</view>
+        </view>
+        <view class="tree-select__content hide-scrollbar"
+          style="height:{{compatibleInfo.isIphoneX?compatibleInfo.systemInfo.screenHeight-(50+32+section1H+fixed)+'px':compatibleInfo.systemInfo.screenHeight-(50+section1H+fixed)+'px'}}">
+          <view class="tree-select__tip">
+            <view class="left">
+              蔬菜豆制品
+            </view>
+            <view class="right">
+              <view class="btn btn-sale">销量</view>
+              <view class="btn btn-price">
+                <view>价格</view>
+                <view class="arrow-box {{priceSort===1?'active-t':priceSort===2?'active-b':''}}">
+                </view>
+              </view>
+            </view>
+          </view>
+          <view class="tree-select__item" wx:for="{{screenCategory[0].content}}" wx:key="unique" id="{{item.id}}">
+            <view class="shopcart-box">
+              <image class="icon-shopcart" mode="aspectFill" src="/assets/images/icon_car.png"></image>
+              <view class="shopcart-info">34</view>
+            </view>
+
+            <view class="left">
+              <image class="icon-goods" src="{{item.url}}" mode="aspectFill"></image>
+            </view>
+            <view class="right">
+              <view class="l1">
+                <text>{{item.option}}</text>
+              </view>
+              <view class="l2">{{item.desc}}</view>
+              <view class="l3">250g/包</view>
+              <view class="l4">
+                <text>￥</text><text>{{item.price}}</text>
+                <text>￥{{item.originPrice}}</text>
+              </view>
+            </view>
+          </view>
+        </view>
+      </view>
+    </view>
   </view>
 </view>

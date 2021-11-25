@@ -29,6 +29,12 @@
           "pathName": "pages/location/add/add",
           "query": "",
           "scene": null
+        },
+        {
+          "name": "pages/category/category",
+          "pathName": "pages/category/category",
+          "query": "",
+          "scene": null
         }
       ]
     }

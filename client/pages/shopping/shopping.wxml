@@ -1,2 +1,54 @@
 <!--pages/shopping/shopping.wxml-->
 <!-- <text>pages/shopping/shopping.wxml</text> -->
+<view class="container container-shopping">
+  <view class="fixed">
+    <top-navigation navigationBarTitleText="{{navigationBarTitleText}}" navHeight="{{compatibleInfo.navHeight}}"
+      navTop="{{compatibleInfo.menuButtonObject.top}}" menuButtonHeight="{{compatibleInfo.menuButtonObject.height}}"
+      status="{{navStatus}}" color="#333" bgColor="#fff" />
+  </view>
+  <view class="content">
+    <view class="section1">
+      <view class="left">
+        <image class="icon-coupon" src="/assets/images/nav_icon_car_check.png" mode="aspectFill"></image>
+        <text>我的优惠券（共0张）</text>
+      </view>
+      <view class="right">
+        <text>去领券</text>
+        <view class="arrow"></view>
+      </view>
+    </view>
+    <view class="section2">
+      <checkbox-group bindchange="checkboxChange">
+        <view class="item" wx:for="{{shoppingData}}" wx:key="unique">
+          <view class="left">
+            <view class="checkbox-box">
+              <checkbox value="{{item.name}}" checked="{{item.checked}}" />
+            </view>
+          </view>
+          <view class="center">
+            <image class="icon-goods" src="{{item.url}}" mode="aspectFill"></image>
+          </view>
+          <view class="right">
+            <view class="l1">
+              <text>{{item.option}}</text>
+            </view>
+            <view class="l3">250g/包</view>
+            <view class="l4">
+              <text>￥</text><text>{{item.price}}</text>
+              <text>￥{{item.originPrice}}</text>
+            </view>
+          </view>
+        </view>
+        <view class="bottom">
+          <view class="select-box">
+            <checkbox value="all" bindtap="selectall" />全选
+          </view>
+          <view class="amount-box">
+            <text>总计 <text>￥55.12</text></text>
+            <view>结算(5)</view>
+          </view>
+        </view>
+      </checkbox-group>
+    </view>
+  </view>
+</view>

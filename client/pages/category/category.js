@@ -113,18 +113,26 @@ create(store, {
   extendHandle() {
     // 展开全部分类
     console.log('extendHandle')
-    this.data.categoryOpened = 1
     this.setData({
       categoryOpened: 1
     })
   },
-  // 排序筛选
+  // 分类展开
   subClickableHandle(e) {
     console.log(e)
     console.log(e.detail)
-    const currentSortObj = e.detail
-    
-    this.data.categoryOpened = 0
+    // const currentSortObj = e.detail
+    this.setData({
+      categoryOpened: 0
+    })
+  },
+  dropdownMenuItemTap(e) {
+    const clickable = e.target.dataset.clickable
+    console.log(e)
+    if (!clickable)
+      this.setData({
+        categoryOpened: 0
+      })
   },
   /**
    * 生命周期函数--监听页面加载

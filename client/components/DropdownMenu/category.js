@@ -7,6 +7,14 @@ Component({
     opened: {
       type: Number,
       value: 0
+    },
+    categoryData: {
+      type: Object,
+      value: []
+    },
+    currentCategoryId: {
+      type: Number,
+      value: 0
     }
   },
 
@@ -15,27 +23,6 @@ Component({
    */
   data: {
     height: 0,
-    currentSort: 1, //value 默认综合排序
-    sortList: [{
-        name: '综合排序',
-        value: 1
-      },
-      {
-        name: '价格最低',
-        value: 2
-      },
-      {
-        name: '最新发布',
-        value: 3
-      },
-      {
-        name: '车龄最短',
-        value: 4
-      }, {
-        name: '里程最少',
-        value: 5
-      }
-    ]
   },
 
   /**
@@ -43,13 +30,26 @@ Component({
    */
   methods: {
     dropdownItemTapHandle(e) {
-      // console.log('dropdownItemTapHandle', e.target.dataset)
-      const currentSortObj = e.target.dataset.item
-      if (currentSortObj.value === this.data.currentSort) return
-      this.setData({
-        currentSort: currentSortObj.value
-      })
-      this.triggerEvent('subClickable', currentSortObj)
+      // 分类下拉弹窗代理事件
+      console.log('dropdownItemTapHandle', e.target.dataset)
+      const myItem = e.target.dataset.item
+      if (myItem) {
+        if (myItem === 'collapse') {
+          this.setData({
+            opened: 0,
+          })
+        } else {
+          // if (myItem.value === this.data.currentSort) return
+          // this.setData({
+          //   currentSort: myItem.value,
+          // })
+          // this.triggerEvent('subClickable', myItem)
+
+          // 相同过的不处理
+          // 当前组件中选择的分类要与页面同步
+          // 触发父组件
+        }
+      }
     }
   },
   lifetimes: {

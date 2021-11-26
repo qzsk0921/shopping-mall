@@ -66,10 +66,7 @@
 }
 
 .btn-submit {
-  position: fixed;
-  bottom: 48rpx;
-  left: 50%;
-  transform: translateX(-50%);
+  margin-top: 40rpx;
   width: 616rpx !important;
   height: 80rpx;
   line-height: 80rpx;
@@ -77,4 +74,12 @@
   border-radius: 40rpx;
   font-size: 32rpx;
   color: #FFFFFF;
+  font-weight: 400;
+}
+
+.btn-del {
+  margin-top: 44rpx;
+  text-align: center;
+  font-size: 32rpx;
+  color: #999999;
 }

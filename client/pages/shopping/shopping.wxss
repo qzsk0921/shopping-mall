@@ -1,1 +1,158 @@
 /* pages/shopping/shopping.wxss */
+.container-shopping {
+  background: #F5F5F5;
+}
+
+.content {
+  padding: 20rpx 24rpx 0;
+}
+
+.section1 {
+  height: 74rpx;
+  background: #FFFFFF;
+  border-radius: 16rpx;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 20rpx 0 24rpx;
+}
+
+.section1 .left {}
+
+.section1 .left .icon-coupon {
+  width: 39rpx;
+  height: 34rpx;
+  background: linear-gradient(90deg, var(--primary-linear-start) 0%, var(--primary-linear-end) 100%);
+}
+
+.section1 .left text {
+  margin-left: 12rpx;
+  font-size: 26rpx;
+  color: #333333;
+}
+
+.section1 .right {
+  display: flex;
+  align-items: center;
+}
+
+.section1 .right text {
+  font-size: 26rpx;
+  color: #888888;
+  margin-right: 8rpx;
+}
+
+.section1 .right .arrow {
+  width: 13rpx;
+  height: 13rpx;
+  border: 2rpx solid transparent;
+  border-right-color: #888888;
+  border-top-color: #888888;
+  transform: rotate(45deg);
+}
+
+.section2 {
+  overflow: hidden;
+}
+
+.section2 .item {
+  margin-top: 20rpx;
+  display: flex;
+  background: #FFFFFF;
+  border-radius: 16rpx;
+}
+
+.section2 .item .center {
+  display: flex;
+  align-items: center;
+}
+
+.section2 .item .center .icon-goods {
+  width: 172rpx;
+  height: 172rpx;
+  background: rgba(0, 0, 0, 0);
+  border-radius: 16rpx;
+}
+
+.section2 .item .right .l1 {
+  margin-top: 20rpx;
+  font-size: 28rpx;
+  font-weight: bold;
+  line-height: 48rpx;
+  color: #333333;
+}
+
+/* .section2 .item .right .l2 {
+  font-size: 22rpx;
+  line-height: 37rpx;
+  color: #999999;
+} */
+
+.section2 .item .right .l3 {
+  font-size: 22rpx;
+  line-height: 37rpx;
+  color: #999999;
+}
+
+.section2 .item .right .l4 {
+  margin-top: 10rpx;
+}
+
+.section2 .item .right .l4 text:first-child {
+  font-size: 24rpx;
+  font-weight: bold;
+  line-height: 41rpx;
+  color: #FC4953;
+}
+
+.section2 .item .right .l4 text:nth-of-type(2) {
+  font-size: 34rpx;
+  font-weight: bold;
+  line-height: 58px;
+  color: #FC4953;
+}
+
+.section2 .item .right .l4 text:nth-of-type(3) {
+  margin-right: 2rpx;
+  font-size: 22rpx;
+  line-height: 37rpx;
+  color: #888888;
+  text-decoration: line-through;
+}
+
+.section2 .item .left {
+  width: 80rpx;
+}
+
+.section2 .item .left .checkbox-box {
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
+
+.section2 .item .left .checkbox-box::before {
+  position: absolute;
+  content: '';
+  top: 50%;
+  transform: translateY(-50%);
+  left: 22rpx;
+  width: 36rpx;
+  height: 36rpx;
+  border: 2rpx solid var(--primary-color);
+  border-radius: 50%;
+}
+
+.section2 .item .left .checkbox-box checkbox {
+  width: 100%;
+  height: 100%;
+  opacity: 0;
+}
+
+.section2 .bottom {
+  display: flex;
+  justify-content: space-between;
+}
+
+.section2 .amount-box {
+  display: flex;
+}

@@ -3,18 +3,20 @@
 
 .container-category .content {
   position: relative;
+  overflow: hidden;
 }
 
 .section1 {
   padding: 24rpx 0;
   background: #FFFFFF;
+  position: relative;
 }
 
 .section1 .category-box {
   width: 100vw;
   overflow: auto;
   display: flex;
-  position: relative;
+  /* position: relative; */
 }
 
 .section1 .category-box .item {
@@ -49,7 +51,7 @@
   width: 78rpx;
   height: 128rpx;
   right: 0;
-  top: 0;
+  top: 24rpx;
   background: #FFFFFF;
 }
 

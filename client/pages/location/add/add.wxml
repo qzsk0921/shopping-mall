@@ -57,5 +57,6 @@
       </view> -->
       <button class="btn-submit btn" form-type="submit">保存收获地址</button>
     </form>
+    <view class="btn btn-del" bindtap="addressDelHandle">删除收获地址</view>
   </view>
 </view>

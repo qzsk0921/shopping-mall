@@ -1,7 +1,4 @@
 /* components/DropdownMenu/category.wxss */
-.active {
-  color: var(--primary-color);
-}
 
 .dropdown-item-down {
   z-index: 1;
@@ -30,17 +27,61 @@
 }
 
 .dropdown-item-down__content {
-  padding: 10rpx 38rpx 30rpx 32rpx;
-  text-align: left;
-  transition: all .2s;
-  background: #FFFFFF;
-  font-size: 28rpx;
-  line-height: 64rpx;
-  color: #383D46;
   position: absolute;
   width: 100%;
   bottom: 100%;
   left: 0;
+  padding-bottom: 6rpx;
+  background: #FFFFFF;
+  border-radius: 0rpx 0rpx 26rpx 26rpx;
+  overflow: hidden;
+  /* transition: all .2s; */
+}
+
+.dropdown-item-down__content .l1 {
+  padding: 0 24rpx;
+  height: 118rpx;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.dropdown-item-down__content .l1 .tit {
+  font-size: 34rpx;
+  font-weight: bold;
+  color: #333333;
+}
+
+.dropdown-item-down__content .l1 .collapse {
+  width: 84rpx;
+  font-size: 26rpx;
+  font-weight: bold;
+  color: #333333;
+  position: relative;
+}
+
+.dropdown-item-down__content .l1 .collapse::after {
+  position: absolute;
+  content: '';
+  top: -6rpx;
+  right: 0;
+  width: 0;
+  height: 0;
+  border-top: 12rpx solid transparent;
+  border-left: 12rpx solid transparent;
+  border-right: 12rpx solid transparent;
+  border-bottom: 12rpx solid #E1E2E2;
+}
+
+.dropdown-item-down__content .l2 {
+  display: flex;
+  justify-content: flex-start;
+  flex-wrap: wrap;
+  text-align: left;
+  background: #FFFFFF;
+
+  font-size: 24rpx;
+  color: #333333;
 }
 
 .opened .dropdown-item-down__content {
@@ -48,14 +89,20 @@
 }
 
 .dropdown-item-down__item {
-  line-height: 1;
-  padding: 30rpx 0;
+  /* padding: 0 15rpx; */
+  width: 20%;
   display: flex;
-  justify-content: space-between;
+  flex-direction: column;
   align-items: center;
+  margin-bottom: 38rpx;
 }
 
-.dropdown-item-down__item::after {
+.dropdown-item-down__item.category-active .text-category {
+  background: #27C068;
+  color: #FFFFFF;
+}
+
+/* .dropdown-item-down__item::after {
   display: none;
   content: '';
   width: 30rpx;
@@ -67,4 +114,20 @@
 
 .active.dropdown-item-down__item::after {
   display: inline-block;
+} */
+
+.dropdown-item-down__item .icon-category {
+  width: 84rpx;
+  height: 84rpx;
+}
+
+.dropdown-item-down__item .text-category {
+  text-align: center;
+  margin-top: 12rpx;
+  width: 110rpx;
+  height: 36rpx;
+  border-radius: 10rpx;
+  font-size: 24rpx;
+  line-height: 36rpx;
+  color: #333333;
 }

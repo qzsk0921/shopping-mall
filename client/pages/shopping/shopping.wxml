@@ -6,7 +6,8 @@
       navTop="{{compatibleInfo.menuButtonObject.top}}" menuButtonHeight="{{compatibleInfo.menuButtonObject.height}}"
       status="{{navStatus}}" color="#333" bgColor="#fff" />
   </view>
-  <view class="content">
+  <view class="content"
+    style="height:{{compatibleInfo.isIphoneX?compatibleInfo.systemInfo.screenHeight-(55+32+fixed)+'px':compatibleInfo.systemInfo.screenHeight-(55+fixed)+'px'}}">
     <view class="section1">
       <view class="left">
         <image class="icon-coupon" src="/assets/images/nav_icon_car_check.png" mode="aspectFill"></image>
@@ -20,6 +21,7 @@
     <view class="section2">
       <checkbox-group bindchange="checkboxChange">
         <view class="item" wx:for="{{shoppingData}}" wx:key="unique">
+          <view class="btn-close"></view>
           <view class="left">
             <view class="checkbox-box">
               <checkbox value="{{item.name}}" checked="{{item.checked}}" />
@@ -44,8 +46,13 @@
             <checkbox value="all" bindtap="selectall" />全选
           </view>
           <view class="amount-box">
-            <text>总计 <text>￥55.12</text></text>
-            <view>结算(5)</view>
+            <view class="left">
+              <view class="left-t"><text>总计</text> <text class="price">￥55.12</text></view>
+              <view class="left-b">已优惠8.88</view>
+            </view>
+            <view class="right">
+              <view class="btn btn-pay">结算(5)</view>
+            </view>
           </view>
         </view>
       </checkbox-group>

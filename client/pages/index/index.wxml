@@ -14,12 +14,79 @@
         value="{{searchKeyword}}" confirm-type="search" bindconfirm="bindconfirmHandle" disabled="true" />
       <view class="btn btn-search" bindtap="btnSearchCancelHandle">搜索</view>
     </view>
-    <view class="section2" bindtap="a">
-      banner
+    <view class="cont hide-scrollbar"
+      style="height:{{compatibleInfo.isIphoneX?compatibleInfo.systemInfo.screenHeight-(55+32+section1H+fixed)+'px':compatibleInfo.systemInfo.screenHeight-(55+section1H+fixed)+'px'}}">
+      <view class="section2" bindtap="swiperHandle">
+        <view class="page-section page-section-spacing swiper">
+          <swiper indicator-dots="{{indicatorDots}}" autoplay="{{autoplay}}" interval="{{interval}}"
+            duration="{{duration}}" indicator-color="rgba(1, 225, 1, .3)" indicator-active-color="#ff4321">
+            <block wx:for="{{background}}" wx:key="*this">
+              <swiper-item>
+                <view class="swiper-item {{item}}"></view>
+              </swiper-item>
+            </block>
+          </swiper>
+        </view>
+      </view>
+      <view class="section3 hide-scrollbar">
+        <view class="category-box">
+          <view class="l1">
+            <view class="item" wx:for="{{categoryList}}" wx:key="unique">
+              <image class="icon-category" src="{{item.url}}" mode="aspectFill" data-clickable="1"></image>
+              <view class="text-category" data-clickable="1">{{item.name}}</view>
+            </view>
+          </view>
+          <view class="l2">
+            <view class="item" wx:for="{{categoryList}}" wx:key="unique">
+              <image class="icon-category" src="{{item.url}}" mode="aspectFill" data-clickable="1"></image>
+              <view class="text-category" data-clickable="1">{{item.name}}</view>
+            </view>
+          </view>
+        </view>
+      </view>
+      <view class="section4">
+        <view class="l">
+          <image src="/assets/images/home_trucks.png"></image>
+          <text>最快29分钟送达</text>
+        </view>
+        <view class="c">
+          <image src="/assets/images/home_cost.png"></image>
+          <text>满15元免配送费</text>
+        </view>
+        <view class="r">
+          <image src="/assets/images/home_call.png"></image>
+          <text>客服电话:059226656442</text>
+        </view>
+      </view>
+      <!-- 预收专栏 -->
+      <view class="section5">
+        <image class="t icon-presale" src="/assets/images/home_booking.png" mode="aspectFill"></image>
+        <view class="b">
+          <view class="item" wx:for="{{prepareSaleList}}" wx:key="unique">
+            <image class="icon-presale l1" src="{{item.url}}" mode="aspectFill"></image>
+            <view class="l2">￥{{item.price}}</view>
+            <view class="l3">￥{{item.originPrice}}</view>
+          </view>
+        </view>
+      </view>
+      <!-- 新品上市 -->
+      <view class="section6">
+        <view class="l">
+          <view class="l1">新品上市</view>
+          <view class="l2">新品副标题</view>
+          <view class="l3">
+            <view class="btn btn-go"><text>去逛逛</text><view>GO</view></view>
+          </view>
+        </view>
+        <view class="r">
+          <view class="item" wx:for="{{newMarketList}}" wx:key="unique">
+            <image class="icon-newmarket l1" src="{{item.url}}" mode="aspectFill"></image>
+            <view class="l2">￥{{item.price}}</view>
+          </view>
+        </view>
+      </view>
+      <!-- 热门推荐 -->
+      <view class="section7">热门推荐</view>
     </view>
-    <view class="section3">分类列表</view>
-    <view class="section4">预收专栏</view>
-    <view class="section5">新品上市</view>
-    <view class="section6">热门推荐</view>
   </view>
 </view>

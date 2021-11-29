@@ -5,6 +5,7 @@
 
 .content {
   padding: 20rpx 24rpx 0;
+  position: relative;
 }
 
 .section1 {
@@ -60,6 +61,34 @@
   display: flex;
   background: #FFFFFF;
   border-radius: 16rpx;
+  position: relative;
+}
+
+.section2 .item .btn-close {
+  position: absolute;
+  width: 28rpx;
+  height: 16rpx;
+  top: 18rpx;
+  right: 18rpx;
+}
+
+.section2 .item .btn-close::before,
+.section2 .item .btn-close::after {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  content: '';
+  width: 100%;
+  height: 3rpx;
+  background: #CCCCCC;
+}
+
+.section2 .item .btn-close:before {
+  transform: rotate(45deg);
+}
+
+.section2 .item .btn-close::after {
+  transform: rotate(-45deg);
 }
 
 .section2 .item .center {
@@ -151,8 +180,57 @@
 .section2 .bottom {
   display: flex;
   justify-content: space-between;
+  height: 100rpx;
+  background: #FFFFFF;
+  padding: 0 24rpx;
+  display: flex;
+  align-items: center;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
 }
 
 .section2 .amount-box {
   display: flex;
+}
+
+.section2 .amount-box .left {
+  text-align: right;
+  margin-top: 20rpx;
+}
+
+.section2 .amount-box .right {
+  margin-top: 10rpx;
+}
+
+.section2 .amount-box .left .left-t {}
+
+.section2 .amount-box .left .left-t text {
+  font-size: 24rpx;
+  color: #333333;
+}
+
+.section2 .amount-box .left .left-t .price {
+  font-size: 34rpx;
+  font-weight: bold;
+  color: #FC4953;
+}
+
+.section2 .amount-box .left .left-b {
+  margin-top: 6rpx;
+  font-size: 20rpx;
+  color: #FC4953;
+}
+
+.section2 .amount-box .btn-pay {
+  margin-left: 20rpx;
+  text-align: center;
+  width: 210rpx;
+  height: 80rpx;
+  background: linear-gradient(90deg, var(--primary-linear-start) 0%, var(--primary-linear-end) 100%);
+  border-radius: 40rpx;
+  font-size: 30rpx;
+  line-height: 80rpx;
+  color: #FFFFFF;
 }

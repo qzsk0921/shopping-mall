@@ -81,7 +81,15 @@ create(store, {
    * 生命周期函数--监听页面初次渲染完成
    */
   onReady: function () {
-
+    const that = this;
+    const query = wx.createSelectorQuery();
+    // 在页面渲染完成OnReady回调 获取元素高度时，如果不加定时器，获取的元素的高度还是没渲染完异步数据前的高度
+    query.select('.fixed').boundingClientRect(function (rect) {
+      that.setData({
+        // scrollViewHeight: that.store.data.systemInfo.screenHeight - (rect.height + 50),
+        fixed: rect.height,
+      })
+    }).exec();
   },
 
   /**

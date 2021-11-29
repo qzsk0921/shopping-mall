@@ -13,7 +13,91 @@ create(store, {
    */
   data: {
     compatibleInfo: null, //navHeight menuButtonObject systemInfo isIphoneX
-    navStatus: 'location'
+    navStatus: 'location',
+    // swiper
+    background: ['demo-text-1', 'demo-text-2', 'demo-text-3'],
+    indicatorDots: true,
+    vertical: false,
+    interval: 2000,
+    autoplay: true,
+    // 分类列表
+    categoryList: [{
+      url: 'https://gw.alicdn.com/tps/i1/O1CN01PWx1at1LfLtyRhW1V_!!0-juitemmedia.jpg_140x10000Q75.jpg',
+      name: '蔬 菜'
+    }, {
+      url: 'https://gw.alicdn.com/tps/i1/O1CN01PWx1at1LfLtyRhW1V_!!0-juitemmedia.jpg_140x10000Q75.jpg',
+      name: '肉禽蛋品'
+    }, {
+      url: 'https://gw.alicdn.com/tps/i1/O1CN01PWx1at1LfLtyRhW1V_!!0-juitemmedia.jpg_140x10000Q75.jpg',
+      name: '水产海鲜'
+    }, {
+      url: 'https://gw.alicdn.com/tps/i1/O1CN01PWx1at1LfLtyRhW1V_!!0-juitemmedia.jpg_140x10000Q75.jpg',
+      name: '蔬 菜'
+    }, {
+      url: 'https://gw.alicdn.com/tps/i1/O1CN01PWx1at1LfLtyRhW1V_!!0-juitemmedia.jpg_140x10000Q75.jpg',
+      name: '蔬 菜'
+    }, {
+      url: 'https://gw.alicdn.com/tps/i1/O1CN01PWx1at1LfLtyRhW1V_!!0-juitemmedia.jpg_140x10000Q75.jpg',
+      name: '蔬 菜'
+    }, {
+      url: 'https://gw.alicdn.com/tps/i1/O1CN01PWx1at1LfLtyRhW1V_!!0-juitemmedia.jpg_140x10000Q75.jpg',
+      name: '蔬 菜'
+    }, {
+      url: 'https://gw.alicdn.com/tps/i1/O1CN01PWx1at1LfLtyRhW1V_!!0-juitemmedia.jpg_140x10000Q75.jpg',
+      name: '蔬 菜'
+    }, {
+      url: 'https://gw.alicdn.com/tps/i1/O1CN01PWx1at1LfLtyRhW1V_!!0-juitemmedia.jpg_140x10000Q75.jpg',
+      name: '蔬 菜'
+    }, {
+      url: 'https://gw.alicdn.com/tps/i1/O1CN01PWx1at1LfLtyRhW1V_!!0-juitemmedia.jpg_140x10000Q75.jpg',
+      name: '蔬 菜'
+    }, {
+      url: 'https://gw.alicdn.com/tps/i1/O1CN01PWx1at1LfLtyRhW1V_!!0-juitemmedia.jpg_140x10000Q75.jpg',
+      name: '蔬 菜'
+    }, {
+      url: 'https://gw.alicdn.com/tps/i1/O1CN01PWx1at1LfLtyRhW1V_!!0-juitemmedia.jpg_140x10000Q75.jpg',
+      name: '蔬 菜'
+    }, {
+      url: 'https://gw.alicdn.com/tps/i1/O1CN01PWx1at1LfLtyRhW1V_!!0-juitemmedia.jpg_140x10000Q75.jpg',
+      name: '蔬 菜'
+    }, {
+      url: 'https://gw.alicdn.com/tps/i1/O1CN01PWx1at1LfLtyRhW1V_!!0-juitemmedia.jpg_140x10000Q75.jpg',
+      name: '蔬 菜'
+    }, {
+      url: 'https://gw.alicdn.com/tps/i1/O1CN01PWx1at1LfLtyRhW1V_!!0-juitemmedia.jpg_140x10000Q75.jpg',
+      name: '蔬 菜'
+    }, {
+      url: 'https://gw.alicdn.com/tps/i1/O1CN01PWx1at1LfLtyRhW1V_!!0-juitemmedia.jpg_140x10000Q75.jpg',
+      name: '蔬 菜'
+    }],
+    // 预售
+    prepareSaleList: [, {
+      url: 'https://gw.alicdn.com/tps/i1/O1CN01PWx1at1LfLtyRhW1V_!!0-juitemmedia.jpg_140x10000Q75.jpg',
+      price: 6.5,
+      originPrice: 7.5
+    }, {
+      url: 'https://gw.alicdn.com/tps/i1/O1CN01PWx1at1LfLtyRhW1V_!!0-juitemmedia.jpg_140x10000Q75.jpg',
+      price: 6.5,
+      originPrice: 7.5
+    }, {
+      url: 'https://gw.alicdn.com/tps/i1/O1CN01PWx1at1LfLtyRhW1V_!!0-juitemmedia.jpg_140x10000Q75.jpg',
+      price: 6.5,
+      originPrice: 7.5
+    }],
+    // 新品上市
+    newMarketList: [{
+      url: 'https://gw.alicdn.com/tps/i1/O1CN01PWx1at1LfLtyRhW1V_!!0-juitemmedia.jpg_140x10000Q75.jpg',
+      price: 6.5,
+      originPrice: 7.5
+    }, {
+      url: 'https://gw.alicdn.com/tps/i1/O1CN01PWx1at1LfLtyRhW1V_!!0-juitemmedia.jpg_140x10000Q75.jpg',
+      price: 6.5,
+      originPrice: 7.5
+    }, {
+      url: 'https://gw.alicdn.com/tps/i1/O1CN01PWx1at1LfLtyRhW1V_!!0-juitemmedia.jpg_140x10000Q75.jpg',
+      price: 6.5,
+      originPrice: 7.5
+    }]
   },
   watch: {
     // compatibleInfo: {
@@ -81,6 +165,13 @@ create(store, {
       that.setData({
         // scrollViewHeight: that.store.data.systemInfo.screenHeight - (rect.height + 50),
         fixed: rect.height,
+      })
+    }).exec();
+
+    query.select('.section1').boundingClientRect(function (rect) {
+      that.setData({
+        // scrollViewHeight: that.store.data.systemInfo.screenHeight - (rect.height + 50),
+        section1H: rect.height,
       })
     }).exec();
 

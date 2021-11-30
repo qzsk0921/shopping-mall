@@ -32,7 +32,7 @@ create(store, {
     compatibleInfo: null, //navHeight menuButtonObject systemInfo isIphoneX
     navigationBarTitleText: '购物车',
     navStatus: 'isEmpty',
-
+    // 购物车商品 优先判断 下架 其次判断 库存
     shoppingData: [{
         type: 1, //预售
         option: '元宝优选调和油20L/捅',
@@ -40,8 +40,9 @@ create(store, {
         id: 1,
         price: '13.9',
         originPrice: '25.9',
-        store: 1, //库存
-        url: 'https://gw.alicdn.com/tps/i1/O1CN01PWx1at1LfLtyRhW1V_!!0-juitemmedia.jpg_140x10000Q75.jpg'
+        store: 12, //库存
+        url: 'https://gw.alicdn.com/tps/i1/O1CN01PWx1at1LfLtyRhW1V_!!0-juitemmedia.jpg_140x10000Q75.jpg',
+        shelf: 1, //上架
       },
       {
         type: 2, //新品
@@ -51,9 +52,24 @@ create(store, {
         price: '13.9',
         originPrice: '25.9',
         store: 0, //库存
-        url: 'https://gw.alicdn.com/tps/i1/O1CN01PWx1at1LfLtyRhW1V_!!0-juitemmedia.jpg_140x10000Q75.jpg'
+        url: 'https://gw.alicdn.com/tps/i1/O1CN01PWx1at1LfLtyRhW1V_!!0-juitemmedia.jpg_140x10000Q75.jpg',
+        shelf: 1 //下架
+      },
+      {
+        type: 2, //新品
+        option: '阿尔卑斯饮用天然矿泉水500ml*6',
+        desc: '商品描述，最多1行，超过显…',
+        id: 2,
+        price: '13.9',
+        originPrice: '25.9',
+        store: 2, //库存
+        url: 'https://gw.alicdn.com/tps/i1/O1CN01PWx1at1LfLtyRhW1V_!!0-juitemmedia.jpg_140x10000Q75.jpg',
+        shelf: 0 //下架
       }
     ]
+  },
+  delGoodsHandle() {
+    console.log('delGoodsHandle')
   },
   checkboxChange: function (e) {
     console.log('checkbox发生change事件，携带value值为：', e.detail.value)
@@ -67,6 +83,9 @@ create(store, {
       listData: that.data.listData,
       select_all: (!that.data.select_all)
     })
+  },
+  quantityBlurHandle() {
+    console.log('quantityBlurHandle')
   },
   /**
    * 生命周期函数--监听页面加载

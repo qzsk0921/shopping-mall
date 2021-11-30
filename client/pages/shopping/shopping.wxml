@@ -10,7 +10,7 @@
     style="height:{{compatibleInfo.isIphoneX?compatibleInfo.systemInfo.screenHeight-(55+32+fixed)+'px':compatibleInfo.systemInfo.screenHeight-(55+fixed)+'px'}}">
     <view class="section1">
       <view class="left">
-        <image class="icon-coupon" src="/assets/images/nav_icon_car_check.png" mode="aspectFill"></image>
+        <image class="icon-coupon" src="/assets/images/car_icon_coupons.png" mode="aspectFill"></image>
         <text>我的优惠券（共0张）</text>
       </view>
       <view class="right">
@@ -20,19 +20,33 @@
     </view>
     <view class="section2">
       <checkbox-group bindchange="checkboxChange">
-        <view class="item" wx:for="{{shoppingData}}" wx:key="unique">
-          <view class="btn-close"></view>
+        <view class="item {{!item.shelf?'mask-box':item.store?'':'mask-box'}}" wx:for="{{shoppingData}}" wx:key="unique"
+          data-disabled="{{!item.shelf?0:item.store?1:0}}">
+          <!-- 关闭按钮 -->
+          <image class="btn-close" src="/assets/images/car_icon_del.png" mode="aspectFill" bindtap="delGoodsHandle">
+          </image>
+          <!-- <view class="btn-close"></view> -->
+          <!-- 选择商品数量 -->
+          <view class="goods-quantity-control" data-disabled="{{!item.shelf?0:item.store?1:0}}">
+            <view class="tip">达最大数量</view>
+            <image class="reduce" src="/assets/images/car_icon_reduce.png" mode="aspectFill"></image>
+            <input class="quantity" type="number" value="1" bindblur="quantityBlurHandle" />
+            <image class="add" src="/assets/images/car_icon_add.png" mode="aspectFill"></image>
+          </view>
           <view class="left">
             <view class="checkbox-box">
               <checkbox value="{{item.name}}" checked="{{item.checked}}" />
             </view>
           </view>
           <view class="center">
-            <image class="icon-goods" src="{{item.url}}" mode="aspectFill"></image>
+            <view class="icon-goods-box">
+              <view class="mask">{{!item.shelf?'已下架':item.store?'':'库存不足'}}</view>
+              <image class="icon-goods" src="{{item.url}}" mode="aspectFill"></image>
+            </view>
           </view>
           <view class="right">
             <view class="l1">
-              <text>{{item.option}}</text>
+              <view class="tag">预售专区</view> <text>{{item.option}}</text>
             </view>
             <view class="l3">250g/包</view>
             <view class="l4">

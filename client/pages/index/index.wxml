@@ -19,7 +19,7 @@
       <view class="section2" bindtap="swiperHandle">
         <view class="page-section page-section-spacing swiper">
           <swiper indicator-dots="{{indicatorDots}}" autoplay="{{autoplay}}" interval="{{interval}}"
-            duration="{{duration}}" indicator-color="rgba(1, 225, 1, .3)" indicator-active-color="#ff4321">
+            duration="{{duration}}" indicator-color="rgba(255, 255, 255, .6)" indicator-active-color="#ffffff">
             <block wx:for="{{background}}" wx:key="*this">
               <swiper-item>
                 <view class="swiper-item {{item}}"></view>
@@ -75,7 +75,9 @@
           <view class="l1">新品上市</view>
           <view class="l2">新品副标题</view>
           <view class="l3">
-            <view class="btn btn-go"><text>去逛逛</text><view>GO</view></view>
+            <view class="btn btn-go"><text>去逛逛</text>
+              <view>GO</view>
+            </view>
           </view>
         </view>
         <view class="r">
@@ -86,7 +88,28 @@
         </view>
       </view>
       <!-- 热门推荐 -->
-      <view class="section7">热门推荐</view>
+      <view class="section7">
+        <view class="item" wx:for="{{hotGoodsList}}" wx:key="unique">
+          <image class="icon-pri" src="{{item.url}}" mode="aspectFill"></image>
+          <view class="cont">
+            <view class="l1">{{item.tit}}</view>
+            <view class="l2">
+              <view class="price">
+                <text>￥</text>{{item.price}}
+              </view>
+              <view class="origin-price">￥{{item.originPrice}}</view>
+            </view>
+          </view>
+          <view class="shopcart-box">
+            <image class="icon-shopcart" mode="aspectFill" src="/assets/images/icon_car.png"></image>
+            <view class="shopcart-info">34</view>
+          </view>
+        </view>
+      </view>
+      <!-- 分类商品 -->
+      <view class="section8">
+
+      </view>
     </view>
   </view>
 </view>

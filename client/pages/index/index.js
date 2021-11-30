@@ -97,6 +97,27 @@ create(store, {
       url: 'https://gw.alicdn.com/tps/i1/O1CN01PWx1at1LfLtyRhW1V_!!0-juitemmedia.jpg_140x10000Q75.jpg',
       price: 6.5,
       originPrice: 7.5
+    }],
+    hotGoodsList: [{
+      url: 'https://gw.alicdn.com/tps/i1/O1CN01PWx1at1LfLtyRhW1V_!!0-juitemmedia.jpg_140x10000Q75.jpg',
+      tit: '元宝优选调和油20L/捅',
+      price: 6.5,
+      originPrice: 7.5
+    }, {
+      url: 'https://gw.alicdn.com/tps/i1/O1CN01PWx1at1LfLtyRhW1V_!!0-juitemmedia.jpg_140x10000Q75.jpg',
+      tit: '阿尔卑斯饮用天然矿泉水500ml*6',
+      price: 6.5,
+      originPrice: 7.5
+    }, {
+      url: 'https://gw.alicdn.com/tps/i1/O1CN01PWx1at1LfLtyRhW1V_!!0-juitemmedia.jpg_140x10000Q75.jpg',
+      tit: '元宝优选调和油20L/捅',
+      price: 6.5,
+      originPrice: 7.5
+    }, {
+      url: 'https://gw.alicdn.com/tps/i1/O1CN01PWx1at1LfLtyRhW1V_!!0-juitemmedia.jpg_140x10000Q75.jpg',
+      tit: '元宝优选调和油20L/捅',
+      price: 6.5,
+      originPrice: 7.5
     }]
   },
   watch: {

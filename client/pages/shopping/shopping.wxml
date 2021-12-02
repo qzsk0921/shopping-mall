@@ -46,7 +46,7 @@
           </view>
           <view class="right">
             <view class="l1">
-              <view class="tag">预售专区</view> <text>{{item.option}}</text>
+              <view class="tag">预售专区</view><text>{{item.option}}</text>
             </view>
             <view class="l3">250g/包</view>
             <view class="l4">

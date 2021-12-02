@@ -8,7 +8,9 @@
     "pages/search/search",
     "pages/search/searchRes",
     "pages/location/index/index",
-    "pages/location/add/add"
+    "pages/location/add/add",
+    "pages/couponCenter/couponCenter",
+    "pages/mine/coupon/coupon"
   ],
   "window": {
     "backgroundTextStyle": "light",

@@ -211,11 +211,12 @@
   font-weight: bold;
   line-height: 38rpx;
   color: #333333;
-  display: flex;
-  align-items: flex-start;
+  /* display: flex;
+  align-items: flex-start; */
 }
 
 .section2 .item .right .l1 .tag {
+  float: left;
   margin: 5rpx 6rpx 0 0;
   text-align: center;
   width: 96rpx;

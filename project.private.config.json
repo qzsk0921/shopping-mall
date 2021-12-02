@@ -41,6 +41,24 @@
           "pathName": "pages/shopping/shopping",
           "query": "",
           "scene": null
+        },
+        {
+          "name": "pages/location/add/add",
+          "pathName": "pages/location/add/add",
+          "query": "",
+          "scene": null
+        },
+        {
+          "name": "pages/couponCenter/couponCenter",
+          "pathName": "pages/couponCenter/couponCenter",
+          "query": "",
+          "scene": null
+        },
+        {
+          "name": "pages/mine/coupon/coupon",
+          "pathName": "pages/mine/coupon/coupon",
+          "query": "",
+          "scene": null
         }
       ]
     }

@@ -75,6 +75,19 @@ create(store, {
   addressDelHandle() {
     // 删除收货地址
     console.log('addressDelHandle')
+    this.setData({
+      confirmDialogVisibile: true
+    })
+  },
+  // 对话框确认按钮
+  diaConfirmHandle(e) {
+    console.log('diaConfirmHandle')
+    console.log(e.detail)
+  },
+  // 对话框取消按钮
+  diaCancelHandle(e) {
+    console.log('diaCancelHandle')
+    console.log(e.detail)
   },
   /**
    * 生命周期函数--监听页面加载

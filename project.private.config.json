@@ -59,6 +59,24 @@
           "pathName": "pages/mine/coupon/coupon",
           "query": "",
           "scene": null
+        },
+        {
+          "name": "pages/mine/certification/certification",
+          "pathName": "pages/mine/certification/certification",
+          "query": "",
+          "scene": null
+        },
+        {
+          "name": "pages/shop/shopType",
+          "pathName": "pages/shop/shopType",
+          "query": "",
+          "scene": null
+        },
+        {
+          "name": "pages/shop/confirmOrder",
+          "pathName": "pages/shop/confirmOrder",
+          "query": "",
+          "scene": null
         }
       ]
     }

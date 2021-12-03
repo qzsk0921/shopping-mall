@@ -73,7 +73,7 @@
   text-align: center;
   line-height: 56rpx;
   right: 6rpx;
-  top: 6rpx;
+  top: 21rpx;
   z-index: 2;
   width: 120rpx;
   height: 56rpx;

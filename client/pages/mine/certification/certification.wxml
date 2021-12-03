@@ -1,0 +1,47 @@
+<!--pages/mine/certification/certification.wxml-->
+<!-- <text>pages/mine/certification/certification.wxml</text> -->
+<view class="container container-certification">
+  <view class="fixed">
+    <top-navigation navigationBarTitleText="{{navigationBarTitleText}}" navHeight="{{compatibleInfo.navHeight}}"
+      navTop="{{compatibleInfo.menuButtonObject.top}}" menuButtonHeight="{{compatibleInfo.menuButtonObject.height}}"
+      status="{{navStatus}}" color="#333" bgColor="#fff" />
+  </view>
+  <view class="content">
+    <view class="tip">当您申请通过后，方可明文查看商品价格</view>
+    <form bindsubmit="formSubmit" bindreset="formReset">
+      <view class="form-section">
+        <view class="form-item form-item-shopname">
+          <label>店铺名称</label>
+          <input type="digit" name="name" placeholder="请输入您的店铺名称" placeholder-class="input-placeholder"
+            value="{{certificationInfo.name}}" bindblur="handleInputChange" disabled="{{generateOrderSuccess}}" />
+        </view>
+        <view class="form-item form-item-shoptype arrow">
+          <label>店铺类型</label>
+          <input type="digit" name="type" placeholder="请选择" placeholder-class="input-placeholder"
+            value="{{certificationInfo.type}}" bindtap="chooseShopTypeHandle" disabled="true" />
+        </view>
+        <view class="form-item form-item-principal">
+          <label>负责人</label>
+          <input type="digit" name="principal" placeholder="请输入店铺负责人名称" placeholder-class="input-placeholder"
+            value="{{certificationInfo.principal}}" disabled="true" bindtap="addressHandle" />
+        </view>
+        <view class="form-item form-item-phone">
+          <label>联系方式</label>
+          <input type="digit" name="phone" placeholder="请输入店铺负责人联系方式" placeholder-class="input-placeholder"
+            value="{{certificationInfo.phone}}" bindblur="handleInputChange" disabled="{{generateOrderSuccess}}" />
+        </view>
+        <view class="form-item form-item-address arrow">
+          <label>收货地址</label>
+          <input type="digit" name="address" placeholder="请填写收货地址" placeholder-class="input-placeholder"
+            value="{{certificationInfo.address}}" disabled="true" bindtap="addressHandle" />
+        </view>
+        <view class="form-item form-item-number">
+          <label>门牌号</label>
+          <input type="digit" name="number" placeholder="例：10号楼808室" placeholder-class="input-placeholder"
+            value="{{certificationInfo.number}}" bindblur="handleInputChange" disabled="{{generateOrderSuccess}}" />
+        </view>
+      </view>
+      <button class="btn-submit btn" form-type="submit">提交申请</button>
+    </form>
+  </view>
+</view>

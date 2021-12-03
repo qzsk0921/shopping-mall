@@ -10,7 +10,10 @@
     "pages/location/index/index",
     "pages/location/add/add",
     "pages/couponCenter/couponCenter",
-    "pages/mine/coupon/coupon"
+    "pages/shop/shopType",
+    "pages/shop/confirmOrder",
+    "pages/mine/coupon/coupon",
+    "pages/mine/certification/certification"
   ],
   "window": {
     "backgroundTextStyle": "light",

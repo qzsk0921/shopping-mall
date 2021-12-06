@@ -1,0 +1,46 @@
+<!--pages/goods/detail.wxml-->
+<!-- <text>pages/goods/detail.wxml</text> -->
+<view class="container container-goods-detail">
+  <view class="fixed">
+    <top-navigation navigationBarTitleText="{{navigationBarTitleText}}" navHeight="{{compatibleInfo.navHeight}}"
+      navTop="{{compatibleInfo.menuButtonObject.top}}" menuButtonHeight="{{compatibleInfo.menuButtonObject.height}}"
+      status="{{navStatus}}" color="#333" />
+  </view>
+  <view class="content">
+    <view class="swiper-box section1">
+      <swiper indicator-dots="{{indicatorDots}}" autoplay="{{autoplay}}" interval="{{interval}}" duration="{{duration}}"
+        indicator-color="rgba(255, 255, 255, .6)" indicator-active-color="#ffffff">
+        <block wx:for="{{background}}" wx:key="*this">
+          <swiper-item>
+            <view class="swiper-item {{item}}"></view>
+          </swiper-item>
+        </block>
+      </swiper>
+    </view>
+    <view class="section2">
+      <view class="l1">
+        <text>￥</text><text>88.88</text><text>￥118.5</text>
+      </view>
+      <view class="l2">阿尔卑斯饮用天然矿泉水阿尔卑斯饮用天然矿泉水阿尔卑斯尔卑斯</view>
+      <view class="l3">商品描述，最多显示2行，第二行内容显示不下，显示…</view>
+    </view>
+    <view class="section3">
+      <view class="l1">详情</view>
+      <view class="l2">详情</view>
+      <view class="l3">详情</view>
+      <view class="l4">详情</view>
+      <view class="l5">详情</view>
+    </view>
+  </view>
+  <view class="footer">
+    <view class="col1">
+      <image src="/assets/images/goods_btn_car.png"></image>
+      <view>购物车</view>
+    </view>
+    <view class="col2">
+      <image src="/assets/images/goods_btn_collection.png"></image>
+      <view>收藏</view>
+    </view>
+    <view class="col3 btn btn-car">加入购物车</view>
+  </view>
+</view>

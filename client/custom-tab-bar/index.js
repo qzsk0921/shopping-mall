@@ -12,8 +12,8 @@ Component({
    */
   data: {
     // selected: 0,
-    color: "#AAAAAA",
-    selectedColor: "#2872EC",
+    color: "#999999",
+    selectedColor: "#FF723A",
   },
 
   /**

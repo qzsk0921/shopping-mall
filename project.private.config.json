@@ -77,6 +77,18 @@
           "pathName": "pages/shop/confirmOrder",
           "query": "",
           "scene": null
+        },
+        {
+          "name": "pages/profile/profile",
+          "pathName": "pages/profile/profile",
+          "query": "",
+          "scene": null
+        },
+        {
+          "name": "pages/goods/detail",
+          "pathName": "pages/goods/detail",
+          "query": "",
+          "scene": null
         }
       ]
     }

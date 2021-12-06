@@ -63,11 +63,13 @@
       <view class="l5 register">
         <view class="left">
           <image class="icon-member" src="/assets/images/order_members.png" mode="aspectFill"></image>
-          <text>开通会员，本单最高立减</text>
+          <!-- <text>开通会员，本单最高立减</text> -->
+          <text>已为您累计节省</text>
           <text>￥</text>
           <text>20</text>
         </view>
-        <view class="right btn btn-register">立即开通</view>
+        <!-- <view class="right btn btn-register">立即开通</view> -->
+        <view class="right btn btn-register">立即续费</view>
       </view>
       <!-- 续费 -->
       <!-- <view class="l5 renewals">

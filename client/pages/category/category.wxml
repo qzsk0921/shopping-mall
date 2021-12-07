@@ -8,11 +8,12 @@
   </view>
   <view class="content">
     <view class="section1" bindtap='dropdownMenuItemTap'>
-      <dropdown-menu-category opened="{{categoryOpened}}" bindsubClickable="subClickableHandle" categoryData="{{categoryData}}" currentCategoryId="{{currentCategoryId}}" />
+      <dropdown-menu-category opened="{{categoryOpened}}" bindsubClickable="subClickableHandle"
+        categoryData="{{firstCategory}}" currentCategoryId="{{currentCategoryId}}" />
       <view class="category-box hide-scrollbar">
-        <view class="item {{currentCategoryId===item.id?'category-active':''}}" wx:for="{{categoryData}}"
+        <view class="item {{currentCategoryId===item.id?'category-active':''}}" wx:for="{{firstCategory}}"
           data-clickable="1">
-          <image class="icon-category" src="{{item.url}}" mode="aspectFill" data-clickable="1"></image>
+          <image class="icon-category" src="{{item.icon}}" mode="aspectFill" data-clickable="1"></image>
           <view class="text-category" data-clickable="1">{{item.name}}</view>
         </view>
         <view class="extend" bindtap="extendHandle" data-clickable="1">

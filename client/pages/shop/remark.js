@@ -1,7 +1,6 @@
-// pages/shop/confirmOrder.js
+// pages/shop/remark.js
 import store from '../../store/common'
 import create from '../../utils/create'
-
 // Page({
 create(store, {
 
@@ -10,11 +9,36 @@ create(store, {
    */
   data: {
     compatibleInfo: null, //navHeight menuButtonObject systemInfo isIphoneX
-    navigationBarTitleText: '订单确认',
+    navigationBarTitleText: '备注',
+
+    prepareList: ['提前联系', '货放隔壁店铺当面验收', '送到电话联系', '送到别打电话', '当面验收', '晚点送到', '货到厨房', '店门没锁请把货放店内', '货放隔壁店铺当面验收'],
+    currentCount: 0,
+    content: ''
   },
-  toRemarkHandle() {
-    wx.navigateTo({
-      url: '/pages/shop/remark',
+  inputHandle(e) {
+    // console.log(e)
+    let content = e.detail.value
+    let len = e.detail.value.length
+
+    if (len > 100) {
+      len = 100
+      content = this.data.content.slice(0, 100)
+    }
+
+    this.setData({
+      currentCount: len,
+      content
+    })
+  },
+  remarkFillHandle(e) {
+    const data = e.target.dataset.text
+
+    // 100字以内
+    if ((this.data.content + data).length > 100) return
+
+    this.setData({
+      currentCount: (this.data.content + data).length,
+      content: this.data.content + data
     })
   },
   /**

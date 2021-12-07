@@ -1,3 +1,4 @@
+// https://www.showdoc.com.cn/1722521359176667/8053561250017786 Xczm190410
 import request from '../utils/request'
 
 // 用户授权
@@ -8,7 +9,26 @@ import request from '../utils/request'
  */
 export function login(data) {
   return request({
-    url: '/mallcar/login/login',
+    url: '/login/login',
+    method: 'post',
+    data
+  })
+}
+
+/**
+ * 更新微信信息
+ * @param {string} nickName 昵称
+ * @param {string} avatarUrl 头像
+ * @param {string} gender 性别 0-未知，1-男，2-女
+ * @param {string} province 省
+ * @param {string} city 市
+ * @param {string} country 国家
+ * @param {string} language 语言
+ */
+export function updateUserInfo(data) {
+  return request({
+    // url: '/usershare/login/login',
+    url: '/login/update',
     method: 'post',
     data
   })
@@ -21,7 +41,7 @@ export function login(data) {
  */
 export function updatePhone(data) {
   return request({
-    url: '/mallcar/login/update_phone',
+    url: '/login/update_phone',
     method: 'post',
     data
   })
@@ -32,7 +52,7 @@ export function updatePhone(data) {
  */
 export function getUserDetail() {
   return request({
-    url: '/mallcar/user/get_user_info',
+    url: '/user/get_user_info',
     method: 'get'
   })
 }

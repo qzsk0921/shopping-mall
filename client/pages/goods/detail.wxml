@@ -19,22 +19,50 @@
     </view>
     <view class="section2">
       <view class="l1">
-        <text>￥</text><text>88.88</text><text>￥118.5</text>
+        <text>￥</text><text>88.88</text>
+        <view>预售专区</view><text>￥118.5</text>
       </view>
       <view class="l2">阿尔卑斯饮用天然矿泉水阿尔卑斯饮用天然矿泉水阿尔卑斯尔卑斯</view>
-      <view class="l3">商品描述，最多显示2行，第二行内容显示不下，显示…</view>
+      <view class="l3">商品描述，最多显示2行，第二行内容显示不下第二行内容显示不下，显示…</view>
     </view>
     <view class="section3">
       <view class="l1">详情</view>
-      <view class="l2">详情</view>
-      <view class="l3">详情</view>
-      <view class="l4">详情</view>
-      <view class="l5">详情</view>
+      <view class="l2">
+        <view class="col1 col">
+          <text class="name">配送</text>
+          <text class="val">这是字数最长的</text>
+        </view>
+        <view class="col2 col">
+          <text class="name">品牌</text>
+          <text class="val">双汇</text>
+        </view>
+      </view>
+      <view class="l3">
+        <view class="col1 col">
+          <text class="name">规格</text>
+          <text class="val">250g</text>
+        </view>
+        <view class="col2 col">
+          <text class="name">单位</text>
+          <text class="val">包</text>
+        </view>
+      </view>
+      <view class="l4">
+        <image class="icon-goods"
+          src="https://gw.alicdn.com/tps/i1/O1CN01PWx1at1LfLtyRhW1V_!!0-juitemmedia.jpg_140x10000Q75.jpg"
+          mode="aspectFill"></image>
+        <image class="icon-goods"
+          src="https://gw.alicdn.com/tps/i1/O1CN01PWx1at1LfLtyRhW1V_!!0-juitemmedia.jpg_140x10000Q75.jpg"
+          mode="aspectFill"></image>
+      </view>
     </view>
   </view>
   <view class="footer">
     <view class="col1">
-      <image src="/assets/images/goods_btn_car.png"></image>
+      <view class="shopcart-box">
+        <image class="icon-shopcart" mode="aspectFill" src="/assets/images/goods_btn_car.png"></image>
+        <view class="shopcart-info">31</view>
+      </view>
       <view>购物车</view>
     </view>
     <view class="col2">

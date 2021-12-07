@@ -52,7 +52,7 @@
       <text>微信支付</text>
     </view>
     <!-- 备注 -->
-    <view class="l4">
+    <view class="l4" bindtap="toRemarkHandle">
       <text>备注</text>
       <view class="remark">可以告诉我您的需求（选填）</view>
       <image class="icon-arrow" src="/assets/images/nav_btn_next.png" mode="aspectFill"></image>

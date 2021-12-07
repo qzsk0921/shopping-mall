@@ -5,6 +5,10 @@ import {
 import store from '../../store/common'
 import create from '../../utils/create'
 
+import {
+  getCategoryList
+} from '../../api/commodity'
+
 // Page({
 create(store, {
   /**
@@ -65,6 +69,8 @@ create(store, {
       name: '蔬菜12',
       url: 'https://gw.alicdn.com/tps/i1/O1CN01PWx1at1LfLtyRhW1V_!!0-juitemmedia.jpg_140x10000Q75.jpg'
     }],
+    firstCategory: [], //第一分类
+    secondCategory: [], //第二分类
     screenCategory: [{
       // 导航名称
       option: '蔬菜豆制品',
@@ -134,10 +140,27 @@ create(store, {
         categoryOpened: 0
       })
   },
+  getCategoryList(data) {
+    return new Promise((resolve, reject) => {
+      getCategoryList(data).then(res => {
+        resolve(res)
+      }).catch(err => {
+        reject(err)
+      })
+    })
+  },
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+    this.getCategoryList({
+      pid: 0
+    }).then(res => {
+      this.setData({
+        firstCategory: res.data
+      })
+    })
+
     setTabBar.call(this, {
       selected: 1
     })
@@ -164,7 +187,6 @@ create(store, {
       })
     }).exec();
   },
-
   /**
    * 生命周期函数--监听页面显示
    */

@@ -89,6 +89,12 @@
           "pathName": "pages/goods/detail",
           "query": "",
           "scene": null
+        },
+        {
+          "name": "pages/shop/remark",
+          "pathName": "pages/shop/remark",
+          "query": "",
+          "scene": null
         }
       ]
     }

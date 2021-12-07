@@ -13,6 +13,7 @@
     "pages/goods/detail",
     "pages/shop/shopType",
     "pages/shop/confirmOrder",
+    "pages/shop/remark",
     "pages/mine/coupon/coupon",
     "pages/mine/certification/certification"
   ],

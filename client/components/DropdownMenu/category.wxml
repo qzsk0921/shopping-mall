@@ -11,7 +11,7 @@
     <view class="l2">
       <view class="dropdown-item-down__item {{currentCategoryId===item.id?'category-active':''}}"
         wx:for="{{categoryData}}" wx:key="unique" data-item="{{item}}">
-        <image class="icon-category" src="{{item.url}}" mode="aspectFill"></image>
+        <image class="icon-category" src="{{item.icon}}" mode="aspectFill"></image>
         <view class="text-category">{{item.name}}</view>
       </view>
     </view>

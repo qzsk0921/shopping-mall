@@ -17,7 +17,18 @@ Component({
       value: 0
     }
   },
-
+  observers: {
+    'categoryData': function (val) {
+      // console.log(val)
+      const query = wx.createSelectorQuery().in(this)
+      query.select('.dropdown-item-down__content').boundingClientRect(rect => {
+        // console.log(rect)
+        this.setData({
+          height: rect.height
+        })
+      }).exec()
+    }
+  },
   /**
    * 组件的初始数据
    */
@@ -55,16 +66,16 @@ Component({
   lifetimes: {
     ready() {
       // 在组件在视图层布局完成后执行
-      const query = wx.createSelectorQuery().in(this)
-      query.select('.dropdown-item-down__content').boundingClientRect(rect => {
-        // console.log(rect)
-        this.setData({
-          height: rect.height
-        })
-      }).exec()
     },
     attached: function () {
       // 在组件实例进入页面节点树时执行
+      // const query = wx.createSelectorQuery().in(this)
+      // query.select('.dropdown-item-down__content').boundingClientRect(rect => {
+      //   // console.log(rect)
+      //   that.setData({
+      //     height: rect.height
+      //   })
+      // }).exec()
     },
     detached: function () {
       // 在组件实例被从页面节点树移除时执行

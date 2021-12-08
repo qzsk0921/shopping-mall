@@ -85,22 +85,26 @@ create(store, {
     const id = e.currentTarget.dataset.id
     console.log(id)
     switch (id) {
-      case id == 1:
+      case 1:
         break;
-      case id == 2:
+      case 2:
         // 收货地址
+        wx.navigateTo({
+          // url: "/pages/mine/address/address",
+          url: '/pages/location/index/index?from=mine'
+        })
         break;
-      case id == 3:
+      case 3:
         break;
-      case id == 4:
+      case 4:
         break;
-      case id == 5:
+      case 5:
         break;
-      case id == 6:
+      case 6:
         break;
-      case id == 7:
+      case 7:
         break;
-      case id == 8:
+      case 8:
         break;
       default:
         console.log(`Sorry, we are out of ${id}.`);

@@ -100,8 +100,8 @@ create(store, {
       })
 
       setTimeout(() => {
-        wx.navigateTo({
-          url: '/pages/location/index/index',
+        wx.navigateBack({
+          delta: 0,
         })
       }, duration)
     })
@@ -148,8 +148,8 @@ create(store, {
           })
 
           setTimeout(() => {
-            wx.navigateTo({
-              url: '/pages/location/index/index',
+            wx.navigateBack({
+              delta: 0,
             })
           }, duration)
         })
@@ -163,8 +163,11 @@ create(store, {
           })
 
           setTimeout(() => {
-            wx.navigateTo({
-              url: '/pages/location/index/index',
+            // wx.navigateTo({
+            //   url: '/pages/location/index/index',
+            // })
+            wx.navigateBack({
+              delta: 0,
             })
           }, duration)
         })

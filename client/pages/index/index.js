@@ -6,6 +6,11 @@ import {
 import config from '../../config/index'
 import store from '../../store/common'
 import create from '../../utils/create'
+
+import {
+  setAddressShopInfo
+} from '../../api/location'
+
 // Page({
 create(store, {
   /**
@@ -209,8 +214,31 @@ create(store, {
         compatibleInfo: this.store.data.compatibleInfo
       })
     }
-  },
 
+    const currentAddress = this.store.data.currentAddress
+    this.update()
+
+    setAddressShopInfo(currentAddress).then(res => {
+      this.setData({
+        currentAddress
+      })
+      console.log(this.data.currentAddress)
+
+      this.data.shop_id = res.data.shop_id
+      this.store.data.shop_id = res.data.shop_id
+      this.update()
+    })
+
+  },
+  setAddressShopInfo(data) {
+    return new Promise((resolve, reject) => {
+      setAddressShopInfo(data).then(res => {
+        resolve(res)
+      }).catch(err => {
+        reject(err)
+      })
+    })
+  },
   /**
    * 生命周期函数--监听页面隐藏
    */
@@ -256,16 +284,14 @@ create(store, {
           url: `https://apis.map.qq.com/ws/geocoder/v1/?location=${latitude},${longitude}&key=${config.tencentKey}`,
           success: res => {
             console.log(res)
-            // console.log(res.data.result.ad_info.city+res.data.result.ad_info.adcode);
-            // that.store.data.searchCityCode = res.data.result.ad_info.adcode
-            // that.store.data.searchCity = res.data.result.ad_info.city
+            that.store.data.currentAddress = res.data.result
+            that.store.data.currentAddress.name = res.data.result.formatted_addresses.recommend
+            that.store.data.currentAddress.type = 2
             that.store.data.location = res.data.result
             that.update()
-            // console.log(that.store.data.location)
             that.setData({
-              location: res.data.result
+              currentAddress: that.store.data.currentAddress
             })
-            // console.log(that.data.location)
           }
         })
       },

@@ -5,11 +5,11 @@ import config from '../../../config/index'
 const QQMapWX = require('../../../lib/qqmap-wx-jssdk.js');
 
 import {
-  getAddress,
-  setAddressShopInfo
+  getAddressList
 } from '../../../api/location'
 
 let qqmapsdk, timer;
+
 // Page({
 create(store, {
   /**
@@ -17,7 +17,7 @@ create(store, {
    */
   data: {
     compatibleInfo: null, //navHeight menuButtonObject systemInfo isIphoneX
-    navigationBarTitleText: '选择收货地址',
+    navigationBarTitleText: '', //选择收货地址 我的地址
     deliveryAddress: [],
 
     searchKeyword: '',
@@ -29,6 +29,24 @@ create(store, {
     currentAddressId: null,
   },
   watch: {
+    navigationBarTitleText: {
+      handler(nv, ov, obj) {
+        // console.log(nv)
+        const that = this;
+        const query = wx.createSelectorQuery();
+        if (nv === '选择收货地址') {
+          setTimeout(function () {
+            query.select('.section1').boundingClientRect(function (rect) {
+              that.setData({
+                listH: that.store.data.compatibleInfo.systemInfo.windowHeight - rect.bottom
+              })
+            }).exec();
+          }, 0)
+        } else if (nv === '我的地址') {
+          console.log('navigationBarTitleText 我的地址')
+        }
+      }
+    },
     deliveryAddress: {
       handler(nv, ov, obj) {
         // console.log(nv)
@@ -37,6 +55,7 @@ create(store, {
         if (!nv.length) return
         const that = this;
         const query = wx.createSelectorQuery();
+
         setTimeout(function () {
           query.select('.deliveryAddress-box').boundingClientRect(function (rect) {
             console.log(rect)
@@ -121,17 +140,19 @@ create(store, {
     // 当前收货地址存后台
     // 请求当前收货地址接口
     // 请求成功
-    const id = e.currentTarget.dataset.id
+    const dataset = e.currentTarget.dataset
     const type = e.target.dataset.type
 
     // 编辑按钮不处理
     if (type) return false
 
     this.setData({
-      currentAddressId: id
+      currentAddressId: dataset.item.id
     })
-
-    // 导航链接，跳转至首页 首页显示定位信息标题
+    this.store.data.currentAddress = dataset.item
+    this.store.data.currentAddress.type = 1
+    this.update()
+    
     wx.switchTab({
       url: '../../index/index',
     })
@@ -159,10 +180,10 @@ create(store, {
       searchKeyword: ''
     })
   },
-  getAddress(data) {
+  getAddressList(data) {
     data = data ? data : {}
     return new Promise((resolve, reject) => {
-      getAddress(data).then(res => {
+      getAddressList(data).then(res => {
         resolve(res)
       }).catch(err => {
         reject(err)
@@ -178,28 +199,23 @@ create(store, {
     qqmapsdk = new QQMapWX({
       key: config.tencentKey
     });
+
+    if (options && options.from === 'mine') {
+      this.setData({
+        navigationBarTitleText: '我的地址'
+      })
+    } else {
+      this.setData({
+        navigationBarTitleText: '选择收货地址'
+      })
+    }
   },
 
   /**
    * 生命周期函数--监听页面初次渲染完成
    */
   onReady: function () {
-    const that = this;
-    const query = wx.createSelectorQuery();
-    // // 在页面渲染完成OnReady回调 获取元素高度时，如果不加定时器，获取的元素的高度还是没渲染完异步数据前的高度
-    // query.select('.fixed').boundingClientRect(function (rect) {
-    //   // console.log(rect)
-    //   that.setData({
-    //     // scrollViewHeight: that.store.data.systemInfo.screenHeight - (rect.height + 50),
-    //     fixed: rect.height,
-    //   })
-    // }).exec();
-
-    query.select('.section1').boundingClientRect(function (rect) {
-      that.setData({
-        listH: that.store.data.compatibleInfo.systemInfo.windowHeight - rect.height - that.store.data.compatibleInfo.navHeight,
-      })
-    }).exec();
+    // 在页面渲染完成OnReady回调 获取元素高度时，如果不加定时器，获取的元素的高度还是没渲染完异步数据前的高度
   },
 
   /**
@@ -213,7 +229,7 @@ create(store, {
     }
 
     // 更新收货地址列表
-    this.getAddress().then(res => {
+    this.getAddressList().then(res => {
       this.setData({
         deliveryAddress: res.data.data
         // deliveryAddress: [{
@@ -225,10 +241,6 @@ create(store, {
         //   current: 0, //当前使用地址
         // }]
       })
-    })
-
-    setAddressShopInfo().then(res => {
-      console.log(res)
     })
   },
 

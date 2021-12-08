@@ -167,6 +167,7 @@
   position: absolute;
   width: 100vw;
   overflow: auto;
+  background: #FFFFFF;
 }
 
 .list .btn-item {

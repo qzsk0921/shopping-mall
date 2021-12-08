@@ -67,7 +67,7 @@ export function getAddressDetail(data) {
 /**
  * 收货地址列表
  */
-export function getAddress(data) {
+export function getAddressList(data) {
   return request({
     url: '/Address/get_address_list',
     method: 'get',

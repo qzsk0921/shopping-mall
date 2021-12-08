@@ -13,6 +13,7 @@ export default {
 
     //定位位置 ad_info{object} address福建省厦门市思明区康泰路5-1-107号 address_component{city: 厦门市, district: 思明区, nation: 中国,province: 福建省,street: 康泰路,street_number: 康泰路5-1-107号} address_reference{object} formatted_addresses{recommend: "中共厦门市委员会", rough: "中共厦门市委员会"} location{lat: 24.47951, lng: 118.08948}
     location: {},
+    //收货地址
     deliveryAddress: [
       //   {
       //   id: 1,
@@ -29,7 +30,16 @@ export default {
       //   phone: '14012344321', //手机号
       //   current: 1,
       // }
-    ] //收货地址
+    ],
+    // 1.未授权：会展中心(默认) 2.已授权：当前定位 3.已授权已选择：已选择地址
+    currentAddress: {
+      name: "厦门国际会议展览中心",
+      longitude: 118.183681124,
+      latitude: 24.467152248,
+      type: 2, //1:通过地址选择 2:首页选择地址
+      id: null,
+    },
+    shop_id: null, //店铺ID
     // logs: [],
     // b: { 
     //   arr: [{ name: '数值项目1' }] ,

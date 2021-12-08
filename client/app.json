@@ -16,7 +16,6 @@
     "pages/shop/remark",
     "pages/mine/coupon/coupon",
     "pages/mine/certification/certification",
-    "pages/mine/address/address"
   ],
   "window": {
     "backgroundTextStyle": "light",

@@ -11,27 +11,26 @@
       <view class="form-section">
         <view class="form-item form-item-customer">
           <label>联系人</label>
-          <input type="digit" name="name" placeholder="请填写姓名" placeholder-class="input-placeholder"
-            value="{{deliveryAddress.name}}" bindblur="handleInputChange"
-            disabled="{{generateOrderSuccess}}" />
+          <input type="digit" name="consignee_name" placeholder="请填写姓名" placeholder-class="input-placeholder"
+            value="{{deliveryAddress.consignee_name}}" bindblur="handleInputChange" disabled="{{generateOrderSuccess}}" />
         </view>
         <view class="form-item form-item-phone">
           <label>手机号</label>
-          <input type="digit" name="phone" placeholder="请填写手机号" placeholder-class="input-placeholder"
-            value="{{deliveryAddress.phone}}" bindblur="handleInputChange" disabled="{{generateOrderSuccess}}" />
+          <input type="digit" name="consignee_phone" placeholder="请填写手机号" placeholder-class="input-placeholder"
+            value="{{deliveryAddress.consignee_phone}}" bindblur="handleInputChange" disabled="{{generateOrderSuccess}}" />
         </view>
         <view class="form-item form-item-address">
           <label>收货地址</label>
-          <input type="digit" name="address" placeholder="请填写收货地址" placeholder-class="input-placeholder"
-            value="{{deliveryAddress.address}}" disabled="true" bindtap="addressHandle" />
+          <input type="digit" name="name" placeholder="请填写收货地址" placeholder-class="input-placeholder"
+            value="{{deliveryAddress.name}}" disabled="true" bindtap="addressHandle" />
         </view>
         <view class="form-item form-item-number">
           <label>门牌号</label>
-          <input type="digit" name="indirect_reward_amount" placeholder="例：10号楼808室"
-            placeholder-class="input-placeholder" value="{{deliveryAddress.indirect_reward_amount}}"
+          <input type="digit" name="user_address" placeholder="例：10号楼808室"
+            placeholder-class="input-placeholder" value="{{deliveryAddress.user_address}}"
             bindblur="handleInputChange" disabled="{{generateOrderSuccess}}" />
         </view>
-        <view class="form-item form-item-default">
+        <!-- <view class="form-item form-item-default">
           <view class="l1">
             <label>设为默认地址</label>
             <van-switch checked="{{ checked }}" bind:change="onChange" size="19px" inactive-color="#F7F7F7" />
@@ -39,26 +38,11 @@
           <view class="l2">
             在小程序启动时，优先定位至默认地址
           </view>
-          <!-- <input type="digit" name="indirect_reward_amount" placeholder="例：10号楼808室"
-            placeholder-class="input-placeholder" value="{{deliveryAddress.indirect_reward_amount}}"
-            bindblur="handleInputChange" disabled="{{generateOrderSuccess}}" /> -->
-        </view>
+        </view> -->
       </view>
-      <!-- <view class="from-item">
-        <input type="text" placeholder="请填写姓名">
-      </view>
-      <view class="from-item">
-        <input type="text" placeholder="请填写手机号">
-      </view>
-      <view class="from-item">
-        <input type="text" placeholder="请填写收货地址">
-      </view>
-      <view class="from-item">
-        <input type="text" placeholder="例：10号楼808室">
-      </view> -->
       <button class="btn-submit btn" form-type="submit">保存收获地址</button>
     </form>
-    <view class="btn btn-del" bindtap="addressDelHandle">删除收获地址</view>
+    <view wx:if="{{type==='edit'}}" class="btn btn-del" bindtap="addressDelHandle">删除收获地址</view>
   </view>
 </view>
 

@@ -39,38 +39,72 @@ create(store, {
       }
     ],
     options2: [{
+        id: 1,
         imgName: 'my_icon_coupons',
         name: '优惠券'
       },
       {
+        id: 2,
         imgName: 'my_icon_address',
         name: '收货地址'
       },
       {
+        id: 3,
         imgName: 'my_icon_consume',
         name: '消费记录'
       },
       {
+        id: 4,
         imgName: 'my_icon_certification',
         name: '资质认证'
       },
       {
+        id: 5,
         imgName: 'my_icon_customer',
         name: '我的客户'
       },
       {
+        id: 6,
         imgName: 'my_icon_problem',
         name: '常见问题'
       },
       {
+        id: 7,
         imgName: 'my_icon_focus',
         name: '关注公众号'
       },
       {
+        id: 8,
         imgName: 'my_icon_set',
         name: '设置'
       }
     ]
+  },
+  option2Handle(e) {
+    console.log(e)
+    const id = e.currentTarget.dataset.id
+    console.log(id)
+    switch (id) {
+      case id == 1:
+        break;
+      case id == 2:
+        // 收货地址
+        break;
+      case id == 3:
+        break;
+      case id == 4:
+        break;
+      case id == 5:
+        break;
+      case id == 6:
+        break;
+      case id == 7:
+        break;
+      case id == 8:
+        break;
+      default:
+        console.log(`Sorry, we are out of ${id}.`);
+    }
   },
   getUserProfile() {
     // userStore.getUserProfile().then(res => {

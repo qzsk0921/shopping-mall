@@ -72,7 +72,7 @@ Component({
       this.setData({
         dialogVisible: false
       })
-      this.triggerEvent('confirm', 'cancel')
+      this.triggerEvent('confirm', 'confirm')
     }
   },
   lifetimes: {

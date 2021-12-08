@@ -131,9 +131,19 @@
 .section3 .deliveryAddress-box .l2 {
   display: flex;
   justify-content: space-between;
+  position: relative;
 }
 
-.section3 .deliveryAddress-box .l2 .l2-r .symbol-hook {
+.section3 .deliveryAddress-box .l2 .icon-edit {
+  width: 44rpx;
+  height: 44rpx;
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  right: 0;
+}
+
+/* .section3 .deliveryAddress-box .l2 .l2-r .symbol-hook {
   margin-top: 6rpx;
   width: 35rpx;
   height: 15rpx;
@@ -141,6 +151,11 @@
   border-top-color: transparent;
   border-right-color: transparent;
   transform: rotate(-45deg);
+} */
+.addr-active {
+  font-size: 32rpx;
+  font-weight: 500;
+  color: var(--primary-color) !important;
 }
 
 .section3 .deliveryAddress-box .l2:nth-of-type(n+3) {

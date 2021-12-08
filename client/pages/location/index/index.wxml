@@ -12,7 +12,8 @@
     <input class="search" name="search" placeholder="搜索小区/写字楼等" placeholder-class="search-placeholder"
       value="{{searchKeyword}}" bindinput="inputHandle" />
     <view wx:if="{{!searchKeyword}}" class="btn btn-search" bindtap="searchClickHandle">搜索</view>
-    <image wx:else class="btn btn-close" src="/assets/images/search_icon_close.png" mode="aspectFill" bindtap="searchCloseHandle"></image>
+    <image wx:else class="btn btn-close" src="/assets/images/search_icon_close.png" mode="aspectFill"
+      bindtap="searchCloseHandle"></image>
   </view>
   <view wx:if="{{searchKeyword}}" class="list" style="height:{{listH}}px">
     <view class="btn-item btn-poi {{availablePoi?'btn-active':''}}" wx:for="{{pois}}" wx:key="unique"
@@ -45,14 +46,17 @@
       <view class="l1">我的收货地址</view>
       <view class="deliveryAddress-box" style="height:{{deliveryAddressBoxH}}px;">
         <view wx:for="{{deliveryAddress}}" wx:key="unique" class="l2" data-id="{{item.id}}" bindtap="addrClickHandle">
+          <image class="icon-edit" src="/assets/images/add_icon_edit.png" mode="aspectFill" bindtap="addrEditHandle"
+            data-type="edit" data-id="{{item.id}}">
+          </image>
           <view class="l2-l">
-            <view class="l2-l-l1 tit">{{item.address}}</view>
-            <view class="l2-l-l2 number">{{item.number}}</view>
-            <view class="l2-l-l3 phone">{{item.name}} {{item.phone}}</view>
+            <view class="l2-l-l1 tit {{item.id===currentAddressId?'addr-active': ''}}">{{item.name}}</view>
+            <view class="l2-l-l2 number">{{item.user_address}}</view>
+            <view class="l2-l-l3 phone">{{item.consignee_name}} {{item.consignee_phone}}</view>
           </view>
-          <view class="l2-r">
+          <!-- <view class="l2-r">
             <view class="symbol-hook" wx:if="{{item.id===currentAddressId||item.current}}"></view>
-          </view>
+          </view> -->
         </view>
       </view>
     </view>

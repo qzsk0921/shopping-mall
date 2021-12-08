@@ -4,6 +4,11 @@ import create from '../../../utils/create'
 import config from '../../../config/index'
 const QQMapWX = require('../../../lib/qqmap-wx-jssdk.js');
 
+import {
+  getAddress,
+  setAddressShopInfo
+} from '../../../api/location'
+
 let qqmapsdk, timer;
 // Page({
 create(store, {
@@ -22,6 +27,26 @@ create(store, {
 
     deliveryAddressBoxH: null, //我的收货地址列表超过高度滚动
     currentAddressId: null,
+  },
+  watch: {
+    deliveryAddress: {
+      handler(nv, ov, obj) {
+        // console.log(nv)
+        // console.log(ov)
+        // console.log(obj)
+        if (!nv.length) return
+        const that = this;
+        const query = wx.createSelectorQuery();
+        setTimeout(function () {
+          query.select('.deliveryAddress-box').boundingClientRect(function (rect) {
+            console.log(rect)
+            that.setData({
+              deliveryAddressBoxH: that.store.data.compatibleInfo.systemInfo.windowHeight - rect.top
+            })
+          }).exec();
+        }, 0)
+      }
+    },
   },
   inputHandle(e) {
     const _this = this
@@ -92,17 +117,31 @@ create(store, {
     // this.data.pois[ind]
   },
   addrClickHandle(e) {
-    // console.log(e)
+    console.log(e)
     // 当前收货地址存后台
     // 请求当前收货地址接口
     // 请求成功
     const id = e.currentTarget.dataset.id
+    const type = e.target.dataset.type
+
+    // 编辑按钮不处理
+    if (type) return false
+
     this.setData({
       currentAddressId: id
     })
+
     // 导航链接，跳转至首页 首页显示定位信息标题
     wx.switchTab({
       url: '../../index/index',
+    })
+  },
+  addrEditHandle(e) {
+    // console.log('addrEditHandle')
+    const id = e.currentTarget.dataset.id
+
+    wx.navigateTo({
+      url: `/pages/location/add/add?type=edit&id=${id}`,
     })
   },
   addAddrHandle() {
@@ -120,10 +159,22 @@ create(store, {
       searchKeyword: ''
     })
   },
+  getAddress(data) {
+    data = data ? data : {}
+    return new Promise((resolve, reject) => {
+      getAddress(data).then(res => {
+        resolve(res)
+      }).catch(err => {
+        reject(err)
+      })
+    })
+  },
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+    getApp().setWatcher(this) //设置监听器
+
     qqmapsdk = new QQMapWX({
       key: config.tencentKey
     });
@@ -149,13 +200,6 @@ create(store, {
         listH: that.store.data.compatibleInfo.systemInfo.windowHeight - rect.height - that.store.data.compatibleInfo.navHeight,
       })
     }).exec();
-
-    query.select('.deliveryAddress-box').boundingClientRect(function (rect) {
-      // console.log(rect)
-      that.setData({
-        deliveryAddressBoxH: that.store.data.compatibleInfo.systemInfo.windowHeight - rect.top
-      })
-    }).exec();
   },
 
   /**
@@ -167,6 +211,25 @@ create(store, {
         compatibleInfo: this.store.data.compatibleInfo
       })
     }
+
+    // 更新收货地址列表
+    this.getAddress().then(res => {
+      this.setData({
+        deliveryAddress: res.data.data
+        // deliveryAddress: [{
+        //   id: 1,
+        //   address: '厦门星辰追梦科技有限公司1', //地址
+        //   number: '10-2号302-1室', //门牌号
+        //   name: '洪先生', //联系人
+        //   phone: '14012344321', //手机号
+        //   current: 0, //当前使用地址
+        // }]
+      })
+    })
+
+    setAddressShopInfo().then(res => {
+      console.log(res)
+    })
   },
 
   /**

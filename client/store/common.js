@@ -13,56 +13,23 @@ export default {
 
     //定位位置 ad_info{object} address福建省厦门市思明区康泰路5-1-107号 address_component{city: 厦门市, district: 思明区, nation: 中国,province: 福建省,street: 康泰路,street_number: 康泰路5-1-107号} address_reference{object} formatted_addresses{recommend: "中共厦门市委员会", rough: "中共厦门市委员会"} location{lat: 24.47951, lng: 118.08948}
     location: {},
-    deliveryAddress: [{
-      id: 1,
-      address: '厦门星辰追梦科技有限公司1', //地址
-      number: '10-2号302-1室', //门牌号
-      name: '洪先生', //联系人
-      phone: '14012344321', //手机号
-      current: 0, //当前使用地址
-    }, {
-      id: 2,
-      address: '厦门星辰追梦科技有限公司2', //地址
-      number: '10-2号302-1室', //门牌号
-      name: '洪先生', //联系人
-      phone: '14012344321', //手机号
-      current: 1,
-    }, {
-      id: 3,
-      address: '厦门星辰追梦科技有限公司2', //地址
-      number: '10-2号302-1室', //门牌号
-      name: '洪先生', //联系人
-      phone: '14012344321', //手机号
-      current: 0,
-    }, {
-      id: 4,
-      address: '厦门星辰追梦科技有限公司2', //地址
-      number: '10-2号302-1室', //门牌号
-      name: '洪先生', //联系人
-      phone: '14012344321', //手机号
-      current: 0,
-    }, {
-      id: 5,
-      address: '厦门星辰追梦科技有限公司2', //地址
-      number: '10-2号302-1室', //门牌号
-      name: '洪先生', //联系人
-      phone: '14012344321', //手机号
-      current: 0,
-    }, {
-      id: 6,
-      address: '厦门星辰追梦科技有限公司2', //地址
-      number: '10-2号302-1室', //门牌号
-      name: '洪先生', //联系人
-      phone: '14012344321', //手机号
-      current: 0,
-    }, {
-      id: 7,
-      address: '厦门星辰追梦科技有限公司2', //地址
-      number: '10-2号302-1室', //门牌号
-      name: '洪先生', //联系人
-      phone: '14012344321', //手机号
-      current: 0,
-    }] //收货地址
+    deliveryAddress: [
+      //   {
+      //   id: 1,
+      //   address: '厦门星辰追梦科技有限公司1', //地址
+      //   number: '10-2号302-1室', //门牌号
+      //   name: '洪先生', //联系人
+      //   phone: '14012344321', //手机号
+      //   current: 0, //当前使用地址
+      // }, {
+      //   id: 2,
+      //   address: '厦门星辰追梦科技有限公司2', //地址
+      //   number: '10-2号302-1室', //门牌号
+      //   name: '洪先生', //联系人
+      //   phone: '14012344321', //手机号
+      //   current: 1,
+      // }
+    ] //收货地址
     // logs: [],
     // b: { 
     //   arr: [{ name: '数值项目1' }] ,

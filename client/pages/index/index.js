@@ -76,7 +76,7 @@ create(store, {
       name: '蔬 菜'
     }],
     // 预售
-    prepareSaleList: [, {
+    prepareSaleList: [{
       url: 'https://gw.alicdn.com/tps/i1/O1CN01PWx1at1LfLtyRhW1V_!!0-juitemmedia.jpg_140x10000Q75.jpg',
       price: 6.5,
       originPrice: 7.5
@@ -126,6 +126,19 @@ create(store, {
     }]
   },
   watch: {
+    currentAddress: {
+      handler(nv, ov, obj) {
+        // console.log(nv)
+        // 用用户授权地址换取店铺id
+        this.setAddressShopInfo(nv).then(res => {
+          // console.log(res)
+          this.store.data.shop_id = res.data.shop_id
+          this.update()
+          // 通过shop_id获取商城商品
+        })
+      },
+      deep: true
+    }
     // compatibleInfo: {
     //   handler(nv, ov, obj) {
     //     // console.log(nv)
@@ -153,9 +166,6 @@ create(store, {
     wx.navigateTo({
       url: '/pages/search/search',
     })
-  },
-  a() {
-    console.log('a')
   },
   /**
    * 生命周期函数--监听页面加载
@@ -215,20 +225,11 @@ create(store, {
       })
     }
 
-    const currentAddress = this.store.data.currentAddress
-    this.update()
-
-    setAddressShopInfo(currentAddress).then(res => {
+    if (this.store.data.shop_id) {
       this.setData({
-        currentAddress
+        currentAddress: this.store.data.currentAddress
       })
-      console.log(this.data.currentAddress)
-
-      this.data.shop_id = res.data.shop_id
-      this.store.data.shop_id = res.data.shop_id
-      this.update()
-    })
-
+    }
   },
   setAddressShopInfo(data) {
     return new Promise((resolve, reject) => {
@@ -284,11 +285,17 @@ create(store, {
           url: `https://apis.map.qq.com/ws/geocoder/v1/?location=${latitude},${longitude}&key=${config.tencentKey}`,
           success: res => {
             console.log(res)
-            that.store.data.currentAddress = res.data.result
-            that.store.data.currentAddress.name = res.data.result.formatted_addresses.recommend
-            that.store.data.currentAddress.type = 2
-            that.store.data.location = res.data.result
+            const result = res.data.result
+
+            that.store.data.currentAddress = {
+              address: result.formatted_addresses.recommend,
+              longitude: result.location.lng,
+              latitude: result.location.lat,
+              type: 2, //1:通过地址选择 2:首页选择地址
+            }
+            that.store.data.location = result
             that.update()
+
             that.setData({
               currentAddress: that.store.data.currentAddress
             })

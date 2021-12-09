@@ -202,10 +202,11 @@
 }
 
 .section6 .l {
+  padding-left: 24rpx;
   width: 188rpx;
   display: flex;
   flex-direction: column;
-  align-items: center;
+  align-items: flex-start;
 }
 
 .section6 .l .l1 {

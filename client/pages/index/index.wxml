@@ -47,15 +47,15 @@
       <view class="section4">
         <view class="l">
           <image src="/assets/images/home_trucks.png"></image>
-          <text>最快29分钟送达</text>
+          <text>联合快采，省时省心更省钱</text>
         </view>
         <view class="c">
           <image src="/assets/images/home_cost.png"></image>
-          <text>满15元免配送费</text>
+          <text>满198配送</text>
         </view>
         <view class="r">
           <image src="/assets/images/home_call.png"></image>
-          <text>客服电话:059226656442</text>
+          <text>(0592)208 5025</text>
         </view>
       </view>
       <!-- 预收专栏 -->
@@ -72,8 +72,8 @@
       <!-- 新品上市 -->
       <view class="section6">
         <view class="l">
-          <view class="l1">新品上市</view>
-          <view class="l2">新品副标题</view>
+          <view class="l1">限时抢购</view>
+          <view class="l2">3天后结束</view>
           <view class="l3">
             <view class="btn btn-go"><text>去逛逛</text>
               <view>GO</view>

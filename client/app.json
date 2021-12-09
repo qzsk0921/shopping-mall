@@ -14,8 +14,9 @@
     "pages/shop/shopType",
     "pages/shop/confirmOrder",
     "pages/shop/remark",
+    "pages/mine/vip/vip",
     "pages/mine/coupon/coupon",
-    "pages/mine/certification/certification",
+    "pages/mine/certification/certification"
   ],
   "window": {
     "backgroundTextStyle": "light",

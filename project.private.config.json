@@ -95,6 +95,12 @@
           "pathName": "pages/shop/remark",
           "query": "",
           "scene": null
+        },
+        {
+          "name": "pages/mine/vip/vip",
+          "pathName": "pages/mine/vip/vip",
+          "query": "",
+          "scene": null
         }
       ]
     }

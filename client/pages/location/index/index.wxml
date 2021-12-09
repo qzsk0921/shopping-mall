@@ -31,10 +31,11 @@
   <block wx:else>
     <view wx:if="{{navigationBarTitleText==='选择收货地址'}}" class="section2">
       <view class="l1">当前地址</view>
-      <view class="l2">
+      <view class="l2" bindtap="locationClickHandle">
         <view class="l2-l">
-          <view class="l2-l-l1 tit">厦门星辰追梦科技有限公司</view>
-          <view class="l2-l-l2 number">10-2号302-1室</view>
+          <view class="l2-l-l1 tit">{{location.formatted_addresses.recommend}}</view>
+          <view class="l2-l-l2 number">
+            {{location.address_component.district}}{{location.address_component.street_number}}</view>
         </view>
         <view class="l2-r">
           <image class="icon-location" src="/assets/images/add_icon_location.png" mode="aspectFill"></image>
@@ -45,12 +46,13 @@
     <view wx:if="{{deliveryAddress.length}}" class="section3">
       <view wx:if="{{navigationBarTitleText==='选择收货地址'}}" class="l1">我的收货地址</view>
       <view class="deliveryAddress-box" style="height:{{deliveryAddressBoxH}}px;">
-        <view wx:for="{{deliveryAddress}}" wx:key="unique" class="l2" data-id="{{item.id}}" data-item="{{item}}" bindtap="addrClickHandle">
+        <view wx:for="{{deliveryAddress}}" wx:key="unique" class="l2" data-id="{{item.id}}" data-item="{{item}}"
+          bindtap="addrClickHandle">
           <image class="icon-edit" src="/assets/images/add_icon_edit.png" mode="aspectFill" bindtap="addrEditHandle"
             data-type="edit" data-id="{{item.id}}">
           </image>
           <view class="l2-l">
-            <view class="l2-l-l1 tit {{item.id===currentAddressId?'addr-active': ''}}">{{item.name}}</view>
+            <view class="l2-l-l1 tit {{item.id===address_id?'addr-active': ''}}">{{item.name}}</view>
             <view class="l2-l-l2 number">{{item.user_address}}</view>
             <view class="l2-l-l3 phone">{{item.consignee_name}} {{item.consignee_phone}}</view>
           </view>

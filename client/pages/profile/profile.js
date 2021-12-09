@@ -80,6 +80,11 @@ create(store, {
       }
     ]
   },
+  toVipHandle() {
+    wx.navigateTo({
+      url: '/pages/mine/vip/vip'
+    })
+  },
   option2Handle(e) {
     console.log(e)
     const id = e.currentTarget.dataset.id

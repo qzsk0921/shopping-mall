@@ -30,7 +30,7 @@
         <view>{{item.name}}</view>
       </view>
     </view>
-    <view class="l3 vip">
+    <view class="l3 vip" bindtap="toVipHandle">
       <image class="icon-vip" src="/assets/images/my_members_bk.png" mode="aspectFill"></image>
       <view class="text">尽享更多会员专属优惠</view>
       <image class="icon-arrow" src="/assets/images/my_members_right.png" mode="aspectFill"></image>

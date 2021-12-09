@@ -13,7 +13,7 @@
 			<image class="icon-location" src="/assets/images/home_nav_local.png" mode="aspectFill"></image>
 			<view class="text one-txt-cut" data-el="location">
 				<!-- {{location.formatted_addresses.recommend?location.formatted_addresses.recommend:'定位中...'}} -->
-				{{location.name}}
+				{{location.address}}
 			</view>
 			<view class="triangle"></view>
 		</view>

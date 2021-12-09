@@ -26,7 +26,8 @@ create(store, {
     availablePoi: false, //是否可配送地址
 
     deliveryAddressBoxH: null, //我的收货地址列表超过高度滚动
-    currentAddressId: null,
+
+    address_id: null,
   },
   watch: {
     navigationBarTitleText: {
@@ -135,6 +136,21 @@ create(store, {
     const ind = e.target.dataset.index
     // this.data.pois[ind]
   },
+  // 当前定位地址点击
+  locationClickHandle() {
+    this.store.data.currentAddress = {
+      address: this.data.location.formatted_addresses.recommend,
+      longitude: this.data.location.location.lng,
+      latitude: this.data.location.location.lat,
+      type: 2,
+    }
+    this.update()
+
+    wx.switchTab({
+      url: '../../index/index',
+    })
+  },
+  // 我的收货地址点击
   addrClickHandle(e) {
     console.log(e)
     // 当前收货地址存后台
@@ -146,13 +162,19 @@ create(store, {
     // 编辑按钮不处理
     if (type) return false
 
-    this.setData({
-      currentAddressId: dataset.item.id
-    })
-    this.store.data.currentAddress = dataset.item
-    this.store.data.currentAddress.type = 1
+    this.store.data.currentAddress = {
+      address: dataset.item.name,
+      longitude: dataset.item.longitude,
+      latitude: dataset.item.latitude,
+      type: 1,
+      id: dataset.item.id
+    }
+    // 收货地址存储
+    this.store.data.address_id = dataset.item.id
     this.update()
-    
+
+    wx.setStorageSync('address_id', dataset.item.id)
+
     wx.switchTab({
       url: '../../index/index',
     })
@@ -228,6 +250,10 @@ create(store, {
       })
     }
 
+    this.setData({
+      location: this.store.data.location,
+      address_id: this.store.data.address_id
+    })
     // 更新收货地址列表
     this.getAddressList().then(res => {
       this.setData({

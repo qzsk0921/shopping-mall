@@ -77,6 +77,11 @@ export function getAddressList(data) {
 
 /**
  * 用户授权地址和切换收货地址 Address/set_shop_info
+ * @param {int} type require 1:通过地址选择 2:首页选择地址
+ * @param {int} id 地址id 通过地址选择
+ * @param {int} longitude 1经度 通过首页选择
+ * @param {int} latitude 纬度 通过首页选择
+ * @param {int} address 位置显示名称 通过首页选择 微信获取的地址的name
  */
 export function setAddressShopInfo(data) {
   return request({

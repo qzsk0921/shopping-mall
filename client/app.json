@@ -12,10 +12,16 @@
     "pages/couponCenter/couponCenter",
     "pages/goods/detail",
     "pages/shop/shopType",
-    "pages/shop/confirmOrder",
+    "pages/shop/order/myOrder",
+    "pages/shop/order/detailOrder",
+    "pages/shop/order/confirmOrder",
+    "pages/shop/coupon/coupon",
     "pages/shop/remark",
     "pages/mine/vip/vip",
     "pages/mine/coupon/coupon",
+    "pages/mine/coupon/detail",
+    "pages/mine/coupon/center",
+    "pages/mine/expensesRecord/expensesRecord",
     "pages/mine/certification/certification"
   ],
   "window": {

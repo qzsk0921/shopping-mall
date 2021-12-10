@@ -73,12 +73,6 @@
           "scene": null
         },
         {
-          "name": "pages/shop/confirmOrder",
-          "pathName": "pages/shop/confirmOrder",
-          "query": "",
-          "scene": null
-        },
-        {
           "name": "pages/profile/profile",
           "pathName": "pages/profile/profile",
           "query": "",
@@ -100,6 +94,30 @@
           "name": "pages/mine/vip/vip",
           "pathName": "pages/mine/vip/vip",
           "query": "",
+          "scene": null
+        },
+        {
+          "name": "",
+          "pathName": "pages/mine/coupon/detail",
+          "query": "pages/mine/coupon/detail",
+          "scene": null
+        },
+        {
+          "name": "",
+          "pathName": "pages/mine/coupon/center",
+          "query": "pages/mine/coupon/center",
+          "scene": null
+        },
+        {
+          "name": "",
+          "pathName": "pages/mine/expensesRecord/expensesRecord",
+          "query": "from=mine",
+          "scene": null
+        },
+        {
+          "name": "",
+          "pathName": "pages/shop/order/myOrder",
+          "query": "from=mine",
           "scene": null
         }
       ]

@@ -38,7 +38,7 @@
   </view>
   <view class="body">
     <view class="l1">
-      <view class="item" wx:for="{{options1}}" wx:key="unique">
+      <view class="item" wx:for="{{options1}}" wx:key="unique" bindtap="option1Handle" data-id="{{item.id}}">
         <image class="icon-option1" src="/assets/images/{{item.imgName}}.png" mode="aspectFill"></image>
         <view>{{item.name}}</view>
       </view>

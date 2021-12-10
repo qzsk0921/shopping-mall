@@ -1,10 +1,6 @@
-// pages/mine/coupon/coupon.js
+// pages/shop/order/myOrder.js
 import store from '../../../store/common'
 import create from '../../../utils/create'
-
-import {
-  getMyCouponList
-} from '../../../api/coupon'
 
 // Page({
 create(store, {
@@ -14,12 +10,15 @@ create(store, {
    */
   data: {
     compatibleInfo: null, //navHeight menuButtonObject systemInfo isIphoneX
-    navigationBarTitleText: '我的优惠券',
-    tabbar: ['未使用', '已使用', '已过期'],
-    tabbarNum: [99, 0, 0],
-    tabIndex: 0, //0:待使用 1:已使用 -2:已过
+    navigationBarTitleText: '我的订单',
+    tabbar: ['全部', '待支付', '已支付', '已取消'],
+    tabIndex: 0, //0全部 1待支付 2已支付 3已取消
     tabWidth: null,
-    couponList: [{
+    orderList: [{
+      cache: [], //couponNouseCache 未使用
+      count: 1,
+      total_page: 1,
+    }, {
       cache: [{
         price: 50,
         condition: '满99可用',
@@ -41,11 +40,7 @@ create(store, {
         tip: '酒水牛奶不可用',
         timeStr: '2021/3/21至2021/12/31',
         status: 3
-      }], //couponNouseCache 未使用
-      count: 1,
-      total_page: 1,
-    }, {
-      cache: [], //couponUsedCache 已使用
+      }], //couponUsedCache 已使用
       count: 1,
       total_page: 1
     }, {
@@ -65,52 +60,13 @@ create(store, {
     }
 
     this.setData(objData)
-    this.getMyCouponList()
-  },
-  getMyCouponList(dataObj) {
-    const tempData = {}
-    if (typeof dataObj === 'object') {
-      Object.keys(dataObj).forEach(key => {
-        tempData[key] = dataObj[key]
-      })
-    }
-
-    if (dataObj !== 'scrollTolwer') {
-      tempData['per_page'] = this.data.page_size
-      tempData['current_page'] = this.data.page
-    }
-
-    tempData.type = this.data.tabIndex
-
-    return new Promise((resolve, reject) => {
-      getMyCouponList(tempData).then(res => {
-        if (dataObj === 'scrollToLower') {
-          this.data.couponList.cache.push(...res.data.data)
-          this.setData({
-            [`couponList[${this.data.tabIndex}].cache`]: this.data.couponList.cache,
-            [`couponList[${this.data.tabIndex}].total_page`]: res.data.last_page
-          })
-          resolve(res)
-          console.log(this.data.couponList)
-        } else {
-          this.setData({
-            // 测试数据
-            // [`couponList.cache`]: [].concat(res.data.data).concat(res.data.data).concat(res.data.data).concat(res.data.data),
-            [`couponList[${this.data.tabIndex}].cache`]: res.data.data,
-            [`couponList[${this.data.tabIndex}].total_page`]: res.data.last_page
-          })
-          this.data.couponList[this.data.tabIndex].cache.length
-        }
-      }).catch(err => {
-        reject(err)
-      })
-    })
+    // this.getOrderList()
   },
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    this.getMyCouponList()
+
   },
 
   /**

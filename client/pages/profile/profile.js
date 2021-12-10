@@ -26,14 +26,17 @@ create(store, {
       }
     ],
     options1: [{
+        id: 1,
         imgName: 'my_order_all',
         name: '全部订单'
       },
       {
+        id: 2,
         imgName: 'my_order_wait',
         name: '待支付'
       },
       {
+        id: 3,
         imgName: 'my_order_done',
         name: '已支付'
       }
@@ -85,21 +88,52 @@ create(store, {
       url: '/pages/mine/vip/vip'
     })
   },
+  option1Handle(e) {
+    const id = e.currentTarget.dataset.id
+    switch (id) {
+      case 1:
+        // 全部订单
+        wx.navigateTo({
+          url: '/pages/shop/order/myOrder?from=mine'
+        })
+        break;
+      case 2:
+        // 待支付
+        wx.navigateTo({
+          // url: '/pages/location/index/index?from=mine'
+        })
+        break;
+      case 3:
+        //已支付
+        wx.navigateTo({
+          // url: '/pages/mine/expensesRecord/expensesRecord?from=mine'
+        })
+        break;
+      default:
+        console.log(`Sorry, we are out of ${id}.`);
+    }
+  },
   option2Handle(e) {
     console.log(e)
     const id = e.currentTarget.dataset.id
     console.log(id)
     switch (id) {
       case 1:
+        wx.navigateTo({
+          url: '/pages/mine/coupon/coupon?from=mine'
+        })
         break;
       case 2:
         // 收货地址
         wx.navigateTo({
-          // url: "/pages/mine/address/address",
           url: '/pages/location/index/index?from=mine'
         })
         break;
       case 3:
+        //消费记录
+        wx.navigateTo({
+          url: '/pages/mine/expensesRecord/expensesRecord?from=mine'
+        })
         break;
       case 4:
         break;

@@ -1,6 +1,6 @@
 // pages/shop/confirmOrder.js
-import store from '../../store/common'
-import create from '../../utils/create'
+import store from '../../../store/common'
+import create from '../../../utils/create'
 
 // Page({
 create(store, {

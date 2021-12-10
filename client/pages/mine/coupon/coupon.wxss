@@ -49,6 +49,24 @@
   background: #333333;
 }
 
+.section2 {}
+
+.section2 .no-data {
+  text-align: center;
+}
+
+.section2 .no-data image {
+  margin-top: 82rpx;
+  width: 483rpx;
+  height: 400rpx;
+}
+
+.section2 .no-data .text {
+  margin-top: 30rpx;
+  font-size: 30rpx;
+  color: #949EA8;
+}
+
 .card {
   position: relative;
   display: flex;

@@ -15,7 +15,7 @@
       <view class="btn btn-search" bindtap="btnSearchCancelHandle">搜索</view>
     </view>
     <view class="cont hide-scrollbar"
-      style="height:{{compatibleInfo.isIphoneX?compatibleInfo.systemInfo.screenHeight-(55+32+section1H+fixed)+'px':compatibleInfo.systemInfo.screenHeight-(55+section1H+fixed)+'px'}}">
+      style="height:{{compatibleInfo.isIphoneX?compatibleInfo.systemInfo.screenHeight-(50+32+section1H+fixed)+'px':compatibleInfo.systemInfo.screenHeight-(50+section1H+fixed)+'px'}}">
       <view class="section2" bindtap="swiperHandle">
         <view class="page-section page-section-spacing swiper">
           <swiper indicator-dots="{{indicatorDots}}" autoplay="{{autoplay}}" interval="{{interval}}"

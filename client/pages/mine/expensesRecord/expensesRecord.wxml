@@ -1,0 +1,40 @@
+<!--pages/mine/expensesRecord/expensesRecord.wxml-->
+<!-- <text>pages/mine/expensesRecord/expensesRecord.wxml</text> -->
+<view class="container container-expensesrecord">
+  <view class="fixed">
+    <top-navigation navigationBarTitleText="{{navigationBarTitleText}}" navHeight="{{compatibleInfo.navHeight}}" navTop="{{compatibleInfo.menuButtonObject.top}}" menuButtonHeight="{{compatibleInfo.menuButtonObject.height}}" status="{{navStatus}}" color="#FFFFFF" bgColor="#FF723A" />
+  </view>
+  <view class="content">
+    <view class="l1">
+      <view class="l1-1">总消费</view>
+      <view class="l1-2"><text>9831.23</text><text>元</text></view>
+    </view>
+    <view class="l2">
+      <view class="top">
+        <!-- <view class="separator"></view> -->
+        <view class="left flex">
+          <image class="icon-calendar" src="/assets/images/consume_icon_date.png" mode="aspectFill"></image>
+          <view class="year">2021年</view>
+          <view class="arrow"></view>
+        </view>
+        <view class="right flex">
+          <view class="right-l1">
+            <text>消费：</text>
+            <text>7686.34元</text>
+          </view>
+          <view class="right-l2">
+            <text>优惠：</text>
+            <text>686.34元</text>
+          </view>
+        </view>
+      </view>
+      <view class="cont">
+        <view class="l1">10月</view>
+        <view class="l2">
+          <view class="flex">消费：7686.34元</view>
+          <view class="flex">优惠：686.34元</view>
+        </view>
+      </view>
+    </view>
+  </view>
+</view>

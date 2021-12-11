@@ -82,8 +82,14 @@ create(store, {
       })
     }).exec();
 
+    query.select('.cont').boundingClientRect(function (rect) {
+      console.log(rect)
+      that.setData({
+        listTop: rect.top,
+      })
+    }).exec();
+
     query.select('.tab').boundingClientRect(function (rect) {
-      console.log(rect.width)
       that.setData({
         tabWidth: rect.width,
       })

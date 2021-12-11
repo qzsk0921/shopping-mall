@@ -119,6 +119,18 @@
           "pathName": "pages/shop/order/myOrder",
           "query": "from=mine",
           "scene": null
+        },
+        {
+          "name": "",
+          "pathName": "pages/shop/order/detailOrder",
+          "query": "",
+          "scene": null
+        },
+        {
+          "name": "",
+          "pathName": "pages/mine/customer/customer",
+          "query": "from=mine",
+          "scene": null
         }
       ]
     }

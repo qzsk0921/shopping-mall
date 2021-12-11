@@ -4,4 +4,82 @@
   <view class="fixed">
     <top-navigation navigationBarTitleText="{{navigationBarTitleText}}" navHeight="{{compatibleInfo.navHeight}}" navTop="{{compatibleInfo.menuButtonObject.top}}" menuButtonHeight="{{compatibleInfo.menuButtonObject.height}}" status="{{navStatus}}" color="#333" bgColor="#FFFFFF" />
   </view>
+  <view class="content hide-scrollbar" style="height:{{compatibleInfo.isIphoneX?compatibleInfo.systemInfo.screenHeight-(32+fixed)+'px':compatibleInfo.systemInfo.screenHeight-(fixed)+'px'}}">
+    <view class="section1">
+      <view class="left">
+        <view class="row1">已支付</view>
+        <view class="row2">订单已成功支付</view>
+      </view>
+      <view class="right">
+        <view class="btn btn-del">删除订单</view>
+        <view class="btn btn-pay">再来一单</view>
+      </view>
+    </view>
+    <view class="section2">
+      <view class="row1">福建省 厦门市 思明区 奥斯卡大楼 16栋之二54</view>
+      <view class="row2">
+        <image class="icon-head" src="/assets/images/order_head.png" mode="aspectFill"></image>
+        <text>阿克苏</text>
+        <text>13465654245</text>
+      </view>
+    </view>
+    <view class="section3">
+      <view class="l1">
+        <view class="left">商品信息</view>
+        <view class="right">
+          <text>共3件</text>
+          <image class="icon-arrow" src="/assets/images/nav_btn_next.png" mode="aspectFill"></image>
+        </view>
+      </view>
+      <view class="l2">
+        <image src="https://gw.alicdn.com/tps/i1/O1CN01PWx1at1LfLtyRhW1V_!!0-juitemmedia.jpg_140x10000Q75.jpg" mode="aspectFill"></image>
+        <image src="https://gw.alicdn.com/tps/i1/O1CN01PWx1at1LfLtyRhW1V_!!0-juitemmedia.jpg_140x10000Q75.jpg" mode="aspectFill"></image>
+        <image src="https://gw.alicdn.com/tps/i1/O1CN01PWx1at1LfLtyRhW1V_!!0-juitemmedia.jpg_140x10000Q75.jpg" mode="aspectFill"></image>
+        <image src="https://gw.alicdn.com/tps/i1/O1CN01PWx1at1LfLtyRhW1V_!!0-juitemmedia.jpg_140x10000Q75.jpg" mode="aspectFill"></image>
+        <image src="https://gw.alicdn.com/tps/i1/O1CN01PWx1at1LfLtyRhW1V_!!0-juitemmedia.jpg_140x10000Q75.jpg" mode="aspectFill"></image>
+        <image src="https://gw.alicdn.com/tps/i1/O1CN01PWx1at1LfLtyRhW1V_!!0-juitemmedia.jpg_140x10000Q75.jpg" mode="aspectFill"></image>
+        <image src="https://gw.alicdn.com/tps/i1/O1CN01PWx1at1LfLtyRhW1V_!!0-juitemmedia.jpg_140x10000Q75.jpg" mode="aspectFill"></image>
+        <image src="https://gw.alicdn.com/tps/i1/O1CN01PWx1at1LfLtyRhW1V_!!0-juitemmedia.jpg_140x10000Q75.jpg" mode="aspectFill"></image>
+        <image src="https://gw.alicdn.com/tps/i1/O1CN01PWx1at1LfLtyRhW1V_!!0-juitemmedia.jpg_140x10000Q75.jpg" mode="aspectFill"></image>
+      </view>
+      <view class="l3 l">
+        <text>商品总额</text>
+        <text>￥2381.33</text>
+      </view>
+      <view class="l4 l">
+        <text>会员优惠</text>
+        <text>￥0.00</text>
+      </view>
+      <view class="l5 l">
+        <text>优惠券抵扣</text>
+        <text>-￥3.00</text>
+      </view>
+      <view class="l6">
+        <text>实付:</text>
+        <text> ￥2378.33</text>
+      </view>
+    </view>
+    <view class="section4">
+      <view class="l1 l">
+        <text>订单编号</text>
+        <text>212394820484283213</text>
+      </view>
+      <view class="l2 l">
+        <text>下单时间</text>
+        <text>2021-9-21 18:32:48</text>
+      </view>
+      <view class="l3 l">
+        <text>支付时间</text>
+        <text>2021-9-21 18:32:48</text>
+      </view>
+      <view class="l4 l">
+        <text>支付方式</text>
+        <text>微信支付</text>
+      </view>
+    </view>
+    <view class="section5">
+      <view class="l1">备注</view>
+      <view class="l2">可以告诉我您的需求</view>
+    </view>
+  </view>
 </view>

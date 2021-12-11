@@ -1,36 +1,54 @@
-// pages/shop/order/detailOrder.js
+// pages/mine/customer/customer.js
 import store from '../../../store/common'
 import create from '../../../utils/create'
 
 // Page({
 create(store, {
+
   /**
    * 页面的初始数据
    */
   data: {
     compatibleInfo: null, //navHeight menuButtonObject systemInfo isIphoneX
-    navigationBarTitleText: '订单详情',
+    navigationBarTitleText: '我的客户',
+    customerList: {
+      cache: [], //couponNouseCache 未使用
+      count: 1,
+      total_page: 1,
+    },
+    page: 1,
+    page_size: 10,
   },
-
+  watch: {
+    customerList: {
+      handler(nv, ov, obj) {
+        console.log(nv)
+        if (nv.length) {
+          const that = this;
+          const query = wx.createSelectorQuery();
+          query.select('.scroll').boundingClientRect(function (rect) {
+            // console.log(rect)
+            that.setData({
+              scrollTop: rect.top,
+            })
+          }).exec();
+        }
+      },
+      deep: true
+    }
+  },
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-
+    getApp().setWatcher(this) //设置监听器
   },
 
   /**
    * 生命周期函数--监听页面初次渲染完成
    */
   onReady: function () {
-    const that = this;
-    const query = wx.createSelectorQuery();
-    query.select('.fixed').boundingClientRect(function (rect) {
-      // console.log(rect)
-      that.setData({
-        fixed: rect.height,
-      })
-    }).exec();
+
   },
 
   /**

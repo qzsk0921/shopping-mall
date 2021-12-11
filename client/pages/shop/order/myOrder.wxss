@@ -1,7 +1,8 @@
 /* pages/shop/order/myOrder.wxss */
 .container-order-my {}
 
-.content {}
+.content {
+}
 
 .section1 {
   background: #ffffff;
@@ -77,24 +78,114 @@
   background: #333333;
 }
 
-.section2 .no-data {
+.cont {
+  overflow: auto;
+}
+
+.cont .no-data {
   text-align: center;
 }
 
-.section2 .no-data image {
+.cont .no-data image {
   margin-top: 82rpx;
   width: 483rpx;
   height: 400rpx;
 }
 
-.section2 .no-data .text {
+.cont .no-data .text {
   margin-top: 30rpx;
   font-size: 30rpx;
   color: #949EA8;
 }
 
-.orderList {}
+.order-list {}
 
 .card {
+  overflow: hidden;
   background: #ffffff;
+  margin-top: 20rpx;
+}
+
+.card .l1 {
+  margin-top: 30rpx;
+  padding: 0 22rpx 0 24rpx;
+  display: flex;
+  justify-content: space-between;
+}
+
+.card .l1 .left {
+  font-size: 24rpx;
+  color: #666666;
+}
+
+.card .l1 .right {
+  font-size: 28rpx;
+  /* color: #FF723A; */
+}
+
+.card .l1 .right .icon-arrow {
+  margin-left: 18rpx;
+  width: 13rpx;
+  height: 24rpx;
+}
+
+
+.card .l2 {
+  margin-top: 34rpx;
+  padding: 0 24rpx;
+}
+
+.card .l2 .l2-1 {
+  width: 124rpx;
+  height: 124rpx;
+}
+
+.card .l2 .l2-1 image:not(:first-child) {
+  margin-left: 20rpx;
+}
+
+.card .l2 .l2-2 {
+  margin-top: 34rpx;
+  padding-right: 31rpx;
+}
+
+.card .l2 .l2-2 {
+  font-size: 26rpx;
+  color: #333333;
+  text-align: right;
+}
+
+.card .l2 .l2-2 text:nth-of-type(2) {
+  margin-left: 20rpx;
+}
+
+.card .l2 .l2-2 text:last-child {
+  margin-left: 3rpx;
+  font-size: 32rpx;
+  font-weight: bold;
+  color: #333333;
+}
+
+.card .l3 {
+  margin: 18rpx 24rpx 0;
+  padding: 24rpx 0;
+  display: flex;
+  justify-content: flex-end;
+  border-top: 2rpx solid #F2F2F2;
+}
+
+.card .l3 .btn {
+  text-align: center;
+  width: 164rpx;
+  height: 60rpx;
+  line-height: 60rpx;
+  /* background: #FFFFFF; */
+  border: 2rpx solid #DDDDDD;
+  border-radius: 36rpx;
+  font-size: 26rpx;
+  /* color: #333333; */
+}
+
+.card .l3 .btn:last-child {
+  margin-left: 20rpx;
 }

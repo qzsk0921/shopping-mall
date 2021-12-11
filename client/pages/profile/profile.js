@@ -136,8 +136,16 @@ create(store, {
         })
         break;
       case 4:
+        //资质认证
+        wx.navigateTo({
+          url: '/pages/mine/certification/certification?from=mine'
+        })
         break;
       case 5:
+        //我的客户
+        wx.navigateTo({
+          url: '/pages/mine/customer/customer?from=mine'
+        })
         break;
       case 6:
         break;

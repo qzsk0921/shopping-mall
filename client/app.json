@@ -22,7 +22,8 @@
     "pages/mine/coupon/detail",
     "pages/mine/coupon/center",
     "pages/mine/expensesRecord/expensesRecord",
-    "pages/mine/certification/certification"
+    "pages/mine/certification/certification",
+    "pages/mine/customer/customer"
   ],
   "window": {
     "backgroundTextStyle": "light",

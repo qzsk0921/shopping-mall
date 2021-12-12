@@ -99,7 +99,7 @@ create(store, {
             [`couponList[${this.data.tabIndex}].cache`]: res.data.data,
             [`couponList[${this.data.tabIndex}].total_page`]: res.data.last_page
           })
-          this.data.couponList[this.data.tabIndex].cache.length
+          // this.data.couponList[this.data.tabIndex].cache.length
         }
       }).catch(err => {
         reject(err)

@@ -23,7 +23,10 @@
     "pages/mine/coupon/center",
     "pages/mine/expensesRecord/expensesRecord",
     "pages/mine/certification/certification",
-    "pages/mine/customer/customer"
+    "pages/mine/customer/customer",
+    "pages/mine/faq/index",
+    "pages/mine/faq/detail",
+    "pages/mine/set/set"
   ],
   "window": {
     "backgroundTextStyle": "light",

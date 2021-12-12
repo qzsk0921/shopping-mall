@@ -38,7 +38,7 @@ create(store, {
 
     // 跳转至搜索结果页
     wx.navigateTo({
-      url: '/pages/search/searchRes',
+      url: `/pages/search/searchRes?keyword=${this.data.searchKeyword}`,
     })
   },
   btnSearchCancelHandle() {

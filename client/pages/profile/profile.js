@@ -28,48 +28,57 @@ create(store, {
     options1: [{
         id: 1,
         imgName: 'my_order_all',
-        name: '全部订单'
+        name: '全部订单',
+        url: '/pages/shop/order/myOrder?from=mine'
       },
       {
         id: 2,
         imgName: 'my_order_wait',
-        name: '待支付'
+        name: '待支付',
+        url: '/pages/shop/order/myOrder?from=mine'
       },
       {
         id: 3,
         imgName: 'my_order_done',
-        name: '已支付'
+        name: '已支付',
+        url: '/pages/shop/order/myOrder?from=mine'
       }
     ],
     options2: [{
         id: 1,
         imgName: 'my_icon_coupons',
-        name: '优惠券'
+        name: '优惠券',
+        url: '/pages/mine/coupon/coupon?from=mine'
       },
       {
         id: 2,
         imgName: 'my_icon_address',
-        name: '收货地址'
+        name: '收货地址',
+        url: '/pages/location/index/index?from=mine'
       },
       {
         id: 3,
         imgName: 'my_icon_consume',
-        name: '消费记录'
+        name: '消费记录',
+        url: '/pages/mine/expensesRecord/expensesRecord?from=mine'
       },
       {
         id: 4,
         imgName: 'my_icon_certification',
-        name: '资质认证'
+        name: '资质认证',
+        url: '/pages/mine/certification/certification?from=mine'
       },
       {
         id: 5,
         imgName: 'my_icon_customer',
-        name: '我的客户'
+        name: '我的客户',
+        url: '/pages/mine/customer/customer?from=mine'
       },
       {
         id: 6,
         imgName: 'my_icon_problem',
-        name: '常见问题'
+        name: '常见问题',
+        url: '/pages/mine/faq/index?from=mine'
       },
       {
         id: 7,
@@ -79,7 +88,8 @@ create(store, {
       {
         id: 8,
         imgName: 'my_icon_set',
-        name: '设置'
+        name: '设置',
+        url: '/pages/mine/set/set?from=mine'
       }
     ]
   },
@@ -90,72 +100,29 @@ create(store, {
   },
   option1Handle(e) {
     const id = e.currentTarget.dataset.id
-    switch (id) {
-      case 1:
-        // 全部订单
+    this.data.options1.some(item => {
+      if (item.id === id) {
         wx.navigateTo({
-          url: '/pages/shop/order/myOrder?from=mine'
+          url: item.url
         })
-        break;
-      case 2:
-        // 待支付
-        wx.navigateTo({
-          // url: '/pages/location/index/index?from=mine'
-        })
-        break;
-      case 3:
-        //已支付
-        wx.navigateTo({
-          // url: '/pages/mine/expensesRecord/expensesRecord?from=mine'
-        })
-        break;
-      default:
-        console.log(`Sorry, we are out of ${id}.`);
-    }
+        return true
+      }
+      return false
+    })
   },
   option2Handle(e) {
     console.log(e)
     const id = e.currentTarget.dataset.id
-    console.log(id)
-    switch (id) {
-      case 1:
+    // console.log(`Sorry, we are out of ${id}.`);
+    this.data.options2.some(item => {
+      if (item.id === id) {
         wx.navigateTo({
-          url: '/pages/mine/coupon/coupon?from=mine'
+          url: item.url
         })
-        break;
-      case 2:
-        // 收货地址
-        wx.navigateTo({
-          url: '/pages/location/index/index?from=mine'
-        })
-        break;
-      case 3:
-        //消费记录
-        wx.navigateTo({
-          url: '/pages/mine/expensesRecord/expensesRecord?from=mine'
-        })
-        break;
-      case 4:
-        //资质认证
-        wx.navigateTo({
-          url: '/pages/mine/certification/certification?from=mine'
-        })
-        break;
-      case 5:
-        //我的客户
-        wx.navigateTo({
-          url: '/pages/mine/customer/customer?from=mine'
-        })
-        break;
-      case 6:
-        break;
-      case 7:
-        break;
-      case 8:
-        break;
-      default:
-        console.log(`Sorry, we are out of ${id}.`);
-    }
+        return true
+      }
+      return false
+    })
   },
   getUserProfile() {
     // userStore.getUserProfile().then(res => {

@@ -2,14 +2,11 @@
 <!-- <text>pages/search/searchRes.wxml</text> -->
 <view class="container-searchRes container">
   <view class="fixed">
-    <top-navigation navigationBarTitleText="{{navigationBarTitleText}}" navHeight="{{compatibleInfo.navHeight}}"
-      navTop="{{compatibleInfo.menuButtonObject.top}}" menuButtonHeight="{{compatibleInfo.menuButtonObject.height}}"
-      status="{{navStatus}}" color="#333" bgColor="#fff" />
+    <top-navigation navigationBarTitleText="{{navigationBarTitleText}}" navHeight="{{compatibleInfo.navHeight}}" navTop="{{compatibleInfo.menuButtonObject.top}}" menuButtonHeight="{{compatibleInfo.menuButtonObject.height}}" status="{{navStatus}}" color="#333" bgColor="#fff" />
   </view>
   <view class="section1">
     <view class="input-box">
-      <input class="search" name="search" placeholder="请输入您想搜索的商品" placeholder-class="search-placeholder"
-        value="{{searchKeyword}}" bindinput="inputHandle" confirm-type="search" bindconfirm="bindconfirmHandle" />
+      <input class="search" name="search" placeholder="请输入您想搜索的商品" placeholder-class="search-placeholder" value="{{searchKeyword}}" bindinput="inputHandle" confirm-type="search" bindconfirm="bindconfirmHandle" />
       <image class="icon-search" src="/assets/images/search_icon_search.png" mode="aspectFill"></image>
       <image class="icon-close" src="/assets/images/search_icon_close.png" mode="aspectFill"></image>
       <!-- <view class="btn btn-search" bindtap="btnSearchCancelHandle">取消</view> -->
@@ -18,37 +15,47 @@
     </image>
   </view>
   <view class="section2">
-    <view class="l1">
-      <view>综合</view>
-      <view>销量</view>
-      <view class="price">
-        <text>价格</text>
-        <view class="triangle-box">
-          <view class="triangle triangle-t"></view>
-          <view class="triangle triangle-b"></view>
-        </view>
+    <view class="l1 tabs-nav" bindtap='changeTab'>
+      <view wx:for="{{tabbar}}" wx:key="unique" data-index="{{index}}" class="tab {{tabIndex==index?'active':''}}">
+        <block wx:if="{{index!==2}}">
+          <view calss="text" data-index="{{index}}">{{item}}</view>
+          <!-- <view class="num" data-index="{{index}}">({{tabbarNum[index]}})</view> -->
+        </block>
+        <block wx:else>
+          <view class="price" data-index="{{index}}">
+            <text data-index="{{index}}">价格</text>
+            <view class="triangle-box" data-index="{{index}}">
+              <view class="triangle triangle-t {{currentPriceSort===4?'triangle-active':''}}" data-index="{{index}}"></view>
+              <view class="triangle triangle-b {{currentPriceSort===3?'triangle-active':''}}" data-index="{{index}}"></view>
+            </view>
+          </view>
+        </block>
       </view>
     </view>
-    <view class="l2">
-      <view class="list">
-        <view class="item">
-          <image class="item-image" mode="aspectFit" src="/assets/images/nav_icon_car_check.png"></image>
+    <scroll-view class="scroll-box hide-scrollbar" refresher-enabled="{{refresherEnabled}}" refresher-triggered="{{triggered}}" bindscrolltolower="scrollToLower" bindrefresherrefresh="scrollToRefresherrefresh" bindrefresherpulling="scrollToRefresherPull" bindrefresherrestore="scrollToRefresherStore" bindrefresherabort="scrollToRefresherAbort" scroll-y="true" style="height:{{compatibleInfo.isIphoneX?compatibleInfo.systemInfo.screenHeight-(32+scrollTop)+'px':compatibleInfo.systemInfo.screenHeight-(scrollTop)+'px'}}">
+      <view class="no-data" wx:if="{{goodsList[tabIndex].cache.length==0}}">
+        <image mode="aspectFill" src="/assets/images/empty.png"></image>
+        <view class="text">搜索无结果</view>
+      </view>
+      <view class="list" wx:else>
+        <view class="item" wx:for="{{goodsList[tabIndex].cache}}" wx:key="unique">
+          <image class="item-image" mode="aspectFit" src="{{item.thumb}}"></image>
           <view class="item-content">
-            <view class="l1">天萃庭原切谷饲肥牛卷 300g</view>
+            <view class="l1">{{item.goods_name}} {{item.spec}}</view>
             <!-- <view class="cart">购物车</view> -->
             <view class="l2">
               <view class="price-box">
-                <view class="price"><text>￥</text><text>13.9</text></view>
-                <view class="del-price">￥25.9</view>
+                <view class="price"><text>￥</text><text>{{item.price}}</text></view>
+                <view class="del-price">￥{{item.market_price}}</view>
               </view>
-              <view class="image-box">
-                <image class="icon-cart-g" src="/assets/images/search_icon_cart.png" mode="aspectFit"></image>
-                <view class="tip">2</view>
+              <view class="shopcart-box">
+                <image class="icon-shopcart" src="/assets/images/icon_car.png" mode="aspectFill"></image>
+                <view class="shopcart-info">{{item.cart_number}}</view>
               </view>
             </view>
           </view>
         </view>
       </view>
-    </view>
+    </scroll-view>
   </view>
 </view>

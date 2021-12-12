@@ -131,6 +131,18 @@
           "pathName": "pages/mine/customer/customer",
           "query": "from=mine",
           "scene": null
+        },
+        {
+          "name": "",
+          "pathName": "pages/mine/faq/index",
+          "query": "from=mine",
+          "scene": null
+        },
+        {
+          "name": "",
+          "pathName": "pages/mine/set/set",
+          "query": "from=mine",
+          "scene": null
         }
       ]
     }

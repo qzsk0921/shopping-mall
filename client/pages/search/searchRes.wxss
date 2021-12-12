@@ -73,7 +73,6 @@
   /* display: inline-block; */
 }
 
-.section2 .l2 {}
 
 .section2 .triangle-box {
   /* display: inline-block; */
@@ -87,6 +86,8 @@
   width: 0;
   height: 0;
 }
+
+.section2 .triangle-box .triangle-active {}
 
 .section2 .triangle-t {
   border-top: 10rpx solid transparent;
@@ -103,17 +104,33 @@
   border-right: 12rpx solid transparent;
 }
 
-.section2 .l2 .list {
-  padding: 0 24rpx;
+.section2 .triangle-t.triangle-active {
+  border-bottom-color: var(--primary-color);
 }
 
-.section2 .l2 .list .item {
+.section2 .triangle-b.triangle-active {
+  border-top-color: var(--primary-color);
+}
+
+.section2 .scroll-box .list {
+  padding: 0 24rpx;
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.section2 .scroll-box .list .item {
+  margin-top: 20rpx;
   width: 336rpx;
   background: #FFFFFF;
   border-radius: 16rpx;
+  position: relative;
 }
 
-.section2 .l2 .list .item .item-image {
+.section2 .scroll-box .list .item:nth-of-type(2n) {
+  margin-left: 20rpx;
+}
+
+.section2 .scroll-box .list .item .item-image {
   width: 336rpx;
   height: 336rpx;
   background: rgba(0, 0, 0, 0);
@@ -121,15 +138,15 @@
 }
 
 
-.section2 .l2 .list .item .item-content {
+.section2 .scroll-box .list .item .item-content {
   padding: 0 20rpx;
 }
 
-.section2 .l2 .list .item .item-content {
+.section2 .scroll-box .list .item .item-content {
   padding-top: 15rpx;
 }
 
-.section2 .l2 .list .item .item-content .l1 {
+.section2 .scroll-box .list .item .item-content .l1 {
   font-size: 26rpx;
   font-weight: bold;
   line-height: 40rpx;
@@ -137,51 +154,74 @@
   height: 80rox;
 }
 
-.section2 .l2 .list .item .item-content .l2 {
+.section2 .scroll-box .list .item .item-content .l2 {
   display: flex;
   justify-content: space-between;
 }
 
-.section2 .l2 .list .item .item-content .l2 .price-box {
+.section2 .scroll-box .list .item .item-content .l2 .price-box {
   display: flex;
   align-items: flex-end;
 }
 
-.section2 .l2 .list .item .item-content .l2 .image-box {
-  margin-top: 5rpx;
-  position: relative;
+.section2 .scroll-box .list .item .item-content .l2 .shopcart-box {
+  position: absolute;
+  right: 20rpx;
+  bottom: 20rpx;
+  width: 56rpx;
+  height: 56rpx;
 }
 
-.section2 .l2 .list .item .item-content .l2 .image-box .icon-cart-g {
-  width: 54rpx;
-  height: 54rpx;
-  background: linear-gradient(140deg, #27C068 0%, #22B862 100%);
-  box-shadow: 0rpx 0px 12rpx rgba(34, 184, 98, 0.35);
+.section2 .scroll-box .list .item .item-content .l2 .shopcart-box .icon-shopcart {
+  width: 56rpx;
+  height: 56rpx;
+  background: #FFFFFF;
   border-radius: 50%;
 }
 
-.section2 .l2 .list .item .item-content .l2 .image-box .tip {
+.section2 .scroll-box .list .item .item-content .l2 .shopcart-box .shopcart-info {
+  text-align: center;
+  background: #FC4953;
   position: absolute;
-  width: 30rpx;
-  height: 24rpx;
-  background: #FA4953;
+  top: -6rpx;
+  right: -6rpx;
   border-radius: 12rpx;
-  border-radius: 12rpx;
+  font-size: 20rpx;
+  line-height: 24rpx;
+  color: #FFFFFF;
+  min-height: 24rpx;
+  padding: 0 8rpx;
 }
 
-.section2 .l2 .list .item .item-content .l2 .price text:first-child {
+.section2 .scroll-box .list .item .item-content .l2 .price text:first-child {
   font-size: 24rpx;
   font-weight: bold;
   color: #DB0512;
 }
 
-.section2 .l2 .list .item .item-content .l2 .price text:last-child {
+.section2 .scroll-box .list .item .item-content .l2 .price text:last-child {
   font-size: 34rpx;
   font-weight: bold;
   color: #DB0512;
 }
 
-.section2 .l2 .list .item .item-content .l2 .del-price {
+.section2 .scroll-box .list .item .item-content .l2 .del-price {
   font-size: 22rpx;
   color: #888888;
+}
+
+.section2 .no-data {
+  text-align: center;
+}
+
+.section2 .no-data image {
+  margin-top: 82rpx;
+  width: 483rpx;
+  height: 400rpx;
+}
+
+.section2 .no-data .text {
+  margin-top: 30rpx;
+  font-size: 30rpx;
+  color: #949EA8;
 }

@@ -158,46 +158,65 @@ create(store, {
   // 切换一级分类
   firstCategoryHandle(e) {
     // console.log(e)
-    // console.log('firstCategoryHandle')
+    console.log('firstCategoryHandle')
     const id = e.target.dataset.id
+
+    // 不是分类选项则不执行
+    if (!id) return
+
+    this.setData({
+      currentFirstCategoryId: id,
+    })
+
     this.getCategoryList({
       pid: id
     }).then(res => {
-      this.setData({
-        currentFirstCategoryId: id,
-        secondCategory: res.data
-      })
-
       if (res.data.length) {
-        this.getCategoryList({
-          pid: res.data[0].id
-        }).then(ress => {
-          if (ress.data.length) {
-            this.setData({
-              secondCategory: ress.data,
-              currentSecondCategoryId: ress.data[0].id
-            })
-            this.getGoodsList({
-              category_id: ress.data[0].id
-            })
-          }
+        this.setData({
+          currentSecondCategoryId: res.data[0].id,
+          secondCategory: res.data
+        })
+
+        if (res.data.length) {
+          this.getGoodsList({
+            category_id: res.data[0].id
+          })
+        }
+      } else {
+        this.setData({
+          secondCategory: []
         })
       }
     })
   },
   // 子组件切换一级分类
   subFirstCategoryHandle(e) {
+    // console.log('subFirstCategoryHandle')
     const id = e.detail
+
+    this.setData({
+      currentFirstCategoryId: id,
+    })
+
     this.getCategoryList({
       pid: id
     }).then(res => {
-      this.setData({
-        currentFirstCategoryId: id,
-        secondCategory: res.data
-      })
-      this.getGoodsList({
-        category_id: id
-      })
+      if (res.data.length) {
+        this.setData({
+          currentSecondCategoryId: res.data[0].id,
+          secondCategory: res.data
+        })
+
+        if (res.data.length) {
+          this.getGoodsList({
+            category_id: res.data[0].id
+          })
+        }
+      } else {
+        this.setData({
+          secondCategory: []
+        })
+      }
     })
   },
   // 切换2级分类
@@ -315,6 +334,12 @@ create(store, {
     }
     return type
   },
+  goodsDetailHandle(e) {
+    const id = e.currentTarget.dataset.id
+    wx.navigateTo({
+      url: `/pages/goods/detail?id=${id}`,
+    })
+  },
   /**
    * 生命周期函数--监听页面加载
    */
@@ -331,8 +356,18 @@ create(store, {
       }).then(ress => {
         if (ress.data.length) {
           this.setData({
-            secondCategory: ress.data,
-            currentSecondCategoryId: ress.data[0].id
+            currentSecondCategoryId: ress.data[0].id,
+            secondCategory: ress.data
+          })
+
+          if (ress.data.length) {
+            this.getGoodsList({
+              category_id: ress.data[0].id
+            })
+          }
+        } else {
+          this.setData({
+            secondCategory: []
           })
         }
       })

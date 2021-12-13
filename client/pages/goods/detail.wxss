@@ -1,7 +1,9 @@
 /* pages/goods/detail.wxss */
 .container-goods-detail {}
 
-.content {}
+.content {
+  overflow: auto;
+}
 
 .section2 {
   padding: 0 0 33rpx 24rpx;

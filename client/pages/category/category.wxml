@@ -38,7 +38,7 @@
               </view>
             </view>
           </view>
-          <view class="tree-select__item" wx:for="{{currentGoodsList.cache}}" wx:key="unique" id="{{item.id}}">
+          <view class="tree-select__item" wx:for="{{currentGoodsList.cache}}" wx:key="unique" id="{{item.id}}" data-id="{{item.id}}" bindtap="goodsDetailHandle">
             <view class="shopcart-box">
               <image class="icon-shopcart" mode="aspectFill" src="/assets/images/icon_car.png"></image>
               <view class="shopcart-info">{{item.cart_number}}</view>

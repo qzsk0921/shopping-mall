@@ -2,58 +2,51 @@
 <!-- <text>pages/goods/detail.wxml</text> -->
 <view class="container container-goods-detail">
   <view class="fixed">
-    <top-navigation navigationBarTitleText="{{navigationBarTitleText}}" navHeight="{{compatibleInfo.navHeight}}"
-      navTop="{{compatibleInfo.menuButtonObject.top}}" menuButtonHeight="{{compatibleInfo.menuButtonObject.height}}"
-      status="{{navStatus}}" color="#333" />
+    <top-navigation navigationBarTitleText="{{navigationBarTitleText}}" navHeight="{{compatibleInfo.navHeight}}" navTop="{{compatibleInfo.menuButtonObject.top}}" menuButtonHeight="{{compatibleInfo.menuButtonObject.height}}" status="{{navStatus}}" color="#333" />
   </view>
-  <view class="content">
+  <view class="content hide-scrollbar" style="height:{{compatibleInfo.isIphoneX?compatibleInfo.systemInfo.screenHeight-(32+contentTop)+'px':compatibleInfo.systemInfo.screenHeight-(contentTop)+'px'}}">
     <view class="swiper-box section1">
-      <swiper indicator-dots="{{indicatorDots}}" autoplay="{{autoplay}}" interval="{{interval}}" duration="{{duration}}"
-        indicator-color="rgba(255, 255, 255, .6)" indicator-active-color="#ffffff">
-        <block wx:for="{{background}}" wx:key="*this">
+      <swiper indicator-dots="{{indicatorDots}}" autoplay="{{autoplay}}" interval="{{interval}}" duration="{{duration}}" indicator-color="rgba(255, 255, 255, .6)" indicator-active-color="#ffffff">
+        <block wx:for="{{goodsDetail.goods_banner_arr}}" wx:key="*this">
           <swiper-item>
-            <view class="swiper-item {{item}}"></view>
+            <!-- <view class="swiper-item {{item}}"></view> -->
+            <image class="icon-banner" src="{{item}}" mode="aspectFill"></image>
           </swiper-item>
         </block>
       </swiper>
     </view>
     <view class="section2">
       <view class="l1">
-        <text>￥</text><text>88.88</text>
-        <view>预售专区</view><text>￥118.5</text>
+        <text>￥</text><text>{{goodsDetail.price}}</text>
+        <view wx:if="{{goodsDetail.is_pre_sale}}">预售专区</view><text>￥{{goodsDetail.market_price}}</text>
       </view>
-      <view class="l2">阿尔卑斯饮用天然矿泉水阿尔卑斯饮用天然矿泉水阿尔卑斯尔卑斯</view>
-      <view class="l3">商品描述，最多显示2行，第二行内容显示不下第二行内容显示不下，显示…</view>
+      <view class="l2">{{goodsDetail.goods_name}}</view>
+      <view class="l3">{{goodsDetail.goods_content}}</view>
     </view>
     <view class="section3">
       <view class="l1">详情</view>
       <view class="l2">
         <view class="col1 col">
           <text class="name">配送</text>
-          <text class="val">这是字数最长的</text>
+          <text class="val">{{goodsDetail.pay_delivery_day}}日后配送</text>
         </view>
         <view class="col2 col">
           <text class="name">品牌</text>
-          <text class="val">双汇</text>
+          <text class="val">{{goodsDetail.brand_name}}</text>
         </view>
       </view>
       <view class="l3">
         <view class="col1 col">
           <text class="name">规格</text>
-          <text class="val">250g</text>
+          <text class="val">{{goodsDetail.spec}}</text>
         </view>
         <view class="col2 col">
           <text class="name">单位</text>
-          <text class="val">包</text>
+          <text class="val">{{goodsDetail.unit_arr[0].unitName}}</text>
         </view>
       </view>
       <view class="l4">
-        <image class="icon-goods"
-          src="https://gw.alicdn.com/tps/i1/O1CN01PWx1at1LfLtyRhW1V_!!0-juitemmedia.jpg_140x10000Q75.jpg"
-          mode="aspectFill"></image>
-        <image class="icon-goods"
-          src="https://gw.alicdn.com/tps/i1/O1CN01PWx1at1LfLtyRhW1V_!!0-juitemmedia.jpg_140x10000Q75.jpg"
-          mode="aspectFill"></image>
+        <image wx:for="{{goodsDetail.goods_image_arr}}" wx:key="unique" class="icon-goods" src="{{item}}" mode="aspectFill"></image>
       </view>
     </view>
   </view>

@@ -2,6 +2,9 @@
 import store from '../../store/common'
 import create from '../../utils/create'
 
+import {
+  getGoodsDetail
+} from '../../api/commodity'
 // Page({
 create(store, {
 
@@ -18,20 +21,47 @@ create(store, {
     vertical: false,
     interval: 2000,
     autoplay: true,
-  },
 
+    goodsDetail: null,
+  },
+  getGoodsDetail(data) {
+    return new Promise((resolve, reject) => {
+      getGoodsDetail(data).then(res => {
+        resolve(res)
+      }).catch(err => {
+        reject(err)
+      })
+    })
+  },
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-
+    const {
+      id
+    } = options
+    this.getGoodsDetail({
+      id
+    }).then(res => {
+      this.setData({
+        goodsDetail: res.data
+      })
+    })
   },
 
   /**
    * 生命周期函数--监听页面初次渲染完成
    */
   onReady: function () {
-
+    const that = this;
+    const query = wx.createSelectorQuery();
+    // 在页面渲染完成OnReady回调 获取元素高度时，如果不加定时器，获取的元素的高度还是没渲染完异步数据前的高度
+    query.select('.content').boundingClientRect(function (rect) {
+      // console.log(rect)
+      that.setData({
+        contentTop: rect.top,
+      })
+    }).exec();
   },
 
   /**

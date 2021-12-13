@@ -12,7 +12,7 @@ Component({
       type: Object,
       value: []
     },
-    currentCategoryId: {
+    currentFirstCategoryId: {
       type: Number,
       value: 0
     }
@@ -40,6 +40,14 @@ Component({
    * 组件的方法列表
    */
   methods: {
+    firstCategoryHandle(e) {
+      // console.log(e)
+      const id = e.target.dataset.item.id
+      this.setData({
+        opened: 0,
+      })
+      this.triggerEvent('subFirstCategoryHandle', id)
+    },
     dropdownItemTapHandle(e) {
       // 分类下拉弹窗代理事件
       console.log('dropdownItemTapHandle', e.target.dataset)

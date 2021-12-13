@@ -1,28 +1,27 @@
 <!--pages/index/index.wxml-->
 <!-- <text>pages/index/index.wxml</text> -->
+<wxs module="tools" src="./wxs/index.wxs"></wxs>
+
 <view class="container-index container">
   <view class="fixed">
-    <top-navigation navigationBarTitleText="{{navigationBarTitleText}}" navHeight="{{compatibleInfo.navHeight}}"
-      navTop="{{compatibleInfo.menuButtonObject.top}}" menuButtonHeight="{{compatibleInfo.menuButtonObject.height}}"
-      status="{{navStatus}}" location="{{currentAddress}}" color="#333" bgColor="#FF723A" />
+    <top-navigation navigationBarTitleText="{{navigationBarTitleText}}" navHeight="{{compatibleInfo.navHeight}}" navTop="{{compatibleInfo.menuButtonObject.top}}" menuButtonHeight="{{compatibleInfo.menuButtonObject.height}}" status="{{navStatus}}" location="{{currentAddress}}" color="#333" bgColor="#FF723A" />
   </view>
   <view class="content">
-    <view class="bg">
-    </view>
+    <!-- <view class="bg">
+    </view> -->
     <view class="section1 input-box" bindtap="searchHandle">
-      <input class="search" name="search" placeholder="蔬菜" placeholder-class="search-placeholder"
-        value="{{searchKeyword}}" confirm-type="search" bindconfirm="bindconfirmHandle" disabled="true" />
+      <input class="search" name="search" placeholder="蔬菜" placeholder-class="search-placeholder" value="{{searchKeyword}}" confirm-type="search" bindconfirm="bindconfirmHandle" disabled="true" />
       <view class="btn btn-search" bindtap="btnSearchCancelHandle">搜索</view>
     </view>
-    <view class="cont hide-scrollbar"
-      style="height:{{compatibleInfo.isIphoneX?compatibleInfo.systemInfo.screenHeight-(50+32+section1H+fixed)+'px':compatibleInfo.systemInfo.screenHeight-(50+section1H+fixed)+'px'}}">
+    <view class="cont hide-scrollbar" style="height:{{compatibleInfo.isIphoneX?compatibleInfo.systemInfo.screenHeight-(50+32+section1H+fixed)+'px':compatibleInfo.systemInfo.screenHeight-(50+section1H+fixed)+'px'}}">
+      <view class="bg">
+      </view>
       <view class="section2" bindtap="swiperHandle">
         <view class="page-section page-section-spacing swiper">
-          <swiper indicator-dots="{{indicatorDots}}" autoplay="{{autoplay}}" interval="{{interval}}"
-            duration="{{duration}}" indicator-color="rgba(255, 255, 255, .6)" indicator-active-color="#ffffff">
-            <block wx:for="{{background}}" wx:key="*this">
+          <swiper indicator-dots="{{indicatorDots}}" autoplay="{{autoplay}}" interval="{{interval}}" duration="{{duration}}" indicator-color="rgba(255, 255, 255, .6)" indicator-active-color="#ffffff">
+            <block wx:for="{{shopData.banner}}" wx:key="*this">
               <swiper-item>
-                <view class="swiper-item {{item}}"></view>
+                <view class="swiper-item {{item.image_url}}"></view>
               </swiper-item>
             </block>
           </swiper>
@@ -31,14 +30,14 @@
       <view class="section3 hide-scrollbar">
         <view class="category-box">
           <view class="l1">
-            <view class="item" wx:for="{{categoryList}}" wx:key="unique">
-              <image class="icon-category" src="{{item.url}}" mode="aspectFill" data-clickable="1"></image>
+            <view class="item" wx:for="{{shopData.category}}" wx:key="unique">
+              <image class="icon-category" src="{{item.icon}}" mode="aspectFill" data-clickable="1"></image>
               <view class="text-category" data-clickable="1">{{item.name}}</view>
             </view>
           </view>
           <view class="l2">
-            <view class="item" wx:for="{{categoryList}}" wx:key="unique">
-              <image class="icon-category" src="{{item.url}}" mode="aspectFill" data-clickable="1"></image>
+            <view class="item" wx:for="{{shopData.category}}" wx:key="unique">
+              <image class="icon-category" src="{{item.icon}}" mode="aspectFill" data-clickable="1"></image>
               <view class="text-category" data-clickable="1">{{item.name}}</view>
             </view>
           </view>
@@ -59,45 +58,73 @@
         </view>
       </view>
       <!-- 预收专栏 -->
-      <view class="section5">
+      <view class="section5" wx:if="{{shopData.pre_goods.length}}">
         <image class="t icon-presale" src="/assets/images/home_booking.png" mode="aspectFill"></image>
-        <view class="b">
-          <view class="item" wx:for="{{prepareSaleList}}" wx:key="unique">
-            <image class="icon-presale l1" src="{{item.url}}" mode="aspectFill"></image>
+        <view class="b hide-scrollbar">
+          <view class="item" wx:for="{{shopData.pre_goods}}" wx:key="unique">
+            <image class="icon-presale l1" src="{{item.thumb}}" mode="aspectFill"></image>
             <view class="l2">￥{{item.price}}</view>
-            <view class="l3">￥{{item.originPrice}}</view>
+            <view class="l3">￥{{item.market_price}}</view>
           </view>
         </view>
       </view>
-      <!-- 新品上市 -->
-      <view class="section6">
+      <!-- 新品上市和限时抢购-->
+      <view class="section6" wx:if="{{shopData.activity_goods.length}}">
         <view class="l">
-          <view class="l1">限时抢购</view>
-          <view class="l2">3天后结束</view>
+          <view class="l1">{{shopData.activity_goods[0].name}}</view>
+          <view class="l2">{{tools.parseActivityGoodsType(shopData.activity_goods[0])}}</view>
           <view class="l3">
             <view class="btn btn-go"><text>去逛逛</text>
               <view>GO</view>
             </view>
           </view>
         </view>
-        <view class="r">
-          <view class="item" wx:for="{{newMarketList}}" wx:key="unique">
-            <image class="icon-newmarket l1" src="{{item.url}}" mode="aspectFill"></image>
+        <view class="r hide-scrollbar">
+          <view class="item" wx:for="{{shopData.activity_goods[0].goods_list}}" wx:key="unique">
+            <image class="icon-newmarket l1" src="{{item.thumb}}" mode="aspectFill"></image>
+            <view class="l2">￥{{item.price}}</view>
+          </view>
+          <view class="item" wx:for="{{shopData.activity_goods[0].goods_list}}" wx:key="unique">
+            <image class="icon-newmarket l1" src="{{item.thumb}}" mode="aspectFill"></image>
+            <view class="l2">￥{{item.price}}</view>
+          </view>
+          <view class="item" wx:for="{{shopData.activity_goods[0].goods_list}}" wx:key="unique">
+            <image class="icon-newmarket l1" src="{{item.thumb}}" mode="aspectFill"></image>
+            <view class="l2">￥{{item.price}}</view>
+          </view>
+          <view class="item" wx:for="{{shopData.activity_goods[0].goods_list}}" wx:key="unique">
+            <image class="icon-newmarket l1" src="{{item.thumb}}" mode="aspectFill"></image>
+            <view class="l2">￥{{item.price}}</view>
+          </view>
+          <view class="item" wx:for="{{shopData.activity_goods[0].goods_list}}" wx:key="unique">
+            <image class="icon-newmarket l1" src="{{item.thumb}}" mode="aspectFill"></image>
+            <view class="l2">￥{{item.price}}</view>
+          </view>
+          <view class="item" wx:for="{{shopData.activity_goods[0].goods_list}}" wx:key="unique">
+            <image class="icon-newmarket l1" src="{{item.thumb}}" mode="aspectFill"></image>
+            <view class="l2">￥{{item.price}}</view>
+          </view>
+          <view class="item" wx:for="{{shopData.activity_goods[0].goods_list}}" wx:key="unique">
+            <image class="icon-newmarket l1" src="{{item.thumb}}" mode="aspectFill"></image>
+            <view class="l2">￥{{item.price}}</view>
+          </view>
+          <view class="item" wx:for="{{shopData.activity_goods[0].goods_list}}" wx:key="unique">
+            <image class="icon-newmarket l1" src="{{item.thumb}}" mode="aspectFill"></image>
             <view class="l2">￥{{item.price}}</view>
           </view>
         </view>
       </view>
       <!-- 热门推荐 -->
       <view class="section7">
-        <view class="item" wx:for="{{hotGoodsList}}" wx:key="unique">
-          <image class="icon-pri" src="{{item.url}}" mode="aspectFill"></image>
+        <view class="item" wx:for="{{shopData.group_goods[0].goods_list}}" wx:key="unique">
+          <image class="icon-pri" src="{{item.thumb}}" mode="aspectFill"></image>
           <view class="cont">
-            <view class="l1">{{item.tit}}</view>
+            <view class="l1">{{item.goods_name}}{{item.spec}}</view>
             <view class="l2">
               <view class="price">
                 <text>￥</text>{{item.price}}
               </view>
-              <view class="origin-price">￥{{item.originPrice}}</view>
+              <view class="origin-price">￥{{item.market_price}}</view>
             </view>
           </view>
           <view class="shopcart-box">
@@ -106,9 +133,43 @@
           </view>
         </view>
       </view>
+      <view class="section7-1" wx:if="{{shopData.group_goods[0].goods_list.length}}" bindtap="toSearchResHandle">
+        <text>更多推荐</text>
+        <image src="/assets/images/nav_btn_next.png" mode="aspectFill"></image>
+      </view>
       <!-- 分类商品 -->
-      <view class="section8">
-
+      <view class="section8" wx:if="{{shopData.shop_type_goods.length}}">
+        <view wx:for="{{shopData.shop_type_goods}}" wx:key="unique">
+          <view class="tit">
+            <view></view>
+            <view></view>
+            <text>{{item.name}}</text>
+            <view></view>
+            <view></view>
+          </view>
+          <view class="item-box">
+            <view class="item" wx:for="{{item.goods_list}}" wx:key="unique" wx:for-item="itemName">
+              <image class="icon-pri" src="{{itemName.thumb}}" mode="aspectFill"></image>
+              <view class="cont">
+                <view class="l1">{{itemName.goods_name}}{{itemName.spec}}</view>
+                <view class="l2">
+                  <view class="price">
+                    <text>￥</text>{{itemName.price}}
+                  </view>
+                  <view class="origin-price">￥{{itemName.market_price}}</view>
+                </view>
+              </view>
+              <view class="shopcart-box">
+                <image class="icon-shopcart" mode="aspectFill" src="/assets/images/icon_car.png"></image>
+                <view class="shopcart-info">34</view>
+              </view>
+            </view>
+          </view>
+          <view class="section8-1" wx:if="{{shopData.group_goods[0].goods_list.length}}" bindtap="toSearchResHandle">
+            <text>更多推荐</text>
+            <image src="/assets/images/nav_btn_next.png" mode="aspectFill"></image>
+          </view>
+        </view>
       </view>
     </view>
   </view>

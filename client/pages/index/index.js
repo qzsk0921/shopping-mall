@@ -11,6 +11,10 @@ import {
   setAddressShopInfo
 } from '../../api/location'
 
+import {
+  getShopData
+} from '../../api/commodity'
+
 // Page({
 create(store, {
   /**
@@ -25,105 +29,216 @@ create(store, {
     vertical: false,
     interval: 2000,
     autoplay: true,
-    // 分类列表
-    categoryList: [{
-      url: 'https://gw.alicdn.com/tps/i1/O1CN01PWx1at1LfLtyRhW1V_!!0-juitemmedia.jpg_140x10000Q75.jpg',
-      name: '蔬 菜'
-    }, {
-      url: 'https://gw.alicdn.com/tps/i1/O1CN01PWx1at1LfLtyRhW1V_!!0-juitemmedia.jpg_140x10000Q75.jpg',
-      name: '肉禽蛋品'
-    }, {
-      url: 'https://gw.alicdn.com/tps/i1/O1CN01PWx1at1LfLtyRhW1V_!!0-juitemmedia.jpg_140x10000Q75.jpg',
-      name: '水产海鲜'
-    }, {
-      url: 'https://gw.alicdn.com/tps/i1/O1CN01PWx1at1LfLtyRhW1V_!!0-juitemmedia.jpg_140x10000Q75.jpg',
-      name: '蔬 菜'
-    }, {
-      url: 'https://gw.alicdn.com/tps/i1/O1CN01PWx1at1LfLtyRhW1V_!!0-juitemmedia.jpg_140x10000Q75.jpg',
-      name: '蔬 菜'
-    }, {
-      url: 'https://gw.alicdn.com/tps/i1/O1CN01PWx1at1LfLtyRhW1V_!!0-juitemmedia.jpg_140x10000Q75.jpg',
-      name: '蔬 菜'
-    }, {
-      url: 'https://gw.alicdn.com/tps/i1/O1CN01PWx1at1LfLtyRhW1V_!!0-juitemmedia.jpg_140x10000Q75.jpg',
-      name: '蔬 菜'
-    }, {
-      url: 'https://gw.alicdn.com/tps/i1/O1CN01PWx1at1LfLtyRhW1V_!!0-juitemmedia.jpg_140x10000Q75.jpg',
-      name: '蔬 菜'
-    }, {
-      url: 'https://gw.alicdn.com/tps/i1/O1CN01PWx1at1LfLtyRhW1V_!!0-juitemmedia.jpg_140x10000Q75.jpg',
-      name: '蔬 菜'
-    }, {
-      url: 'https://gw.alicdn.com/tps/i1/O1CN01PWx1at1LfLtyRhW1V_!!0-juitemmedia.jpg_140x10000Q75.jpg',
-      name: '蔬 菜'
-    }, {
-      url: 'https://gw.alicdn.com/tps/i1/O1CN01PWx1at1LfLtyRhW1V_!!0-juitemmedia.jpg_140x10000Q75.jpg',
-      name: '蔬 菜'
-    }, {
-      url: 'https://gw.alicdn.com/tps/i1/O1CN01PWx1at1LfLtyRhW1V_!!0-juitemmedia.jpg_140x10000Q75.jpg',
-      name: '蔬 菜'
-    }, {
-      url: 'https://gw.alicdn.com/tps/i1/O1CN01PWx1at1LfLtyRhW1V_!!0-juitemmedia.jpg_140x10000Q75.jpg',
-      name: '蔬 菜'
-    }, {
-      url: 'https://gw.alicdn.com/tps/i1/O1CN01PWx1at1LfLtyRhW1V_!!0-juitemmedia.jpg_140x10000Q75.jpg',
-      name: '蔬 菜'
-    }, {
-      url: 'https://gw.alicdn.com/tps/i1/O1CN01PWx1at1LfLtyRhW1V_!!0-juitemmedia.jpg_140x10000Q75.jpg',
-      name: '蔬 菜'
-    }, {
-      url: 'https://gw.alicdn.com/tps/i1/O1CN01PWx1at1LfLtyRhW1V_!!0-juitemmedia.jpg_140x10000Q75.jpg',
-      name: '蔬 菜'
-    }],
-    // 预售
-    prepareSaleList: [{
-      url: 'https://gw.alicdn.com/tps/i1/O1CN01PWx1at1LfLtyRhW1V_!!0-juitemmedia.jpg_140x10000Q75.jpg',
-      price: 6.5,
-      originPrice: 7.5
-    }, {
-      url: 'https://gw.alicdn.com/tps/i1/O1CN01PWx1at1LfLtyRhW1V_!!0-juitemmedia.jpg_140x10000Q75.jpg',
-      price: 6.5,
-      originPrice: 7.5
-    }, {
-      url: 'https://gw.alicdn.com/tps/i1/O1CN01PWx1at1LfLtyRhW1V_!!0-juitemmedia.jpg_140x10000Q75.jpg',
-      price: 6.5,
-      originPrice: 7.5
-    }],
-    // 新品上市
-    newMarketList: [{
-      url: 'https://gw.alicdn.com/tps/i1/O1CN01PWx1at1LfLtyRhW1V_!!0-juitemmedia.jpg_140x10000Q75.jpg',
-      price: 6.5,
-      originPrice: 7.5
-    }, {
-      url: 'https://gw.alicdn.com/tps/i1/O1CN01PWx1at1LfLtyRhW1V_!!0-juitemmedia.jpg_140x10000Q75.jpg',
-      price: 6.5,
-      originPrice: 7.5
-    }, {
-      url: 'https://gw.alicdn.com/tps/i1/O1CN01PWx1at1LfLtyRhW1V_!!0-juitemmedia.jpg_140x10000Q75.jpg',
-      price: 6.5,
-      originPrice: 7.5
-    }],
-    hotGoodsList: [{
-      url: 'https://gw.alicdn.com/tps/i1/O1CN01PWx1at1LfLtyRhW1V_!!0-juitemmedia.jpg_140x10000Q75.jpg',
-      tit: '元宝优选调和油20L/捅',
-      price: 6.5,
-      originPrice: 7.5
-    }, {
-      url: 'https://gw.alicdn.com/tps/i1/O1CN01PWx1at1LfLtyRhW1V_!!0-juitemmedia.jpg_140x10000Q75.jpg',
-      tit: '阿尔卑斯饮用天然矿泉水500ml*6',
-      price: 6.5,
-      originPrice: 7.5
-    }, {
-      url: 'https://gw.alicdn.com/tps/i1/O1CN01PWx1at1LfLtyRhW1V_!!0-juitemmedia.jpg_140x10000Q75.jpg',
-      tit: '元宝优选调和油20L/捅',
-      price: 6.5,
-      originPrice: 7.5
-    }, {
-      url: 'https://gw.alicdn.com/tps/i1/O1CN01PWx1at1LfLtyRhW1V_!!0-juitemmedia.jpg_140x10000Q75.jpg',
-      tit: '元宝优选调和油20L/捅',
-      price: 6.5,
-      originPrice: 7.5
-    }]
+    shopData: {
+      "shop_id": "1",
+      "banner": [{
+          "id": 8,
+          "type": 1,
+          "link_type": 1,
+          "name": "banner7",
+          "image_url": "image1",
+          "link": ""
+        },
+        {
+          "id": 7,
+          "type": 1,
+          "link_type": 1,
+          "name": "banner7",
+          "image_url": "image1",
+          "link": ""
+        },
+        {
+          "id": 6,
+          "type": 1,
+          "link_type": 1,
+          "name": "banner6",
+          "image_url": "image1",
+          "link": ""
+        },
+        {
+          "id": 5,
+          "type": 1,
+          "link_type": 1,
+          "name": "banner5",
+          "image_url": "image1",
+          "link": ""
+        },
+        {
+          "id": 4,
+          "type": 1,
+          "link_type": 1,
+          "name": "banner4",
+          "image_url": "image1",
+          "link": ""
+        },
+        {
+          "id": 1,
+          "type": 1,
+          "link_type": 1,
+          "name": "banner1",
+          "image_url": "image1",
+          "link": ""
+        }
+      ],
+      "category": [{
+          "id": 2,
+          "name": "分类2",
+          "icon": "https://sharepuls.xcmbkj.com/app_memu_1.png?"
+        },
+        {
+          "id": 1,
+          "name": "分类1",
+          "icon": "https://sharepuls.xcmbkj.com/app_memu_1.png?1"
+        },
+        {
+          "id": 3,
+          "name": "分类3",
+          "icon": "https://sharepuls.xcmbkj.com/app_memu_1.png?"
+        }
+      ],
+      "pre_goods": [{
+        "id": 2,
+        "goods_name": "商品2",
+        "price": "100.00",
+        "market_price": "100.00",
+        "spec": "10g",
+        "is_vip": 0,
+        "is_sale": 1,
+        "is_shop_check": 1,
+        "thumb": "http://image.wms.wljkxys.com/202009305f742c49a5276.png",
+        "cart_number": 0
+      }],
+      "activity_goods": [{
+        "id": 2,
+        "name": "限时抢购",
+        "short_name": "很好",
+        "type": 2,
+        "start_time": 1638950997,
+        "end_time": 1658950997,
+        "goods_list": [{
+          "id": 3,
+          "goods_name": "商品3",
+          "price": "40.00",
+          "market_price": "100.00",
+          "spec": "10g",
+          "is_vip": 0,
+          "is_sale": 1,
+          "is_shop_check": 1,
+          "thumb": "http://image.wms.wljkxys.com/202009305f742c49a5276.png",
+          "cart_number": 0
+        }]
+      }],
+      "group_goods": [{
+        "id": 1,
+        "name": "商品分组1",
+        "goods_list": [{
+          "id": 1,
+          "goods_name": "商品1",
+          "price": "100.00",
+          "market_price": "100.00",
+          "spec": "10g",
+          "is_vip": 0,
+          "is_sale": 1,
+          "is_shop_check": 1,
+          "thumb": "http://image.wms.wljkxys.com/202009305f742c49a5276.png",
+          "cart_number": 0
+        }]
+      }],
+      "shop_type_goods": [{
+          "id": 4,
+          "name": "子分类1",
+          "icon": "https://sharepuls.xcmbkj.com/app_memu_1.png?",
+          "goods_list": [{
+              "id": 4,
+              "goods_name": "商品4",
+              "price": "100.00",
+              "market_price": "100.00",
+              "spec": "10g",
+              "is_vip": 0,
+              "is_sale": 1,
+              "is_shop_check": 1,
+              "thumb": "http://image.wms.wljkxys.com/202009305f742c49a5276.png",
+              "cart_number": 0
+            },
+            {
+              "id": 8,
+              "goods_name": "商品8",
+              "price": "100.00",
+              "market_price": "100.00",
+              "spec": "10g",
+              "is_vip": 0,
+              "is_sale": 1,
+              "is_shop_check": 1,
+              "thumb": "http://image.wms.wljkxys.com/202009305f742c49a5276.png",
+              "cart_number": 0
+            },
+            {
+              "id": 9,
+              "goods_name": "商品9",
+              "price": "100.00",
+              "market_price": "100.00",
+              "spec": "10g",
+              "is_vip": 0,
+              "is_sale": 1,
+              "is_shop_check": 1,
+              "thumb": "http://image.wms.wljkxys.com/202009305f742c49a5276.png",
+              "cart_number": 0
+            }
+          ]
+        },
+        {
+          "id": 5,
+          "name": "子分类2",
+          "icon": "https://sharepuls.xcmbkj.com/app_memu_1.png?",
+          "goods_list": [{
+            "id": 5,
+            "goods_name": "商品5",
+            "price": "100.00",
+            "market_price": "100.00",
+            "spec": "10g",
+            "is_vip": 0,
+            "is_sale": 1,
+            "is_shop_check": 1,
+            "thumb": "http://image.wms.wljkxys.com/202009305f742c49a5276.png",
+            "cart_number": 0
+          }]
+        },
+        {
+          "id": 6,
+          "name": "子分类3",
+          "icon": "https://sharepuls.xcmbkj.com/app_memu_1.png?",
+          "goods_list": [{
+            "id": 6,
+            "goods_name": "商品6",
+            "price": "100.00",
+            "market_price": "100.00",
+            "spec": "10g",
+            "is_vip": 0,
+            "is_sale": 1,
+            "is_shop_check": 1,
+            "thumb": "http://image.wms.wljkxys.com/202009305f742c49a5276.png",
+            "cart_number": 0
+          }]
+        },
+        {
+          "id": 7,
+          "name": "子分类4",
+          "icon": "https://sharepuls.xcmbkj.com/app_memu_1.png?",
+          "goods_list": [{
+            "id": 7,
+            "goods_name": "商品7",
+            "price": "100.00",
+            "market_price": "100.00",
+            "spec": "10g",
+            "is_vip": 0,
+            "is_sale": 1,
+            "is_shop_check": 1,
+            "thumb": "http://image.wms.wljkxys.com/202009305f742c49a5276.png",
+            "cart_number": 0
+          }]
+        }
+      ]
+    }
   },
   watch: {
     currentAddress: {
@@ -134,11 +249,27 @@ create(store, {
           // console.log(res)
           this.store.data.shop_id = res.data.shop_id
           this.update()
+          this.data.shop_id = res.data.shop_id
           // 通过shop_id获取商城商品
         })
       },
       deep: true
-    }
+    },
+    shop_id: {
+      handler(nv, ov, obj) {
+        // console.log(nv)
+        // 用用户授权地址换取店铺id
+        this.getShopData({
+          shop_id: nv
+        }).then(res => {
+          // console.log(res)
+          this.setData({
+            // shopData: res.data
+          })
+        })
+      },
+      deep: true
+    },
     // compatibleInfo: {
     //   handler(nv, ov, obj) {
     //     // console.log(nv)
@@ -165,6 +296,12 @@ create(store, {
     console.log('searchHandle')
     wx.navigateTo({
       url: '/pages/search/search',
+    })
+  },
+  toSearchResHandle() {
+    console.log('toSearchResHandle')
+    wx.navigateTo({
+      url: '/pages/search/searchRes',
     })
   },
   /**
@@ -230,6 +367,15 @@ create(store, {
         currentAddress: this.store.data.currentAddress
       })
     }
+  },
+  getShopData(data) {
+    return new Promise((resolve, reject) => {
+      getShopData(data).then(res => {
+        resolve(res)
+      }).catch(err => {
+        reject(err)
+      })
+    })
   },
   setAddressShopInfo(data) {
     return new Promise((resolve, reject) => {

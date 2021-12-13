@@ -21,6 +21,7 @@
 
 .section1 .category-box .item {
   margin: 0 29rpx;
+  text-align: center;
 }
 
 .section1 .category-box .item .icon-category {
@@ -156,6 +157,8 @@ scroll-view.isIphoneX {
 
 .tree-select__content .tree-select__tip .right {
   display: flex;
+  height: 100%;
+  line-height: 76rpx;
 }
 
 .tree-select__content .tree-select__tip .right .btn {
@@ -167,8 +170,13 @@ scroll-view.isIphoneX {
   margin-right: 28rpx;
 }
 
+.active-color {
+  color: #333333 !important;
+}
+
 .tree-select__content .tree-select__tip .right .btn-price {
   display: flex;
+  align-items: center;
 }
 
 .tree-select__content .tree-select__tip .right .btn-price .arrow-box {
@@ -299,11 +307,17 @@ scroll-view.isIphoneX {
   text-decoration: line-through;
 }
 
-.tree-select__content .tree-select__item .left {}
+.tree-select__content .tree-select__item .left {
+  
+}
 
 .tree-select__content .tree-select__item .left image {
   width: 172rpx;
   height: 172rpx;
   background: rgba(0, 0, 0, 0);
   border-radius: 16rpx;
+}
+
+.tree-select__content .tree-select__item .right {
+  padding-left: 24rpx;
 }

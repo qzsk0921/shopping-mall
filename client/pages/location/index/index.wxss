@@ -67,8 +67,25 @@
   margin-top: 20rpx;
 }
 
+.section2 .l2 {
+  padding-top: 19rpx !important;
+}
+
+.section2 .number {
+  margin-top: 9rpx !important;
+}
+
+.section2 .l2 .l2-l {
+  width: calc(100% - 170rpx);
+}
+
+.section2 .l2 .l2-l .l2-l-l1 {
+  line-height: 54rpx;
+}
+
 .section2 .l2 .l2-r {
   display: flex;
+  padding-top: 19rpx;
 }
 
 .section2 .l2 .l2-r .icon-location {

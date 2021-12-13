@@ -2,15 +2,18 @@
 .container-index {}
 
 .content {
-  position: relative;
 }
 
 .cont {
+  padding-bottom: 60rpx;
   overflow: auto;
+  position: relative;
 }
 
 .bg {
   position: absolute;
+  top: -116rpx;
+  left: 0;
   width: 100%;
   height: 513rpx;
   background: linear-gradient(180deg, var(--primary-color) 0%, var(--primary-color-a) 100%);
@@ -20,8 +23,9 @@
 .section1 {
   position: relative;
   z-index: 3;
-  margin: 0 24rpx;
-  padding: 16rpx 0 22rpx;
+  /* margin: 0 24rpx; */
+  padding: 16rpx 24rpx 22rpx;
+  background: linear-gradient(180deg, var(--primary-color) 0%, #fe895a 100%);
 }
 
 .input-box {
@@ -72,7 +76,7 @@
   color: #FFFFFF;
   text-align: center;
   line-height: 56rpx;
-  right: 6rpx;
+  right: 30rpx;
   top: 21rpx;
   z-index: 2;
   width: 120rpx;
@@ -154,7 +158,8 @@
   background: linear-gradient(180deg, #FFAB44 0%, #FFAB44 100%);
   border-radius: 0rpx 0rpx 16rpx 16rpx;
   display: flex;
-  justify-content: space-between;
+  overflow: auto;
+  /* justify-content: space-between; */
 }
 
 .section5 .item {
@@ -167,6 +172,10 @@
   flex-direction: column;
   align-items: center;
   text-align: center;
+}
+
+.section5 .item:not(:first-child) {
+  margin-left: 17rpx;
 }
 
 .section5 .b .item .icon-presale {
@@ -257,8 +266,8 @@
 .section6 .r {
   padding: 24rpx 0;
   display: flex;
-  justify-content: center;
   align-items: center;
+  overflow: scroll;
 }
 
 .section6 .r .item {
@@ -339,7 +348,7 @@
 }
 
 .section7 .item .cont .l2 .origin-price {
-  margin-right: 2rpx;
+  margin-left: 2rpx;
   font-size: 22rpx;
   color: #888888;
   text-decoration: line-through;
@@ -367,5 +376,387 @@
   padding: 0 8rpx;
 }
 
+.section7-1 {
+  margin: 20rpx 24rpx 0;
+  width: 702rpx;
+  height: 72rpx;
+  background: #FFFFFF;
+  border-radius: 10rpx;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: #FFFFFF;
+}
+
+.section7-1 text {
+  font-size: 28rpx;
+  font-weight: 500;
+  line-height: 72rpx;
+  color: #888888;
+}
+
+.section7-1 image {
+  margin-left: 10rpx;
+  width: 8rpx;
+  height: 16rpx;
+}
+
 /* 分类商品 */
-.section8 {}
+.section7 {
+  margin: 20rpx 24rpx 0;
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+}
+
+.section7 .item {
+  margin-bottom: 20rpx;
+  width: 336rpx;
+  background: #FFFFFF;
+  border-radius: 16rpx;
+  overflow: hidden;
+  position: relative;
+}
+
+.section7 .item .icon-pri {
+  width: 100%;
+  height: 336rpx;
+}
+
+.section7 .item .cont {
+  padding: 12rpx 20rpx 28rpx;
+}
+
+.section7 .item .cont .l1 {
+  height: 88rpx;
+  line-height: 48rpx;
+  font-size: 28rpx;
+  font-weight: bold;
+  color: #333333;
+}
+
+.section7 .item .cont .l2 {
+  margin-top: 14rpx;
+  display: flex;
+  align-items: flex-end;
+}
+
+.section7 .item .cont .l2 .price {
+  font-size: 34rpx;
+  font-weight: bold;
+  color: #FC4953;
+}
+
+.section7 .item .cont .l2 .price text {
+  font-size: 24rpx;
+  font-weight: bold;
+  color: #FC4953;
+}
+
+.section7 .item .cont .l2 .origin-price {
+  margin-left: 2rpx;
+  font-size: 22rpx;
+  color: #888888;
+  text-decoration: line-through;
+}
+
+.section7 .item .shopcart-box {
+  position: absolute;
+  right: 20rpx;
+  bottom: 20rpx;
+  width: 56rpx;
+  height: 56rpx;
+}
+
+.section7 .item .shopcart-box .shopcart-info {
+  text-align: center;
+  background: #FC4953;
+  position: absolute;
+  top: -6rpx;
+  right: -6rpx;
+  border-radius: 12rpx;
+  font-size: 20rpx;
+  line-height: 24rpx;
+  color: #FFFFFF;
+  min-height: 24rpx;
+  padding: 0 8rpx;
+}
+
+.section7-1 {
+  margin: 20rpx 24rpx 0;
+  width: 702rpx;
+  height: 72rpx;
+  background: #FFFFFF;
+  border-radius: 10rpx;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: #FFFFFF;
+}
+
+.section7-1 text {
+  font-size: 28rpx;
+  font-weight: 500;
+  line-height: 72rpx;
+  color: #888888;
+}
+
+.section7-1 image {
+  margin-left: 10rpx;
+  width: 8rpx;
+  height: 16rpx;
+}
+
+/* 分类商品 */
+.section7 {
+  margin: 20rpx 24rpx 0;
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+}
+
+.section7 .item {
+  margin-bottom: 20rpx;
+  width: 336rpx;
+  background: #FFFFFF;
+  border-radius: 16rpx;
+  overflow: hidden;
+  position: relative;
+}
+
+.section7 .item .icon-pri {
+  width: 100%;
+  height: 336rpx;
+}
+
+.section7 .item .cont {
+  padding: 12rpx 20rpx 28rpx;
+}
+
+.section7 .item .cont .l1 {
+  height: 88rpx;
+  line-height: 48rpx;
+  font-size: 28rpx;
+  font-weight: bold;
+  color: #333333;
+}
+
+.section7 .item .cont .l2 {
+  margin-top: 14rpx;
+  display: flex;
+  align-items: flex-end;
+}
+
+.section7 .item .cont .l2 .price {
+  font-size: 34rpx;
+  font-weight: bold;
+  color: #FC4953;
+}
+
+.section7 .item .cont .l2 .price text {
+  font-size: 24rpx;
+  font-weight: bold;
+  color: #FC4953;
+}
+
+.section7 .item .cont .l2 .origin-price {
+  margin-left: 2rpx;
+  font-size: 22rpx;
+  color: #888888;
+  text-decoration: line-through;
+}
+
+.section7 .item .shopcart-box {
+  position: absolute;
+  right: 20rpx;
+  bottom: 20rpx;
+  width: 56rpx;
+  height: 56rpx;
+}
+
+.section7 .item .shopcart-box .shopcart-info {
+  text-align: center;
+  background: #FC4953;
+  position: absolute;
+  top: -6rpx;
+  right: -6rpx;
+  border-radius: 12rpx;
+  font-size: 20rpx;
+  line-height: 24rpx;
+  color: #FFFFFF;
+  min-height: 24rpx;
+  padding: 0 8rpx;
+}
+
+.section7-1 {
+  margin: 20rpx 24rpx 0;
+  width: 702rpx;
+  height: 72rpx;
+  background: #FFFFFF;
+  border-radius: 10rpx;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: #FFFFFF;
+}
+
+.section7-1 text {
+  font-size: 28rpx;
+  font-weight: 500;
+  line-height: 72rpx;
+  color: #888888;
+}
+
+.section7-1 image {
+  margin-left: 10rpx;
+  width: 8rpx;
+  height: 16rpx;
+}
+
+/* 分类商品 */
+.section8 {
+  margin: 20rpx 24rpx 0;
+}
+
+.section8 .tit {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 114rpx;
+}
+
+.section8 .tit text {
+  margin: 0 20rpx;
+  font-size: 34rpx;
+  font-weight: bold;
+  color: #333333;
+}
+
+.section8 .tit view:nth-of-type(1) {
+  margin-right: 12rpx;
+}
+
+.section8 .tit view:nth-of-type(4) {
+  margin-left: 12rpx;
+}
+
+.section8 .tit view:nth-of-type(1),
+.section8 .tit view:nth-of-type(4) {
+  width: 10rpx;
+  height: 10rpx;
+  background: #FE552A;
+  border-radius: 50%;
+  opacity: 0.6;
+}
+
+.section8 .tit view:nth-of-type(2),
+.section8 .tit view:nth-of-type(3) {
+  width: 16rpx;
+  height: 16rpx;
+  background: #FE552A;
+  border-radius: 50%;
+}
+
+.section8 .item-box {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+}
+
+.section8 .item {
+  margin-bottom: 20rpx;
+  width: 336rpx;
+  background: #FFFFFF;
+  border-radius: 16rpx;
+  overflow: hidden;
+  position: relative;
+}
+
+.section8 .item .icon-pri {
+  width: 100%;
+  height: 336rpx;
+}
+
+.section8 .item .cont {
+  padding: 12rpx 20rpx 28rpx;
+}
+
+.section8 .item .cont .l1 {
+  height: 88rpx;
+  line-height: 48rpx;
+  font-size: 28rpx;
+  font-weight: bold;
+  color: #333333;
+}
+
+.section8 .item .cont .l2 {
+  margin-top: 14rpx;
+  display: flex;
+  align-items: flex-end;
+}
+
+.section8 .item .cont .l2 .price {
+  font-size: 34rpx;
+  font-weight: bold;
+  color: #FC4953;
+}
+
+.section8 .item .cont .l2 .price text {
+  font-size: 24rpx;
+  font-weight: bold;
+  color: #FC4953;
+}
+
+.section8 .item .cont .l2 .origin-price {
+  margin-left: 2rpx;
+  font-size: 22rpx;
+  color: #888888;
+  text-decoration: line-through;
+}
+
+.section8 .item .shopcart-box {
+  position: absolute;
+  right: 20rpx;
+  bottom: 20rpx;
+  width: 56rpx;
+  height: 56rpx;
+}
+
+.section8 .item .shopcart-box .shopcart-info {
+  text-align: center;
+  background: #FC4953;
+  position: absolute;
+  top: -6rpx;
+  right: -6rpx;
+  border-radius: 12rpx;
+  font-size: 20rpx;
+  line-height: 24rpx;
+  color: #FFFFFF;
+  min-height: 24rpx;
+  padding: 0 8rpx;
+}
+
+.section8-1 {
+  margin: 20rpx 0 0;
+  width: 702rpx;
+  height: 72rpx;
+  background: #FFFFFF;
+  border-radius: 10rpx;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: #FFFFFF;
+}
+
+.section8-1 text {
+  font-size: 28rpx;
+  font-weight: 500;
+  line-height: 72rpx;
+  color: #888888;
+}
+
+.section8-1 image {
+  margin-left: 10rpx;
+  width: 8rpx;
+  height: 16rpx;
+}

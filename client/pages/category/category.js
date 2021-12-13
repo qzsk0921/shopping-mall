@@ -6,7 +6,8 @@ import store from '../../store/common'
 import create from '../../utils/create'
 
 import {
-  getCategoryList
+  getCategoryList,
+  getGoodsList
 } from '../../api/commodity'
 
 // Page({
@@ -16,10 +17,13 @@ create(store, {
    */
   data: {
     categoryOpened: 0, //0收起 1展开
-    priceSort: 1, //1升序 2降序 0空
+    currentSecondCategoryIndex: 0,
+    currentPriceSort: null, //3:价格从高到底 4:价格从低到高
+    // priceSort: 1, //1升序 2降序 0空
+
     compatibleInfo: null, //navHeight menuButtonObject systemInfo isIphoneX
     navStatus: 'category',
-    currentCategoryId: 2,
+
     categoryData: [{
       id: 1,
       name: '蔬 菜',
@@ -69,8 +73,6 @@ create(store, {
       name: '蔬菜12',
       url: 'https://gw.alicdn.com/tps/i1/O1CN01PWx1at1LfLtyRhW1V_!!0-juitemmedia.jpg_140x10000Q75.jpg'
     }],
-    firstCategory: [], //第一分类
-    secondCategory: [], //第二分类
     screenCategory: [{
       // 导航名称
       option: '蔬菜豆制品',
@@ -114,7 +116,20 @@ create(store, {
         store: 0, //库存
         url: 'https://gw.alicdn.com/tps/i1/O1CN01PWx1at1LfLtyRhW1V_!!0-juitemmedia.jpg_140x10000Q75.jpg'
       }]
-    }]
+    }],
+
+    firstCategory: [], //第一分类
+    secondCategory: [], //第二分类
+    currentFirstCategoryId: '',
+    currentSecondCategoryId: '',
+    currentGoodsList: {
+      cache: [], //综合
+      count: 1,
+      total_page: 1,
+    },
+
+    page: 1,
+    page_size: 10,
   },
   extendHandle() {
     // 展开全部分类
@@ -140,6 +155,88 @@ create(store, {
         categoryOpened: 0
       })
   },
+  // 切换一级分类
+  firstCategoryHandle(e) {
+    // console.log(e)
+    // console.log('firstCategoryHandle')
+    const id = e.target.dataset.id
+    this.getCategoryList({
+      pid: id
+    }).then(res => {
+      this.setData({
+        currentFirstCategoryId: id,
+        secondCategory: res.data
+      })
+
+      if (res.data.length) {
+        this.getCategoryList({
+          pid: res.data[0].id
+        }).then(ress => {
+          if (ress.data.length) {
+            this.setData({
+              secondCategory: ress.data,
+              currentSecondCategoryId: ress.data[0].id
+            })
+            this.getGoodsList({
+              category_id: ress.data[0].id
+            })
+          }
+        })
+      }
+    })
+  },
+  // 子组件切换一级分类
+  subFirstCategoryHandle(e) {
+    const id = e.detail
+    this.getCategoryList({
+      pid: id
+    }).then(res => {
+      this.setData({
+        currentFirstCategoryId: id,
+        secondCategory: res.data
+      })
+      this.getGoodsList({
+        category_id: id
+      })
+    })
+  },
+  // 切换2级分类
+  itemTapHandle(e) {
+    // console.log('itemTapHandle')
+    const id = e.target.dataset.id
+    const index = e.target.dataset.index
+    this.setData({
+      currentSecondCategoryId: id,
+      currentSecondCategoryIndex: index
+    })
+    this.getGoodsList({
+      category_id: id
+    })
+  },
+  changeTab(e) {
+    // console.log(e)
+    let index = e.target.dataset.index
+
+    if (index == this.data.tabIndex) {
+      if (index == 1) {
+        index = null
+      } else if (index == 2 && this.data.currentPriceSort == 4) {
+        index = null
+      }
+    }
+
+    let objData = {
+      tabIndex: index,
+    }
+    console.log(index)
+    if (this.data.currentGoodsList.count > 1) {
+      objData[[`currentGoodsList.count`]] = 1
+    }
+    this.setData(objData)
+
+    this.getGoodsList()
+
+  },
   getCategoryList(data) {
     return new Promise((resolve, reject) => {
       getCategoryList(data).then(res => {
@@ -149,6 +246,75 @@ create(store, {
       })
     })
   },
+  getGoodsList(dataObj) {
+    const tempData = {}
+    if (typeof dataObj === 'object') {
+      Object.keys(dataObj).forEach(key => {
+        tempData[key] = dataObj[key]
+      })
+    }
+
+    if (dataObj !== 'scrollTolwer') {
+      tempData['per_page'] = this.data.page_size
+      tempData['current_page'] = this.data.currentGoodsList.count
+    }
+
+
+    tempData.order_by_type = this.typeParse(this.data.tabIndex)
+
+    return new Promise((resolve, reject) => {
+      getGoodsList(tempData).then(res => {
+        if (dataObj === 'scrollToLower') {
+          this.data.currentGoodsList.cache.push(...res.data.data)
+          this.setData({
+            [`currentGoodsList.cache`]: this.data.currentGoodsList.cache,
+            [`currentGoodsList.total_page`]: res.data.last_page
+          })
+          resolve(res)
+          console.log(this.data.currentGoodsList)
+        } else {
+          this.setData({
+            [`currentGoodsList.cache`]: res.data.data,
+            [`currentGoodsList.total_page`]: res.data.last_page
+          })
+        }
+      }).catch(err => {
+        reject(err)
+      })
+    })
+  },
+  typeParse(index) {
+    let type
+    if (!index) {
+      type = 0
+      this.setData({
+        currentPriceSort: null
+      })
+    } else if (index == 1) {
+      type = 2
+      this.setData({
+        currentPriceSort: null
+      })
+    } else if (index == 2) {
+      if (!this.data.currentPriceSort) {
+        type = 3
+        this.setData({
+          currentPriceSort: type
+        })
+      } else if (this.data.currentPriceSort == 3) {
+        type = 4
+        this.setData({
+          currentPriceSort: type
+        })
+      } else {
+        type = 3
+        this.setData({
+          currentPriceSort: type
+        })
+      }
+    }
+    return type
+  },
   /**
    * 生命周期函数--监听页面加载
    */
@@ -157,7 +323,18 @@ create(store, {
       pid: 0
     }).then(res => {
       this.setData({
-        firstCategory: res.data
+        firstCategory: res.data,
+        currentFirstCategoryId: res.data[0].id
+      })
+      this.getCategoryList({
+        pid: res.data[0].id
+      }).then(ress => {
+        if (ress.data.length) {
+          this.setData({
+            secondCategory: ress.data,
+            currentSecondCategoryId: ress.data[0].id
+          })
+        }
       })
     })
 

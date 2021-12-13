@@ -2,6 +2,18 @@
 import request from '../utils/request'
 
 /**
+ * 商城首页 Index/home
+ * @param {string} shop_id require 设置地址返回的店铺id
+ */
+export function getShopData(data) {
+  return request({
+    url: '/Index/home',
+    method: 'get',
+    data
+  })
+}
+
+/**
  * 商品分类
  * @param {int} pid require 0:父级 其他:父级分类id
  */

@@ -91,7 +91,7 @@ create(store, {
   typeParse(index) {
     let type
     if (index === 0) {
-      type = 1
+      type = 0
       this.setData({
         currentPriceSort: null
       })

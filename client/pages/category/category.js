@@ -131,6 +131,39 @@ create(store, {
     page: 1,
     page_size: 10,
   },
+  watch: {
+    currentGoodsList: {
+      handler(nv, ov, obj) {
+        if (nv) {
+          const that = this;
+          const query = wx.createSelectorQuery();
+          query.select('.tree-select__tip').boundingClientRect(function (rect) {
+            // console.log(rect)
+            that.setData({
+              contentTipH: rect.height,
+            })
+          }).exec();
+        }
+      },
+      deep: true
+    },
+    firstCategory: {
+      handler(nv, ov, obj) {
+        console.log(nv)
+        const that = this;
+        setTimeout(() => {
+          const query = wx.createSelectorQuery();
+          query.select('.section1').boundingClientRect(function (rect) {
+            that.setData({
+              section1H: rect.height,
+            })
+          }).exec();
+        }, 0)
+
+      },
+      deep: true
+    }
+  },
   extendHandle() {
     // 展开全部分类
     console.log('extendHandle')
@@ -266,7 +299,10 @@ create(store, {
     })
   },
   getGoodsList(dataObj) {
-    const tempData = {}
+    const tempData = {
+      category_id: this.data.currentSecondCategoryId
+    }
+
     if (typeof dataObj === 'object') {
       Object.keys(dataObj).forEach(key => {
         tempData[key] = dataObj[key]
@@ -347,7 +383,7 @@ create(store, {
     let currentGoodsList = this.data.currentGoodsList
 
     if (currentGoodsList[this.data.tabIndex].count + 1 > currentGoodsList.total_page) return
-    
+
     this.setData({
       [`currentGoodsList[${this.data.tabIndex}].count`]: ++currentGoodsList[this.data.tabIndex].count
     })
@@ -363,6 +399,8 @@ create(store, {
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+    getApp().setWatcher(this) //设置监听器
+
     this.getCategoryList({
       pid: 0
     }).then(res => {
@@ -408,13 +446,6 @@ create(store, {
       that.setData({
         // scrollViewHeight: that.store.data.systemInfo.screenHeight - (rect.height + 50),
         fixed: rect.height,
-      })
-    }).exec();
-
-    query.select('.section1').boundingClientRect(function (rect) {
-      that.setData({
-        // scrollViewHeight: that.store.data.systemInfo.screenHeight - (rect.height + 50),
-        section1H: rect.height,
       })
     }).exec();
   },

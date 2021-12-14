@@ -81,7 +81,7 @@
 
 .tree-select {
   display: flex;
-  height: calc(100vh - 240rpx);
+  /* height: calc(100vh - 240rpx); */
 }
 
 .tree-select__nav {
@@ -137,13 +137,14 @@ scroll-view.isIphoneX {
 }
 
 .tree-select__content {
-  padding: 0 24rpx;
+  padding: 0 0 0 24rpx;
   width: calc(100Vw - 182rpx);
   background: #ffffff;
   overflow: auto;
 }
 
 .tree-select__content .tree-select__tip {
+  padding-right: 24rpx;
   height: 76rpx;
   display: flex;
   justify-content: space-between;
@@ -224,6 +225,7 @@ scroll-view.isIphoneX {
 
 .tree-select__item-box {
   overflow: auto;
+  padding-right: 24rpx;
 }
 
 .tree-select__content .tree-select__item {

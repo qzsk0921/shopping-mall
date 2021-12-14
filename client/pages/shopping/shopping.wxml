@@ -7,7 +7,7 @@
       status="{{navStatus}}" color="#333" bgColor="#fff" />
   </view>
   <view class="content"
-    style="height:{{compatibleInfo.isIphoneX?compatibleInfo.systemInfo.screenHeight-(55+32+fixed)+'px':compatibleInfo.systemInfo.screenHeight-(55+fixed)+'px'}}">
+    style="height:{{compatibleInfo.isIphoneX?compatibleInfo.systemInfo.screenHeight-(50+32+fixed)+'px':compatibleInfo.systemInfo.screenHeight-(50+fixed)+'px'}}">
     <view class="section1">
       <view class="left">
         <image class="icon-coupon" src="/assets/images/car_icon_coupons.png" mode="aspectFill"></image>

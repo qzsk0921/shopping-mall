@@ -319,14 +319,14 @@ create(store, {
       })
     })
   },
-  scrollToLower() {
+  scrollToLower(e) {
     console.log(e)
     console.log('scrollToLower')
 
     let goodsList = this.data.goodsList
 
     if (goodsList[this.data.tabIndex].count + 1 > goodsList.total_page) return
-    
+
     this.setData({
       [`goodsList[${this.data.tabIndex}].count`]: ++goodsList[this.data.tabIndex].count
     })
@@ -349,11 +349,9 @@ create(store, {
     } = options
 
     // console.log(keyword)
-    if (!keyword) {
-      this.setData({
-        searchKeyword: ''
-      })
-    }
+    this.setData({
+      searchKeyword: keyword ? keyword : ''
+    })
 
     // this.data.searchKeyword = keyword
     this.getGoodsList()

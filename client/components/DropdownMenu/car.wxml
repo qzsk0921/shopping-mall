@@ -1,0 +1,36 @@
+<!--components/DropdownMenu/car.wxml-->
+<!-- <text>components/DropdownMenu/car.wxml</text> -->
+<view class="dropdown-item-down {{opened?'opened':''}}">
+  <view class="mask" bindtap="mask"></view>
+  <view class="dropdown-item-down__content" style="{{opened?'transform:translateY('+(-height)+'px)':''}}" catchtap="dropdownItemTapHandle">
+    <view class="l1">
+      <image class="left" src="{{myGoodsDetail.goods_image_arr[0]}}" mode="aspectFill"></image>
+      <view class="right">
+        <view class="l1-1">
+          <text>￥</text>
+          <text>{{myGoodsDetail.price}}</text>
+        </view>
+        <view class="l1-2">
+          <text>￥{{myGoodsDetail.market_price}}</text>
+        </view>
+      </view>
+    </view>
+    <view class="l2">
+      <text class="l2-1">规格</text>
+      <view class="l2-2" bindtap="specHandle">
+        <view class="btn btn-spec {{item.id===currentUnitId?'active':''}}" wx:for="{{myGoodsDetail.unit_arr}}" wx:key="unique" data-id="{{item.id}}">{{item.unitName}}</view>
+      </view>
+    </view>
+    <view class="l3">
+      <view class="left">购买数量</view>
+      <view class="right">
+        <image src="/assets/images/popup_icon_reduce.png" mode="aspectFill" bindtap="reduceHandle"></image>
+        <input type="number" value="{{myGoodsDetail.cart_number}}" bindblur="inputBlurHandle" />
+        <image src="/assets/images/popup_icon_add.png" mode="aspectFill" bindtap="addHandle"></image>
+      </view>
+    </view>
+    <view class="l4 btn btn-addcar" bindtap="addCarHandle">
+      加入购物车
+    </view>
+  </view>
+</view>

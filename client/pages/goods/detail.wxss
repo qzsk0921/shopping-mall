@@ -5,6 +5,14 @@
   overflow: auto;
 }
 
+.section1 swiper {
+  height: 750rpx;
+}
+
+.section1 .icon-banner {
+  height: 100%;
+}
+
 .section2 {
   padding: 0 0 33rpx 24rpx;
   background: #FFFFFF;

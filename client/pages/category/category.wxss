@@ -222,6 +222,10 @@ scroll-view.isIphoneX {
   border-top-color: #666666;
 }
 
+.tree-select__item-box {
+  overflow: auto;
+}
+
 .tree-select__content .tree-select__item {
   position: relative;
   display: flex;
@@ -307,9 +311,7 @@ scroll-view.isIphoneX {
   text-decoration: line-through;
 }
 
-.tree-select__content .tree-select__item .left {
-  
-}
+.tree-select__content .tree-select__item .left {}
 
 .tree-select__content .tree-select__item .left image {
   width: 172rpx;

@@ -19,10 +19,87 @@ create(store, {
     background: ['demo-text-1', 'demo-text-2', 'demo-text-3'],
     indicatorDots: true,
     vertical: false,
-    interval: 2000,
+    interval: 4000,
     autoplay: true,
+    duration: 500,
 
-    goodsDetail: null,
+    // goodsDetail: null,
+    goodsDetail: {
+      "id": 1,
+      "goods_name": "商品1",
+      "brand_id": 1,
+      "category_id": 1,
+      "goods_banner": "[\"http:\\/\\/image.wms.wljkxys.com\\/202009305f742c49a5276.png\",\"http:\\/\\/image.wms.wljkxys.com\\/202009305f742c4a327a7.png\",\"http:\\/\\/image.wms.wljkxys.com\\/202009305f742c4aa422b.png\",\"http:\\/\\/image.wms.wljkxys.com\\/202009305f742c4b1df9f.png\",\"http:\\/\\/image.wms.wljkxys.com\\/202009305f742c4b9470d.png\",\"http:\\/\\/image.wms.wljkxys.com\\/202009305f742cd92eccf.jpg\",\"http:\\/\\/image.wms.wljkxys.com\\/202009305f742cd9a0546.jpg\",\"http:\\/\\/image.wms.wljkxys.com\\/202009305f742cda2b288.jpg\",\"http:\\/\\/image.wms.wljkxys.com\\/202009305f742cdab73ca.jpg\",\"http:\\/\\/image.wms.wljkxys.com\\/202009305f742ce223965.jpg\",\"http:\\/\\/image.wms.wljkxys.com\\/202009305f742ce288d48.jpg\",\"http:\\/\\/image.wms.wljkxys.com\\/202009305f742d120b78b.jpg\",\"http:\\/\\/image.wms.wljkxys.com\\/202009305f742d127b1a7.jpg\"]",
+      "goods_image": "[\"http:\\/\\/image.wms.wljkxys.com\\/202009305f742c49a5276.png\",\"http:\\/\\/image.wms.wljkxys.com\\/202009305f742c4a327a7.png\",\"http:\\/\\/image.wms.wljkxys.com\\/202009305f742c4aa422b.png\",\"http:\\/\\/image.wms.wljkxys.com\\/202009305f742c4b1df9f.png\",\"http:\\/\\/image.wms.wljkxys.com\\/202009305f742c4b9470d.png\",\"http:\\/\\/image.wms.wljkxys.com\\/202009305f742cd92eccf.jpg\",\"http:\\/\\/image.wms.wljkxys.com\\/202009305f742cd9a0546.jpg\",\"http:\\/\\/image.wms.wljkxys.com\\/202009305f742cda2b288.jpg\",\"http:\\/\\/image.wms.wljkxys.com\\/202009305f742cdab73ca.jpg\",\"http:\\/\\/image.wms.wljkxys.com\\/202009305f742ce223965.jpg\",\"http:\\/\\/image.wms.wljkxys.com\\/202009305f742ce288d48.jpg\",\"http:\\/\\/image.wms.wljkxys.com\\/202009305f742d120b78b.jpg\",\"http:\\/\\/image.wms.wljkxys.com\\/202009305f742d127b1a5.jpg\"]",
+      "goods_content": "商品详情1",
+      "spec": "10g",
+      "sort": 10,
+      "is_pre_sale": 0,
+      "pay_delivery_day": 1,
+      "price": 10.49,
+      "market_price": "99.00",
+      "sale_number": 0,
+      "status": 1,
+      "create_time": 1638946959,
+      "is_multi_unit": 1,
+      "activity_info": [],
+      "goods_banner_arr": [
+          "http://image.wms.wljkxys.com/202009305f742c49a5276.png",
+          "http://image.wms.wljkxys.com/202009305f742c4a327a7.png",
+          "http://image.wms.wljkxys.com/202009305f742c4aa422b.png",
+          "http://image.wms.wljkxys.com/202009305f742c4b1df9f.png",
+          "http://image.wms.wljkxys.com/202009305f742c4b9470d.png",
+          "http://image.wms.wljkxys.com/202009305f742cd92eccf.jpg",
+          "http://image.wms.wljkxys.com/202009305f742cd9a0546.jpg",
+          "http://image.wms.wljkxys.com/202009305f742cda2b288.jpg",
+          "http://image.wms.wljkxys.com/202009305f742cdab73ca.jpg",
+          "http://image.wms.wljkxys.com/202009305f742ce223965.jpg",
+          "http://image.wms.wljkxys.com/202009305f742ce288d48.jpg",
+          "http://image.wms.wljkxys.com/202009305f742d120b78b.jpg",
+          "http://image.wms.wljkxys.com/202009305f742d127b1a7.jpg"
+      ],
+      "goods_image_arr": [
+          "http://image.wms.wljkxys.com/202009305f742c49a5276.png",
+          "http://image.wms.wljkxys.com/202009305f742c4a327a7.png",
+          "http://image.wms.wljkxys.com/202009305f742c4aa422b.png",
+          "http://image.wms.wljkxys.com/202009305f742c4b1df9f.png",
+          "http://image.wms.wljkxys.com/202009305f742c4b9470d.png",
+          "http://image.wms.wljkxys.com/202009305f742cd92eccf.jpg",
+          "http://image.wms.wljkxys.com/202009305f742cd9a0546.jpg",
+          "http://image.wms.wljkxys.com/202009305f742cda2b288.jpg",
+          "http://image.wms.wljkxys.com/202009305f742cdab73ca.jpg",
+          "http://image.wms.wljkxys.com/202009305f742ce223965.jpg",
+          "http://image.wms.wljkxys.com/202009305f742ce288d48.jpg",
+          "http://image.wms.wljkxys.com/202009305f742d120b78b.jpg",
+          "http://image.wms.wljkxys.com/202009305f742d127b1a5.jpg"
+      ],
+      "brand_name": "品牌1",
+      "is_like": 0,
+      "unit_arr": [
+          {
+              "id": 1,
+              "goods_id": 1,
+              "unitName": "个",
+              "price": 10.6,
+              "market_price": "20.00"
+          },
+          {
+              "id": 2,
+              "goods_id": 1,
+              "unitName": "箱",
+              "price": 106,
+              "market_price": "200.00"
+          },
+      ],
+      "cart_number": 0
+  },
+
+    dialog: {
+      car: {
+        // 点击购物车，多规格
+        opened: 0
+      },
+    }, // 弹窗和下拉窗
   },
   getGoodsDetail(data) {
     return new Promise((resolve, reject) => {
@@ -31,6 +108,18 @@ create(store, {
       }).catch(err => {
         reject(err)
       })
+    })
+  },
+  // 关闭购物车弹窗
+  dropdownMenuCarMaskTap() {
+    this.setData({
+      ['dialog.car.opened']: 0
+    })
+  },
+  // 唤起购物车弹窗
+  awakenCarHandle() {
+    this.setData({
+      ['dialog.car.opened']: 1
     })
   },
   /**
@@ -44,7 +133,7 @@ create(store, {
       id
     }).then(res => {
       this.setData({
-        goodsDetail: res.data
+        // goodsDetail: res.data
       })
     })
   },

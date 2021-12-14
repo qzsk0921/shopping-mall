@@ -340,6 +340,25 @@ create(store, {
       url: `/pages/goods/detail?id=${id}`,
     })
   },
+  scrollToLower() {
+    console.log(e)
+    console.log('scrollToLower')
+
+    let currentGoodsList = this.data.currentGoodsList
+
+    if (currentGoodsList[this.data.tabIndex].count + 1 > currentGoodsList.total_page) return
+    
+    this.setData({
+      [`currentGoodsList[${this.data.tabIndex}].count`]: ++currentGoodsList[this.data.tabIndex].count
+    })
+
+    this.getGoodsList('scrollToLower').then(res => {
+      currentGoodsList.cache.push(...res.data.data)
+      this.setData({
+        [`currentGoodsList.cache`]: currentGoodsList.cache
+      })
+    })
+  },
   /**
    * 生命周期函数--监听页面加载
    */

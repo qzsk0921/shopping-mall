@@ -1,12 +1,14 @@
 <!--pages/goods/detail.wxml-->
 <!-- <text>pages/goods/detail.wxml</text> -->
 <view class="container container-goods-detail">
+  <!-- 购物车下拉弹窗 -->
+  <dropdown-car bindtap="dropdownMenuCarMaskTap" opened="{{dialog.car.opened}}" bindsubClickable="subClickableHandle" goodsDetail="{{goodsDetail}}"></dropdown-car>
   <view class="fixed">
     <top-navigation navigationBarTitleText="{{navigationBarTitleText}}" navHeight="{{compatibleInfo.navHeight}}" navTop="{{compatibleInfo.menuButtonObject.top}}" menuButtonHeight="{{compatibleInfo.menuButtonObject.height}}" status="{{navStatus}}" color="#333" />
   </view>
   <view class="content hide-scrollbar" style="height:{{compatibleInfo.isIphoneX?compatibleInfo.systemInfo.screenHeight-(32+contentTop)+'px':compatibleInfo.systemInfo.screenHeight-(contentTop)+'px'}}">
     <view class="swiper-box section1">
-      <swiper indicator-dots="{{indicatorDots}}" autoplay="{{autoplay}}" interval="{{interval}}" duration="{{duration}}" indicator-color="rgba(255, 255, 255, .6)" indicator-active-color="#ffffff">
+      <swiper indicator-dots="{{indicatorDots}}" autoplay="{{autoplay}}" interval="{{interval}}" duration="{{duration}}" indicator-color="rgba(255, 255, 255, .6)" indicator-active-color="#ffffff" circular="true">
         <block wx:for="{{goodsDetail.goods_banner_arr}}" wx:key="*this">
           <swiper-item>
             <!-- <view class="swiper-item {{item}}"></view> -->
@@ -54,7 +56,7 @@
     <view class="col1">
       <view class="shopcart-box">
         <image class="icon-shopcart" mode="aspectFill" src="/assets/images/goods_btn_car.png"></image>
-        <view class="shopcart-info">31</view>
+        <view class="shopcart-info">{{goodsDetail.cart_number}}</view>
       </view>
       <view>购物车</view>
     </view>
@@ -62,6 +64,6 @@
       <image src="/assets/images/goods_btn_collection.png"></image>
       <view>收藏</view>
     </view>
-    <view class="col3 btn btn-car">加入购物车</view>
+    <view class="col3 btn btn-car" bindtap="awakenCarHandle">加入购物车</view>
   </view>
 </view>

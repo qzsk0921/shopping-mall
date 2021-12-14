@@ -20,8 +20,14 @@
 
 .section1 .input-box .search {
   height: 100%;
+  width: calc(100% - 70rpx);
   font-size: 30rpx;
   color: #333333;
+}
+
+.section1 .input-box .search-placeholder {
+  font-size: 30rpx;
+  color: #999999
 }
 
 .section1 .input-box .icon-search {
@@ -61,6 +67,11 @@
   line-height: 72rpx;
   background: #FFFFFF;
   font-size: 28rpx;
+  /* color: #333333; */
+  color: #bbbbbb;
+}
+
+.section2 .tab.active {
   color: #333333;
 }
 
@@ -92,16 +103,16 @@
 .section2 .triangle-t {
   border-top: 10rpx solid transparent;
   border-bottom: 10rpx solid #BBBBBB;
-  border-left: 12rpx solid transparent;
-  border-right: 12rpx solid transparent;
+  border-left: 10rpx solid transparent;
+  border-right: 10rpx solid transparent;
   margin: 15rpx 0 9rpx;
 }
 
 .section2 .triangle-b {
   border-top: 10rpx solid #BBBBBB;
   border-bottom: 10rpx solid transparent;
-  border-left: 12rpx solid transparent;
-  border-right: 12rpx solid transparent;
+  border-left: 10rpx solid transparent;
+  border-right: 10rpx solid transparent;
 }
 
 .section2 .triangle-t.triangle-active {
@@ -113,7 +124,7 @@
 }
 
 .section2 .scroll-box .list {
-  padding: 0 24rpx;
+  padding: 0 24rpx 40rpx;
   display: flex;
   flex-wrap: wrap;
 }
@@ -139,7 +150,7 @@
 
 
 .section2 .scroll-box .list .item .item-content {
-  padding: 0 20rpx;
+  padding: 0 20rpx 20rpx;
 }
 
 .section2 .scroll-box .list .item .item-content {
@@ -162,6 +173,12 @@
 .section2 .scroll-box .list .item .item-content .l2 .price-box {
   display: flex;
   align-items: flex-end;
+}
+
+.section2 .scroll-box .list .item .item-content .l2 .no-sign {
+  font-size: 24rpx;
+  color: #888888;
+  margin-bottom: 8rpx;
 }
 
 .section2 .scroll-box .list .item .item-content .l2 .shopcart-box {
@@ -224,4 +241,31 @@
   margin-top: 30rpx;
   font-size: 30rpx;
   color: #949EA8;
+}
+
+.search-list {
+  padding-top: 10rpx;
+  position: absolute;
+  width: 100vw;
+  overflow: auto;
+  background: #FFFFFF;
+  z-index: 1;
+}
+
+.search-list .btn-item {
+  margin: 0 32rpx;
+  border-bottom: 2rpx solid #F3F3F3;
+  display: flex;
+  justify-content: space-between;
+  height: 88rpx;
+}
+
+.search-list .btn-item .btn-item-l {
+  flex: 4;
+}
+
+.search-list .btn-item .title {
+  font-size: 28rpx;
+  line-height: 88rpx;
+  color: #383D46;
 }

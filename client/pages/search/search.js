@@ -2,6 +2,12 @@
 import store from '../../store/common'
 import create from '../../utils/create'
 
+import {
+  getKeyList
+} from '../../api/commodity'
+
+let timer;
+
 // Page({
 create(store, {
   /**
@@ -15,10 +21,80 @@ create(store, {
 
     searchKeyword: '',
     searchHistory: [],
+
+    searchKeyList: [{
+        "id": 4,
+        "search_name": "车",
+        "time": 3,
+        "create_time": 1638935250
+      },
+      {
+        "id": 1,
+        "search_name": "大车",
+        "time": 2,
+        "create_time": 1638935148
+      },
+      {
+        "id": 2,
+        "search_name": "小车",
+        "time": 1,
+        "create_time": 1638935240
+      },
+      {
+        "id": 3,
+        "search_name": "货车",
+        "time": 1,
+        "create_time": 1638935245
+      },
+    ]
   },
   inputHandle(e) {
-    console.log(e)
+    // console.log(e)
     this.data.searchKeyword = e.detail.value
+    var val = e.detail.value;
+
+    const _this = this
+    this.setData({
+      searchKeyword: val
+    })
+
+
+    clearTimeout(timer);
+    timer = setTimeout(function () {
+      if (val.length > 0) {
+        _this.getKeyList({
+          keyword: val
+        }).then(res => {
+          _this.setData({
+            // searchKeyList: res.data
+          })
+        })
+      } else {
+        //  清空
+
+      }
+    }, 400);
+  },
+  // 关闭搜索
+  searchCloseHandle() {
+    this.setData({
+      searchKeyword: ''
+    })
+  },
+  // 点击搜索出的关键字
+  keyTapHandle(e) {
+    wx.navigateTo({
+      url: `/pages/search/searchRes?keyword=${e.currentTarget.dataset.search_name}`,
+    })
+
+    // 保存搜索记录
+    this.saveSearchHandle({
+      name: e.currentTarget.dataset.search_name
+    })
+
+    this.setData({
+      searchKeyword: ''
+    })
   },
   bindconfirmHandle() {
     if (!this.data.searchKeyword.trim()) {
@@ -49,15 +125,15 @@ create(store, {
     console.log(e)
     const dataset = e.target.dataset
 
-    this.store.data.searchKeyword = dataset.keyword
-    this.update()
+    // this.store.data.searchKeyword = dataset.keyword
+    // this.update()
 
     this.saveSearchHandle({
       name: dataset.keyword
     })
 
-    wx.switchTab({
-      url: '/pages/index/index',
+    wx.navigateTo({
+      url: `/pages/search/searchRes?keyword=${dataset.keyword}`,
     })
   },
   // 存储历史搜索
@@ -95,8 +171,8 @@ create(store, {
    * 生命周期函数--监听页面初次渲染完成
    */
   onReady: function () {
-    // const that = this;
-    // const query = wx.createSelectorQuery();
+    const that = this;
+    const query = wx.createSelectorQuery();
     // // 在页面渲染完成OnReady回调 获取元素高度时，如果不加定时器，获取的元素的高度还是没渲染完异步数据前的高度
     // query.select('.fixed').boundingClientRect(function (rect) {
     //   // console.log(rect)
@@ -105,6 +181,14 @@ create(store, {
     //     fixed: rect.height,
     //   })
     // }).exec();
+
+    setTimeout(function () {
+      query.select('.section1').boundingClientRect(function (rect) {
+        that.setData({
+          listH: that.store.data.compatibleInfo.systemInfo.windowHeight - rect.bottom
+        })
+      }).exec();
+    }, 0)
   },
 
   /**
@@ -125,7 +209,15 @@ create(store, {
       })
     }
   },
-
+  getKeyList(data) {
+    return new Promise((resolve, reject) => {
+      getKeyList(data).then(res => {
+        resolve(res)
+      }).catch(err => {
+        reject(err)
+      })
+    })
+  },
   /**
    * 生命周期函数--监听页面隐藏
    */

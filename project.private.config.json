@@ -143,6 +143,12 @@
           "pathName": "pages/mine/set/set",
           "query": "from=mine",
           "scene": null
+        },
+        {
+          "name": "",
+          "pathName": "pages/goods/detail",
+          "query": "id=4",
+          "scene": null
         }
       ]
     }

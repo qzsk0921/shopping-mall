@@ -27,8 +27,10 @@ create(store, {
     background: ['demo-text-1', 'demo-text-2', 'demo-text-3'],
     indicatorDots: true,
     vertical: false,
-    interval: 2000,
+    interval: 4000,
     autoplay: true,
+    duration: 500,
+
     shopData: {
       "shop_id": "1",
       "banner": [{
@@ -36,7 +38,7 @@ create(store, {
           "type": 1,
           "link_type": 1,
           "name": "banner7",
-          "image_url": "image1",
+          "image_url": "https://sharepuls.xcmbkj.com/app_memu_1.png?",
           "link": ""
         },
         {
@@ -44,7 +46,7 @@ create(store, {
           "type": 1,
           "link_type": 1,
           "name": "banner7",
-          "image_url": "image1",
+          "image_url": "https://sharepuls.xcmbkj.com/app_memu_1.png?",
           "link": ""
         },
         {
@@ -52,7 +54,7 @@ create(store, {
           "type": 1,
           "link_type": 1,
           "name": "banner6",
-          "image_url": "image1",
+          "image_url": "https://sharepuls.xcmbkj.com/app_memu_1.png?",
           "link": ""
         },
         {
@@ -60,7 +62,7 @@ create(store, {
           "type": 1,
           "link_type": 1,
           "name": "banner5",
-          "image_url": "image1",
+          "image_url": "https://sharepuls.xcmbkj.com/app_memu_1.png?",
           "link": ""
         },
         {
@@ -68,7 +70,7 @@ create(store, {
           "type": 1,
           "link_type": 1,
           "name": "banner4",
-          "image_url": "image1",
+          "image_url": "https://sharepuls.xcmbkj.com/app_memu_1.png?",
           "link": ""
         },
         {
@@ -76,7 +78,7 @@ create(store, {
           "type": 1,
           "link_type": 1,
           "name": "banner1",
-          "image_url": "image1",
+          "image_url": "https://sharepuls.xcmbkj.com/app_memu_1.png?",
           "link": ""
         }
       ],

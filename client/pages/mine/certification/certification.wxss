@@ -89,3 +89,46 @@
   font-size: 32rpx;
   color: #999999;
 }
+
+.certing {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.certing image {
+  margin-top: 186rpx;
+  width: 356rpx;
+  height: 356rpx;
+}
+
+.certing text {
+  margin-top: 50rpx;
+  font-size: 36rpx;
+  font-weight: 500;
+  color: #333333;
+}
+
+.certing text:last-child {
+  font-size: 28rpx;
+  color: #949EA8;
+}
+
+.certed {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.certed image {
+  margin-top: 186rpx;
+  width: 356rpx;
+  height: 356rpx;
+}
+
+.certed text {
+  margin-top: 50rpx;
+  font-size: 36rpx;
+  font-weight: 500;
+  color: #333333;
+}

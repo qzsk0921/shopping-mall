@@ -1,6 +1,10 @@
 // pages/shop/shopType.js
 import store from '../../store/common'
 import create from '../../utils/create'
+
+import {
+  getShopCertType
+} from '../../api/certification'
 // Page({
 create(store, {
   /**
@@ -9,60 +13,129 @@ create(store, {
   data: {
     compatibleInfo: null, //navHeight menuButtonObject systemInfo isIphoneX
     navigationBarTitleText: '店铺类型',
-    currentId: 2, //选中的类型
-    shops: [{
-        id: 1,
-        name: '烧烤店'
-      },
-      {
-        id: 2,
-        name: '卤料店'
-      },
-      {
-        id: 3,
-        name: '烧烤店'
-      },
-      {
-        id: 4,
-        name: '烧烤店'
-      },
-      {
-        id: 5,
-        name: '卤料店'
-      },
-      {
-        id: 6,
-        name: '卤料店'
-      }, {
-        id: 7,
-        name: '卤料店'
-      }, {
-        id: 8,
-        name: '卤料店'
-      }, {
-        id: 9,
-        name: '卤料店'
-      }, {
-        id: 10,
-        name: '卤料店'
-      }, {
-        id: 11,
-        name: '卤料店'
-      }
-    ]
+    currentId: null, //选中的类型
+    shops: {
+      cache: [{
+          "id": 1,
+          "name": "烧烤店",
+          "category_str": "1,2",
+          "sort": 6,
+          "status": 1,
+          "create_time": 222222
+        },
+        {
+          "id": 4,
+          "name": "烧烤店3",
+          "category_str": "1,2",
+          "sort": 5,
+          "status": 1,
+          "create_time": 222222
+        },
+        {
+          "id": 5,
+          "name": "烧烤店4",
+          "category_str": "1,2",
+          "sort": 2,
+          "status": 1,
+          "create_time": 222222
+        },
+        {
+          "id": 6,
+          "name": "烧烤店5",
+          "category_str": "1,2",
+          "sort": 2,
+          "status": 1,
+          "create_time": 222222
+        },
+        {
+          "id": 7,
+          "name": "烧烤店6",
+          "category_str": "1,2",
+          "sort": 2,
+          "status": 1,
+          "create_time": 222222
+        },
+        {
+          "id": 9,
+          "name": "烧烤店8",
+          "category_str": "1,2",
+          "sort": 2,
+          "status": 1,
+          "create_time": 222222
+        },
+        {
+          "id": 10,
+          "name": "烧烤店9",
+          "category_str": "1,2",
+          "sort": 2,
+          "status": 1,
+          "create_time": 222222
+        },
+        {
+          "id": 8,
+          "name": "烧烤店7",
+          "category_str": "1,2",
+          "sort": 1,
+          "status": 1,
+          "create_time": 222222
+        }
+      ],
+      count: 1,
+      total_page: 1,
+    },
+    page: 1,
+    page_size: 20,
   },
   selectHandle(e) {
     // 店铺类型选择
-    if (e.target.dataset.id === this.data.currentId) return
+    const item = e.target.dataset.item
+    if (item.id === this.data.currentId) return
     this.setData({
-      currentId: e.target.dataset.id
+      currentId: item.id
+    })
+
+    // 在提交成功后，返回首页需要刷新（带上参数）
+    const pages = getCurrentPages();
+    const prevPage = pages[pages.length - 2]; //上一个页面
+    //直接调用上一个页面的setData()方法，把数据存到上一个页面中去
+    prevPage.setData({
+      shopType: item
+    })
+    wx.navigateBack({
+      delta: 0,
+    })
+  },
+  getShopCertType(dataObj) {
+    const tempData = {}
+
+    if (typeof dataObj === 'object') {
+      Object.keys(dataObj).forEach(key => {
+        tempData[key] = dataObj[key]
+      })
+    }
+
+    if (dataObj !== 'scrollTolwer') {
+      tempData['per_page'] = this.data.page_size
+      tempData['current_page'] = this.data.shops.count
+    }
+
+    return new Promise((resolve, reject) => {
+      getShopCertType(tempData).then(res => {
+        resolve(res)
+      }).catch(err => {
+        reject(err)
+      })
     })
   },
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-
+    this.getShopCertType().then(res => {
+      this.setData({
+        'shops.cache': res.data.data
+      })
+    })
   },
 
   /**

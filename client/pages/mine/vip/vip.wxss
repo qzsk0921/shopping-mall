@@ -1,10 +1,11 @@
 /* pages/mine/vip/vip.wxss */
-.container-vip {}
+.container-vip {
+  background: #FFFFFF;
+}
 
 .section1 {
   width: 100vw;
   height: 278rpx;
-  padding-left: 60rpx;
   position: relative;
   display: inline-block;
 }
@@ -13,26 +14,31 @@
   position: absolute;
   top: 0;
   left: 0;
-  width: 100%;
+  width: 100vw;
   height: 100%;
-  z-index: -1;
 }
 
 .section1 .row1 {
-  margin-top: 76rpx;
+  position: absolute;
+  top: 76rpx;
+  left: 60rpx;
   font-size: 34rpx;
   font-weight: bold;
   color: #5D3726;
 }
 
 .section1 .row2 {
-  margin-top: 16rpx;
+  position: absolute;
+  top: 126rpx;
+  left: 60rpx;
   font-size: 24rpx;
   color: #976D48;
 }
 
 .section1 .row3 {
-  margin-top: 43rpx;
+  position: absolute;
+  top: 193rpx;
+  left: 60rpx;
   font-size: 26rpx;
   font-weight: 500;
   color: #5D3726;
@@ -52,7 +58,7 @@
 }
 
 .section2 {
-  padding-top: 20rpx
+  padding-top: 20rpx;
 }
 
 
@@ -63,11 +69,17 @@
   padding: 0 0 14rpx 24rpx;
 }
 
+.section2 .row.active {
+  background: #FDF8EE;
+  border: 2rpx solid #F4CF8E;
+}
+
 .section2 .row {
-  margin-top: 20rpx;
+  margin: 20rpx 0 0 24rpx;
   width: 702rpx;
   height: 170rpx;
-  border: 2rpx solid #F4CF8E;
+  background: #FAFAFA;
+  border: 2rpx solid #EAEAEA;
   opacity: 0.8;
   border-radius: 16rpx;
   display: flex;

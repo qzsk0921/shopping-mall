@@ -165,7 +165,7 @@ create(store, {
             {
               "id": 8,
               "goods_name": "商品8",
-              "price": "100.00",
+              "price": "99.00",
               "market_price": "100.00",
               "spec": "10g",
               "is_vip": 0,
@@ -177,7 +177,7 @@ create(store, {
             {
               "id": 9,
               "goods_name": "商品9",
-              "price": "100.00",
+              "price": "101.00",
               "market_price": "100.00",
               "spec": "10g",
               "is_vip": 0,
@@ -304,6 +304,18 @@ create(store, {
     console.log('toSearchResHandle')
     wx.navigateTo({
       url: '/pages/search/searchRes',
+    })
+  },
+  // 跳转至分类页面
+  toCategoryHandle() {
+    wx.switchTab({
+      url: '/pages/category/category',
+    })
+  },
+  //跳转至商品详情页
+  toGoodsDetail(e) {
+    wx.navigateTo({
+      url: `/pages/goods/detail?id=${e.currentTarget.dataset.id}`,
     })
   },
   /**

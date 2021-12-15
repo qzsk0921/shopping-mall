@@ -3,16 +3,12 @@
 <!-- 店铺类型 -->
 <view class="container container-shop-type">
   <view class="fixed">
-    <top-navigation navigationBarTitleText="{{navigationBarTitleText}}" navHeight="{{compatibleInfo.navHeight}}"
-      navTop="{{compatibleInfo.menuButtonObject.top}}" menuButtonHeight="{{compatibleInfo.menuButtonObject.height}}"
-      status="{{navStatus}}" color="#333" />
+    <top-navigation navigationBarTitleText="{{navigationBarTitleText}}" navHeight="{{compatibleInfo.navHeight}}" navTop="{{compatibleInfo.menuButtonObject.top}}" menuButtonHeight="{{compatibleInfo.menuButtonObject.height}}" status="{{navStatus}}" color="#333" />
   </view>
-  <view class="content hide-scrollbar"
-    style="height:{{compatibleInfo.isIphoneX?compatibleInfo.systemInfo.screenHeight-(32+fixed)+'px':compatibleInfo.systemInfo.screenHeight-(fixed)+'px'}}">
-    <view wx:for="{{shops}}" wx:key="unique" class="item" bindtap="selectHandle" data-id="{{item.id}}">
+  <view class="content hide-scrollbar" style="height:{{compatibleInfo.isIphoneX?compatibleInfo.systemInfo.screenHeight-(32+fixed)+'px':compatibleInfo.systemInfo.screenHeight-(fixed)+'px'}}" bindtap="selectHandle">
+    <view wx:for="{{shops.cache}}" wx:key="unique" class="item" data-item="{{item}}">
       {{item.name}}
-      <image class="icon-right {{item.id===currentId?'active':''}}" src="/assets/images/add_icon_on.png"
-        mode="aspectFill"></image>
+      <image class="icon-right {{item.id===currentId?'active':''}}" src="/assets/images/add_icon_on.png" mode="aspectFill"></image>
     </view>
   </view>
 </view>

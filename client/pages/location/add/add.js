@@ -83,6 +83,7 @@ create(store, {
     // 删除收货地址
     // console.log('addressDelHandle')
     this.setData({
+      confirmText: '删除',
       confirmDialogVisibile: true
     })
   },

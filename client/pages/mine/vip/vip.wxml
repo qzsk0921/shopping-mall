@@ -2,9 +2,7 @@
 <!-- <text>pages/mine/vip/vip.wxml</text> -->
 <view class="container container-vip">
   <view class="fixed">
-    <top-navigation navigationBarTitleText="{{navigationBarTitleText}}" navHeight="{{compatibleInfo.navHeight}}"
-      navTop="{{compatibleInfo.menuButtonObject.top}}" menuButtonHeight="{{compatibleInfo.menuButtonObject.height}}"
-      status="{{navStatus}}" color="#D1B491" bgColor="#1D1E24" />
+    <top-navigation navigationBarTitleText="{{navigationBarTitleText}}" navHeight="{{compatibleInfo.navHeight}}" navTop="{{compatibleInfo.menuButtonObject.top}}" menuButtonHeight="{{compatibleInfo.menuButtonObject.height}}" status="{{navStatus}}" color="#D1B491" bgColor="#1D1E24" />
   </view>
   <view class="section1">
     <image class="icon-bgvip" src="/assets/images/members_head_bk.png" mode="aspectFill"></image>
@@ -16,7 +14,7 @@
   </view>
   <view class="section2">
     <view class="tit">套餐选择</view>
-    <view class="row{{index+1}} row" wx:for="{{vipList}}" wx:key="unique">
+    <view class="row{{index+1}} row {{currentVipId===item.id?'active':''}}" wx:for="{{vipList}}" wx:key="unique" data-id="{{item.id}}" bindtap="vipItemHandle">
       <image class="icon-level left" src="/assets/images/order_members.png" mode="aspectFill"></image>
       <view class="center">
         <view class="row1">{{item.name}}</view>
@@ -27,6 +25,8 @@
   </view>
   <view class="section3 footer">
     <view class="left"><text>￥</text><text>399</text></view>
-    <view class="right btn btn-open">立即开通</view>
+    <view class="right btn btn-open" bindtap="addVipHandle">立即开通</view>
   </view>
 </view>
+
+<confirm dialogVisible="{{confirmDialogVisibile}}" bindconfirm="diaConfirmHandle" bindcancel="diaCancelHandle" content="{{confirmContent}}" title="{{confirmTitle}}" confirmBgColor="{{confirmBgColor}}" />

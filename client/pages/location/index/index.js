@@ -162,22 +162,36 @@ create(store, {
     // 编辑按钮不处理
     if (type) return false
 
-    this.store.data.currentAddress = {
-      address: dataset.item.name,
-      longitude: dataset.item.longitude,
-      latitude: dataset.item.latitude,
-      type: 1,
-      id: dataset.item.id
+    if (this.data.tag === 'cert_of_mine') {
+      // 来自资质认证的使用我的地址
+      const pages = getCurrentPages();
+      const prevPage = pages[pages.length - 2]; //上一个页面
+      //直接调用上一个页面的setData()方法，把数据存到上一个页面中去
+      prevPage.setData({
+        shopAddress: dataset.item
+      })
+      wx.navigateBack({
+        delta: 0,
+      })
+    } else {
+      // 个人中心点击进我的地址
+      this.store.data.currentAddress = {
+        address: dataset.item.name,
+        longitude: dataset.item.longitude,
+        latitude: dataset.item.latitude,
+        type: 1,
+        id: dataset.item.id
+      }
+      // 收货地址存储
+      this.store.data.address_id = dataset.item.id
+      this.update()
+
+      wx.setStorageSync('address_id', dataset.item.id)
+
+      wx.switchTab({
+        url: '../../index/index',
+      })
     }
-    // 收货地址存储
-    this.store.data.address_id = dataset.item.id
-    this.update()
-
-    wx.setStorageSync('address_id', dataset.item.id)
-
-    wx.switchTab({
-      url: '../../index/index',
-    })
   },
   addrEditHandle(e) {
     // console.log('addrEditHandle')
@@ -221,11 +235,16 @@ create(store, {
     qqmapsdk = new QQMapWX({
       key: config.tencentKey
     });
-
-    if (options && options.from === 'mine') {
+    
+    if (options.from && options.from.includes('mine')) {
       this.setData({
         navigationBarTitleText: '我的地址'
       })
+      if (options.from === 'cert_of_mine') {
+        this.setData({
+          tag: 'cert_of_mine'
+        })
+      }
     } else {
       this.setData({
         navigationBarTitleText: '选择收货地址'

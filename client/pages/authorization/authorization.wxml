@@ -1,0 +1,5 @@
+<!--pages/authorization/authorization.wxml-->
+<!-- <text>pages/authorization/authorization.wxml</text> -->
+<view class="container container-authorization">
+  <!-- 手机授权 -->
+</view>

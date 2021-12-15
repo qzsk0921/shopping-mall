@@ -37,7 +37,7 @@ Component({
     cancelText: {
       // 取消按钮的文字
       type: String,
-      value: '删除'
+      value: '取消'
     },
     cancelBgColor: {
       type: String,

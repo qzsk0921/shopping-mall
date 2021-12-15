@@ -6,6 +6,10 @@ import {
 import store from '../../store/common'
 import create from '../../utils/create'
 
+import {
+  getUserDetail
+} from '../../api/user'
+
 // Page({
 create(store, {
   /**
@@ -181,8 +185,16 @@ create(store, {
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-    this.setData({
-      userInfo: this.store.data.userInfo
+    // console.log('profile show')
+    // this.setData({
+    //   userInfo: this.store.data.userInfo
+    // })
+    getUserDetail().then(res => {
+      this.setData({
+        userInfo: res.data
+      })
+      this.store.data.userInfo = res.data
+      this.store.update()
     })
   },
 

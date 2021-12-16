@@ -64,8 +64,19 @@
         <view class="b hide-scrollbar">
           <view class="item" wx:for="{{shopData.pre_goods}}" wx:key="unique" data-id="{{item.id}}" bindtap="toGoodsDetail">
             <image class="icon-presale l1" src="{{item.thumb}}" mode="aspectFill"></image>
-            <view class="l2">￥{{item.price}}</view>
-            <view class="l3">￥{{item.market_price}}</view>
+            <!-- 未授权非会员 -->
+            <block wx:if="{{!userInfo.phone}}">
+              <view class="l2">￥***</view>
+            </block>
+            <!-- 授权非会员 -->
+            <block wx:elif="{{!userInfo.is_vip}}">
+              <view class="l2">￥{{item.market_price}}</view>
+            </block>
+            <!-- 会员 -->
+            <block wx:else>
+              <view class="l2">￥{{item.price}}</view>
+              <view class="l3">￥{{item.market_price}}</view>
+            </block>
           </view>
         </view>
       </view>
@@ -73,7 +84,7 @@
       <view class="section6" wx:if="{{shopData.activity_goods.length}}">
         <view class="l">
           <view class="l1">{{shopData.activity_goods[0].name}}</view>
-          <view class="l2">{{tools.parseActivityGoodsType(shopData.activity_goods[0])}}</view>
+          <view class="l2">{{type===1?activity_goods[0].short_name:tools.parseActivityGoodsType(shopData.activity_goods[0])}}</view>
           <view class="l3">
             <view class="btn btn-go"><text>去逛逛</text>
               <view>GO</view>
@@ -83,7 +94,19 @@
         <view class="r hide-scrollbar">
           <view class="item" wx:for="{{shopData.activity_goods[0].goods_list}}" wx:key="unique" data-id="{{item.id}}" bindtap="toGoodsDetail">
             <image class="icon-newmarket l1" src="{{item.thumb}}" mode="aspectFill"></image>
-            <view class="l2">￥{{item.price}}</view>
+            <!-- <view class="l2">￥{{item.price}}</view> -->
+            <!-- 未授权非会员 -->
+            <block wx:if="{{!userInfo.phone}}">
+              <view class="l2">￥***</view>
+            </block>
+            <!-- 授权非会员 -->
+            <block wx:elif="{{!userInfo.is_vip}}">
+              <view class="l2">￥{{item.price}}</view>
+            </block>
+            <!-- 会员 -->
+            <block wx:else>
+              <view class="l2">￥{{item.price}}</view>
+            </block>
           </view>
         </view>
       </view>
@@ -93,7 +116,18 @@
           <image class="icon-pri" src="{{item.thumb}}" mode="aspectFill"></image>
           <view class="cont">
             <view class="l1">{{item.goods_name}}{{item.spec}}</view>
-            <view class="l2">
+            <!-- 未授权非会员 -->
+            <view class="l2 no-sign" wx:if="{{!userInfo.phone}}">
+              请登录查看价格
+            </view>
+            <!-- 授权非会员 -->
+            <view class="l2" wx:elif="{{!userInfo.is_vip}}">
+              <view class="price">
+                <text>￥</text>{{item.market_price}}
+              </view>
+            </view>
+            <!-- 会员 -->
+            <view class="l2" wx:else>
               <view class="price">
                 <text>￥</text>{{item.price}}
               </view>
@@ -125,7 +159,18 @@
               <image class="icon-pri" src="{{itemName.thumb}}" mode="aspectFill"></image>
               <view class="cont">
                 <view class="l1">{{itemName.goods_name}}{{itemName.spec}}</view>
-                <view class="l2">
+                <!-- 未授权非会员 -->
+                <view class="l2 no-sign" wx:if="{{!userInfo.phone}}">
+                  请登录查看价格
+                </view>
+                <!-- 授权非会员 -->
+                <view class="l2" wx:elif="{{!userInfo.is_vip}}">
+                  <view class="price">
+                    <text>￥</text>{{itemName.market_price}}
+                  </view>
+                </view>
+                <!-- 会员 -->
+                <view class="l2" wx:else>
                   <view class="price">
                     <text>￥</text>{{itemName.price}}
                   </view>

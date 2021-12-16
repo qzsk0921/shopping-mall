@@ -1,6 +1,7 @@
 /* pages/mine/expensesRecord/expensesRecord.wxss */
 .content {
   overflow: hidden;
+  background: #F8F8F8;
 }
 
 .content>.l1 {
@@ -36,7 +37,6 @@
 .content>.l2 {
   margin-top: -34rpx;
   overflow: hidden;
-  height: 981rpx;
   background: #FFFFFF;
   box-shadow: 0rpx -3rpx 16rpx rgba(0, 0, 0, 0.16);
   border-radius: 24rpx 16rpx 0rpx 0rpx;

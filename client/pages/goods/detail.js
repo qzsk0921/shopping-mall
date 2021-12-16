@@ -17,11 +17,13 @@ create(store, {
 
     // swiper
     background: ['demo-text-1', 'demo-text-2', 'demo-text-3'],
-    indicatorDots: true,
+    indicatorDots: false,
     vertical: false,
-    interval: 4000,
+    interval: 2000,
     autoplay: true,
     duration: 500,
+
+    currentSwiperIndex: 1,
 
     // goodsDetail: null,
     goodsDetail: {
@@ -44,55 +46,54 @@ create(store, {
       "is_multi_unit": 1,
       "activity_info": [],
       "goods_banner_arr": [
-          "http://image.wms.wljkxys.com/202009305f742c49a5276.png",
-          "http://image.wms.wljkxys.com/202009305f742c4a327a7.png",
-          "http://image.wms.wljkxys.com/202009305f742c4aa422b.png",
-          "http://image.wms.wljkxys.com/202009305f742c4b1df9f.png",
-          "http://image.wms.wljkxys.com/202009305f742c4b9470d.png",
-          "http://image.wms.wljkxys.com/202009305f742cd92eccf.jpg",
-          "http://image.wms.wljkxys.com/202009305f742cd9a0546.jpg",
-          "http://image.wms.wljkxys.com/202009305f742cda2b288.jpg",
-          "http://image.wms.wljkxys.com/202009305f742cdab73ca.jpg",
-          "http://image.wms.wljkxys.com/202009305f742ce223965.jpg",
-          "http://image.wms.wljkxys.com/202009305f742ce288d48.jpg",
-          "http://image.wms.wljkxys.com/202009305f742d120b78b.jpg",
-          "http://image.wms.wljkxys.com/202009305f742d127b1a7.jpg"
+        "http://image.wms.wljkxys.com/202009305f742c49a5276.png",
+        "http://image.wms.wljkxys.com/202009305f742c4a327a7.png",
+        "http://image.wms.wljkxys.com/202009305f742c4aa422b.png",
+        "http://image.wms.wljkxys.com/202009305f742c4b1df9f.png",
+        "http://image.wms.wljkxys.com/202009305f742c4b9470d.png",
+        "http://image.wms.wljkxys.com/202009305f742cd92eccf.jpg",
+        "http://image.wms.wljkxys.com/202009305f742cd9a0546.jpg",
+        "http://image.wms.wljkxys.com/202009305f742cda2b288.jpg",
+        "http://image.wms.wljkxys.com/202009305f742cdab73ca.jpg",
+        "http://image.wms.wljkxys.com/202009305f742ce223965.jpg",
+        "http://image.wms.wljkxys.com/202009305f742ce288d48.jpg",
+        "http://image.wms.wljkxys.com/202009305f742d120b78b.jpg",
+        "http://image.wms.wljkxys.com/202009305f742d127b1a7.jpg"
       ],
       "goods_image_arr": [
-          "http://image.wms.wljkxys.com/202009305f742c49a5276.png",
-          "http://image.wms.wljkxys.com/202009305f742c4a327a7.png",
-          "http://image.wms.wljkxys.com/202009305f742c4aa422b.png",
-          "http://image.wms.wljkxys.com/202009305f742c4b1df9f.png",
-          "http://image.wms.wljkxys.com/202009305f742c4b9470d.png",
-          "http://image.wms.wljkxys.com/202009305f742cd92eccf.jpg",
-          "http://image.wms.wljkxys.com/202009305f742cd9a0546.jpg",
-          "http://image.wms.wljkxys.com/202009305f742cda2b288.jpg",
-          "http://image.wms.wljkxys.com/202009305f742cdab73ca.jpg",
-          "http://image.wms.wljkxys.com/202009305f742ce223965.jpg",
-          "http://image.wms.wljkxys.com/202009305f742ce288d48.jpg",
-          "http://image.wms.wljkxys.com/202009305f742d120b78b.jpg",
-          "http://image.wms.wljkxys.com/202009305f742d127b1a5.jpg"
+        "http://image.wms.wljkxys.com/202009305f742c49a5276.png",
+        "http://image.wms.wljkxys.com/202009305f742c4a327a7.png",
+        "http://image.wms.wljkxys.com/202009305f742c4aa422b.png",
+        "http://image.wms.wljkxys.com/202009305f742c4b1df9f.png",
+        "http://image.wms.wljkxys.com/202009305f742c4b9470d.png",
+        "http://image.wms.wljkxys.com/202009305f742cd92eccf.jpg",
+        "http://image.wms.wljkxys.com/202009305f742cd9a0546.jpg",
+        "http://image.wms.wljkxys.com/202009305f742cda2b288.jpg",
+        "http://image.wms.wljkxys.com/202009305f742cdab73ca.jpg",
+        "http://image.wms.wljkxys.com/202009305f742ce223965.jpg",
+        "http://image.wms.wljkxys.com/202009305f742ce288d48.jpg",
+        "http://image.wms.wljkxys.com/202009305f742d120b78b.jpg",
+        "http://image.wms.wljkxys.com/202009305f742d127b1a5.jpg"
       ],
       "brand_name": "品牌1",
       "is_like": 0,
-      "unit_arr": [
-          {
-              "id": 1,
-              "goods_id": 1,
-              "unitName": "个",
-              "price": 10.6,
-              "market_price": "20.00"
-          },
-          {
-              "id": 2,
-              "goods_id": 1,
-              "unitName": "箱",
-              "price": 106,
-              "market_price": "200.00"
-          },
+      "unit_arr": [{
+          "id": 1,
+          "goods_id": 1,
+          "unitName": "个",
+          "price": 10.6,
+          "market_price": "20.00"
+        },
+        {
+          "id": 2,
+          "goods_id": 1,
+          "unitName": "箱",
+          "price": 106,
+          "market_price": "200.00"
+        },
       ],
       "cart_number": 0
-  },
+    },
 
     dialog: {
       car: {
@@ -100,6 +101,12 @@ create(store, {
         opened: 0
       },
     }, // 弹窗和下拉窗
+  },
+  bindchangeHandle(e) {
+    console.log(e)
+    this.setData({
+      currentSwiperIndex: e.detail.current + 1
+    })
   },
   getGoodsDetail(data) {
     return new Promise((resolve, reject) => {

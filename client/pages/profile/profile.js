@@ -21,11 +21,11 @@ create(store, {
     userInfo: null,
 
     options: [{
-        value: 9,
+        value: 0,
         name: '我的收藏'
       },
       {
-        value: 92,
+        value: 0,
         name: '浏览记录'
       }
     ],
@@ -97,36 +97,87 @@ create(store, {
       }
     ]
   },
+  optionsTapHandle(e) {
+    // 检查授权状态
+    // 未授权
+    if (!this.checkAuth()) return
+    // 已授权
+    else {
+      const name = e.currentTarget.dataset.name
+      if (name === '我的收藏') {
+        // 我的收藏
+        wx.navigateTo({
+          url: '/pages/authorization/identity',
+        })
+      } else if (name === '浏览记录') {
+        // 浏览记录
+        wx.navigateTo({
+          url: '/pages/authorization/identity',
+        })
+      }
+    }
+  },
+  checkAuth() {
+    if (!this.data.userInfo.avatar_url) {
+      // 未授权先去授权页
+      wx.navigateTo({
+        url: '/pages/authorization/identity',
+      })
+      return false
+    } else if (!this.data.userInfo.phone) {
+      // 授权昵称头像还未授权手机号
+      wx.navigateTo({
+        url: '/pages/authorization/phone',
+      })
+      return false
+    }
+    return true
+  },
   toVipHandle() {
-    wx.navigateTo({
-      url: '/pages/mine/vip/vip'
-    })
+    // 未授权
+    if (!this.checkAuth()) return
+    // 已授权
+    else {
+      wx.navigateTo({
+        url: '/pages/mine/vip/vip'
+      })
+    }
   },
   option1Handle(e) {
-    const id = e.currentTarget.dataset.id
-    this.data.options1.some(item => {
-      if (item.id === id) {
-        wx.navigateTo({
-          url: item.url
-        })
-        return true
-      }
-      return false
-    })
+    // 未授权
+    if (!this.checkAuth()) return
+    // 已授权
+    else {
+      const id = e.currentTarget.dataset.id
+      this.data.options1.some(item => {
+        if (item.id === id) {
+          wx.navigateTo({
+            url: item.url
+          })
+          return true
+        }
+        return false
+      })
+    }
   },
   option2Handle(e) {
     console.log(e)
-    const id = e.currentTarget.dataset.id
-    // console.log(`Sorry, we are out of ${id}.`);
-    this.data.options2.some(item => {
-      if (item.id === id) {
-        wx.navigateTo({
-          url: item.url
-        })
-        return true
-      }
-      return false
-    })
+    // 未授权
+    if (!this.checkAuth()) return
+    // 已授权
+    else {
+      const id = e.currentTarget.dataset.id
+      // console.log(`Sorry, we are out of ${id}.`);
+      this.data.options2.some(item => {
+        if (item.id === id) {
+          wx.navigateTo({
+            url: item.url
+          })
+          return true
+        }
+        return false
+      })
+    }
   },
   getUserProfile() {
     // userStore.getUserProfile().then(res => {
@@ -185,13 +236,13 @@ create(store, {
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
+    console.log(this.data.userInfo)
     // console.log('profile show')
-    // this.setData({
-    //   userInfo: this.store.data.userInfo
-    // })
     getUserDetail().then(res => {
       this.setData({
-        userInfo: res.data
+        userInfo: res.data,
+        'options[0].value': res.data.view_number,
+        'options[1].value': res.data.like_number
       })
       this.store.data.userInfo = res.data
       this.store.update()

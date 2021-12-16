@@ -21,13 +21,15 @@ create(store, {
    * 页面的初始数据
    */
   data: {
+    userInfo: null,
+
     compatibleInfo: null, //navHeight menuButtonObject systemInfo isIphoneX
     navStatus: 'location',
     // swiper
     background: ['demo-text-1', 'demo-text-2', 'demo-text-3'],
     indicatorDots: true,
     vertical: false,
-    interval: 4000,
+    interval: 2000,
     autoplay: true,
     duration: 500,
 

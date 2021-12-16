@@ -313,6 +313,12 @@ scroll-view.isIphoneX {
   text-decoration: line-through;
 }
 
+.tree-select__content .tree-select__item .l4.no-sign text {
+  line-height: 37rpx;
+  font-size: 22rpx;
+  color: #888888
+}
+
 .tree-select__content .tree-select__item .left {}
 
 .tree-select__content .tree-select__item .left image {

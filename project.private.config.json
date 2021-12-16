@@ -149,6 +149,12 @@
           "pathName": "pages/goods/detail",
           "query": "id=4",
           "scene": null
+        },
+        {
+          "name": "",
+          "pathName": "pages/authorization/identity",
+          "query": "",
+          "scene": null
         }
       ]
     }

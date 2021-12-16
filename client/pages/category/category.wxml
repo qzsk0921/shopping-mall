@@ -54,7 +54,20 @@
                 </view>
                 <view class="l2">{{item.goods_content}}</view>
                 <view class="l3">{{item.spec}}</view>
-                <view class="l4">
+                <!-- <view class="l4">
+                  <text>￥</text><text>{{item.price}}</text>
+                  <text>￥{{item.market_price}}</text>
+                </view> -->
+                <!-- 未授权非会员 -->
+                <view class="l4 no-sign" wx:if="{{!userInfo.phone}}">
+                  <text>请登录查看价格</text>
+                </view>
+                <!-- 授权非会员 -->
+                <view class="l4" wx:elif="{{!userInfo.is_vip}}">
+                  <text>￥</text><text>{{item.market_price}}</text>
+                </view>
+                <!-- 会员 -->
+                <view class="l4" wx:else>
                   <text>￥</text><text>{{item.price}}</text>
                   <text>￥{{item.market_price}}</text>
                 </view>

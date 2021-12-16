@@ -27,7 +27,6 @@ export function login(data) {
  */
 export function updateUserInfo(data) {
   return request({
-    // url: '/usershare/login/login',
     url: '/login/update',
     method: 'post',
     data
@@ -53,6 +52,7 @@ export function updatePhone(data) {
 export function getUserDetail() {
   return request({
     url: '/user/get_user_info',
-    method: 'get'
+    method: 'get',
+    load: 'noload'
   })
 }

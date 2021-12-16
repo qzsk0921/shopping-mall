@@ -346,6 +346,13 @@
   align-items: flex-end;
 }
 
+.section7 .item .cont .l2.no-sign,
+.section8 .item .cont .l2.no-sign {
+  font-size: 24rpx;
+  color: #888888;
+  margin-bottom: 8rpx;
+}
+
 .section7 .item .cont .l2 .price {
   font-size: 34rpx;
   font-weight: bold;

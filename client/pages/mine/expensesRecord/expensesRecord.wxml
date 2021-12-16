@@ -4,7 +4,7 @@
   <view class="fixed">
     <top-navigation navigationBarTitleText="{{navigationBarTitleText}}" navHeight="{{compatibleInfo.navHeight}}" navTop="{{compatibleInfo.menuButtonObject.top}}" menuButtonHeight="{{compatibleInfo.menuButtonObject.height}}" status="{{navStatus}}" color="#FFFFFF" bgColor="#FF723A" />
   </view>
-  <view class="content">
+  <view class="content" style="height:{{compatibleInfo.isIphoneX?compatibleInfo.systemInfo.screenHeight-(32+compatibleInfo.navHeight)+'px':compatibleInfo.systemInfo.screenHeight-(compatibleInfo.navHeight)+'px'}}">
     <view class="l1">
       <view class="l1-1">总消费</view>
       <view class="l1-2"><text>9831.23</text><text>元</text></view>

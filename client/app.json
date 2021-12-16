@@ -1,7 +1,8 @@
 {
   "pages": [
     "pages/index/index",
-    "pages/authorization/authorization",
+    "pages/authorization/identity",
+    "pages/authorization/phone",
     "pages/logs/logs",
     "pages/profile/profile",
     "pages/category/category",

@@ -21,12 +21,16 @@ create(store, {
     userInfo: null,
 
     options: [{
+        id: 1,
         value: 0,
-        name: '我的收藏'
+        name: '我的收藏',
+        url: '/pages/mine/collection/collection?from=mine'
       },
       {
+        id: 2,
         value: 0,
-        name: '浏览记录'
+        name: '浏览记录',
+        url: '/pages/mine/history/history?from=mine'
       }
     ],
     options1: [{
@@ -103,18 +107,16 @@ create(store, {
     if (!this.checkAuth()) return
     // 已授权
     else {
-      const name = e.currentTarget.dataset.name
-      if (name === '我的收藏') {
-        // 我的收藏
-        wx.navigateTo({
-          url: '/pages/authorization/identity',
-        })
-      } else if (name === '浏览记录') {
-        // 浏览记录
-        wx.navigateTo({
-          url: '/pages/authorization/identity',
-        })
-      }
+      const id = e.currentTarget.dataset.id
+      this.data.options.some(item => {
+        if (item.id === id) {
+          wx.navigateTo({
+            url: item.url
+          })
+          return true
+        }
+        return false
+      })
     }
   },
   checkAuth() {

@@ -63,7 +63,7 @@ export function getGoodsDetail(data) {
  * @param {int} goods_id 商品id
  * @param {string} type 0:取消关注 1:关注
  */
-export function getGoodsCollection(data) {
+export function setGoodsCollection(data) {
   return request({
     url: '/goods/goods_like',
     method: 'post',

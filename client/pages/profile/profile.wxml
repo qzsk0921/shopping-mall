@@ -25,7 +25,7 @@
       </block>
     </view>
     <view class="options l2">
-      <view class="col col{{index+1}}" wx:for="{{options}}" wx:key="unique" bindtap="optionsTapHandle" data-name="{{item.name}}">
+      <view class="col col{{index+1}}" wx:for="{{options}}" wx:key="unique" bindtap="optionsTapHandle" data-name="{{item.name}}" data-id="{{item.id}}">
         <view>{{item.value}}</view>
         <view>{{item.name}}</view>
       </view>

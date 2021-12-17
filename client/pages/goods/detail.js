@@ -3,7 +3,8 @@ import store from '../../store/common'
 import create from '../../utils/create'
 
 import {
-  getGoodsDetail
+  getGoodsDetail,
+  setGoodsCollection
 } from '../../api/commodity'
 // Page({
 create(store, {
@@ -12,6 +13,7 @@ create(store, {
    * 页面的初始数据
    */
   data: {
+    userInfo: null,
     compatibleInfo: null, //navHeight menuButtonObject systemInfo isIphoneX
     navigationBarTitleText: '商品详情',
 
@@ -27,7 +29,7 @@ create(store, {
 
     // goodsDetail: null,
     goodsDetail: {
-      "id": 1,
+      "id": 2,
       "goods_name": "商品1",
       "brand_id": 1,
       "category_id": 1,
@@ -76,7 +78,7 @@ create(store, {
         "http://image.wms.wljkxys.com/202009305f742d127b1a5.jpg"
       ],
       "brand_name": "品牌1",
-      "is_like": 0,
+      "is_like": 1,
       "unit_arr": [{
           "id": 1,
           "goods_id": 1,
@@ -102,6 +104,29 @@ create(store, {
       },
     }, // 弹窗和下拉窗
   },
+  // 购物车
+  toCartHandle() {
+    // 移除所有上级页面，除1级页面，tab显示至购物车页面
+    wx.switchTab({
+      url: '/pages/shopping/shopping',
+    })
+  },
+  // 收藏
+  collectionHandle(e) {
+    // 分为2种情况1.收藏成功2.取消收藏
+    const data = {
+      goods_id: this.data.goodsDetail.id,
+      type: this.data.goodsDetail.is_like ? 0 : 1
+    }
+
+    this.setGoodsCollection(data).then(res => {
+      // console.log(res)
+      this.setData({
+        'goodsDetail.is_like': data.type
+      })
+    })
+  },
+
   bindchangeHandle(e) {
     console.log(e)
     this.setData({
@@ -117,6 +142,15 @@ create(store, {
       })
     })
   },
+  setGoodsCollection(data) {
+    return new Promise((resolve, reject) => {
+      setGoodsCollection(data).then(res => {
+        resolve(res)
+      }).catch(err => {
+        reject(err)
+      })
+    })
+  },
   // 关闭购物车弹窗
   dropdownMenuCarMaskTap() {
     this.setData({
@@ -125,6 +159,14 @@ create(store, {
   },
   // 唤起购物车弹窗
   awakenCarHandle() {
+    // 未资质认证导航至认证页
+    if (this.data.userInfo.is_shop_check != 1) {
+      wx.navigateTo({
+        url: '/pages/mine/certification/certification',
+      })
+      return false
+    }
+
     this.setData({
       ['dialog.car.opened']: 1
     })
@@ -167,6 +209,12 @@ create(store, {
     if (!this.data.compatibleInfo.navHeight) {
       this.setData({
         compatibleInfo: this.store.data.compatibleInfo
+      })
+    }
+
+    if (!this.data.userInfo) {
+      this.setData({
+        userInfo: this.store.data.userInfo
       })
     }
   },

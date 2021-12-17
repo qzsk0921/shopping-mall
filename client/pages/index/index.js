@@ -40,7 +40,7 @@ create(store, {
           "type": 1,
           "link_type": 1,
           "name": "banner7",
-          "image_url": "https://sharepuls.xcmbkj.com/app_memu_1.png?",
+          "image_url": "image1",
           "link": ""
         },
         {
@@ -48,7 +48,7 @@ create(store, {
           "type": 1,
           "link_type": 1,
           "name": "banner7",
-          "image_url": "https://sharepuls.xcmbkj.com/app_memu_1.png?",
+          "image_url": "image1",
           "link": ""
         },
         {
@@ -56,7 +56,7 @@ create(store, {
           "type": 1,
           "link_type": 1,
           "name": "banner6",
-          "image_url": "https://sharepuls.xcmbkj.com/app_memu_1.png?",
+          "image_url": "image1",
           "link": ""
         },
         {
@@ -64,7 +64,7 @@ create(store, {
           "type": 1,
           "link_type": 1,
           "name": "banner5",
-          "image_url": "https://sharepuls.xcmbkj.com/app_memu_1.png?",
+          "image_url": "image1",
           "link": ""
         },
         {
@@ -72,7 +72,7 @@ create(store, {
           "type": 1,
           "link_type": 1,
           "name": "banner4",
-          "image_url": "https://sharepuls.xcmbkj.com/app_memu_1.png?",
+          "image_url": "image1",
           "link": ""
         },
         {
@@ -80,7 +80,7 @@ create(store, {
           "type": 1,
           "link_type": 1,
           "name": "banner1",
-          "image_url": "https://sharepuls.xcmbkj.com/app_memu_1.png?",
+          "image_url": "image1",
           "link": ""
         }
       ],
@@ -101,17 +101,36 @@ create(store, {
         }
       ],
       "pre_goods": [{
-        "id": 2,
-        "goods_name": "商品2",
-        "price": "100.00",
-        "market_price": "100.00",
-        "spec": "10g",
-        "is_vip": 0,
-        "is_sale": 1,
-        "is_shop_check": 1,
-        "thumb": "http://image.wms.wljkxys.com/202009305f742c49a5276.png",
-        "cart_number": 0
-      }],
+          "id": 2,
+          "goods_name": "商品2",
+          "price": 0,
+          "market_price": "100.00",
+          "spec": "",
+          "is_pre_sale": 1,
+          "is_vip": 1,
+          "is_sale": 0,
+          "is_shop_check": 0,
+          "thumb": "http://image.wms.wljkxys.com/202009305f742c49a5276.png",
+          "cart_number": 0,
+          "stock": 0,
+          "activity_info": []
+        },
+        {
+          "id": 10,
+          "goods_name": "商品10",
+          "price": 0,
+          "market_price": "100.00",
+          "spec": "",
+          "is_pre_sale": 1,
+          "is_vip": 1,
+          "is_sale": 0,
+          "is_shop_check": 0,
+          "thumb": "http://image.wms.wljkxys.com/202009305f742c49a5276.png",
+          "cart_number": 0,
+          "stock": 0,
+          "activity_info": []
+        }
+      ],
       "activity_goods": [{
         "id": 2,
         "name": "限时抢购",
@@ -122,14 +141,24 @@ create(store, {
         "goods_list": [{
           "id": 3,
           "goods_name": "商品3",
-          "price": "40.00",
+          "price": 0,
           "market_price": "100.00",
-          "spec": "10g",
-          "is_vip": 0,
-          "is_sale": 1,
-          "is_shop_check": 1,
+          "spec": "",
+          "is_pre_sale": 0,
+          "is_vip": 1,
+          "is_sale": 0,
+          "is_shop_check": 0,
           "thumb": "http://image.wms.wljkxys.com/202009305f742c49a5276.png",
-          "cart_number": 0
+          "cart_number": 0,
+          "stock": 0,
+          "activity_info": {
+            "activity_id": 2,
+            "activity_name": "限时抢购",
+            "short_name": "很好",
+            "type": 2,
+            "start_time": 1638950997,
+            "end_time": 1658950997
+          }
         }]
       }],
       "group_goods": [{
@@ -138,14 +167,24 @@ create(store, {
         "goods_list": [{
           "id": 1,
           "goods_name": "商品1",
-          "price": "100.00",
+          "price": 0,
           "market_price": "100.00",
-          "spec": "10g",
-          "is_vip": 0,
-          "is_sale": 1,
-          "is_shop_check": 1,
+          "spec": "",
+          "is_pre_sale": 0,
+          "is_vip": 1,
+          "is_sale": 0,
+          "is_shop_check": 0,
           "thumb": "http://image.wms.wljkxys.com/202009305f742c49a5276.png",
-          "cart_number": 0
+          "cart_number": 0,
+          "stock": 0,
+          "activity_info": {
+            "activity_id": 2,
+            "activity_name": "限时抢购",
+            "short_name": "很好",
+            "type": 2,
+            "start_time": 1638950997,
+            "end_time": 1658950997
+          }
         }]
       }],
       "shop_type_goods": [{
@@ -155,38 +194,62 @@ create(store, {
           "goods_list": [{
               "id": 4,
               "goods_name": "商品4",
-              "price": "100.00",
+              "price": 0,
               "market_price": "100.00",
-              "spec": "10g",
-              "is_vip": 0,
-              "is_sale": 1,
-              "is_shop_check": 1,
+              "spec": "",
+              "is_pre_sale": 0,
+              "is_vip": 1,
+              "is_sale": 0,
+              "is_shop_check": 0,
               "thumb": "http://image.wms.wljkxys.com/202009305f742c49a5276.png",
-              "cart_number": 0
+              "cart_number": 0,
+              "stock": 0,
+              "activity_info": []
             },
             {
               "id": 8,
               "goods_name": "商品8",
-              "price": "99.00",
+              "price": 0,
               "market_price": "100.00",
-              "spec": "10g",
-              "is_vip": 0,
-              "is_sale": 1,
-              "is_shop_check": 1,
+              "spec": "",
+              "is_pre_sale": 0,
+              "is_vip": 1,
+              "is_sale": 0,
+              "is_shop_check": 0,
               "thumb": "http://image.wms.wljkxys.com/202009305f742c49a5276.png",
-              "cart_number": 0
+              "cart_number": 0,
+              "stock": 0,
+              "activity_info": []
             },
             {
               "id": 9,
               "goods_name": "商品9",
-              "price": "101.00",
+              "price": 0,
               "market_price": "100.00",
-              "spec": "10g",
-              "is_vip": 0,
-              "is_sale": 1,
-              "is_shop_check": 1,
+              "spec": "",
+              "is_pre_sale": 0,
+              "is_vip": 1,
+              "is_sale": 0,
+              "is_shop_check": 0,
               "thumb": "http://image.wms.wljkxys.com/202009305f742c49a5276.png",
-              "cart_number": 0
+              "cart_number": 0,
+              "stock": 0,
+              "activity_info": []
+            },
+            {
+              "id": 10,
+              "goods_name": "商品10",
+              "price": 0,
+              "market_price": "100.00",
+              "spec": "",
+              "is_pre_sale": 1,
+              "is_vip": 1,
+              "is_sale": 0,
+              "is_shop_check": 0,
+              "thumb": "http://image.wms.wljkxys.com/202009305f742c49a5276.png",
+              "cart_number": 0,
+              "stock": 0,
+              "activity_info": []
             }
           ]
         },
@@ -197,14 +260,17 @@ create(store, {
           "goods_list": [{
             "id": 5,
             "goods_name": "商品5",
-            "price": "100.00",
+            "price": 0,
             "market_price": "100.00",
-            "spec": "10g",
-            "is_vip": 0,
-            "is_sale": 1,
-            "is_shop_check": 1,
+            "spec": "",
+            "is_pre_sale": 0,
+            "is_vip": 1,
+            "is_sale": 0,
+            "is_shop_check": 0,
             "thumb": "http://image.wms.wljkxys.com/202009305f742c49a5276.png",
-            "cart_number": 0
+            "cart_number": 0,
+            "stock": 0,
+            "activity_info": []
           }]
         },
         {
@@ -214,14 +280,17 @@ create(store, {
           "goods_list": [{
             "id": 6,
             "goods_name": "商品6",
-            "price": "100.00",
+            "price": 0,
             "market_price": "100.00",
-            "spec": "10g",
-            "is_vip": 0,
-            "is_sale": 1,
-            "is_shop_check": 1,
+            "spec": "",
+            "is_pre_sale": 0,
+            "is_vip": 1,
+            "is_sale": 0,
+            "is_shop_check": 0,
             "thumb": "http://image.wms.wljkxys.com/202009305f742c49a5276.png",
-            "cart_number": 0
+            "cart_number": 0,
+            "stock": 0,
+            "activity_info": []
           }]
         },
         {
@@ -231,14 +300,17 @@ create(store, {
           "goods_list": [{
             "id": 7,
             "goods_name": "商品7",
-            "price": "100.00",
+            "price": 0,
             "market_price": "100.00",
-            "spec": "10g",
-            "is_vip": 0,
-            "is_sale": 1,
-            "is_shop_check": 1,
+            "spec": "",
+            "is_pre_sale": 0,
+            "is_vip": 1,
+            "is_sale": 0,
+            "is_shop_check": 0,
             "thumb": "http://image.wms.wljkxys.com/202009305f742c49a5276.png",
-            "cart_number": 0
+            "cart_number": 0,
+            "stock": 0,
+            "activity_info": []
           }]
         }
       ]
@@ -381,6 +453,12 @@ create(store, {
     if (this.store.data.shop_id) {
       this.setData({
         currentAddress: this.store.data.currentAddress
+      })
+    }
+
+    if (!this.data.userInfo) {
+      this.setData({
+        userInfo: this.store.data.userInfo
       })
     }
   },

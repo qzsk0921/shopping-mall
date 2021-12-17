@@ -64,15 +64,15 @@
         <view class="b hide-scrollbar">
           <view class="item" wx:for="{{shopData.pre_goods}}" wx:key="unique" data-id="{{item.id}}" bindtap="toGoodsDetail">
             <image class="icon-presale l1" src="{{item.thumb}}" mode="aspectFill"></image>
-            <!-- 未授权非会员 -->
-            <block wx:if="{{!userInfo.phone}}">
+            <!-- 未授权或未资质认证的非会员 -->
+            <block wx:if="{{!userInfo.phone||userInfo.is_shop_check!=1}}">
               <view class="l2">￥***</view>
             </block>
-            <!-- 授权非会员 -->
+            <!-- 授权且资质认证的非会员 -->
             <block wx:elif="{{!userInfo.is_vip}}">
               <view class="l2">￥{{item.market_price}}</view>
             </block>
-            <!-- 会员 -->
+            <!-- 授权且资质认证的会员 -->
             <block wx:else>
               <view class="l2">￥{{item.price}}</view>
               <view class="l3">￥{{item.market_price}}</view>
@@ -95,15 +95,15 @@
           <view class="item" wx:for="{{shopData.activity_goods[0].goods_list}}" wx:key="unique" data-id="{{item.id}}" bindtap="toGoodsDetail">
             <image class="icon-newmarket l1" src="{{item.thumb}}" mode="aspectFill"></image>
             <!-- <view class="l2">￥{{item.price}}</view> -->
-            <!-- 未授权非会员 -->
-            <block wx:if="{{!userInfo.phone}}">
+            <!-- 未授权或未资质认证的非会员 -->
+            <block wx:if="{{!userInfo.phone||userInfo.is_shop_check!=1}}">
               <view class="l2">￥***</view>
             </block>
-            <!-- 授权非会员 -->
+            <!-- 授权且资质认证的非会员 -->
             <block wx:elif="{{!userInfo.is_vip}}">
               <view class="l2">￥{{item.price}}</view>
             </block>
-            <!-- 会员 -->
+            <!-- 授权且资质认证的会员 -->
             <block wx:else>
               <view class="l2">￥{{item.price}}</view>
             </block>
@@ -115,18 +115,21 @@
         <view class="item" wx:for="{{shopData.group_goods[0].goods_list}}" wx:key="unique" data-id="{{item.id}}" bindtap="toGoodsDetail">
           <image class="icon-pri" src="{{item.thumb}}" mode="aspectFill"></image>
           <view class="cont">
-            <view class="l1">{{item.goods_name}}{{item.spec}}</view>
-            <!-- 未授权非会员 -->
-            <view class="l2 no-sign" wx:if="{{!userInfo.phone}}">
+            <view class="l1">
+              <view wx:if="{{item.is_pre_sale===1 || item.activity_info.activity_name}}" class="tag {{item.is_pre_sale===1?'pre_sale':item.activity_info.activity_name?'new_activity':''}}">{{item.is_pre_sale===1?'预售专区':item.activity_info.activity_name?'新品上市':''}}</view>
+              <text>{{item.goods_name}} {{item.spec}}</text>
+            </view>
+            <!-- 未授权或未资质认证的非会员 -->
+            <view class="l2 no-sign" wx:if="{{!userInfo.phone||userInfo.is_shop_check!=1}}">
               请登录查看价格
             </view>
-            <!-- 授权非会员 -->
+            <!-- 授权且资质认证的非会员 -->
             <view class="l2" wx:elif="{{!userInfo.is_vip}}">
               <view class="price">
                 <text>￥</text>{{item.market_price}}
               </view>
             </view>
-            <!-- 会员 -->
+            <!-- 授权且资质认证的会员 -->
             <view class="l2" wx:else>
               <view class="price">
                 <text>￥</text>{{item.price}}
@@ -158,18 +161,21 @@
             <view class="item" wx:for="{{item.goods_list}}" wx:key="unique" wx:for-item="itemName" data-id="{{itemName.id}}" bindtap="toGoodsDetail">
               <image class="icon-pri" src="{{itemName.thumb}}" mode="aspectFill"></image>
               <view class="cont">
-                <view class="l1">{{itemName.goods_name}}{{itemName.spec}}</view>
-                <!-- 未授权非会员 -->
-                <view class="l2 no-sign" wx:if="{{!userInfo.phone}}">
+                <view class="l1">
+                  <view wx:if="{{itemName.is_pre_sale===1 || itemName.activity_info.activity_name}}" class="tag {{itemName.is_pre_sale===1?'pre_sale':itemName.activity_info.activity_name?'new_activity':''}}">{{itemName.is_pre_sale===1?'预售专区':itemName.activity_info.activity_name?'新品上市':''}}</view>
+                  {{itemName.goods_name}} {{itemName.spec}}
+                </view>
+                <!-- 未授权或未资质认证的非会员 -->
+                <view class="l2 no-sign" wx:if="{{!userInfo.phone||userInfo.is_shop_check!=1}}">
                   请登录查看价格
                 </view>
-                <!-- 授权非会员 -->
+                <!-- 授权且资质认证的非会员 -->
                 <view class="l2" wx:elif="{{!userInfo.is_vip}}">
                   <view class="price">
                     <text>￥</text>{{itemName.market_price}}
                   </view>
                 </view>
-                <!-- 会员 -->
+                <!-- 授权且资质认证的会员 -->
                 <view class="l2" wx:else>
                   <view class="price">
                     <text>￥</text>{{itemName.price}}

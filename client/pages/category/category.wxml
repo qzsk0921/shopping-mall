@@ -50,7 +50,8 @@
               </view>
               <view class="right">
                 <view class="l1">
-                  <text>{{item.goods_name}}{{item.spec}}</text>
+                  <view wx:if="{{item.is_pre_sale===1 || item.activity_info.activity_name}}" class="tag {{item.is_pre_sale===1?'pre_sale':item.activity_info.activity_name?'new_activity':''}}">{{item.is_pre_sale===1?'预售专区':item.activity_info.activity_name?'新品上市':''}}</view>
+                  <text>{{item.goods_name}} {{item.spec}}</text>
                 </view>
                 <view class="l2">{{item.goods_content}}</view>
                 <view class="l3">{{item.spec}}</view>
@@ -58,15 +59,15 @@
                   <text>￥</text><text>{{item.price}}</text>
                   <text>￥{{item.market_price}}</text>
                 </view> -->
-                <!-- 未授权非会员 -->
-                <view class="l4 no-sign" wx:if="{{!userInfo.phone}}">
+                <!-- 未授权或未资质认证的非会员 -->
+                <view class="l4 no-sign" wx:if="{{!userInfo.phone||userInfo.is_shop_check!=1}}">
                   <text>请登录查看价格</text>
                 </view>
-                <!-- 授权非会员 -->
+                <!-- 授权且资质认证的非会员 -->
                 <view class="l4" wx:elif="{{!userInfo.is_vip}}">
                   <text>￥</text><text>{{item.market_price}}</text>
                 </view>
-                <!-- 会员 -->
+                <!-- 授权且资质认证的会员 -->
                 <view class="l4" wx:else>
                   <text>￥</text><text>{{item.price}}</text>
                   <text>￥{{item.market_price}}</text>

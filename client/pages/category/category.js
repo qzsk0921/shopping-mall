@@ -20,7 +20,7 @@ create(store, {
     currentSecondCategoryIndex: 0,
     currentPriceSort: null, //3:价格从高到底 4:价格从低到高
     // priceSort: 1, //1升序 2降序 0空
-    
+
     userInfo: null,
     compatibleInfo: null, //navHeight menuButtonObject systemInfo isIphoneX
     navStatus: 'category',
@@ -457,6 +457,12 @@ create(store, {
     if (!this.data.compatibleInfo.navHeight) {
       this.setData({
         compatibleInfo: this.store.data.compatibleInfo
+      })
+    }
+
+    if (!this.data.userInfo) {
+      this.setData({
+        userInfo: this.store.data.userInfo
       })
     }
   },

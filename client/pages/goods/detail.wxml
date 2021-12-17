@@ -21,10 +21,28 @@
       </view>
     </view>
     <view class="section2">
-      <view class="l1">
+      <!-- <view class="l1">
         <text>￥</text><text>{{goodsDetail.price}}</text>
-        <view wx:if="{{goodsDetail.is_pre_sale}}">预售专区</view><text>￥{{goodsDetail.market_price}}</text>
+        <view wx:if="{{goodsDetail.is_pre_sale===1 || goodsDetail.activity_info.activity_name}}" class="tag {{goodsDetail.is_pre_sale===1?'pre_sale':goodsDetail.activity_info.activity_name?'new_activity':''}}">{{goodsDetail.is_pre_sale===1?'预售专区':goodsDetail.activity_info.activity_name?'新品上市':''}}</view>
+        <text>￥{{goodsDetail.market_price}}</text>
+      </view> -->
+
+      <!-- 已授权未资质认证的非会员 -->
+      <view class="l1 no-sign" wx:if="{{!userInfo.phone||userInfo.is_shop_check!=1}}">
+        <text>￥</text><text>***</text>
       </view>
+      <!-- 授权且资质认证的非会员 -->
+      <view class="l1" wx:elif="{{!userInfo.is_vip}}">
+        <text>￥</text><text>{{goodsDetail.market_price}}</text>
+        <view wx:if="{{goodsDetail.is_pre_sale===1 || goodsDetail.activity_info.activity_name}}" class="tag {{goodsDetail.is_pre_sale===1?'pre_sale':goodsDetail.activity_info.activity_name?'new_activity':''}}">{{goodsDetail.is_pre_sale===1?'预售专区':goodsDetail.activity_info.activity_name?'新品上市':''}}</view>
+      </view>
+      <!-- 授权且资质认证的会员 -->
+      <view class="l1" wx:else>
+        <text>￥</text><text>{{goodsDetail.price}}</text>
+        <view wx:if="{{goodsDetail.is_pre_sale===1 || goodsDetail.activity_info.activity_name}}" class="tag {{goodsDetail.is_pre_sale===1?'pre_sale':goodsDetail.activity_info.activity_name?'new_activity':''}}">{{goodsDetail.is_pre_sale===1?'预售专区':goodsDetail.activity_info.activity_name?'新品上市':''}}</view>
+        <text>￥{{goodsDetail.market_price}}</text>
+      </view>
+
       <view class="l2">{{goodsDetail.goods_name}}</view>
       <view class="l3">{{goodsDetail.goods_content}}</view>
     </view>
@@ -56,15 +74,15 @@
     </view>
   </view>
   <view class="footer">
-    <view class="col1">
+    <view class="col1" bindtap="toCartHandle">
       <view class="shopcart-box">
         <image class="icon-shopcart" mode="aspectFill" src="/assets/images/goods_btn_car.png"></image>
         <view class="shopcart-info">{{goodsDetail.cart_number}}</view>
       </view>
       <view>购物车</view>
     </view>
-    <view class="col2">
-      <image src="/assets/images/goods_btn_collection.png"></image>
+    <view class="col2" bindtap="collectionHandle">
+      <image src="{{goodsDetail.is_like?'/assets/images/goods_btn_collection_focus.png':'/assets/images/goods_btn_collection.png'}}"></image>
       <view>收藏</view>
     </view>
     <view class="col3 btn btn-car" bindtap="awakenCarHandle">加入购物车</view>

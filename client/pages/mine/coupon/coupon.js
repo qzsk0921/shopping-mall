@@ -68,16 +68,15 @@ create(store, {
     this.getMyCouponList()
   },
   getMyCouponList(dataObj) {
-    const tempData = {}
+    const tempData = {
+      page: `this.data.couponMarketList[${this.data.tabIndex}].count`,
+      page_size: this.data.page_size,
+    }
+
     if (typeof dataObj === 'object') {
       Object.keys(dataObj).forEach(key => {
         tempData[key] = dataObj[key]
       })
-    }
-
-    if (dataObj !== 'scrollTolwer') {
-      tempData['per_page'] = this.data.page_size
-      tempData['current_page'] = this.data.page
     }
 
     tempData.type = this.data.tabIndex

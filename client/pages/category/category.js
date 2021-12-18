@@ -301,6 +301,8 @@ create(store, {
   },
   getGoodsList(dataObj) {
     const tempData = {
+      page: this.data.currentGoodsList.count,
+      page_size: this.data.page_size,
       category_id: this.data.currentSecondCategoryId
     }
 
@@ -309,12 +311,6 @@ create(store, {
         tempData[key] = dataObj[key]
       })
     }
-
-    if (dataObj !== 'scrollTolwer') {
-      tempData['per_page'] = this.data.page_size
-      tempData['current_page'] = this.data.currentGoodsList.count
-    }
-
 
     tempData.order_by_type = this.typeParse(this.data.tabIndex)
 

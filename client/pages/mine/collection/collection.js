@@ -27,9 +27,26 @@ create(store, {
 
     page: 1,
     page_size: 10,
+
+    refresherEnabled: false,
+    triggered: false,
   },
   itemHandle() {
     console.log('itemHandle')
+  },
+  scrollToLower(e) {
+    console.log(e)
+    console.log('scrollToLower')
+
+    let collectionList = this.data.collectionList
+
+    if (collectionList.count + 1 > collectionList.total_page) return
+
+    this.setData({
+      [`collectionList.count`]: ++collectionList.count
+    })
+
+    this.getGoodsCollectionList('scrollToLower')
   },
   delGoodsHandle(e) {
     // console.log(e)
@@ -60,19 +77,17 @@ create(store, {
     })
   },
   getGoodsCollectionList(dataObj) {
-    const tempData = {}
+    const tempData = {
+      page: this.data.collectionList.count,
+      page_size: this.data.page_size,
+      shop_id: this.store.data.shop_id
+    }
 
     if (typeof dataObj === 'object') {
       Object.keys(dataObj).forEach(key => {
         tempData[key] = dataObj[key]
       })
     }
-
-    if (dataObj !== 'scrollTolwer') {
-      tempData['per_page'] = this.data.page_size
-      tempData['current_page'] = this.data.collectionList.count
-    }
-
 
     return new Promise((resolve, reject) => {
       getGoodsCollectionList(tempData).then(res => {
@@ -98,9 +113,7 @@ create(store, {
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    this.getGoodsCollectionList({
-      shop_id: this.store.data.shop_id
-    }).then(res => {
+    this.getGoodsCollectionList().then(res => {
       console.log(res)
     })
   },

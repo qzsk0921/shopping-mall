@@ -89,7 +89,7 @@ export function getGoodsCollectionList(data) {
  */
 export function getViewHistory(data) {
   return request({
-    url: '/goods/get_view_goods',
+    url: '/goods/goods_view_log',
     method: 'get',
     data
   })

@@ -243,8 +243,8 @@ create(store, {
     getUserDetail().then(res => {
       this.setData({
         userInfo: res.data,
-        'options[0].value': res.data.view_number,
-        'options[1].value': res.data.like_number
+        'options[0].value': res.data.like_number,
+        'options[1].value': res.data.view_number
       })
       this.store.data.userInfo = res.data
       this.store.update()

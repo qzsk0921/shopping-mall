@@ -3,12 +3,8 @@
   background: #F5F5F5;
 }
 
-.content {
-  padding: 20rpx 24rpx 0;
-  position: relative;
-}
-
-.section1 {
+.coupon {
+  margin: 20rpx 24rpx 0;
   height: 74rpx;
   background: #FFFFFF;
   border-radius: 16rpx;
@@ -18,41 +14,46 @@
   padding: 0 20rpx 0 24rpx;
 }
 
-.section1 .left {
+.coupon .left {
   display: flex;
   align-items: center;
 }
 
-.section1 .left .icon-coupon {
+.coupon .left .icon-coupon {
   width: 40rpx;
   height: 40rpx;
   /* background: linear-gradient(90deg, var(--primary-linear-start) 0%, var(--primary-linear-end) 100%); */
 }
 
-.section1 .left text {
+.coupon .left text {
   margin-left: 12rpx;
   font-size: 26rpx;
   color: #333333;
 }
 
-.section1 .right {
+.coupon .right {
   display: flex;
   align-items: center;
 }
 
-.section1 .right text {
+.coupon .right text {
   font-size: 26rpx;
   color: #888888;
   margin-right: 8rpx;
 }
 
-.section1 .right .arrow {
+.coupon .right .arrow {
   width: 13rpx;
   height: 13rpx;
   border: 2rpx solid transparent;
   border-right-color: #888888;
   border-top-color: #888888;
   transform: rotate(45deg);
+}
+
+.content {
+  padding: 0 24rpx 0;
+  position: relative;
 }
 
 .section2 {
@@ -244,6 +245,12 @@
   margin-top: 10rpx;
 }
 
+.section2 .item .right .l4.no-sign {
+  font-size: 24rpx;
+  color: #888888;
+  margin-bottom: 8rpx;
+}
+
 .section2 .item .right .l4 text:first-child {
   font-size: 24rpx;
   font-weight: bold;
@@ -294,7 +301,7 @@
   opacity: 0;
 }
 
-.section2 .bottom {
+.bottom {
   display: flex;
   justify-content: space-between;
   height: 100rpx;
@@ -308,39 +315,39 @@
   width: 100%;
 }
 
-.section2 .amount-box {
+.bottom .amount-box {
   display: flex;
 }
 
-.section2 .amount-box .left {
+.bottom .amount-box .left {
   text-align: right;
   margin-top: 20rpx;
 }
 
-.section2 .amount-box .right {
+.bottom .amount-box .right {
   margin-top: 10rpx;
 }
 
-.section2 .amount-box .left .left-t {}
+.bottom .amount-box .left .left-t {}
 
-.section2 .amount-box .left .left-t text {
+.bottom .amount-box .left .left-t text {
   font-size: 24rpx;
   color: #333333;
 }
 
-.section2 .amount-box .left .left-t .price {
+.bottom .amount-box .left .left-t .price {
   font-size: 34rpx;
   font-weight: bold;
   color: #FC4953;
 }
 
-.section2 .amount-box .left .left-b {
+.bottom .amount-box .left .left-b {
   margin-top: 6rpx;
   font-size: 20rpx;
   color: #FC4953;
 }
 
-.section2 .amount-box .btn-pay {
+.bottom .amount-box .btn-pay {
   margin-left: 20rpx;
   text-align: center;
   width: 210rpx;
@@ -350,4 +357,24 @@
   font-size: 30rpx;
   line-height: 80rpx;
   color: #FFFFFF;
+}
+
+.bottom .amount-box .right .tag {
+  float: left;
+  margin: 8rpx 6rpx 0 0;
+  text-align: center;
+  width: 96rpx;
+  height: 28rpx;
+  border-radius: 8rpx;
+  font-size: 20rpx;
+  line-height: 28rpx;
+  color: #FFFFFF;
+}
+
+.bottom .amount-box .right .tag.new_activity {
+  background: #FF7753;
+}
+
+.bottom .amount-box .right .tag.pre_sale {
+  background: #22B862;
 }

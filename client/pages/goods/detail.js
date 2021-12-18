@@ -6,6 +6,10 @@ import {
   getGoodsDetail,
   setGoodsCollection
 } from '../../api/commodity'
+
+// import {
+//   addCart
+// } from '../../api/cart'
 // Page({
 create(store, {
 
@@ -29,7 +33,7 @@ create(store, {
 
     // goodsDetail: null,
     goodsDetail: {
-      "id": 2,
+      "id": 13,
       "goods_name": "商品1",
       "brand_id": 1,
       "category_id": 1,
@@ -104,6 +108,28 @@ create(store, {
       },
     }, // 弹窗和下拉窗
   },
+  // 加入购物车
+  addCarHandle() {
+    // console.log('addCarHandle')
+
+    let myData = {
+      shop_id: this.store.data.shop_id,
+      goods_id: this.data.goods_id,
+      goods_num: this.data.currentGoodsNum
+    }
+
+    if (this.unit_arr.length) {
+      // 多单位
+      myData.type = 2
+      myData.unit_id = 11111
+    } else {
+      // 单单位
+      myData.type = 1
+      this.addCart(myData).then(res => {
+        console.log(res)
+      })
+    }
+  },
   // 购物车
   toCartHandle() {
     // 移除所有上级页面，除1级页面，tab显示至购物车页面
@@ -128,7 +154,7 @@ create(store, {
   },
 
   bindchangeHandle(e) {
-    console.log(e)
+    // console.log(e)
     this.setData({
       currentSwiperIndex: e.detail.current + 1
     })
@@ -145,6 +171,15 @@ create(store, {
   setGoodsCollection(data) {
     return new Promise((resolve, reject) => {
       setGoodsCollection(data).then(res => {
+        resolve(res)
+      }).catch(err => {
+        reject(err)
+      })
+    })
+  },
+  addCart(data) {
+    return new Promise((resolve, reject) => {
+      addCart(data).then(res => {
         resolve(res)
       }).catch(err => {
         reject(err)
@@ -178,6 +213,9 @@ create(store, {
     const {
       id
     } = options
+
+    this.data.goods_id = id
+
     this.getGoodsDetail({
       id
     }).then(res => {

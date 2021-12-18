@@ -139,7 +139,7 @@
           </view>
           <view class="shopcart-box">
             <image class="icon-shopcart" mode="aspectFill" src="/assets/images/icon_car.png"></image>
-            <view class="shopcart-info">34</view>
+            <view class="shopcart-info">{{item.cart_number}}</view>
           </view>
         </view>
       </view>
@@ -185,7 +185,7 @@
               </view>
               <view class="shopcart-box">
                 <image class="icon-shopcart" mode="aspectFill" src="/assets/images/icon_car.png"></image>
-                <view class="shopcart-info">34</view>
+                <view class="shopcart-info">{{itemName.cart_number}}</view>
               </view>
             </view>
           </view>

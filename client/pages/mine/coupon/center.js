@@ -22,6 +22,9 @@ create(store, {
     },
     page: 1,
     page_size: 10,
+
+    refresherEnabled: false,
+    triggered: false,
   },
   getCouponMarketList(dataObj) {
 

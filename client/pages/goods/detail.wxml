@@ -2,7 +2,7 @@
 <!-- <text>pages/goods/detail.wxml</text> -->
 <view class="container container-goods-detail">
   <!-- 购物车下拉弹窗 -->
-  <dropdown-car bindtap="dropdownMenuCarMaskTap" opened="{{dialog.car.opened}}" bindsubClickable="subClickableHandle" goodsDetail="{{goodsDetail}}"></dropdown-car>
+  <dropdown-car bindtap="dropdownMenuCarMaskTap" opened="{{dialog.car.opened}}" bindsubClickable="subClickableHandle" goodsDetail="{{goodsDetail}}" userInfo="{{userInfo}}"></dropdown-car>
   <view class="fixed">
     <top-navigation navigationBarTitleText="{{navigationBarTitleText}}" navHeight="{{compatibleInfo.navHeight}}" navTop="{{compatibleInfo.menuButtonObject.top}}" menuButtonHeight="{{compatibleInfo.menuButtonObject.height}}" status="{{navStatus}}" color="#333" />
   </view>

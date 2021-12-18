@@ -1,6 +1,11 @@
 // components/DropdownMenu/car.js
 import store from '../../store/common'
 import create from '../../utils/create'
+
+import {
+  addCart
+} from '../../api/cart'
+
 // Component({
 create({
   /**
@@ -12,6 +17,7 @@ create({
       value: 0
     },
     goodsDetail: Object,
+    userInfo: Object
   },
   observers: {
     'opened': function (val) {
@@ -21,9 +27,13 @@ create({
         // this.setData({
         //   userInfo: store.data.userInfo
         // })
-        this.setData({
-          currentUnitId: this.data.goodsDetail.unit_arr[0].id
-        })
+
+        // 没有初始化过才使用默认第一个规格
+        if(!this.data.currentUnitId) {
+          this.setData({
+            currentUnitId: this.data.goodsDetail.unit_arr[0].id
+          })
+        }
       }
     }
   },
@@ -31,9 +41,11 @@ create({
    * 组件的初始数据
    */
   data: {
+
     height: 0,
+    currentUnitIndex: 0,
     currentUnitId: null,
-    myGoodsDetail: null
+    myGoodsDetail: null,
   },
 
   /**
@@ -43,35 +55,75 @@ create({
     specHandle(e) {
       console.log(e)
       this.setData({
+        currentUnitIndex: e.target.dataset.index,
         currentUnitId: e.target.dataset.id
       })
     },
     dropdownItemTapHandle() {},
     addHandle() {
       this.setData({
-        'myGoodsDetail.cart_number': ++this.data.myGoodsDetail.cart_number
+        [`myGoodsDetail.unit_arr[${this.data.currentUnitIndex}].number`]: Number(this.data.myGoodsDetail.unit_arr[this.data.currentUnitIndex].number) + 1,
       })
     },
     reduceHandle() {
       // 不能小于0
-      if (this.data.myGoodsDetail.cart_number - 1 <= -1) return
+      if (this.data.myGoodsDetail.unit_arr[this.data.currentUnitIndex].number - 1 <= -1) return
 
       this.setData({
-        'myGoodsDetail.cart_number': --this.data.myGoodsDetail.cart_number
+        [`myGoodsDetail.unit_arr[${this.data.currentUnitIndex}].number`]: this.data.myGoodsDetail.unit_arr[this.data.currentUnitIndex].number - 1,
       })
     },
     inputBlurHandle(e) {
       // console.log(e)
-      this.setData({
-        'myGoodsDetail.cart_number': e.detail.value
-      })
+      // 购买数量非法恢复原数值
+      if (e.detail.value < 0) {
+        this.setData({
+          [`myGoodsDetail.unit_arr[${this.data.currentUnitIndex}].number`]: this.data.myGoodsDetail.unit_arr[this.data.currentUnitIndex].number,
+        })
+      } else {
+        this.setData({
+          [`myGoodsDetail.unit_arr[${this.data.currentUnitIndex}].number`]: e.detail.value,
+        })
+      }
+
+
     },
+    // 加入购物车
     addCarHandle() {
-      console.log('addCarHandle')
+      // console.log('addCarHandle')
+
       this.setData({
         opened: 0
       })
-    }
+
+      let myData = {
+        shop_id: store.data.shop_id,
+        goods_id: this.data.myGoodsDetail.id,
+        goods_num: this.data.myGoodsDetail.unit_arr[this.data.currentUnitIndex].number
+      }
+
+      if (this.data.myGoodsDetail.unit_arr.length === 1) {
+        // 单单位
+        myData.type = 1
+      } else {
+        // 多单位
+        myData.type = 2
+        myData.unit_id = this.data.myGoodsDetail.unit_arr[this.data.currentUnitIndex].id
+      }
+
+      this.addCart(myData).then(res => {
+        console.log(res)
+      })
+    },
+    addCart(data) {
+      return new Promise((resolve, reject) => {
+        addCart(data).then(res => {
+          resolve(res)
+        }).catch(err => {
+          reject(err)
+        })
+      })
+    },
   },
   lifetimes: {
     ready() {

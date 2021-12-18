@@ -55,6 +55,9 @@ create(store, {
     }],
     page: 1,
     page_size: 10,
+
+    refresherEnabled: false,
+    triggered: false,
   },
   changeTab(e) {
     console.log(e)

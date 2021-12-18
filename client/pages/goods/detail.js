@@ -7,9 +7,6 @@ import {
   setGoodsCollection
 } from '../../api/commodity'
 
-// import {
-//   addCart
-// } from '../../api/cart'
 // Page({
 create(store, {
 
@@ -33,7 +30,7 @@ create(store, {
 
     // goodsDetail: null,
     goodsDetail: {
-      "id": 13,
+      "id": 1,
       "goods_name": "商品1",
       "brand_id": 1,
       "category_id": 1,
@@ -88,14 +85,18 @@ create(store, {
           "goods_id": 1,
           "unitName": "个",
           "price": 10.6,
-          "market_price": "20.00"
+          "market_price": "20.00",
+          "cart_number": 0,
+          "number": 0,
         },
         {
           "id": 2,
           "goods_id": 1,
           "unitName": "箱",
           "price": 106,
-          "market_price": "200.00"
+          "market_price": "200.00",
+          "cart_number": 0,
+          "number": 0,
         },
       ],
       "cart_number": 0
@@ -107,28 +108,6 @@ create(store, {
         opened: 0
       },
     }, // 弹窗和下拉窗
-  },
-  // 加入购物车
-  addCarHandle() {
-    // console.log('addCarHandle')
-
-    let myData = {
-      shop_id: this.store.data.shop_id,
-      goods_id: this.data.goods_id,
-      goods_num: this.data.currentGoodsNum
-    }
-
-    if (this.unit_arr.length) {
-      // 多单位
-      myData.type = 2
-      myData.unit_id = 11111
-    } else {
-      // 单单位
-      myData.type = 1
-      this.addCart(myData).then(res => {
-        console.log(res)
-      })
-    }
   },
   // 购物车
   toCartHandle() {
@@ -171,15 +150,6 @@ create(store, {
   setGoodsCollection(data) {
     return new Promise((resolve, reject) => {
       setGoodsCollection(data).then(res => {
-        resolve(res)
-      }).catch(err => {
-        reject(err)
-      })
-    })
-  },
-  addCart(data) {
-    return new Promise((resolve, reject) => {
-      addCart(data).then(res => {
         resolve(res)
       }).catch(err => {
         reject(err)

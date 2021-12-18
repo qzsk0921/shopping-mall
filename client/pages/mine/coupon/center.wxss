@@ -6,9 +6,11 @@
 }
 
 .content {
+  overflow: hidden;
+}
+.card-box {
   padding-bottom: 120rpx;
 }
-
 .card {
   margin: 20rpx auto 0;
   width: 702rpx;
@@ -111,4 +113,20 @@
   background: #FFFFFF;
   border: 2rpx solid #DDDDDD;
   color: #666666;
+}
+
+.no-data {
+  text-align: center;
+}
+
+.no-data image {
+  margin-top: 184rpx;
+  width: 483rpx;
+  height: 400rpx;
+}
+
+.no-data .text {
+  margin-top: 30rpx;
+  font-size: 30rpx;
+  color: #949EA8;
 }

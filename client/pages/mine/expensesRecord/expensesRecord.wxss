@@ -58,6 +58,10 @@
   align-items: center;
 }
 
+.content>.l2 .top .left .picker {
+  display: flex;
+}
+
 .content>.l2 .top .left .icon-calendar {
   margin-left: 38rpx;
   width: 32rpx;
@@ -107,7 +111,9 @@
   justify-content: space-between;
 }
 
-.l2 .cont {}
+.l2 .cont {
+  overflow: auto;
+}
 
 .l2 .cont .l1 {
   height: 52rpx;

@@ -5,11 +5,12 @@ import request from '../utils/request'
  * 购物车页面 Cart/cart_list
  * @param {string} shop_id
  */
-export function getCartList(data) {
+export function getCartData(data) {
   return request({
     url: '/Cart/cart_list',
     method: 'get',
-    data
+    data,
+    load: 'noload'
   })
 }
 
@@ -48,7 +49,7 @@ export function delCart(data) {
  * 购物车推荐 Cart/cart_like
  * @param {string} require shop_id
  */
-export function recommendCart(data) {
+export function getRecommendList(data) {
   return request({
     url: '/Cart/cart_like',
     method: 'get',

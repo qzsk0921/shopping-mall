@@ -85,8 +85,6 @@ create({
           [`myGoodsDetail.unit_arr[${this.data.currentUnitIndex}].number`]: e.detail.value,
         })
       }
-
-
     },
     // 加入购物车
     addCarHandle() {
@@ -112,6 +110,9 @@ create({
       }
 
       this.addCart(myData).then(res => {
+        // 更新详情页购物车数据
+        this.triggerEvent('updateCartHandle')
+
         console.log(res)
       })
     },

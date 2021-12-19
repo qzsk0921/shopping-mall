@@ -7,7 +7,7 @@ module.exports = {
         text = "领取"
         break;
       case 1:
-        text = "立刻使用"
+        text = "立即使用"
         break;
       case 2:
         text = "已抢光"
@@ -22,5 +22,8 @@ module.exports = {
         console.log('nothing match')
     }
     return text
+  },
+  parseInt: function (val) {
+    return parseInt(val)
   },
 }

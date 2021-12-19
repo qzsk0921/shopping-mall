@@ -6,7 +6,11 @@ import store from '../../store/common'
 import create from '../../utils/create'
 
 import {
-  getCartList
+  getCartData,
+  addCart,
+  delCart,
+  addOrder,
+  getRecommendList
 } from '../../api/cart'
 
 import {
@@ -20,35 +24,24 @@ create(store, {
    * 页面的初始数据
    */
   data: {
-    select_all: false, //全选
-    listData: [{
-        code: "111",
-        text: "text1",
-        typ: "type1",
-      },
-      {
-        code: "021",
-        text: "text2",
-        typ: "type2",
-      },
-      {
-        code: "111",
-        text: "text1",
-        typ: "type3",
-      }
-    ],
+    totalPrice: 0, //总计
+    discountPrice: 0, //总优惠
+
+    select_all: true, //全选
+    batchIndexs: [], //选中的ids
+
     compatibleInfo: null, //navHeight menuButtonObject systemInfo isIphoneX
     navigationBarTitleText: '购物车',
     navStatus: 'isEmpty',
     // 购物车商品 优先判断 下架 其次判断 库存
-    cartList: {
+    cartData: {
       cache: [{
-          "id": 2,
+          "id": 1,
           "is_pre_sale": 0,
           "goods_name": "商品2",
           "price": 10.6,
-          "market_price": "100.00",
-          "status": 1,
+          "market_price": 100.00,
+          "status": 3,
           "spec": "10g",
           "is_vip": 1,
           "is_sale": 1,
@@ -63,7 +56,7 @@ create(store, {
           "is_stock": 0
         },
         {
-          "id": 1,
+          "id": 2,
           "is_pre_sale": 1,
           "goods_name": "商品1",
           "price": 35,
@@ -74,7 +67,7 @@ create(store, {
           "is_sale": 1,
           "is_shop_check": 1,
           "thumb": "http://image.wms.wljkxys.com/202009305f742c49a5276.png",
-          "stock": 0,
+          "stock": 10,
           "activity_info": {
             "activity_id": 1,
             "activity_name": "新品上市",
@@ -87,10 +80,10 @@ create(store, {
           "unit_id": 1,
           "type": 2,
           "unitName": "1/个",
-          "is_stock": 0
+          "is_stock": 1
         },
         {
-          "id": 1,
+          "id": 3,
           "is_pre_sale": 1,
           "goods_name": "商品1",
           "price": 350,
@@ -110,22 +103,164 @@ create(store, {
             "start_time": 0,
             "end_time": 0
           },
-          "cart_number": "1",
+          "cart_number": 1,
           "unit_id": "2",
           "type": "2",
           "unitName": "1/箱",
           "is_stock": 0
         }
       ],
+      "total": 3,
+      "coupon_total": 3,
+      // count: 1,
+      // total_page: 1,
+    },
+
+    // 猜你喜欢
+    recommendList: {
+      cache: [],
       count: 1,
       total_page: 1,
     },
-
     page: 1,
     page_size: 10,
 
     refresherEnabled: false,
     triggered: false,
+  },
+  watch: {
+    select_all: {
+      handler(nv, ov, obj) {
+        console.log(nv)
+        let arr = []; //存放选中id的数组
+
+        // 更新购物车
+        // this.getCartData().then(res => {
+        // 全选或全不选
+        this.data.cartData.cache.forEach((item, index) => {
+
+          // 有库存并且未下架或删除
+          if (![2, 3].includes(item.status) && item.is_stock) {
+
+            if (item.checked != nv) item.checked = nv
+
+            if (nv) arr = arr.concat(index)
+          }
+        })
+
+        this.setData({
+          'cartData.cache': this.data.cartData.cache,
+          batchIndexs: arr
+        })
+        // })
+      },
+      immediate: true
+    },
+    batchIndexs: {
+      handler(nv, ov, obj) {
+        console.log(nv)
+        if (nv.length) {
+          let totalPrice = 0
+          let discountPrice = 0
+          this.data.cartData.cache.forEach((item, index) => {
+            if (nv.includes(index)) {
+              // 有库存并且未下架或删除
+              if (![2, 3].includes(item.status) && item.is_stock) {
+                if (this.store.data.userInfo.is_vip) {
+                  // 会员
+                  totalPrice += (item.price * item.cart_number)
+                  discountPrice += ((item.market_price - item.price) * item.cart_number)
+                } else {
+                  // 非会员
+                  totalPrice += (item.market_price * item.cart_number)
+                }
+              }
+            }
+          })
+
+          this.setData({
+            totalPrice,
+            discountPrice
+          })
+        } else {
+          this.setData({
+            totalPrice: 0,
+            discountPrice: 0
+          })
+        }
+      },
+      immediate: true
+    },
+  },
+  // 增加商品数量
+  addHandle(e) {
+    const item = e.currentTarget.dataset.item
+    const index = e.currentTarget.dataset.index
+
+    const cartData = {
+      type: item.type,
+      shop_id: this.store.data.shop_id,
+      goods_id: item.id,
+      goods_num: item.cart_number + 1, //-1为扣减
+      unit_id: item.unit_id
+    }
+
+    this.addCart(cartData).then(res => {
+      this.setData({
+        [`cartData.cache[${index}].cart_number`]: item.cart_number + 1,
+      })
+    })
+  },
+  // 减少商品数量
+  reduceHandle(e) {
+    const item = e.currentTarget.dataset.item
+    const index = e.currentTarget.dataset.index
+    // 不能小于0
+    if (item.cart_number - 1 <= -1) return
+    const cartData = {
+      type: item.type,
+      shop_id: this.store.data.shop_id,
+      goods_id: item.id,
+      // goods_num: -1, //-1为扣减
+      goods_num: item.cart_number - 1,
+      unit_id: item.unit_id
+    }
+
+    this.addCart(cartData).then(res => {
+      this.setData({
+        [`cartData.cache[${index}].cart_number`]: item.cart_number - 1,
+      })
+    })
+  },
+  // 输入商品数量
+  inputBlurHandle(e) {
+    // console.log(e)
+    const item = e.currentTarget.dataset.item
+    const index = e.currentTarget.dataset.index
+    // 购买数量非法恢复原数值
+    if (e.detail.value < 0) {
+      this.setData({
+        [`cartData.cache[${index}].cart_number`]: item.cart_number,
+      })
+    } else {
+      const cartData = {
+        type: item.type,
+        shop_id: this.store.data.shop_id,
+        goods_id: item.id,
+        goods_num: e.detail.value - 0, //-1为扣减
+        unit_id: item.unit_id
+      }
+
+      this.addCart(cartData).then(res => {
+        this.setData({
+          [`cartData.cache[${index}].cart_number`]: e.detail.value,
+        })
+      }).catch(err => {
+        this.setData({
+          [`cartData.cache[${index}].cart_number`]: item.cart_number,
+        })
+      })
+    }
   },
   couponHandle() {
     // 1.有购物券 跳转至我的购物券 2.没购物券 跳转至领券中心页面
@@ -139,11 +274,25 @@ create(store, {
       })
     }
   },
+  // 结算 导航至订单确认页
   payHandle() {
     // 授权校验
     if (!this.checkAuth()) return
     // 资质校验
     if (!this.certCheck()) return
+
+    if (!this.data.cartData.total) {
+      wx.showToast({
+        icon: 'none',
+        title: '没有选中任何商品',
+      })
+    } else {
+      wx.navigateTo({
+        url: '/pages/shop/order/comfirmOrder',
+      })
+    }
+    // const data = {}
+    // this.addOrder(data).then(res=>{})
   },
   // 授权检查
   checkAuth() {
@@ -188,43 +337,99 @@ create(store, {
     }
     return true
   },
+  // 删除购物车中的商品
+  delGoodsHandle(e) {
+    // console.log('delGoodsHandle')
+    this.setData({
+      confirmTitle: '提示',
+      confirmContent: '确定要删除该商品吗？',
+      confirmBgColor: "#F23D32",
+      confirmText: '删除',
+      confirmDialogVisibile: true
+    })
+    const item = e.currentTarget.dataset.item
+    const cartData = {
+      type: item.type, //1：单单位（列表页面和购物车页面） 2:多单位（商品详情和购物车）3:清空购物车
+      shop_id: this.store.data.shop_id,
+      goods_id: item.id,
+      unit_id: item.unit_id
+    }
+    this.data.tempDelGoodsData = cartData
+
+    // const index = e.currentTarget.dataset.index
+  },
+  diaConfirmHandle(params) {
+    this.delCart(this.data.tempDelGoodsData).then(res => {
+      // 更新购物车数据
+      this.getCartData()
+    })
+  },
+  // 单选
+  checkboxChange: function (e) {
+    console.log('checkbox发生change事件，携带value值为：', e.detail.value)
+    let myIndex = []
+
+    // this.getCartData().then(res => {
+
+    // })
+    let setData = {
+      'cartData.cache': this.data.cartData.cache,
+    }
+    if (e.detail.value.length) {
+      for (let i = 0; i < e.detail.value.length; i++) {
+        myIndex[i] = e.detail.value[i] - 0
+      }
+
+      this.data.cartData.cache.forEach((item, index) => {
+
+        if (myIndex.includes(index))
+          this.data.cartData.cache[index].checked = true
+        else
+          this.data.cartData.cache[index].checked = false
+      })
+
+      // 控制全选按钮
+      if (e.detail.value.length === this.data.cartData.cache.filter(item =>
+          ![2, 3].includes(item.status) && item.is_stock).length)
+        setData.select_all = true
+      else
+        setData.select_all = false
+    } else {
+      this.data.cartData.cache.forEach(item => {
+        item.checked = false
+      })
+
+      // 控制全选按钮
+      setData.select_all = false
+    }
+    this.setData(setData)
+    this.data.batchIndexs = myIndex //单个选中的值
+  },
+  // 全选与反选
+  checkboxAllChange(e) {
+    // console.log(e)
+    this.setData({
+      select_all: Boolean(e.detail.value.length)
+    })
+  },
   scrollToLower(e) {
     console.log(e)
     console.log('scrollToLower')
 
-    let cartList = this.data.cartList
+    // let recommendList = this.data.recommendList
 
-    if (cartList.count + 1 > cartList.total_page) return
+    // if (recommendList.count + 1 > recommendList.total_page) return
 
-    this.setData({
-      [`cartList.count`]: ++cartList.count
-    })
+    // this.setData({
+    //   'recommendList.count': ++recommendList.count
+    // })
 
-    this.getGoodscartList('scrollToLower')
+    this.getRecommendList('scrollToLower')
   },
-  delGoodsHandle() {
-    console.log('delGoodsHandle')
-  },
-  checkboxChange: function (e) {
-    console.log('checkbox发生change事件，携带value值为：', e.detail.value)
-  },
-  selectall() {
-    var that = this;
-    for (let i = 0; i < that.data.listData.length; i++) {
-      that.data.listData[i].checked = (!that.data.select_all)
-    }
-    that.setData({
-      listData: that.data.listData,
-      select_all: (!that.data.select_all)
-    })
-  },
-  quantityBlurHandle() {
-    console.log('quantityBlurHandle')
-  },
-  getCartList(dataObj) {
+  getCartData(dataObj) {
     const tempData = {
-      page: this.data.cartList.count,
-      page_size: this.data.page_size,
+      // page: this.data.cartData.count,
+      // page_size: this.data.page_size,
       shop_id: this.store.data.shop_id
     }
 
@@ -235,18 +440,82 @@ create(store, {
     }
 
     return new Promise((resolve, reject) => {
-      getCartList(tempData).then(res => {
+      getCartData(tempData).then(res => {
         if (dataObj === 'scrollToLower') {
-          this.data.cartList.cache.push(...res.data.data)
+          this.data.cartData.cache.push(...res.data.list)
           this.setData({
-            [`cartList.cache`]: this.data.cartList.cache,
-            [`cartList.total_page`]: res.data.last_page
+            'cartData.cache': this.data.cartData.cache,
           })
-          resolve(res)
         } else {
           this.setData({
-            [`cartList.cache`]: res.data.data,
-            [`cartList.total_page`]: res.data.last_page
+            // 'cartData.cache': res.data.list,
+            'cartData.total': res.data.total,
+            'cartData.coupon_total': res.data.coupon_total
+          })
+        }
+        resolve(res)
+      }).catch(err => {
+        reject(err)
+      })
+    })
+  },
+  addCart(data) {
+    return new Promise((resolve, reject) => {
+      addCart(data).then(res => {
+        resolve(res)
+      }).catch(err => {
+        reject(err)
+      })
+    })
+  },
+  delCart(data) {
+    return new Promise((resolve, reject) => {
+      delCart(data).then(res => {
+        resolve(res)
+      }).catch(err => {
+        reject(err)
+      })
+    })
+  },
+  addOrder(data) {
+    return new Promise((resolve, reject) => {
+      addOrder(data).then(res => {
+        resolve(res)
+      }).catch(err => {
+        reject(err)
+      })
+    })
+  },
+  getRecommendList(dataObj) {
+    const tempData = {
+      // page: this.data.recommendList.count,
+      // page_size: this.data.page_size,
+      shop_id: this.store.data.shop_id
+    }
+
+    if (typeof dataObj === 'object') {
+      Object.keys(dataObj).forEach(key => {
+        tempData[key] = dataObj[key]
+      })
+    }
+
+    return new Promise((resolve, reject) => {
+      getRecommendList(tempData).then(res => {
+        if (dataObj === 'scrollToLower') {
+          this.data.recommendList.cache.push(...res.data)
+          this.setData({
+            'recommendList.cache': this.data.recommendList.cache,
+            // 'recommendList.total_page': res.data.last_page
+          })
+          resolve(res)
+
+          console.log(this.data.recommendList)
+        } else {
+          this.setData({
+            // 测试数据
+            // [`recommendList.cache`]: [].concat(res.data.data).concat(res.data.data).concat(res.data.data).concat(res.data.data),
+            'recommendList.cache': res.data,
+            // 'recommendList.total_pag': res.data.last_page
           })
         }
       }).catch(err => {
@@ -262,6 +531,8 @@ create(store, {
       selected: 2
     })
 
+    getApp().setWatcher(this) //设置监听器
+
     getMyCouponList({
       type: 0
     }).then(res => {
@@ -271,7 +542,8 @@ create(store, {
       })
     })
 
-    this.getCartList()
+    this.getCartData()
+    this.getRecommendList()
   },
 
   /**
@@ -290,10 +562,15 @@ create(store, {
 
     query.select('.scroll-box').boundingClientRect(function (rect) {
       that.setData({
-        scrollBoxH: rect.top,
+        scrollBoxT: rect.top,
       })
     }).exec();
 
+    query.select('.bottom').boundingClientRect(function (rect) {
+      that.setData({
+        bottomH: rect.height,
+      })
+    }).exec();
   },
 
   /**

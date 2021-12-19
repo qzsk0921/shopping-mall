@@ -67,29 +67,6 @@
   color: #949EA8;
 }
 
-.card {
-  position: relative;
-  display: flex;
-  width: 702rpx;
-  height: 196rpx;
-  background: #FFFFFF;
-  border-radius: 16rpx;
-  margin: 20rpx auto 0;
-}
-
-.card .btn {
-  position: absolute;
-  right: 24rpx;
-  top: 50%;
-  transform: translateY(-50%);
-  text-align: center;
-  width: 136rpx;
-  height: 56rpx;
-  line-height: 56rpx;
-  border-radius: 28rpx;
-  font-size: 26rpx;
-}
-
 .btn1 {
   background: #FF723B;
   color: #FFFFFF;
@@ -105,52 +82,63 @@
   background: #C4C4C4;
 }
 
-.card .line {
-  position: absolute;
-  left: 202rpx;
-  top: 50%;
-  transform: translateY(-50%);
-  width: 3rpx;
-  height: 116rpx;
-  background: #eeeeee;
+.card {
+  margin: 20rpx auto 0;
+  width: 702rpx;
+  border-radius: 16rpx;
+  background: #FFFFFF;
+  display: flex;
+  align-items: center;
 }
 
 .card .left {
   width: 202rpx;
+  background: #FFFFFF;
   text-align: center;
 }
 
-.card .left .l1 {
-  margin-top: 42rpx;
+.card .left .l1 {}
+
+.card .left .l1 text:first-child {
   font-size: 32rpx;
   font-weight: bold;
   color: #FC4953;
 }
 
-.card .left .l1>text {
+.card .left .l1 text:last-child {
   font-size: 70rpx;
   font-weight: bold;
   color: #FC4953;
 }
 
+
 .card .left .l2 {
-  margin-top: 20rpx;
+  margin-top: 13rpx;
   font-size: 22rpx;
   color: #777777;
 }
 
+.card .center {
+  width: 3rpx;
+  height: 116rpx;
+  background: #EEEEEE;
+}
+
 .card .right {
-  padding: 40rpx 0 40rpx 44rpx;
+  box-sizing: content-box;
+  width: 300rpx;
+  padding: 35rpx 0 40rpx 44rpx;
 }
 
 .card .right .l1 {
   font-size: 30rpx;
+  line-height: 40rpx;
   font-weight: bold;
   color: #333333;
 }
 
 .card .right .l2 {
-  margin-top: 20rpx;
+  margin-top: 15rpx;
   font-size: 24rpx;
   color: #777777;
 }
@@ -159,6 +147,43 @@
   margin-top: 19rpx;
   font-size: 22rpx;
   color: #777777;
+}
+
+.card .btn-coupon {
+  text-align: center;
+  width: 136rpx;
+  height: 56rpx;
+  line-height: 56rpx;
+  border-radius: 28rpx;
+  font-size: 26rpx;
+  color: #FFFFFF;
+}
+
+/* 0:领取 */
+.status0 {
+  background: #27C068;
+}
+
+/* 1:立刻使用 */
+.status1 {
+  background: #FF723B;
+}
+
+/* 2:已抢光 */
+.status2 {
+  background: #C4C4C4;
+}
+
+/* 3:已领取 */
+.status3 {
+  background: #C4C4C4;
+}
+
+/* 4:已使用 */
+.status4 {
+  background: #FFFFFF;
+  border: 2rpx solid #DDDDDD;
+  color: #666666;
 }
 
 .nothing {

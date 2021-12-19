@@ -1,0 +1,21 @@
+module.exports = {
+  //保留两位
+  calcAmount: function (goods, indexs, isVip) {
+    console.log(999)
+    var price = 0
+    goods.forEach(function (item, index) {
+      indexs.forEach(function (ind) {
+        if (ind == index) {
+          if (isVip) {
+            // 会员
+            price += Number(item.price)
+          } else {
+            // 非会员
+            price += Number(item.market_price)
+          }
+        }
+      })
+    })
+    return price
+  }
+}

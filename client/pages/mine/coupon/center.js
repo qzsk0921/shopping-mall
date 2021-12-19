@@ -3,7 +3,8 @@ import store from '../../../store/common'
 import create from '../../../utils/create'
 
 import {
-  getCouponMarketList
+  getCouponMarketList,
+  getCoupon
 } from '../../../api/coupon'
 // Page({
 create(store, {
@@ -25,6 +26,37 @@ create(store, {
 
     refresherEnabled: false,
     triggered: false,
+  },
+  getCouponHandle(e) {
+    const dataset = e.currentTarget.dataset
+
+    if (dataset.item.coupon_status === 0) {
+      // 领取
+      // 1. 成功， toast: 领取成功， 按钮变为立即使用
+      // 2. 失败， toast: 后台提供的msg
+      getCoupon({
+        coupon_id: dataset.item.id
+      }).then(res => {
+        this.setData({
+          [`couponMarketList.cache[${dataset.index}].coupon_status`]: 1
+        })
+
+        wx.showToast({
+          icon: 'none',
+          title: res.msg,
+        })
+      })
+
+    } else if (dataset.item.coupon_status === 1) {
+      // 立即使用
+      // 跳转至分类页面
+      wx.switchTab({
+        url: '/pages/category/category',
+      })
+    } else {
+      return false
+    }
+
   },
   getCouponMarketList(dataObj) {
 

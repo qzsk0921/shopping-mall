@@ -138,6 +138,16 @@ create(store, {
       currentSwiperIndex: e.detail.current + 1
     })
   },
+  // 更新购物车数量
+  updateCartHandle(e) {console.log(3333)
+    this.getGoodsDetail({
+      id: this.data.goods_id
+    }).then(res => {
+      this.setData({
+        goodsDetail: res.data
+      })
+    })
+  },
   getGoodsDetail(data) {
     return new Promise((resolve, reject) => {
       getGoodsDetail(data).then(res => {

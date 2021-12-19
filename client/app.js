@@ -97,20 +97,25 @@ App({
       // 假设key==='my.name',此时nowData===data['my']===data.my,lastKey==='name'
       let watchFun = watch[v].handler || watch[v]; // 兼容带handler和不带handler的两种写法
       let deep = watch[v].deep; // 若未设置deep,则为undefine
-      this.observe(nowData, lastKey, watchFun, deep, page); // 监听nowData对象的lastKey
+      let immediate = watch[v].immediate; // 若未设置immediate,则为undefine
+      this.observe(nowData, lastKey, watchFun, deep, immediate, page); // 监听nowData对象的lastKey
     })
   },
 
   /**
    * 监听属性 并执行监听函数
    */
-  observe(obj, key, watchFun, deep, page) {
+  observe(obj, key, watchFun, deep, immediate, page) {
     var val = obj[key];
     // 判断deep是true 且 val不能为空 且 typeof val==='object'（数组内数值变化也需要深度监听）
     if (deep && val != null && typeof val === 'object') {
       Object.keys(val).forEach(childKey => { // 遍历val对象下的每一个key
-        this.observe(val, childKey, watchFun, deep, page); // 递归调用监听函数
+        this.observe(val, childKey, watchFun, deep, immediate, page); // 递归调用监听函数
       })
+    }
+
+    if (immediate) {
+      watchFun.call(page, val, obj); // value是新值，val是旧值
     }
     var that = this;
     Object.defineProperty(obj, key, {
@@ -121,7 +126,7 @@ App({
         watchFun.call(page, value, val, obj); // value是新值，val是旧值
         val = value;
         if (deep) { // 若是深度监听,重新监听该对象，以便监听其属性。
-          that.observe(obj, key, watchFun, deep, page);
+          that.observe(obj, key, watchFun, deep, immediate, page);
         }
       },
       get: function () {

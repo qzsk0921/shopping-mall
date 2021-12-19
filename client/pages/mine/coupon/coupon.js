@@ -70,6 +70,29 @@ create(store, {
     this.setData(objData)
     this.getMyCouponList()
   },
+  couponHandle(e) {
+    console.log(e)
+    const status = e.currentTarget.dataset.item.status
+    if (status === 0) {
+      // 导航链接，跳转至分类
+      wx.switchTab({
+        url: '/pages/category/category',
+      })
+    } else return false
+  },
+  // 滚动到最底部
+  scrollToLower(e) {
+    console.log(e)
+    console.log('scrollToLower')
+    const couponMarketList = this.data.couponMarketList
+
+    if (couponMarketList[this.data.tabIndex].count + 1 > couponMarketList[this.data.tabIndex].total_page) return
+
+    this.setData({
+      [`couponMarketList[${this.data.tabIndex}].count`]: ++couponMarketList[this.data.tabIndex].count
+    })
+    this.getMyCouponList('scrollToLower')
+  },
   getMyCouponList(dataObj) {
     const tempData = {
       page: `this.data.couponMarketList[${this.data.tabIndex}].count`,

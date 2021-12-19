@@ -1,5 +1,8 @@
 <!--pages/mine/coupon/coupon.wxml-->
 <!-- <text>pages/mine/coupon/coupon.wxml</text> -->
+<wxs module="tools" src="./wxs/index.wxs"></wxs>
+<wxs module="commontools" src="../../../wxs/common.wxs"></wxs>
+
 <!-- 我的优惠券 -->
 <view class="container container-coupon">
   <view class="fixed">
@@ -31,20 +34,32 @@
     <view class="section2">
       <view class="no-data" wx:if="{{couponList[tabIndex].cache.length==0}}">
         <image mode="aspectFill" src="/assets/images/empty.png"></image>
-        <view class="text">暂无优惠券</view>
+        <view class="text">暂无更多内容</view>
       </view>
-      <view class='coupon-list business' wx:elif="{{couponList[tabIndex].cache.length}}">
-        <view class="card" style="{{item.translateX}}" wx:for="{{couponList[tabIndex].cache}}" wx:key="unique">
-          <view class="line"></view>
-          <view class="btn btn-use btn{{item.status}}">{{item.status===1?'立即使用':item.status===2?'已使用':'已过期'}}</view>
+      <view class='coupon-list card-box' wx:elif="{{couponList[tabIndex].cache.length}}">
+        <view class="card" wx:for="{{couponList[tabIndex].cache}}" wx:key="unique">
+          <!-- <view class="line"></view> -->
+          <!-- <view class="btn btn-use btn{{item.status}}">{{item.status===1?'立即使用':item.status===2?'已使用':'已过期'}}</view> -->
           <view class="left">
-            <view class="l1">￥<text>{{item.price}}</text></view>
-            <view class="l2">{{item.condition}}</view>
+            <view class="l1">
+              <text>￥</text>
+              <text>{{tools.parseInt(item.discount)}}</text>
+            </view>
+            <view class="l2">满{{item.money_limit}}可用</view>
           </view>
+          <view class="center separator"></view>
           <view class="right">
-            <view class="l1">{{item.tit}}</view>
+            <!-- <view class="l1">{{item.tit}}</view>
             <view class="l2">{{item.tip}}</view>
-            <view class="l3">{{item.timeStr}}</view>
+            <view class="l3">{{item.timeStr}}</view> -->
+            <view class="l1 l">{{item.coupon_name}}</view>
+            <view class="l2 l one-txt-cut">{{item.content}}</view>
+            <view class="l3 l">{{commontools.formatTime(item.start_time*1000,'yy-mm-dd')}}至{{commontools.formatTime(item.end_time*1000,'yy-mm-dd')}}</view>
+          </view>
+          <view class="rright btn btn-coupon status{{item.status}}" bindtap="couponHandle" data-item="{{item}}" data-index="{{index}}">
+            <!-- {{tools.parsePouponStatus(item.coupon_status)}} -->
+            <!-- 0:待使用 1:已使用 -2:已过期 -->
+            {{item.status===0?'立即使用':item.status===1?'已使用':'已过期'}}
           </view>
         </view>
         <view class="nothing" wx:if="couponList[tabIndex].total_page===couponList[tabIndex].count">没有更多了~</view>

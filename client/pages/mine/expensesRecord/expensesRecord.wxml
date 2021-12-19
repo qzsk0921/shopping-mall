@@ -7,32 +7,38 @@
   <view class="content" style="height:{{compatibleInfo.isIphoneX?compatibleInfo.systemInfo.screenHeight-(32+compatibleInfo.navHeight)+'px':compatibleInfo.systemInfo.screenHeight-(compatibleInfo.navHeight)+'px'}}">
     <view class="l1">
       <view class="l1-1">总消费</view>
-      <view class="l1-2"><text>9831.23</text><text>元</text></view>
+      <view class="l1-2"><text>{{data.total_money}}</text><text>元</text></view>
     </view>
     <view class="l2">
       <view class="top">
         <!-- <view class="separator"></view> -->
         <view class="left flex">
-          <image class="icon-calendar" src="/assets/images/consume_icon_date.png" mode="aspectFill"></image>
-          <view class="year">2021年</view>
-          <view class="arrow"></view>
+          <picker bindchange="dateChandeHandle" value="{{index}}" range="{{yearArr}}">
+            <view class="picker">
+              <image class="icon-calendar" src="/assets/images/consume_icon_date.png" mode="aspectFill"></image>
+              <view class="year">{{yearArr[index]}}年</view>
+              <view class="arrow"></view>
+            </view>
+          </picker>
         </view>
         <view class="right flex">
           <view class="right-l1">
             <text>消费：</text>
-            <text>7686.34元</text>
+            <text>{{data.pay_money}}元</text>
           </view>
           <view class="right-l2">
             <text>优惠：</text>
-            <text>686.34元</text>
+            <text>{{data.discount_money}}元</text>
           </view>
         </view>
       </view>
-      <view class="cont">
-        <view class="l1">10月</view>
-        <view class="l2">
-          <view class="flex">消费：7686.34元</view>
-          <view class="flex">优惠：686.34元</view>
+      <view class="cont hide-scrollbar" style="height:{{compatibleInfo.isIphoneX?compatibleInfo.systemInfo.screenHeight-(32+contTop)+'px':compatibleInfo.systemInfo.screenHeight-(contTop)+'px'}}">
+        <view class="item" wx:for="{{data.list}}" wx:key="unique">
+          <view class="l1">{{item.month}}月</view>
+          <view class="l2">
+            <view class="flex">消费：{{item.pay_money}}元</view>
+            <view class="flex">优惠：{{item.discount_money}}元</view>
+          </view>
         </view>
       </view>
     </view>

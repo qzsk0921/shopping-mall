@@ -35,9 +35,10 @@
             <!-- <view class="btn-close"></view> -->
             <!-- 选择商品数量 -->
             <view class="goods-quantity-control">
-              <view class="tip {{item.stock<=item.cart_number?'active':''}}">达最大数量</view>
+              <!-- 预售商品不做限制 -->
+              <view class="tip {{(item.stock<=item.cart_number&&!item.is_pre_sale)?'active':''}}">达最大数量</view>
               <image class="reduce" src="/assets/images/car_icon_reduce.png" mode="aspectFill" data-item="{{item}}" data-index="{{index}}" bindtap="reduceHandle"></image>
-              <input class="quantity" type="number" value="{{item.cart_number}}" data-item="{{item}}" data-index="{{index}}" bindblur="inputBlurHandle" />
+              <input class="quantity" type="number" value="{{item.cart_number}}" data-item="{{item}}" data-index="{{index}}" disabled="true" bindblur="inputBlurHandle" />
               <image class="add" src="/assets/images/car_icon_add.png" mode="aspectFill" data-item="{{item}}" data-index="{{index}}" bindtap="addHandle"></image>
             </view>
             <view class="left">
@@ -86,8 +87,8 @@
           <view></view>
         </view>
         <view class="item-box">
-          <view class="item" wx:for="{{recommendList.cache}}" wx:key="unique" wx:for-item="itemName" data-id="{{itemName.id}}" bindtap="toGoodsDetail">
-            <image class="icon-pri" src="{{itemName.thumb}}" mode="aspectFill"></image>
+          <view class="item" wx:for="{{recommendList.cache}}" wx:key="unique" wx:for-item="itemName">
+            <image class="icon-pri" src="{{itemName.thumb}}" mode="aspectFill" data-id="{{itemName.id}}" bindtap="toGoodsDetail"></image>
             <view class="cont">
               <view class="l1">
                 <view wx:if="{{itemName.is_pre_sale===1 || itemName.activity_info.activity_name}}" class="tag {{itemName.is_pre_sale===1?'pre_sale':itemName.activity_info.activity_name?'new_activity':''}}">{{itemName.is_pre_sale===1?'预售专区':itemName.activity_info.activity_name?'新品上市':''}}</view>
@@ -111,7 +112,7 @@
                 <view class="origin-price">￥{{itemName.market_price}}</view>
               </view>
             </view>
-            <view class="shopcart-box">
+            <view class="shopcart-box" catchtap="addArtHandle" data-item="{{itemName}}">
               <image class="icon-shopcart" mode="aspectFill" src="/assets/images/icon_car.png"></image>
               <view class="shopcart-info">{{itemName.cart_number}}</view>
             </view>
@@ -137,7 +138,7 @@
         <view wx:if="{{discountPrice}}" class="left-b">已优惠{{discountPrice}}</view>
       </view>
       <view class="right">
-        <view class="btn btn-pay" bindtap="payHandle">结算({{cartData.total}})</view>
+        <view class="btn btn-pay" bindtap="confirmationOrderHandle">结算({{cartData.total}})</view>
       </view>
     </view>
   </view>

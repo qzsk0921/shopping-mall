@@ -1,6 +1,11 @@
 // pages/shop/remark.js
 import store from '../../store/common'
 import create from '../../utils/create'
+
+import {
+  getRemarkList
+} from '../../api/order'
+
 // Page({
 create(store, {
 
@@ -14,6 +19,19 @@ create(store, {
     prepareList: ['提前联系', '货放隔壁店铺当面验收', '送到电话联系', '送到别打电话', '当面验收', '晚点送到', '货到厨房', '店门没锁请把货放店内', '货放隔壁店铺当面验收'],
     currentCount: 0,
     content: ''
+  },
+  submitHandle() {
+    // 在提交成功后，返回上一页（带上参数）
+    const pages = getCurrentPages();
+    const prevPage = pages[pages.length - 2]; //上一个页面
+    //直接调用上一个页面的setData()方法，把数据存到上一个页面中去
+    prevPage.setData({
+      remark: this.data.content
+    })
+
+    wx.navigateBack({
+      delta: 0,
+    })
   },
   inputHandle(e) {
     // console.log(e)
@@ -41,11 +59,26 @@ create(store, {
       content: this.data.content + data
     })
   },
+
+  getRemarkList(data) {
+    return new Promise((resolve, reject) => {
+      getRemarkList(data).then(res => {
+        resolve(res)
+      }).catch(err => {
+        reject(err)
+      })
+    })
+  },
+
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-
+    this.getRemarkList().then(res => {
+      this.setData({
+        prepareList: res.data
+      })
+    })
   },
 
   /**

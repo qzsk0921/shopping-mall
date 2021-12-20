@@ -10,6 +10,10 @@ import {
   getGoodsList
 } from '../../api/commodity'
 
+import {
+  addNumCart
+} from '../../api/cart'
+
 // Page({
 create(store, {
   /**
@@ -165,6 +169,26 @@ create(store, {
       deep: true
     }
   },
+  // 加入购物车
+  addArtHandle(e) {
+    const item = e.currentTarget.dataset.item
+    const index = e.currentTarget.dataset.index
+
+    let myData = {
+      type: 1,
+      shop_id: this.store.data.shop_id,
+      goods_id: item.id,
+      goods_num: item.cart_number + 1
+    }
+    this.addNumCart(myData).then(res => {
+      // 更新详情页购物车数据
+      // this.getGoodsList()
+      // 不适合重新渲染
+      this.setData({
+        'currentGoodsList.cache': item.cart_number + 1
+      })
+    })
+  },
   extendHandle() {
     // 展开全部分类
     console.log('extendHandle')
@@ -289,6 +313,15 @@ create(store, {
 
     this.getGoodsList()
 
+  },
+  addNumCart(data) {
+    return new Promise((resolve, reject) => {
+      addNumCart(data).then(res => {
+        resolve(res)
+      }).catch(err => {
+        reject(err)
+      })
+    })
   },
   getCategoryList(data) {
     return new Promise((resolve, reject) => {

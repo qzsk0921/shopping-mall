@@ -1,7 +1,6 @@
 module.exports = {
   //保留两位
   calcAmount: function (goods, indexs, isVip) {
-    console.log(999)
     var price = 0
     goods.forEach(function (item, index) {
       indexs.forEach(function (ind) {

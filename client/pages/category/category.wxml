@@ -40,7 +40,7 @@
           </view>
           <view class="tree-select__item-box hide-scrollbar" style="height:{{compatibleInfo.isIphoneX?compatibleInfo.systemInfo.screenHeight-(50+32+section1H+fixed+contentTipH)+'px':compatibleInfo.systemInfo.screenHeight-(50+section1H+fixed+contentTipH)+'px'}}">
             <view class="tree-select__item" wx:for="{{currentGoodsList.cache}}" wx:key="unique" id="{{item.id}}" data-id="{{item.id}}" bindtap="goodsDetailHandle">
-              <view class="shopcart-box">
+              <view class="shopcart-box" data-item="{{item}}" data-index="{{index}}" catchtap="addArtHandle" >
                 <image class="icon-shopcart" mode="aspectFill" src="/assets/images/icon_car.png"></image>
                 <view class="shopcart-info">{{item.cart_number}}</view>
               </view>

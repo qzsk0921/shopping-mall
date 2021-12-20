@@ -3,7 +3,7 @@ import store from '../../store/common'
 import create from '../../utils/create'
 
 import {
-  addCart
+  addNumCart
 } from '../../api/cart'
 
 // Component({
@@ -109,16 +109,16 @@ create({
         myData.unit_id = this.data.myGoodsDetail.unit_arr[this.data.currentUnitIndex].id
       }
 
-      this.addCart(myData).then(res => {
+      this.addNumCart(myData).then(res => {
         // 更新详情页购物车数据
         this.triggerEvent('updateCartHandle')
 
         console.log(res)
       })
     },
-    addCart(data) {
+    addNumCart(data) {
       return new Promise((resolve, reject) => {
-        addCart(data).then(res => {
+        addNumCart(data).then(res => {
           resolve(res)
         }).catch(err => {
           reject(err)

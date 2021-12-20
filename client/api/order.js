@@ -2,27 +2,57 @@
 import request from '../utils/request'
 
 /**
+ * 下单页面 Order/pre_order
+ * @param {string} shop_id require 店铺id
+ * @param {string} address_id require 用户选择地址id
+ * @param {int} is_use_coupon require	1:使用优惠券 0：不使用优惠券
+ * @param {int} coupon_id	用户的优惠券id
+ * @param {object} goods require i	是	int	商品index 0-n
+ *  {"goods_id": "2","goods_num": "2","type": "1","is_pre_goods": "0","unit_id": "1"}
+ */
+export function preOrder(data) {
+  return request({
+    url: '/Order/pre_order',
+    method: 'post',
+    data
+  })
+}
+
+/**
+ * 订单提示语 Order/get_remark_list
+ */
+export function getRemarkList() {
+  return request({
+    url: '/Order/get_remark_list',
+    method: 'get',
+  })
+}
+
+/**
  * 下单接口 Order/add_order
  * @param {string} shop_id require 店铺id
  * @param {string} address_id require 用户选择地址id
- * @param {string} goods_id require 商品id
- * @param {string} shop_id require 店铺id
- * @param {string} shop_id require 店铺id
- * @param {string} shop_id require 店铺id
- * @param {string} shop_id require 店铺id
- * @param {string} shop_id require 店铺id
- * 
-goods[i][goods_id]	是	string	
-goods[i][goods_num]	是	string	用户单件选择数量
-goods[i][type]	是	string	购物车返回type
-goods[i][is_pre_goods]	是	string	购物车返回
-goods[i][unit_id]	是	string	购物车 返回unit_id
-i	是	int	商品index 0-n
+ * @param {int} is_use_coupon require	1:使用优惠券 0：不使用优惠券
+ * @param {int} coupon_id	用户的优惠券id
+ * @param {object} goods require i	是	int	商品index 0-n
+ *  {"goods_id": "2","goods_num": "2","type": "1","is_pre_goods": "0","unit_id": "1"}
  */
 export function addOrder(data) {
   return request({
     url: '/Order/add_order',
     method: 'post',
+    data
+  })
+}
+
+/**
+ * 订单详情 Order/order_info
+ * @param {int} order_id require 订单id
+ */
+export function getOrderDetail(data) {
+  return request({
+    url: '/Order/order_info',
+    method: 'get',
     data
   })
 }

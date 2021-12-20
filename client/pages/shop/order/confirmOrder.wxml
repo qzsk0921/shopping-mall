@@ -1,19 +1,19 @@
 <!--pages/shop/confirmOrder.wxml-->
 <!-- <text>pages/shop/confirmOrder.wxml</text> -->
+<wxs module="tools" src="./wxs/index.wxs"></wxs>
+
 <view class="container container-confirmorder">
   <view class="fixed">
-    <top-navigation navigationBarTitleText="{{navigationBarTitleText}}" navHeight="{{compatibleInfo.navHeight}}"
-      navTop="{{compatibleInfo.menuButtonObject.top}}" menuButtonHeight="{{compatibleInfo.menuButtonObject.height}}"
-      status="{{navStatus}}" color="#333" />
+    <top-navigation navigationBarTitleText="{{navigationBarTitleText}}" navHeight="{{compatibleInfo.navHeight}}" navTop="{{compatibleInfo.menuButtonObject.top}}" menuButtonHeight="{{compatibleInfo.menuButtonObject.height}}" status="{{navStatus}}" color="#333" />
   </view>
   <view class="content">
     <!-- 收货地址 -->
     <view class="l1">
-      <view class="l1-1">福建省 厦门市 思明区 奥斯卡大楼 16栋之二54</view>
+      <view class="l1-1">{{orderData.receiving_address}}</view>
       <view class="l1-2">
         <image class="icon-avatar" src="/assets/images/order_head.png" mode="aspectFill"></image>
-        <text>阿克苏</text>
-        <text>13465654245</text>
+        <text>{{orderData.receiving_name}}</text>
+        <text>{{orderData.receiving_phone}}</text>
       </view>
       <image class="icon-arrow" src="/assets/images/nav_btn_next.png" mode="aspectFill"></image>
     </view>
@@ -21,28 +21,24 @@
     <view class="l2">
       <view class="l2-1">
         <text>商品信息</text>
-        <text>共3件</text>
+        <text>共{{tools.calc(orderData.goods_list)}}件</text>
         <image class="icon-arrow" src="/assets/images/nav_btn_next.png" mode="aspectFill"></image>
       </view>
       <view class="l2-2">
-        <image class="icon-goods"
-          src="https://gw.alicdn.com/tps/i1/O1CN01PWx1at1LfLtyRhW1V_!!0-juitemmedia.jpg_140x10000Q75.jpg"
-          mode="aspectFill"></image>
-        <image class="icon-goods"
-          src="https://gw.alicdn.com/tps/i1/O1CN01PWx1at1LfLtyRhW1V_!!0-juitemmedia.jpg_140x10000Q75.jpg"
-          mode="aspectFill"></image>
+        <image class="icon-goods" src="https://gw.alicdn.com/tps/i1/O1CN01PWx1at1LfLtyRhW1V_!!0-juitemmedia.jpg_140x10000Q75.jpg" mode="aspectFill"></image>
+        <image class="icon-goods" src="https://gw.alicdn.com/tps/i1/O1CN01PWx1at1LfLtyRhW1V_!!0-juitemmedia.jpg_140x10000Q75.jpg" mode="aspectFill"></image>
       </view>
       <view class="l2-3">
         <text>商品金额</text>
-        <text>￥2381.33</text>
+        <text>￥{{orderData.market_price_total}}</text>
       </view>
       <view class="l2-4">
         <text>会员优惠</text>
-        <text>￥0.00(不可用)</text>
+        <text>￥{{orderData.vip_discount_total}}(不可用)</text>
       </view>
       <view class="l2-5">
         <view><text>优惠券</text><text class="l2-5-tip">(不可与会员优惠叠加使用)</text></view>
-        <text class="preferential-amount">-￥3.00</text>
+        <text class="preferential-amount">-￥{{orderData.coupon_discount_total}}</text>
         <image class="icon-arrow" src="/assets/images/nav_btn_next.png" mode="aspectFill"></image>
       </view>
     </view>
@@ -54,7 +50,7 @@
     <!-- 备注 -->
     <view class="l4" bindtap="toRemarkHandle">
       <text>备注</text>
-      <view class="remark">可以告诉我您的需求（选填）</view>
+      <view class="remark one-txt-cut">{{remark?remark:'可以告诉我您的需求（选填）'}}</view>
       <image class="icon-arrow" src="/assets/images/nav_btn_next.png" mode="aspectFill"></image>
     </view>
     <view class="foot">
@@ -89,8 +85,8 @@
       <!-- 去支付 -->
       <view class="l6">
         <view class="left">
-          <view class="amount"><text>待支付</text><text>￥</text><text>55.12</text></view>
-          <view class="preferential-price">已优惠3.00</view>
+          <view class="amount"><text>待支付</text><text>￥</text><text>{{orderData.price_total}}</text></view>
+          <view class="preferential-price">已优惠{{orderData.discount_total}}</view>
         </view>
         <view class="right btn btn-pay">去支付</view>
       </view>

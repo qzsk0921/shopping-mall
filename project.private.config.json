@@ -155,6 +155,12 @@
           "pathName": "pages/authorization/identity",
           "query": "",
           "scene": null
+        },
+        {
+          "name": "",
+          "pathName": "pages/shop/order/confirmOrder",
+          "query": "",
+          "scene": null
         }
       ]
     }

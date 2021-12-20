@@ -31,6 +31,22 @@ export function addCart(data) {
 }
 
 /**
+ * 购物车操作 Cart/add_cart 购物车操作 直接改变数量
+ * @param {int} type 1：单单位（列表页面和购物车页面） 2:多单位（商品详情和购物车）
+ * @param {int} shop_id 店铺id
+ * @param {int} goods_id 商品id
+ * @param {int} goods_num 商品数量 -1为扣减
+ * @param {int} unit_id 多单位单位
+ */
+export function addNumCart(data) {
+  return request({
+    url: '/Cart/add_num_cart',
+    method: 'post',
+    data
+  })
+}
+
+/**
  * 删除购物车 goods/del_cart
  * @param {int} type1：单单位（列表页面和购物车页面） 2:多单位（商品详情和购物车）3:清空购物车
  * @param {int} shop_id 店铺id
@@ -39,7 +55,7 @@ export function addCart(data) {
  */
 export function delCart(data) {
   return request({
-    url: '/goods/del_cart',
+    url: '/Cart/del_cart',
     method: 'get',
     data
   })

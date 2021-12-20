@@ -1,0 +1,10 @@
+module.exports = {
+  //计算商品件数
+  calc: function (list) {
+    var num = 0
+    list.forEach(function (item, index) {
+      num += (item.cart_number - 0)
+    })
+    return num
+  }
+}

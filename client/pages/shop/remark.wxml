@@ -13,5 +13,5 @@
   <view class="reserves">
     <view class="item" wx:for="{{prepareList}}" wx:key="unique" data-text="{{item}}" bindtap="remarkFillHandle">{{item}}</view>
   </view>
-  <view class="btn btn-submit">确定</view>
+  <view class="btn btn-submit" bindtap="submitHandle">确定</view>
 </view>

@@ -137,7 +137,7 @@
               <view class="origin-price">￥{{item.market_price}}</view>
             </view>
           </view>
-          <view class="shopcart-box">
+          <view class="shopcart-box" catchtap="addArtHandle" data-item="{{item}}">
             <image class="icon-shopcart" mode="aspectFill" src="/assets/images/icon_car.png"></image>
             <view class="shopcart-info">{{item.cart_number}}</view>
           </view>
@@ -183,7 +183,7 @@
                   <view class="origin-price">￥{{itemName.market_price}}</view>
                 </view>
               </view>
-              <view class="shopcart-box">
+              <view class="shopcart-box" catchtap="addArtHandle" data-item="{{itemName}}">
                 <image class="icon-shopcart" mode="aspectFill" src="/assets/images/icon_car.png"></image>
                 <view class="shopcart-info">{{itemName.cart_number}}</view>
               </view>

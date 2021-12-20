@@ -33,7 +33,7 @@ create(store, {
     discountPrice: 0, //总优惠
 
     select_all: true, //全选
-    batchIndexs: [], //选中的ids
+    checkedIds: [], //选中的ids
 
     compatibleInfo: null, //navHeight menuButtonObject systemInfo isIphoneX
     navigationBarTitleText: '购物车',
@@ -135,34 +135,7 @@ create(store, {
     triggered: false,
   },
   watch: {
-    select_all: {
-      handler(nv, ov, obj) {
-        console.log(nv)
-        let arr = []; //存放选中id的数组
-
-        // 更新购物车
-        // this.getCartData().then(res => {
-        // 全选或全不选
-        this.data.cartData.cache.forEach((item, index) => {
-
-          // 有库存并且未下架或删除
-          if (![2, 3].includes(item.status) && item.is_stock) {
-
-            if (item.checked != nv) item.checked = nv
-
-            if (nv) arr = arr.concat(index)
-          }
-        })
-
-        this.setData({
-          'cartData.cache': this.data.cartData.cache,
-          batchIndexs: arr
-        })
-        // })
-      },
-      // immediate: true
-    },
-    batchIndexs: {
+    checkedIds: {
       handler(nv, ov, obj) {
         console.log(nv)
         clearTimeout(timerSearchObject)
@@ -170,8 +143,8 @@ create(store, {
           if (nv.length) {
             let totalPrice = 0
             let discountPrice = 0
-            this.data.cartData.cache.forEach((item, index) => {
-              if (nv.includes(index)) {
+            this.data.cartData.cache.forEach(item => {
+              if (nv.includes(item.id)) {
                 // 有库存并且未下架或删除
                 if (![2, 3].includes(item.status) && item.is_stock) {
                   if (this.store.data.userInfo.is_vip) {
@@ -197,39 +170,38 @@ create(store, {
           }
         }, 0)
       },
-      immediate: true
+      // immediate: true
     },
     'cartData.cache': {
       handler(nv, ov, obj) {
-        // console.log(nv)
         // console.log(obj)
 
         // 修改购物车数量和修改购物车选择
-        clearTimeout(timerSearchObject)
-        timerSearchObject = setTimeout(() => {
-          if (typeof nv === 'number') {
-            let totalPrice = 0
-            let discountPrice = 0
-            this.data.cartData.cache.forEach((item, index) => {
-              // 有库存并且未下架或删除
-              if (![2, 3].includes(item.status) && item.is_stock && item.checked) {
-                if (this.store.data.userInfo.is_vip) {
-                  // 会员
-                  totalPrice += (item.price * item.cart_number)
-                  discountPrice += ((item.market_price - item.price) * item.cart_number)
-                } else {
-                  // 非会员
-                  totalPrice += (item.market_price * item.cart_number)
-                }
+        // clearTimeout(timerSearchObject)
+        // timerSearchObject = setTimeout(() => {
+        if (typeof nv === 'object') {
+          let totalPrice = 0
+          let discountPrice = 0
+          nv.forEach((item, index) => {
+            // 有库存并且未下架或删除
+            if (![2, 3].includes(item.status) && item.is_stock && this.data.checkedIds.includes(item.id)) {
+              if (this.store.data.userInfo.is_vip) {
+                // 会员
+                totalPrice += (item.price * item.cart_number)
+                discountPrice += ((item.market_price - item.price) * item.cart_number)
+              } else {
+                // 非会员
+                totalPrice += (item.market_price * item.cart_number)
               }
-            })
+            }
+          })
 
-            this.setData({
-              totalPrice,
-              discountPrice
-            })
-          }
-        }, 200)
+          this.setData({
+            totalPrice,
+            discountPrice
+          })
+        }
+        // }, 200)
       },
       deep: true
     }
@@ -237,7 +209,6 @@ create(store, {
   // 增加商品数量
   addHandle(e) {
     const item = e.currentTarget.dataset.item
-    const index = e.currentTarget.dataset.index
 
     const cartData = {
       type: item.type,
@@ -249,20 +220,21 @@ create(store, {
     }
 
     this.addNumCart(cartData).then(res => {
-      this.setData({
-        [`cartData.cache[${index}].cart_number`]: Number(item.cart_number) + 1,
-      })
+      this.getCartData()
+      // this.setData({
+      //   [`cartData.cache[${index}].cart_number`]: Number(item.cart_number) + 1,
+      // })
     }).catch(err => {
       console.log(err.msg)
-      this.setData({
-        [`cartData.cache[${index}].cart_number`]: Number(item.cart_number),
-      })
+      this.getCartData()
+      // this.setData({
+      //   [`cartData.cache[${index}].cart_number`]: Number(item.cart_number),
+      // })
     })
   },
   // 减少商品数量
   reduceHandle(e) {
     const item = e.currentTarget.dataset.item
-    const index = e.currentTarget.dataset.index
     // 不能小于0
     if (item.cart_number - 1 <= -1) return
     const cartData = {
@@ -275,9 +247,7 @@ create(store, {
     }
 
     this.addNumCart(cartData).then(res => {
-      this.setData({
-        [`cartData.cache[${index}].cart_number`]: item.cart_number - 1,
-      })
+      this.getCartData()
     })
   },
   // 输入商品数量
@@ -313,7 +283,7 @@ create(store, {
   // },
   couponHandle() {
     // 1.有购物券 跳转至我的购物券 2.没购物券 跳转至领券中心页面
-    if (this.data.couponLen) {
+    if (this.data.cartData.coupon_total) {
       wx.navigateTo({
         url: '/pages/mine/coupon/coupon',
       })
@@ -428,8 +398,6 @@ create(store, {
       unit_id: item.unit_id
     }
     this.data.tempDelGoodsData = cartData
-
-    // const index = e.currentTarget.dataset.index
   },
   diaConfirmHandle(params) {
     this.delCart(this.data.tempDelGoodsData).then(res => {
@@ -440,51 +408,44 @@ create(store, {
   // 单选
   checkboxChange: function (e) {
     console.log('checkbox发生change事件，携带value值为：', e.detail.value)
-    let myIndex = []
-
-    // this.getCartData().then(res => {
-
-    // })
+    const myIds = e.detail.value.map(id => id - 0)
     let setData = {
-      'cartData.cache': this.data.cartData.cache
+      checkedIds: myIds
     }
 
-    if (e.detail.value.length) {
-      for (let i = 0; i < e.detail.value.length; i++) {
-        myIndex[i] = e.detail.value[i] - 0
-      }
-
-      this.data.cartData.cache.forEach((item, index) => {
-        if (myIndex.includes(index)) {
-          item.checked = true
-        } else {
-          item.checked = false
-        }
-      })
-
+    if (myIds.length) {
       // 控制全选按钮
-      if (e.detail.value.length === this.data.cartData.cache.filter(item =>
-          ![2, 3].includes(item.status) && item.is_stock).length)
-        setData.select_all = true
-      else
-        setData.select_all = false
+      if (myIds.length === this.data.cartData.cache.filter(item =>
+          ![2, 3].includes(item.status) && item.is_stock).length) {
+        if (!this.data.select_all) setData.select_all = true
+      } else {
+        if (this.data.select_all) setData.select_all = false
+      }
     } else {
-      this.data.cartData.cache.forEach(item => {
-        item.checked = false
-      })
-
       // 控制全选按钮
       setData.select_all = false
     }
 
     this.setData(setData)
-    this.data.batchIndexs = myIndex //单个选中的值
   },
   // 全选与反选
   checkboxAllChange(e) {
-    // console.log(e)
+    console.log(e)
+    const flag = Boolean(e.detail.value.length)
+
+    let arr = []; //存放选中id的数组
+
+    // 全选或全不选
+    this.data.cartData.cache.forEach(item => {
+      // 有库存并且未下架或删除
+      if (![2, 3].includes(item.status) && item.is_stock) {
+        if (flag) arr = arr.concat(item.id)
+      }
+    })
+
     this.setData({
-      select_all: Boolean(e.detail.value.length)
+      select_all: flag,
+      checkedIds: arr
     })
   },
   //跳转至商品详情页
@@ -677,30 +638,27 @@ create(store, {
       })
     }
 
-    getMyCouponList({
-      type: 0
-    }).then(res => {
-      console.log(res)
-      this.setData({
-        couponLen: res.data.data.length
-      })
-    })
+    // getMyCouponList({
+    //   type: 0
+    // }).then(res => {
+    //   console.log(res)
+    //   this.setData({
+    //     coupon_total: res.data.data.length
+    //   })
+    // })
 
     this.getCartData().then(res => {
       let arr = []
       // 全选或全不选 的处理
-      res.data.list.forEach((item, index) => {
+      res.data.list.forEach(item => {
         // 有库存并且未下架或删除
         if (![2, 3].includes(item.status) && item.is_stock) {
-          if (item.checked != this.data.select_all)
-            item.checked = this.data.select_all
-          if (this.data.select_all) arr = arr.concat(index)
+          if (this.data.select_all) arr = arr.concat(item.id)
         }
       })
 
       this.setData({
-        'cartData.cache': this.data.cartData.cache,
-        batchIndexs: arr
+        checkedIds: arr
       })
     })
 

@@ -28,12 +28,24 @@ create({
         //   userInfo: store.data.userInfo
         // })
 
+        this.setData({
+          myGoodsDetail: this.data.goodsDetail
+        })
+
         // 没有初始化过才使用默认第一个规格
-        if(!this.data.currentUnitId) {
+        if (!this.data.currentUnitId) {
           this.setData({
             currentUnitId: this.data.goodsDetail.unit_arr[0].id
           })
         }
+
+        const query = wx.createSelectorQuery().in(this)
+        query.select('.dropdown-item-down__content').boundingClientRect(rect => {
+          console.log(rect)
+          this.setData({
+            height: rect.height
+          })
+        }).exec()
       }
     }
   },
@@ -62,16 +74,20 @@ create({
     dropdownItemTapHandle() {},
     addHandle() {
       this.setData({
-        [`myGoodsDetail.unit_arr[${this.data.currentUnitIndex}].number`]: Number(this.data.myGoodsDetail.unit_arr[this.data.currentUnitIndex].number) + 1,
+        [`myGoodsDetail.unit_arr[${this.data.currentUnitIndex}].cart_number`]: Number(this.data.myGoodsDetail.unit_arr[this.data.currentUnitIndex].cart_number) + 1,
       })
     },
     reduceHandle() {
       // 不能小于0
-      if (this.data.myGoodsDetail.unit_arr[this.data.currentUnitIndex].number - 1 <= -1) return
-
-      this.setData({
-        [`myGoodsDetail.unit_arr[${this.data.currentUnitIndex}].number`]: this.data.myGoodsDetail.unit_arr[this.data.currentUnitIndex].number - 1,
-      })
+      if (this.data.myGoodsDetail.unit_arr[this.data.currentUnitIndex].cart_number - 1 <= 0) {
+        this.setData({
+          [`myGoodsDetail.unit_arr[${this.data.currentUnitIndex}].cart_number`]: this.data.myGoodsDetail.unit_arr[this.data.currentUnitIndex].cart_number,
+        })
+      } else {
+        this.setData({
+          [`myGoodsDetail.unit_arr[${this.data.currentUnitIndex}].cart_number`]: this.data.myGoodsDetail.unit_arr[this.data.currentUnitIndex].cart_number - 1,
+        })
+      }
     },
     inputBlurHandle(e) {
       // console.log(e)
@@ -97,7 +113,7 @@ create({
       let myData = {
         shop_id: store.data.shop_id,
         goods_id: this.data.myGoodsDetail.id,
-        goods_num: this.data.myGoodsDetail.unit_arr[this.data.currentUnitIndex].number
+        goods_num: this.data.myGoodsDetail.unit_arr[this.data.currentUnitIndex].cart_number
       }
 
       if (this.data.myGoodsDetail.unit_arr.length === 1) {
@@ -114,6 +130,9 @@ create({
         this.triggerEvent('updateCartHandle')
 
         console.log(res)
+      }).catch(err => {
+        // 恢复设置
+        this.triggerEvent('updateCartHandle')
       })
     },
     addNumCart(data) {
@@ -128,22 +147,10 @@ create({
   },
   lifetimes: {
     ready() {
-      // this.setData({
-      //   userInfo: store.data.userInfo
-      // })
       // 在组件在视图层布局完成后执行
-      const query = wx.createSelectorQuery().in(this)
-      query.select('.dropdown-item-down__content').boundingClientRect(rect => {
-        console.log(rect)
-        this.setData({
-          height: rect.height
-        })
-      }).exec()
     },
     attached: function () {
-      this.setData({
-        myGoodsDetail: this.data.goodsDetail
-      })
+
       // 在组件实例进入页面节点树时执行
     },
     detached: function () {

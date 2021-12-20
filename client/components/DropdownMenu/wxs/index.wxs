@@ -1,13 +1,10 @@
 module.exports = {
   filterUnit: function (unit_arr, id) {
-    var item = ''
-    unit_arr.some(function (unit) {
-      if (unit.id === id) {
-        item = unit
-        return true
+    for (var i = 0; i < unit_arr.length; i++) {
+      if (unit_arr[i].id === id) {
+        return unit_arr[i]
       }
-      return false
-    })
-    return item
+    }
+    return unit_arr[0]
   },
 }

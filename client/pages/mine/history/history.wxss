@@ -4,8 +4,7 @@
 .content {
   margin: 20rpx 24rpx 0;
   display: flex;
-  justify-content: space-between;
-  flex-wrap: wrap;
+  justify-content: center;
 }
 
 .content .no-data {
@@ -22,6 +21,12 @@
   margin-top: 30rpx;
   font-size: 30rpx;
   color: #949EA8;
+}
+
+.scroll-box .item-box {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
 }
 
 .scroll-box .item {
@@ -57,7 +62,7 @@
 }
 
 .scroll-box .item .cont .l2.no-sign,
-.section8 .item .cont .l2.no-sign {
+.scroll-box .item .cont .l2.no-sign {
   font-size: 24rpx;
   color: #888888;
   margin-bottom: 8rpx;
@@ -102,4 +107,24 @@
   color: #FFFFFF;
   min-height: 24rpx;
   padding: 0 8rpx;
+}
+
+.scroll-box .item .cont .l1 .tag {
+  float: left;
+  margin: 8rpx 6rpx 0 0;
+  text-align: center;
+  width: 96rpx;
+  height: 28rpx;
+  border-radius: 8rpx;
+  font-size: 20rpx;
+  line-height: 28rpx;
+  color: #FFFFFF;
+}
+
+.scroll-box .item .cont .l1 .tag.new_activity {
+  background: #FF7753;
+}
+
+.scroll-box .item .cont .l1 .tag.pre_sale {
+  background: #22B862;
 }

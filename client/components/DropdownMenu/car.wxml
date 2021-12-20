@@ -44,7 +44,7 @@
       <view class="left">购买数量</view>
       <view class="right">
         <image src="/assets/images/popup_icon_reduce.png" mode="aspectFill" bindtap="reduceHandle"></image>
-        <input type="number" value="{{myGoodsDetail.unit_arr[currentUnitIndex].number}}" bindblur="inputBlurHandle" disabled="true"/>
+        <input type="number" value="{{myGoodsDetail.unit_arr[currentUnitIndex].cart_number}}" bindblur="inputBlurHandle" disabled="true"/>
         <image src="/assets/images/popup_icon_add.png" mode="aspectFill" bindtap="addHandle"></image>
       </view>
     </view>

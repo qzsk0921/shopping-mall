@@ -1,20 +1,14 @@
 module.exports = {
   //保留两位
-  calcAmount: function (goods, indexs, isVip) {
-    var price = 0
-    goods.forEach(function (item, index) {
-      indexs.forEach(function (ind) {
-        if (ind == index) {
-          if (isVip) {
-            // 会员
-            price += Number(item.price)
-          } else {
-            // 非会员
-            price += Number(item.market_price)
-          }
+  checkedCheck: function (id, ids) {
+    var flag = false
+    if (ids.length) {
+      for (var i = 0; i < ids.length; i++) {
+        if (ids[i] == id) {
+          flag = true
         }
-      })
-    })
-    return price
+      }
+    }
+    return flag
   }
 }

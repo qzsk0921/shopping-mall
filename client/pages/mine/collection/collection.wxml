@@ -18,7 +18,7 @@
           <!-- 关闭按钮 -->
           <image class="btn-close" src="/assets/images/car_icon_del.png" mode="aspectFill" catchtap="delGoodsHandle" data-item="{{item}}" data-index="{{index}}">
           </image>
-          <view class="shopcart-box">
+          <view class="shopcart-box" catchtap="addArtHandle" data-item="{{item}}">
             <image class="icon-shopcart" mode="aspectFill" src="/assets/images/icon_car.png"></image>
             <view class="shopcart-info">{{item.cart_number}}</view>
           </view>

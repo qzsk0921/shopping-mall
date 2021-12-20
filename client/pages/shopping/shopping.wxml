@@ -1,6 +1,6 @@
 <!--pages/shopping/shopping.wxml-->
 <!-- <text>pages/shopping/shopping.wxml</text> -->
-<!-- <wxs module="tools" src="./wxs/index.wxs"></wxs> -->
+<wxs module="tools" src="./wxs/index.wxs"></wxs>
 
 <view class="container container-shopping">
   <view class="fixed">
@@ -10,10 +10,10 @@
   <view wx:if="{{!userInfo.is_sale||!userInfo.is_vip}}" class="coupon" bindtap="couponHandle">
     <view class="left">
       <image class="icon-coupon" src="/assets/images/car_icon_coupons.png" mode="aspectFill"></image>
-      <text>我的优惠券（共{{couponLen}}张）</text>
+      <text>我的优惠券（共{{cartData.coupon_total}}张）</text>
     </view>
     <view class="right">
-      <text>{{couponLen?'去看看':'去领券'}}</text>
+      <text>{{cartData.coupon_total?'去看看':'去领券'}}</text>
       <view class="arrow"></view>
     </view>
   </view>
@@ -37,14 +37,15 @@
             <view class="goods-quantity-control">
               <!-- 预售商品不做限制 -->
               <view class="tip {{(item.stock<=item.cart_number&&!item.is_pre_sale)?'active':''}}">达最大数量</view>
-              <image class="reduce" src="/assets/images/car_icon_reduce.png" mode="aspectFill" data-item="{{item}}" data-index="{{index}}" bindtap="reduceHandle"></image>
+              <image class="reduce" src="/assets/images/car_icon_reduce.png" mode="aspectFill" data-item="{{item}}" bindtap="reduceHandle"></image>
               <input class="quantity" type="number" value="{{item.cart_number}}" data-item="{{item}}" data-index="{{index}}" disabled="true" bindblur="inputBlurHandle" />
-              <image class="add" src="/assets/images/car_icon_add.png" mode="aspectFill" data-item="{{item}}" data-index="{{index}}" bindtap="addHandle"></image>
+              <image class="add" src="/assets/images/car_icon_add.png" mode="aspectFill" data-item="{{item}}" bindtap="addHandle"></image>
             </view>
             <view class="left">
-              <view class="checkbox-box {{item.checked?'checked':''}}">
+              <!-- <view class="checkbox-box {{item.checked?'checked':''}}"> -->
+              <view class="checkbox-box {{tools.checkedCheck(item.id, checkedIds)?'checked':''}}">
                 <image src="/assets/images/car_icon_on.png" mode="aspectFill"></image>
-                <checkbox value="{{index}}" checked="{{item.checked}}" disabled="{{(item.status===2||item.status===3)?1:item.is_stock?0:1}}" />
+                <checkbox value="{{item.id}}" checked="{{tools.checkedCheck(item.id, checkedIds)}}" disabled="{{(item.status===2||item.status===3)?1:item.is_stock?0:1}}" />
               </view>
             </view>
             <view class="center">
@@ -129,7 +130,7 @@
           <image src="/assets/images/car_icon_on.png" mode="aspectFill"></image>
           <text>全选</text>
         </view>
-        <checkbox checked="{{select_all}}" />
+        <checkbox value="all" checked="{{select_all}}" />
       </view>
     </checkbox-group>
     <view class="amount-box">

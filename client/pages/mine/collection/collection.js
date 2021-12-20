@@ -7,7 +7,9 @@ import {
   getGoodsCollectionList,
   setGoodsCollection
 } from '../../../api/commodity'
-
+import {
+  addNumCart
+} from '../../../api/cart'
 // Page({
 create(store, {
 
@@ -31,8 +33,26 @@ create(store, {
     refresherEnabled: false,
     triggered: false,
   },
-  itemHandle() {
-    console.log('itemHandle')
+  //跳转至商品详情页
+  itemHandle(e) {
+    // console.log('itemHandle')
+    wx.navigateTo({
+      url: `/pages/goods/detail?id=${e.currentTarget.dataset.id}`,
+    })
+  },
+  // 加入购物车
+  addArtHandle(e) {
+    const item = e.currentTarget.dataset.item
+    let myData = {
+      type: 1,
+      shop_id: this.store.data.shop_id,
+      goods_id: item.id,
+      goods_num: item.cart_number + 1
+    }
+    this.addNumCart(myData).then(res => {
+      // 更新
+      this.getGoodsCollectionList()
+    })
   },
   scrollToLower(e) {
     console.log(e)
@@ -104,6 +124,15 @@ create(store, {
             [`collectionList.total_page`]: res.data.last_page
           })
         }
+      }).catch(err => {
+        reject(err)
+      })
+    })
+  },
+  addNumCart(data) {
+    return new Promise((resolve, reject) => {
+      addNumCart(data).then(res => {
+        resolve(res)
       }).catch(err => {
         reject(err)
       })

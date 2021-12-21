@@ -33,7 +33,7 @@ create(store, {
     discountPrice: 0, //总优惠
 
     select_all: true, //全选
-    checkedIds: [], //选中的ids
+    checkedIds: [], //选中的id和unit_id  格式[id.unit_id]
 
     compatibleInfo: null, //navHeight menuButtonObject systemInfo isIphoneX
     navigationBarTitleText: '购物车',
@@ -144,7 +144,10 @@ create(store, {
             let totalPrice = 0
             let discountPrice = 0
             this.data.cartData.cache.forEach(item => {
-              if (nv.includes(item.id)) {
+              console.log(nv)
+              console.log(item.id + '.' + item.unit_id)
+
+              if (nv.includes(item.id + '.' + item.unit_id)) {
                 // 有库存并且未下架或删除
                 if (![2, 3].includes(item.status) && item.is_stock) {
                   if (this.store.data.userInfo.is_vip) {
@@ -154,6 +157,7 @@ create(store, {
                   } else {
                     // 非会员
                     totalPrice += (item.market_price * item.cart_number)
+                    console.log(totalPrice)
                   }
                 }
               }
@@ -184,7 +188,7 @@ create(store, {
           let discountPrice = 0
           nv.forEach((item, index) => {
             // 有库存并且未下架或删除
-            if (![2, 3].includes(item.status) && item.is_stock && this.data.checkedIds.includes(item.id)) {
+            if (![2, 3].includes(item.status) && item.is_stock && this.data.checkedIds.includes(item.id + '.' + item.unit_id)) {
               if (this.store.data.userInfo.is_vip) {
                 // 会员
                 totalPrice += (item.price * item.cart_number)
@@ -300,7 +304,9 @@ create(store, {
     // 资质校验
     if (!this.certCheck()) return
 
-    if (!this.data.cartData.total) {
+    // if(checkedIds)
+
+    if (!this.data.checkedIds.length) {
       wx.showToast({
         icon: 'none',
         title: '没有选中任何商品',
@@ -324,7 +330,7 @@ create(store, {
           "unit_id": item.unit_id
         }
 
-        if (item.checked) {
+        if (this.data.checkedIds.includes(item.id + '.' + item.unit_id)) {
           orderData.goods.push(temp)
         }
       })
@@ -407,8 +413,11 @@ create(store, {
   },
   // 单选
   checkboxChange: function (e) {
+    //1.3 1表示id 3表示unit_id
     console.log('checkbox发生change事件，携带value值为：', e.detail.value)
-    const myIds = e.detail.value.map(id => id - 0)
+    // const myIds = e.detail.value.map(id => id - 0)
+    const myIds = e.detail.value
+
     let setData = {
       checkedIds: myIds
     }
@@ -433,13 +442,13 @@ create(store, {
     console.log(e)
     const flag = Boolean(e.detail.value.length)
 
-    let arr = []; //存放选中id的数组
+    let arr = []; //存放选中id.unit_id的数组
 
     // 全选或全不选
     this.data.cartData.cache.forEach(item => {
       // 有库存并且未下架或删除
       if (![2, 3].includes(item.status) && item.is_stock) {
-        if (flag) arr = arr.concat(item.id)
+        if (flag) arr = arr.concat(item.id + '.' + item.unit_id)
       }
     })
 
@@ -454,7 +463,7 @@ create(store, {
       url: `/pages/goods/detail?id=${e.currentTarget.dataset.id}`,
     })
   },
-  // 加入购物车
+  // 加入购物车(猜你喜欢列表的购物车)
   addArtHandle(e) {
     const item = e.currentTarget.dataset.item
     let myData = {
@@ -653,7 +662,7 @@ create(store, {
       res.data.list.forEach(item => {
         // 有库存并且未下架或删除
         if (![2, 3].includes(item.status) && item.is_stock) {
-          if (this.data.select_all) arr = arr.concat(item.id)
+          if (this.data.select_all) arr = arr.concat(item.id + '.' + item.unit_id)
         }
       })
 

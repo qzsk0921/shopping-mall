@@ -161,6 +161,24 @@
           "pathName": "pages/shop/order/confirmOrder",
           "query": "",
           "scene": null
+        },
+        {
+          "name": "",
+          "pathName": "pages/shop/order/goods",
+          "query": "",
+          "scene": null
+        },
+        {
+          "name": "",
+          "pathName": "pages/shop/coupon/coupon",
+          "query": "",
+          "scene": null
+        },
+        {
+          "name": "",
+          "pathName": "pages/mine/coupon/center",
+          "query": "",
+          "scene": null
         }
       ]
     }

@@ -1,0 +1,26 @@
+/* pages/shop/order/goods.wxss */
+
+.content {
+}
+
+.section1 .l1,
+.section2 .l1 {
+  height: 84rpx;
+  font-size: 28rpx;
+  color: #999999;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.section1 .l1 text,
+.section2  .l1 text {
+  margin: 0 20rpx;
+}
+
+.section1 .l1 view,
+.section2 .l1 view {
+  width: 70rpx;
+  height: 2rpx;
+  background: #DDDDDD;
+}

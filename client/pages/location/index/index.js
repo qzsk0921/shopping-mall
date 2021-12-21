@@ -173,6 +173,17 @@ create(store, {
       wx.navigateBack({
         delta: 0,
       })
+    } else if (this.data.tag === 'confirmOrder_of_mine') {
+      // 来自确认订单页使用我的地址
+      const pages = getCurrentPages();
+      const prevPage = pages[pages.length - 2]; //上一个页面
+      //直接调用上一个页面的setData()方法，把数据存到上一个页面中去
+      prevPage.setData({
+        shopAddress: dataset.item
+      })
+      wx.navigateBack({
+        delta: 0,
+      })
     } else {
       // 个人中心点击进我的地址
       this.store.data.currentAddress = {
@@ -235,14 +246,20 @@ create(store, {
     qqmapsdk = new QQMapWX({
       key: config.tencentKey
     });
-    
+
     if (options.from && options.from.includes('mine')) {
       this.setData({
         navigationBarTitleText: '我的地址'
       })
-      if (options.from === 'cert_of_mine') {
+
+      if (options.from === 'confirmOrder_of_mine') {
+        // 来自订单确认页
         this.setData({
-          tag: 'cert_of_mine'
+          tag: options.from
+        })
+      } else if (options.from === 'cert_of_mine') {
+        this.setData({
+          tag: options.from
         })
       }
     } else {

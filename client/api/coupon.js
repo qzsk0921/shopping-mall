@@ -27,11 +27,13 @@ export function getCoupon(data) {
 /**
  * 我的优惠券列表 Coupon/my_coupon_list
  * @param {int} type require 全部 0:待使用 1:已使用 -2:已过期
+ * @param {object} goods require i	是	int	商品index 0-n
+ *  {"goods_id": "2","goods_num": "2","type": "1","is_pre_goods": "0","unit_id": "1"}
  */
 export function getMyCouponList(data) {
   return request({
     url: '/Coupon/my_coupon_list',
-    method: 'get',
+    method: 'post',
     data
   })
 }

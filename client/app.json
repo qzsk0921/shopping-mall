@@ -17,6 +17,7 @@
     "pages/shop/order/myOrder",
     "pages/shop/order/detailOrder",
     "pages/shop/order/confirmOrder",
+    "pages/shop/order/goods",
     "pages/shop/coupon/coupon",
     "pages/shop/remark",
     "pages/mine/collection/collection",

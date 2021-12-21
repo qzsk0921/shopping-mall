@@ -43,15 +43,20 @@ create(store, {
   // 加入购物车
   addArtHandle(e) {
     const item = e.currentTarget.dataset.item
+    const index = e.currentTarget.dataset.index
+
     let myData = {
       type: 1,
       shop_id: this.store.data.shop_id,
       goods_id: item.id,
       goods_num: item.cart_number + 1
     }
+    
     this.addNumCart(myData).then(res => {
-      // 更新
-      this.getGoodsCollectionList()
+      // 更新购物车数值
+      this.setData({
+        [`collectionList.cache[${index}].cart_number`]: item.cart_number + 1
+      })
     })
   },
   scrollToLower(e) {

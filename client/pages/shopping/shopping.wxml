@@ -43,9 +43,9 @@
             </view>
             <view class="left">
               <!-- <view class="checkbox-box {{item.checked?'checked':''}}"> -->
-              <view class="checkbox-box {{tools.checkedCheck(item.id, checkedIds)?'checked':''}}">
+              <view class="checkbox-box {{tools.checkedCheck(item.id+'.'+item.unit_id, checkedIds)?'checked':''}}">
                 <image src="/assets/images/car_icon_on.png" mode="aspectFill"></image>
-                <checkbox value="{{item.id}}" checked="{{tools.checkedCheck(item.id, checkedIds)}}" disabled="{{(item.status===2||item.status===3)?1:item.is_stock?0:1}}" />
+                <checkbox value="{{item.id+'.'+item.unit_id}}" checked="{{tools.checkedCheck(item.id+'.'+item.unit_id, checkedIds)}}" disabled="{{(item.status===2||item.status===3)?1:item.is_stock?0:1}}" />
               </view>
             </view>
             <view class="center">

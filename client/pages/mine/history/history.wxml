@@ -39,7 +39,7 @@
               <view class="origin-price">￥{{item.market_price}}</view>
             </view>
           </view>
-          <view class="shopcart-box" catchtap="addArtHandle" data-item="{{item}}">
+          <view class="shopcart-box" catchtap="addArtHandle" data-item="{{item}}" data-index="{{index}}">
             <image class="icon-shopcart" mode="aspectFill" src="/assets/images/icon_car.png"></image>
             <view class="shopcart-info">{{item.cart_number}}</view>
           </view>

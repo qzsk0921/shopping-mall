@@ -181,6 +181,13 @@ create(store, {
       prevPage.setData({
         shopAddress: dataset.item
       })
+
+      // 收货地址存储
+      this.store.data.address_id = dataset.item.id
+      this.update()
+
+      wx.setStorageSync('address_id', dataset.item.id)
+      
       wx.navigateBack({
         delta: 0,
       })

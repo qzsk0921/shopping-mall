@@ -135,8 +135,8 @@
     </checkbox-group>
     <view class="amount-box">
       <view class="left">
-        <view class="left-t"><text>总计</text> <text class="price">￥{{totalPrice}}</text></view>
-        <view wx:if="{{discountPrice}}" class="left-b">已优惠{{discountPrice}}</view>
+        <view class="left-t"><text>总计</text> <text class="price">￥{{totalPrice/100}}</text></view>
+        <view wx:if="{{discountPrice}}" class="left-b">已优惠{{discountPrice/100}}</view>
       </view>
       <view class="right">
         <view class="btn btn-pay" bindtap="confirmationOrderHandle">结算({{cartData.total}})</view>

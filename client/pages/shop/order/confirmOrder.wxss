@@ -23,6 +23,14 @@
   position: relative;
 }
 
+.content>.l1.noaddress {
+  line-height: 90rpx;
+  height: 90rpx;
+  font-size: 30rpx;
+  font-weight: 500;
+  color: #333333;
+}
+
 .content>.l1 .l1-1 {
   margin-top: 30rpx;
   font-size: 30rpx;

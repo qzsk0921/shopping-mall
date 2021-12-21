@@ -329,8 +329,17 @@ create(store, {
           // console.log(res)
           this.store.data.shop_id = res.data.shop_id
           this.update()
-          this.data.shop_id = res.data.shop_id
+          this.setData({
+            shop_id: res.data.shop_id
+          })
           // 通过shop_id获取商城商品
+        }).catch(err => {
+          // 出现异常或当前地址没有符合店铺
+          this.store.data.shop_id = 0
+          this.update()
+          this.setData({
+            shop_id: 0
+          })
         })
       },
       deep: true
@@ -339,14 +348,26 @@ create(store, {
       handler(nv, ov, obj) {
         // console.log(nv)
         // 用用户授权地址换取店铺id
-        this.getShopData({
-          shop_id: nv
-        }).then(res => {
-          // console.log(res)
-          this.setData({
-            shopData: res.data
+        if (nv) {
+          if (!this.data.section1H) {
+            const that = this;
+            const query = wx.createSelectorQuery();
+            query.select('.section1').boundingClientRect(function (rect) {
+              that.setData({
+                section1H: rect.height,
+              })
+            }).exec();
+          }
+
+          this.getShopData({
+            shop_id: nv
+          }).then(res => {
+            // console.log(res)
+            this.setData({
+              shopData: res.data
+            })
           })
-        })
+        }
       },
       deep: true
     },
@@ -445,6 +466,7 @@ create(store, {
   onReady: function () {
     const that = this;
     const query = wx.createSelectorQuery();
+
     // 在页面渲染完成OnReady回调 获取元素高度时，如果不加定时器，获取的元素的高度还是没渲染完异步数据前的高度
     query.select('.fixed').boundingClientRect(function (rect) {
       // console.log(rect)
@@ -454,12 +476,7 @@ create(store, {
       })
     }).exec();
 
-    query.select('.section1').boundingClientRect(function (rect) {
-      that.setData({
-        // scrollViewHeight: that.store.data.systemInfo.screenHeight - (rect.height + 50),
-        section1H: rect.height,
-      })
-    }).exec();
+
 
     setTabBar.call(this)
   },
@@ -475,7 +492,7 @@ create(store, {
       })
     }
 
-    if (this.store.data.shop_id) {
+    if (this.store.data.currentAddress) {
       this.setData({
         currentAddress: this.store.data.currentAddress
       })

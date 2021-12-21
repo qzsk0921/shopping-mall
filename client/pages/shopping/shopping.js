@@ -116,8 +116,8 @@ create(store, {
         //   "is_stock": 0
         // }
       ],
-      "total": 3,
-      "coupon_total": 3,
+      total: 0,
+      coupon_total: 0,
       // count: 1,
       // total_page: 1,
     },
@@ -143,33 +143,33 @@ create(store, {
           if (nv.length) {
             let totalPrice = 0
             let discountPrice = 0
+            let total = 0 //结算商品数量
             this.data.cartData.cache.forEach(item => {
-              console.log(nv)
-              console.log(item.id + '.' + item.unit_id)
-
               if (nv.includes(item.id + '.' + item.unit_id)) {
                 // 有库存并且未下架或删除
                 if (![2, 3].includes(item.status) && item.is_stock) {
                   if (this.store.data.userInfo.is_vip) {
                     // 会员
-                    totalPrice += (item.price * item.cart_number)
-                    discountPrice += ((item.market_price - item.price) * item.cart_number)
+                    totalPrice += (item.price * 100 * item.cart_number)
+                    discountPrice += ((item.market_price * 100 - item.price * 100) * item.cart_number)
                   } else {
                     // 非会员
-                    totalPrice += (item.market_price * item.cart_number)
-                    console.log(totalPrice)
+                    totalPrice += (item.market_price * 100 * item.cart_number)
                   }
+                  total += 1
                 }
               }
             })
             this.setData({
               totalPrice,
-              discountPrice
+              discountPrice,
+              'cartData.total': total
             })
           } else {
             this.setData({
               totalPrice: 0,
-              discountPrice: 0
+              discountPrice: 0,
+              'cartData.total': 0
             })
           }
         }, 0)
@@ -186,23 +186,26 @@ create(store, {
         if (typeof nv === 'object') {
           let totalPrice = 0
           let discountPrice = 0
+          let total = 0 //结算商品数量
           nv.forEach((item, index) => {
             // 有库存并且未下架或删除
             if (![2, 3].includes(item.status) && item.is_stock && this.data.checkedIds.includes(item.id + '.' + item.unit_id)) {
               if (this.store.data.userInfo.is_vip) {
                 // 会员
-                totalPrice += (item.price * item.cart_number)
-                discountPrice += ((item.market_price - item.price) * item.cart_number)
+                totalPrice += (item.price * 100 * item.cart_number)
+                discountPrice += ((item.market_price * 100 - item.price * 100) * item.cart_number)
               } else {
                 // 非会员
-                totalPrice += (item.market_price * item.cart_number)
+                totalPrice += (item.market_price * 100 * item.cart_number)
               }
+              total += 1
             }
           })
 
           this.setData({
             totalPrice,
-            discountPrice
+            discountPrice,
+            'cartData.total': total
           })
         }
         // }, 200)
@@ -315,12 +318,14 @@ create(store, {
 
       let orderData = {
         shop_id: this.store.data.shop_id,
-        address_id: this.store.data.address_id,
         is_use_coupon: 0,
         // coupon_id: null,
         goods: []
       }
 
+      if (this.store.data.address_id) {
+        orderData.address_id = this.store.data.address_id
+      }
       this.data.cartData.cache.forEach(item => {
         const temp = {
           "goods_id": item.id,
@@ -519,7 +524,7 @@ create(store, {
         } else {
           this.setData({
             'cartData.cache': res.data.list,
-            'cartData.total': res.data.total,
+            // 'cartData.total': res.data.total,
             'cartData.coupon_total': res.data.coupon_total
           })
         }

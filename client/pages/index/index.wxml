@@ -6,7 +6,7 @@
   <view class="fixed">
     <top-navigation navigationBarTitleText="{{navigationBarTitleText}}" navHeight="{{compatibleInfo.navHeight}}" navTop="{{compatibleInfo.menuButtonObject.top}}" menuButtonHeight="{{compatibleInfo.menuButtonObject.height}}" status="{{navStatus}}" location="{{currentAddress}}" color="#333" bgColor="#FF723A" />
   </view>
-  <view class="content">
+  <view wx:if="{{shop_id}}" class="content">
     <!-- <view class="bg">
     </view> -->
     <view class="section1 input-box" bindtap="searchHandle">

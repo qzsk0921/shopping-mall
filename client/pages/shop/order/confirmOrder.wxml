@@ -8,13 +8,18 @@
   </view>
   <view class="content">
     <!-- 收货地址 -->
-    <view class="l1" bindtap="toAddressHandle">
-      <view class="l1-1">{{orderData.address_info.address}}</view>
-      <view class="l1-2">
-        <image class="icon-avatar" src="/assets/images/order_head.png" mode="aspectFill"></image>
-        <text>{{orderData.address_info.consignee_name}}</text>
-        <text>{{orderData.address_info.consignee_phone}}</text>
-      </view>
+    <view class="l1 {{orderData.address_info.address?'':'noaddress'}}" bindtap="toAddressHandle">
+      <block wx:if="{{orderData.address_info.address}}">
+        <view class="l1-1">{{orderData.address_info.address}}</view>
+        <view class="l1-2">
+          <image class="icon-avatar" src="/assets/images/order_head.png" mode="aspectFill"></image>
+          <text>{{orderData.address_info.consignee_name}}</text>
+          <text>{{orderData.address_info.consignee_phone}}</text>
+        </view>
+      </block>
+      <block wx:else>
+        <view>请选择/新建收货地址</view>
+      </block>
       <image class="icon-arrow arrow1" src="/assets/images/nav_btn_next.png" mode="aspectFill"></image>
     </view>
     <!-- 商品信息 -->

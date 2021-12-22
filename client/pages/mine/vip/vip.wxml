@@ -1,16 +1,18 @@
 <!--pages/mine/vip/vip.wxml-->
 <!-- <text>pages/mine/vip/vip.wxml</text> -->
+<wxs module="tools" src="../../../wxs/common.wxs"></wxs>
+
 <view class="container container-vip">
   <view class="fixed">
     <top-navigation navigationBarTitleText="{{navigationBarTitleText}}" navHeight="{{compatibleInfo.navHeight}}" navTop="{{compatibleInfo.menuButtonObject.top}}" menuButtonHeight="{{compatibleInfo.menuButtonObject.height}}" status="{{navStatus}}" color="#D1B491" bgColor="#1D1E24" />
   </view>
   <view class="section1">
     <image class="icon-bgvip" src="/assets/images/members_head_bk.png" mode="aspectFill"></image>
-    <view class="row1">用户昵称</view>
+    <view class="row1">{{userInfo.nick_name}}</view>
     <!-- <view class="row2">还未开通会员</view> -->
-    <view class="row2">有效期至：2021-12-31</view>
-    <!-- <view class="row3">开通既享受更多优惠价格</view> -->
-    <view class="row3 vip"><text>累计已</text><text>省26.56元</text></view>
+    <view class="row2">{{userInfo.is_vip?'有效期至：'+tools.formatTime(userInfo.vip_info.expire_time*1000, 'yy-mm-dd'):'还未开通会员'}}</view>
+    <view wx:if="{{userInfo.is_vip}}" class="row3 vip"><text>累计已</text><text>省{{userInfo.vip_info.discount}}元</text></view>
+    <view wx:else class="row3">开通既享受更多优惠价格</view>
   </view>
   <view class="section2">
     <view class="tit">套餐选择</view>
@@ -25,7 +27,7 @@
   </view>
   <view class="section3 footer">
     <view class="left"><text>￥</text><text>399</text></view>
-    <view class="right btn btn-open" bindtap="addVipHandle">立即开通</view>
+    <view class="right btn btn-open" bindtap="addVipHandle">{{userInfo.is_vip?'立即续费':'立即开通'}}</view>
   </view>
 </view>
 

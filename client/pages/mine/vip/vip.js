@@ -176,6 +176,12 @@ create(store, {
         compatibleInfo: this.store.data.compatibleInfo
       })
     }
+
+    if (!this.data.userInfo) {
+      this.setData({
+        userInfo: this.store.data.userInfo
+      })
+    }
   },
 
   /**

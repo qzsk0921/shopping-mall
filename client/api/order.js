@@ -2,7 +2,7 @@
 import request from '../utils/request'
 
 /**
- * 下单页面 Order/pre_order
+ * 下单页面（预下单） Order/pre_order
  * @param {string} shop_id require 店铺id
  * @param {string} address_id require 用户选择地址id
  * @param {int} is_use_coupon require	1:使用优惠券 0：不使用优惠券

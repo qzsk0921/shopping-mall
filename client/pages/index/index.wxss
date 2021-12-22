@@ -333,7 +333,7 @@
 }
 
 .section7 .item .cont .l1 {
-  height: 88rpx;
+  /* height: 88rpx; */
   line-height: 48rpx;
   font-size: 28rpx;
   font-weight: bold;
@@ -545,112 +545,6 @@
 }
 
 /* 分类商品 */
-.section7 {
-  margin: 20rpx 24rpx 0;
-  display: flex;
-  justify-content: space-between;
-  flex-wrap: wrap;
-}
-
-.section7 .item {
-  margin-bottom: 20rpx;
-  width: 336rpx;
-  background: #FFFFFF;
-  border-radius: 16rpx;
-  overflow: hidden;
-  position: relative;
-}
-
-.section7 .item .icon-pri {
-  width: 100%;
-  height: 336rpx;
-}
-
-.section7 .item .cont {
-  padding: 12rpx 20rpx 28rpx;
-}
-
-.section7 .item .cont .l1 {
-  height: 88rpx;
-  line-height: 48rpx;
-  font-size: 28rpx;
-  font-weight: bold;
-  color: #333333;
-}
-
-.section7 .item .cont .l2 {
-  margin-top: 14rpx;
-  display: flex;
-  align-items: flex-end;
-}
-
-.section7 .item .cont .l2 .price {
-  font-size: 34rpx;
-  font-weight: bold;
-  color: #FC4953;
-}
-
-.section7 .item .cont .l2 .price text {
-  font-size: 24rpx;
-  font-weight: bold;
-  color: #FC4953;
-}
-
-.section7 .item .cont .l2 .origin-price {
-  margin-left: 2rpx;
-  font-size: 22rpx;
-  color: #888888;
-  text-decoration: line-through;
-}
-
-.section7 .item .shopcart-box {
-  position: absolute;
-  right: 20rpx;
-  bottom: 20rpx;
-  width: 56rpx;
-  height: 56rpx;
-}
-
-.section7 .item .shopcart-box .shopcart-info {
-  text-align: center;
-  background: #FC4953;
-  position: absolute;
-  top: -6rpx;
-  right: -6rpx;
-  border-radius: 12rpx;
-  font-size: 20rpx;
-  line-height: 24rpx;
-  color: #FFFFFF;
-  min-height: 24rpx;
-  padding: 0 8rpx;
-}
-
-.section7-1 {
-  margin: 20rpx 24rpx 0;
-  width: 702rpx;
-  height: 72rpx;
-  background: #FFFFFF;
-  border-radius: 10rpx;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  background: #FFFFFF;
-}
-
-.section7-1 text {
-  font-size: 28rpx;
-  font-weight: 500;
-  line-height: 72rpx;
-  color: #888888;
-}
-
-.section7-1 image {
-  margin-left: 10rpx;
-  width: 8rpx;
-  height: 16rpx;
-}
-
-/* 分类商品 */
 .section8 {
   margin: 20rpx 24rpx 0;
 }
@@ -719,7 +613,7 @@
 }
 
 .section8 .item .cont .l1 {
-  height: 88rpx;
+  /* height: 88rpx; */
   line-height: 48rpx;
   font-size: 28rpx;
   font-weight: bold;
@@ -816,4 +710,15 @@
 
 .section8 .item .cont .l1 .tag.pre_sale {
   background: #22B862;
+}
+
+.unit {
+  font-size: 22rpx;
+  font-size: 24rpx;
+  line-height: 41rpx;
+  color: #888888;
+}
+
+.l12-box {
+  height: 127rpx;
 }

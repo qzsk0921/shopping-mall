@@ -206,7 +206,7 @@
 .section2 .item .right {
   margin-left: 24rpx;
   width: 426rpx;
-  padding-top: 20rpx;
+  padding-top: 22rpx;
 }
 
 .section2 .item.mask-box .right {
@@ -325,9 +325,7 @@
   opacity: 0;
 }
 
-.section3 {
-
-}
+.section3 {}
 
 .section3 .tit {
   display: flex;
@@ -393,7 +391,7 @@
 }
 
 .section3 .item .cont .l1 {
-  height: 88rpx;
+  /* height: 88rpx; */
   line-height: 48rpx;
   font-size: 28rpx;
   font-weight: bold;
@@ -646,4 +644,20 @@
   margin-top: 30rpx;
   font-size: 30rpx;
   color: #949EA8;
+}
+
+.unit {
+  font-size: 22rpx;
+  line-height: 37rpx;
+  color: #999999;
+}
+
+.section3 .unit {
+  font-size: 24rpx;
+  line-height: 41rpx;
+  color: #888888;
+}
+
+.section3 .l12-box {
+  height: 127rpx;
 }

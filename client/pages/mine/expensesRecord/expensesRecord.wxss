@@ -149,3 +149,19 @@
   font-size: 28rpx;
   color: var(--primary-color);
 }
+
+.no-data {
+  text-align: center;
+}
+
+.no-data image {
+  margin-top: 48rpx;
+  width: 483rpx;
+  height: 400rpx;
+}
+
+.no-data .text {
+  margin-top: 30rpx;
+  font-size: 30rpx;
+  color: #949EA8;
+}

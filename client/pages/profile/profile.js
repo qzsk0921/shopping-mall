@@ -37,19 +37,19 @@ create(store, {
         id: 1,
         imgName: 'my_order_all',
         name: '全部订单',
-        url: '/pages/shop/order/myOrder?from=mine'
+        url: '/pages/shop/order/myOrder?from=mine&type=0'
       },
       {
         id: 2,
         imgName: 'my_order_wait',
         name: '待支付',
-        url: '/pages/shop/order/myOrder?from=mine'
+        url: '/pages/shop/order/myOrder?from=mine&type=1'
       },
       {
         id: 3,
         imgName: 'my_order_done',
         name: '已支付',
-        url: '/pages/shop/order/myOrder?from=mine'
+        url: '/pages/shop/order/myOrder?from=mine&type=2'
       }
     ],
     options2: [{

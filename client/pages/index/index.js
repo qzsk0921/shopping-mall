@@ -458,6 +458,16 @@ create(store, {
 
     // 定位授权
     this.getLocation()
+
+    //第一次登陆提示json动图 显示一次 来过吗 0 没来过 1 来过
+    const jsonAddDialogVisibile = wx.getStorageSync('jsonAddDialogVisibile')
+    // console.log(jsonAddDialogVisibile)
+    if (jsonAddDialogVisibile) {
+      this.setData({
+        jsonAddDialogVisibile: 1
+      })
+      wx.setStorageSync('jsonAddDialogVisibile', 1)
+    }
   },
 
   /**

@@ -11,8 +11,10 @@
       <image class="icon-close" src="/assets/images/search_icon_close.png" mode="aspectFill" catchtap="closeHandle"></image>
       <!-- <view class="btn btn-search" bindtap="btnSearchCancelHandle">取消</view> -->
     </view>
-    <image class="icon-cart" src="/assets/images/search_icon_shop.png" mode="aspectFill" bindtap="cartClickHandle">
-    </image>
+    <view class="shopcart-box" catchtap="toArtHandle" data-item="{{item}}">
+      <image class="icon-shopcart" mode="aspectFill" src="/assets/images/btn_car.png"></image>
+      <view wx:if="{{cart_number}}" class="shopcart-info">{{cart_number}}</view>
+    </view>
   </view>
   <view wx:if="{{visibileSearchDialog}}" class="search-list hide-scrollbar" style="height:{{listH}}px">
     <view class="btn-item" wx:for="{{searchKeyList}}" wx:key="unique" bindtap='keyTapHandle' data-index='{{index}}' data-search_name="{{item.search_name}}">
@@ -58,7 +60,7 @@
               <view wx:else class="price-box no-sign">请登录查看价格</view>
               <view class="shopcart-box">
                 <image class="icon-shopcart" src="/assets/images/icon_car.png" mode="aspectFill"></image>
-                <view class="shopcart-info">{{item.cart_number}}</view>
+                <view wx:if="{{item.cart_number}}" class="shopcart-info">{{item.cart_number}}</view>
               </view>
             </view>
           </view>

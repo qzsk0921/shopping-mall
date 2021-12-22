@@ -48,7 +48,7 @@
 }
 
 .scroll-box .item .cont .l1 {
-  height: 88rpx;
+  /* height: 88rpx; */
   line-height: 48rpx;
   font-size: 28rpx;
   font-weight: bold;
@@ -127,4 +127,16 @@
 
 .scroll-box .item .cont .l1 .tag.pre_sale {
   background: #22B862;
+}
+
+
+.unit {
+  font-size: 22rpx;
+  font-size: 24rpx;
+  line-height: 41rpx;
+  color: #888888;
+}
+
+.l12-box {
+  height: 127rpx;
 }

@@ -425,6 +425,12 @@ create(store, {
       })
     })
   },
+  calcCategoryW(len) {
+    const categoryBoxW = len * 158 + 78
+    this.setData({
+      categoryBoxW
+    })
+  },
   /**
    * 生命周期函数--监听页面加载
    */
@@ -438,6 +444,10 @@ create(store, {
         firstCategory: res.data,
         currentFirstCategoryId: res.data[0].id
       })
+
+      // 计算第一分类宽度
+      this.calcCategoryW(res.data.length)
+
       this.getCategoryList({
         pid: res.data[0].id
       }).then(ress => {

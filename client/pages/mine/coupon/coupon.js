@@ -95,7 +95,7 @@ create(store, {
   },
   getMyCouponList(dataObj) {
     const tempData = {
-      page: `this.data.couponMarketList[${this.data.tabIndex}].count`,
+      page: this.data.couponMarketList[this.data.tabIndex].count,
       page_size: this.data.page_size,
     }
 

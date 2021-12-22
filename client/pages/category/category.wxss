@@ -15,10 +15,11 @@
 .section1 .category-box {
   width: 100vw;
   overflow: auto;
-  display: flex;
   /* position: relative; */
 }
-
+.section1 .category-box .item-box {
+  display: flex;
+}
 .section1 .category-box .item {
   margin: 0 29rpx;
   text-align: center;

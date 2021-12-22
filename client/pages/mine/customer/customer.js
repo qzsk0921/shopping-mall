@@ -2,6 +2,10 @@
 import store from '../../../store/common'
 import create from '../../../utils/create'
 
+import {
+  getCustomerList
+} from '../../../api/customer'
+
 // Page({
 create(store, {
 
@@ -37,11 +41,49 @@ create(store, {
       deep: true
     }
   },
+  getCustomerList(dataObj) {
+    const tempData = {
+      page: this.data.customerList.count,
+      page_size: this.data.page_size,
+    }
+
+    if (typeof dataObj === 'object') {
+      Object.keys(dataObj).forEach(key => {
+        tempData[key] = dataObj[key]
+      })
+    }
+
+    tempData.type = this.data.tabIndex
+
+    return new Promise((resolve, reject) => {
+      getCustomerList(tempData).then(res => {
+        if (dataObj === 'scrollToLower') {
+          this.data.customerList.cache.push(...res.data.data)
+          this.setData({
+            'customerList.cache': this.data.customerList.cache,
+            'customerList.total_page': res.data.last_page
+          })
+          resolve(res)
+        } else {
+          this.setData({
+            // 测试数据
+            // [`customerList.cache`]: [].concat(res.data.data).concat(res.data.data).concat(res.data.data).concat(res.data.data),
+            'customerList.cache': res.data.data,
+            'customerList.total_page': res.data.last_page
+          })
+          resolve(res)
+        }
+      }).catch(err => {
+        reject(err)
+      })
+    })
+  },
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
     getApp().setWatcher(this) //设置监听器
+    this.getCustomerList()
   },
 
   /**
@@ -93,7 +135,22 @@ create(store, {
   /**
    * 用户点击右上角分享
    */
-  onShareAppMessage: function () {
-
-  }
+  onShareAppMessage: function (res) {
+    // if (res.from === 'button') {
+    // 来自页面内转发按钮
+    return {
+      title: this.data.detail.name,
+      // path: `pages/detail/detail?id=${this.data.detail.id}&u=${this.data.jinzhu_id}&s=${this.store.data.userInfo.id}&s_id=${this.store.data.userInfo.is_sale_role?this.store.data.userInfo.is_sale_role:''}`,
+      //两种情况 商品详情,帮卖商品详情
+      path: `pages/detail/detail?id=${this.data.detail.id}&s=${this.store.data.userInfo.id}&s_id=${this.store.data.userInfo.is_sale_role?this.store.data.userInfo.id:''}&status=isEntryWithShare`,
+      imageUrl: this.data.detail.cover_url,
+      success(res) {
+        console.log('分享成功', res)
+      },
+      fail(res) {
+        console.log(res)
+      }
+    }
+    // }
+  },
 })

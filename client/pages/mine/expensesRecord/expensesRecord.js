@@ -18,19 +18,20 @@ create(store, {
     index: 20,
 
     data: {
-      "total_money": 4340,
-      "pay_money": 4340,
-      "discount_money": 20,
-      "list": [{
-          "month": "08",
-          "pay_money": "2170.00",
-          "discount_money": "10.00"
-        },
-        {
-          "month": "12",
-          "pay_money": "2170.00",
-          "discount_money": "10.00"
-        },
+      "total_money": 0,
+      "pay_money": 0,
+      "discount_money": 0,
+      "list": [
+        // {
+        //   "month": "08",
+        //   "pay_money": "2170.00",
+        //   "discount_money": "10.00"
+        // },
+        // {
+        //   "month": "12",
+        //   "pay_money": "2170.00",
+        //   "discount_money": "10.00"
+        // },
       ]
     }
   },

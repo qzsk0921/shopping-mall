@@ -59,12 +59,13 @@
                 <view wx:if="{{item.is_pre_sale===1 || item.activity_info.activity_name}}" class="tag {{item.is_pre_sale===1?'pre_sale':item.activity_info.activity_name?'new_activity':''}}">{{item.is_pre_sale===1?'预售专区':item.activity_info.activity_name?'新品上市':''}}</view>
                 {{item.goods_name}} {{item.spec}}
               </view>
+              <view class="unit">{{item.unitName}}</view>
               <!-- 未授权或未资质认证的非会员 -->
-              <view class="l4 no-sign" wx:if="{{!userInfo.phone||userInfo.is_shop_check!=1}}">
+              <view class="l4 no-sign" wx:if="{{(!userInfo.phone||userInfo.is_shop_check!=1)&&!userInfo.is_sale}}">
                 请登录查看价格
               </view>
               <!-- 授权且资质认证的非会员 -->
-              <view class="l4" wx:elif="{{!userInfo.is_vip}}">
+              <view class="l4" wx:elif="{{!userInfo.is_vip&&!userInfo.is_sale}}">
                 <view class="price">
                   <text>￥</text><text>{{item.market_price}}</text>
                 </view>
@@ -91,16 +92,19 @@
           <view class="item" wx:for="{{recommendList.cache}}" wx:key="unique" wx:for-item="itemName">
             <image class="icon-pri" src="{{itemName.thumb}}" mode="aspectFill" data-id="{{itemName.id}}" bindtap="toGoodsDetail"></image>
             <view class="cont">
-              <view class="l1">
-                <view wx:if="{{itemName.is_pre_sale===1 || itemName.activity_info.activity_name}}" class="tag {{itemName.is_pre_sale===1?'pre_sale':itemName.activity_info.activity_name?'new_activity':''}}">{{itemName.is_pre_sale===1?'预售专区':itemName.activity_info.activity_name?'新品上市':''}}</view>
-                {{itemName.goods_name}} {{itemName.spec}}
+              <view class="l12-box">
+                <view class="l1">
+                  <view wx:if="{{itemName.is_pre_sale===1 || itemName.activity_info.activity_name}}" class="tag {{itemName.is_pre_sale===1?'pre_sale':itemName.activity_info.activity_name?'new_activity':''}}">{{itemName.is_pre_sale===1?'预售专区':itemName.activity_info.activity_name?'新品上市':''}}</view>
+                  {{itemName.goods_name}} {{itemName.spec}}
+                </view>
+                <view class="unit">{{item.unitName}}</view>
               </view>
               <!-- 未授权或未资质认证的非会员 -->
-              <view class="l2 no-sign" wx:if="{{!userInfo.phone||userInfo.is_shop_check!=1}}">
+              <view class="l2 no-sign" wx:if="{{(!userInfo.phone||userInfo.is_shop_check!=1)&&!userInfo.is_sale}}">
                 请登录查看价格
               </view>
               <!-- 授权且资质认证的非会员 -->
-              <view class="l2" wx:elif="{{!userInfo.is_vip}}">
+              <view class="l2" wx:elif="{{!userInfo.is_vip&&!userInfo.is_sale}}">
                 <view class="price">
                   <text>￥</text>{{itemName.market_price}}
                 </view>
@@ -115,7 +119,7 @@
             </view>
             <view class="shopcart-box" catchtap="addArtHandle" data-item="{{itemName}}">
               <image class="icon-shopcart" mode="aspectFill" src="/assets/images/icon_car.png"></image>
-              <view class="shopcart-info">{{itemName.cart_number}}</view>
+              <view wx:if="{{itemName.cart_number}}" class="shopcart-info">{{itemName.cart_number}}</view>
             </view>
           </view>
         </view>

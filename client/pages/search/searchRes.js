@@ -6,6 +6,10 @@ import {
   getKeyList
 } from '../../api/commodity'
 
+import {
+  getCartData,
+} from '../../api/cart'
+
 let timer
 // Page({
 create(store, {
@@ -53,30 +57,31 @@ create(store, {
     page_size: 10,
     currentPriceSort: null, //3:价格从高到底 4:价格从低到高
 
-    searchKeyList: [{
-        "id": 4,
-        "search_name": "车",
-        "time": 3,
-        "create_time": 1638935250
-      },
-      {
-        "id": 1,
-        "search_name": "大车",
-        "time": 2,
-        "create_time": 1638935148
-      },
-      {
-        "id": 2,
-        "search_name": "小车",
-        "time": 1,
-        "create_time": 1638935240
-      },
-      {
-        "id": 3,
-        "search_name": "货车",
-        "time": 1,
-        "create_time": 1638935245
-      },
+    searchKeyList: [
+      // {
+      //   "id": 4,
+      //   "search_name": "车",
+      //   "time": 3,
+      //   "create_time": 1638935250
+      // },
+      // {
+      //   "id": 1,
+      //   "search_name": "大车",
+      //   "time": 2,
+      //   "create_time": 1638935148
+      // },
+      // {
+      //   "id": 2,
+      //   "search_name": "小车",
+      //   "time": 1,
+      //   "create_time": 1638935240
+      // },
+      // {
+      //   "id": 3,
+      //   "search_name": "货车",
+      //   "time": 1,
+      //   "create_time": 1638935245
+      // },
 
     ]
   },
@@ -97,6 +102,11 @@ create(store, {
       },
       deep: true
     }
+  },
+  toArtHandle() {
+    wx.switchTab({
+      url: '/pages/shopping/shopping',
+    })
   },
   // 搜索框获取焦点
   focusHandle(e) {
@@ -153,7 +163,7 @@ create(store, {
           keyword: val
         }).then(res => {
           _this.setData({
-            // searchKeyList: res.data
+            searchKeyList: res.data
           })
         })
       } else {
@@ -386,6 +396,14 @@ create(store, {
         userInfo: this.store.data.userInfo
       })
     }
+
+    getCartData({
+      shop_id: this.store.data.shop_id
+    }).then(res => {
+      this.setData({
+        cart_number: res.data.total
+      })
+    })
   },
 
   /**

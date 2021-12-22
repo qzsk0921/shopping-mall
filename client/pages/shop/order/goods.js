@@ -17,9 +17,26 @@ create(store, {
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    this.setData({
-      navigationBarTitleText: '共2件商品'
-    })
+
+    const {
+      preData
+    } = options
+
+    if (preData) {
+      const myPreData = JSON.parse(options.preData)
+      // 普通商品
+      const normalList = myPreData.filter(item => !item.activity_info.activity_id && !item.is_pre_sale)
+      // 折扣商品
+      const discountList = myPreData.filter(item => item.activity_info.activity_id || item.is_pre_sale)
+      console.log(normalList)
+      console.log(discountList)
+
+      this.setData({
+        navigationBarTitleText: `共${myPreData.length}件商品`,
+        normalList,
+        discountList
+      })
+    }
   },
 
   /**

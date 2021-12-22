@@ -1,12 +1,12 @@
 /* pages/mine/collection/collection.wxss */
-.container-collection {
-}
+.container-collection {}
 
 .content {
   display: inline-block;
   padding: 0 24rpx;
   width: 100%;
 }
+
 .content .no-data {
   text-align: center;
 }
@@ -22,6 +22,7 @@
   font-size: 30rpx;
   color: #949EA8;
 }
+
 .content .item {
   width: 702rpx;
   margin-top: 20rpx;
@@ -68,6 +69,15 @@
   padding: 0 8rpx;
 }
 
+.content .item.mask-box .right {
+  opacity: 0.5;
+  width: 426rpx;
+}
+
+.content .item.mask-box .shopcart-box {
+  opacity: 0.5;
+}
+
 .content .item .left {
   display: flex;
   align-items: center;
@@ -75,6 +85,25 @@
 
 .content .item .left .icon-goods {
   margin: auto;
+}
+
+.content .item.mask-box .icon-goods-box {
+  position: relative;
+}
+
+.content .item.mask-box .icon-goods-box .mask {
+  border-radius: 16rpx;
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  background: #333333;
+  opacity: 0.5;
+  font-size: 24rpx;
+  color: #FFFFFF;
+  line-height: 172rpx;
+  text-align: center;
 }
 
 .content .item .l1 {
@@ -118,7 +147,7 @@
 }
 
 .content .item .l4 {
-  margin: 24rpx 0 18rpx;
+  /* margin: 24rpx 0 18rpx; */
 }
 
 .content .item .l4 text:first-child {
@@ -165,4 +194,8 @@
 .content .item .right {
   padding-left: 24rpx;
   min-height: 232rpx;
+}
+
+.l12-box {
+  height: 127rpx;
 }

@@ -28,11 +28,11 @@
       </view> -->
 
       <!-- 已授权未资质认证的非会员 -->
-      <view class="l1 no-sign" wx:if="{{!userInfo.phone||userInfo.is_shop_check!=1}}">
+      <view class="l1 no-sign" wx:if="{{(!userInfo.phone||userInfo.is_shop_check!=1)&&!userInfo.is_sale}}">
         <text>￥</text><text>***</text>
       </view>
       <!-- 授权且资质认证的非会员 -->
-      <view class="l1" wx:elif="{{!userInfo.is_vip}}">
+      <view class="l1" wx:elif="{{!userInfo.is_vip&&!userInfo.is_sale}}">
         <text>￥</text><text>{{goodsDetail.market_price}}</text>
         <view wx:if="{{goodsDetail.is_pre_sale===1 || goodsDetail.activity_info.activity_name}}" class="tag {{goodsDetail.is_pre_sale===1?'pre_sale':goodsDetail.activity_info.activity_name?'new_activity':''}}">{{goodsDetail.is_pre_sale===1?'预售专区':goodsDetail.activity_info.activity_name?'新品上市':''}}</view>
       </view>

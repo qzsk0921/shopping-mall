@@ -17,16 +17,19 @@
         <view class="item" wx:for="{{historyList.cache}}" wx:key="unique" data-id="{{item.id}}" bindtap="toGoodsDetail">
           <image class="icon-pri" src="{{item.thumb}}" mode="aspectFill"></image>
           <view class="cont">
-            <view class="l1">
-              <view wx:if="{{item.is_pre_sale===1 || item.activity_info.activity_name}}" class="tag {{item.is_pre_sale===1?'pre_sale':item.activity_info.activity_name?'new_activity':''}}">{{item.is_pre_sale===1?'预售专区':item.activity_info.activity_name?'新品上市':''}}</view>
-              <text>{{item.goods_name}} {{item.spec}}</text>
+            <view class="l12-box">
+              <view class="l1">
+                <view wx:if="{{item.is_pre_sale===1 || item.activity_info.activity_name}}" class="tag {{item.is_pre_sale===1?'pre_sale':item.activity_info.activity_name?'new_activity':''}}">{{item.is_pre_sale===1?'预售专区':item.activity_info.activity_name?'新品上市':''}}</view>
+                <text>{{item.goods_name}} {{item.spec}}</text>
+              </view>
+              <view class="unit">{{itemName.unitName}}打发方式</view>
             </view>
             <!-- 未授权或未资质认证的非会员 -->
-            <view class="l2 no-sign" wx:if="{{!userInfo.phone||userInfo.is_shop_check!=1}}">
+            <view class="l2 no-sign" wx:if="{{(!userInfo.phone||userInfo.is_shop_check!=1)&&!userInfo.is_sale}}">
               请登录查看价格
             </view>
             <!-- 授权且资质认证的非会员 -->
-            <view class="l2" wx:elif="{{!userInfo.is_vip}}">
+            <view class="l2" wx:elif="{{!userInfo.is_vip&&!userInfo.is_sale}}">
               <view class="price">
                 <text>￥</text>{{item.market_price}}
               </view>
@@ -41,7 +44,7 @@
           </view>
           <view class="shopcart-box" catchtap="addArtHandle" data-item="{{item}}" data-index="{{index}}">
             <image class="icon-shopcart" mode="aspectFill" src="/assets/images/icon_car.png"></image>
-            <view class="shopcart-info">{{item.cart_number}}</view>
+            <view wx:if="{{item.cart_number}}" class="shopcart-info">{{item.cart_number}}</view>
           </view>
         </view>
       </view>

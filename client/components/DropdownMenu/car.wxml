@@ -9,14 +9,14 @@
       <image class="left" src="{{myGoodsDetail.goods_image_arr[0]}}" mode="aspectFill"></image>
       <view class="right">
         <!-- 授权未资质认证的非会员 -->
-        <block wx:if="{{!userInfo.phone||userInfo.is_shop_check!=1}}">
+        <block wx:if="{{(!userInfo.phone||userInfo.is_shop_check!=1)&&!userInfo.is_sale}}">
           <view class="l1-1">
             <text>￥</text>
             <text>***</text>
           </view>
         </block>
         <!-- 授权且资质认证的非会员 -->
-        <block wx:elif="{{!userInfo.is_vip}}">
+        <block wx:elif="{{!userInfo.is_vip&&!userInfo.is_sale}}">
           <view class="l1-1">
             <text>￥</text>
             <text>{{tools.filterUnit(myGoodsDetail.unit_arr,currentUnitId).market_price}}</text>

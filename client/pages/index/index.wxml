@@ -65,11 +65,11 @@
           <view class="item" wx:for="{{shopData.pre_goods}}" wx:key="unique" data-id="{{item.id}}" bindtap="toGoodsDetail">
             <image class="icon-presale l1" src="{{item.thumb}}" mode="aspectFill"></image>
             <!-- 未授权或未资质认证的非会员 -->
-            <block wx:if="{{!userInfo.phone||userInfo.is_shop_check!=1}}">
+            <block wx:if="{{(!userInfo.phone||userInfo.is_shop_check!=1)&&!userInfo.is_sale}}">
               <view class="l2">￥***</view>
             </block>
             <!-- 授权且资质认证的非会员 -->
-            <block wx:elif="{{!userInfo.is_vip}}">
+            <block wx:elif="{{!userInfo.is_vip&&!userInfo.is_sale}}">
               <view class="l2">￥{{item.market_price}}</view>
             </block>
             <!-- 授权且资质认证的会员 -->
@@ -96,11 +96,11 @@
             <image class="icon-newmarket l1" src="{{item.thumb}}" mode="aspectFill"></image>
             <!-- <view class="l2">￥{{item.price}}</view> -->
             <!-- 未授权或未资质认证的非会员 -->
-            <block wx:if="{{!userInfo.phone||userInfo.is_shop_check!=1}}">
+            <block wx:if="{{(!userInfo.phone||userInfo.is_shop_check!=1)&&!userInfo.is_sale}}">
               <view class="l2">￥***</view>
             </block>
             <!-- 授权且资质认证的非会员 -->
-            <block wx:elif="{{!userInfo.is_vip}}">
+            <block wx:elif="{{!userInfo.is_vip&&!userInfo.is_sale}}">
               <view class="l2">￥{{item.price}}</view>
             </block>
             <!-- 授权且资质认证的会员 -->
@@ -115,16 +115,19 @@
         <view class="item" wx:for="{{shopData.group_goods[0].goods_list}}" wx:key="unique" data-id="{{item.id}}" bindtap="toGoodsDetail">
           <image class="icon-pri" src="{{item.thumb}}" mode="aspectFill"></image>
           <view class="cont">
-            <view class="l1">
-              <view wx:if="{{item.is_pre_sale===1 || item.activity_info.activity_name}}" class="tag {{item.is_pre_sale===1?'pre_sale':item.activity_info.activity_name?'new_activity':''}}">{{item.is_pre_sale===1?'预售专区':item.activity_info.activity_name?'新品上市':''}}</view>
-              <text>{{item.goods_name}} {{item.spec}}</text>
+            <view class="l12-box">
+              <view class="l1">
+                <view wx:if="{{item.is_pre_sale===1 || item.activity_info.activity_name}}" class="tag {{item.is_pre_sale===1?'pre_sale':item.activity_info.activity_name?'new_activity':''}}">{{item.is_pre_sale===1?'预售专区':item.activity_info.activity_name?'新品上市':''}}</view>
+                <text>{{item.goods_name}} {{item.spec}}</text>
+              </view>
+              <view class="unit">{{item.unitName}}</view>
             </view>
             <!-- 未授权或未资质认证的非会员 -->
-            <view class="l2 no-sign" wx:if="{{!userInfo.phone||userInfo.is_shop_check!=1}}">
+            <view class="l2 no-sign" wx:if="{{(!userInfo.phone||userInfo.is_shop_check!=1)&&!userInfo.is_sale}}">
               请登录查看价格
             </view>
             <!-- 授权且资质认证的非会员 -->
-            <view class="l2" wx:elif="{{!userInfo.is_vip}}">
+            <view class="l2" wx:elif="{{!userInfo.is_vip&&!userInfo.is_sale}}">
               <view class="price">
                 <text>￥</text>{{item.market_price}}
               </view>
@@ -139,7 +142,7 @@
           </view>
           <view class="shopcart-box" catchtap="addArtHandle" data-item="{{item}}">
             <image class="icon-shopcart" mode="aspectFill" src="/assets/images/icon_car.png"></image>
-            <view class="shopcart-info">{{item.cart_number}}</view>
+            <view wx:if="{{item.cart_number}}" class="shopcart-info">{{item.cart_number}}</view>
           </view>
         </view>
       </view>
@@ -149,7 +152,7 @@
       </view>
       <!-- 分类商品 -->
       <view class="section8" wx:if="{{shopData.shop_type_goods.length}}">
-        <view wx:for="{{shopData.shop_type_goods}}" wx:key="unique">
+        <view wx:for="{{shopData.shop_type_goods}}" wx:key="unique" wx:if="{{item.goods_list.length}}">
           <view class="tit">
             <view></view>
             <view></view>
@@ -161,16 +164,19 @@
             <view class="item" wx:for="{{item.goods_list}}" wx:key="unique" wx:for-item="itemName" data-id="{{itemName.id}}" bindtap="toGoodsDetail">
               <image class="icon-pri" src="{{itemName.thumb}}" mode="aspectFill"></image>
               <view class="cont">
-                <view class="l1">
-                  <view wx:if="{{itemName.is_pre_sale===1 || itemName.activity_info.activity_name}}" class="tag {{itemName.is_pre_sale===1?'pre_sale':itemName.activity_info.activity_name?'new_activity':''}}">{{itemName.is_pre_sale===1?'预售专区':itemName.activity_info.activity_name?'新品上市':''}}</view>
-                  {{itemName.goods_name}} {{itemName.spec}}
+                <view class="l12-box">
+                  <view class="l1">
+                    <view wx:if="{{itemName.is_pre_sale===1 || itemName.activity_info.activity_name}}" class="tag {{itemName.is_pre_sale===1?'pre_sale':itemName.activity_info.activity_name?'new_activity':''}}">{{itemName.is_pre_sale===1?'预售专区':itemName.activity_info.activity_name?'新品上市':''}}</view>
+                    {{itemName.goods_name}} {{itemName.spec}}
+                  </view>
+                  <view class="unit">{{itemName.unitName}}</view>
                 </view>
                 <!-- 未授权或未资质认证的非会员 -->
-                <view class="l2 no-sign" wx:if="{{!userInfo.phone||userInfo.is_shop_check!=1}}">
+                <view class="l2 no-sign" wx:if="{{(!userInfo.phone||userInfo.is_shop_check!=1)&&!userInfo.is_sale}}">
                   请登录查看价格
                 </view>
                 <!-- 授权且资质认证的非会员 -->
-                <view class="l2" wx:elif="{{!userInfo.is_vip}}">
+                <view class="l2" wx:elif="{{!userInfo.is_vip&&!userInfo.is_sale}}">
                   <view class="price">
                     <text>￥</text>{{itemName.market_price}}
                   </view>
@@ -185,7 +191,7 @@
               </view>
               <view class="shopcart-box" catchtap="addArtHandle" data-item="{{itemName}}">
                 <image class="icon-shopcart" mode="aspectFill" src="/assets/images/icon_car.png"></image>
-                <view class="shopcart-info">{{itemName.cart_number}}</view>
+                <view wx:if="{{itemName.cart_number}}" class="shopcart-info">{{itemName.cart_number}}</view>
               </view>
             </view>
           </view>
@@ -198,3 +204,5 @@
     </view>
   </view>
 </view>
+
+<json-add dialogVisible="{{jsonAddDialogVisibile}}" navHeight="{{compatibleInfo.navHeight}}" />

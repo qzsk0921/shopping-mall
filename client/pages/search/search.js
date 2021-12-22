@@ -22,30 +22,31 @@ create(store, {
     searchKeyword: '',
     searchHistory: [],
 
-    searchKeyList: [{
-        "id": 4,
-        "search_name": "车",
-        "time": 3,
-        "create_time": 1638935250
-      },
-      {
-        "id": 1,
-        "search_name": "大车",
-        "time": 2,
-        "create_time": 1638935148
-      },
-      {
-        "id": 2,
-        "search_name": "小车",
-        "time": 1,
-        "create_time": 1638935240
-      },
-      {
-        "id": 3,
-        "search_name": "货车",
-        "time": 1,
-        "create_time": 1638935245
-      },
+    searchKeyList: [
+      // {
+      //   "id": 4,
+      //   "search_name": "车",
+      //   "time": 3,
+      //   "create_time": 1638935250
+      // },
+      // {
+      //   "id": 1,
+      //   "search_name": "大车",
+      //   "time": 2,
+      //   "create_time": 1638935148
+      // },
+      // {
+      //   "id": 2,
+      //   "search_name": "小车",
+      //   "time": 1,
+      //   "create_time": 1638935240
+      // },
+      // {
+      //   "id": 3,
+      //   "search_name": "货车",
+      //   "time": 1,
+      //   "create_time": 1638935245
+      // },
     ]
   },
   inputHandle(e) {
@@ -66,7 +67,7 @@ create(store, {
           keyword: val
         }).then(res => {
           _this.setData({
-            // searchKeyList: res.data
+            searchKeyList: res.data
           })
         })
       } else {

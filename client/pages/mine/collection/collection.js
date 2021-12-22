@@ -44,6 +44,8 @@ create(store, {
   addArtHandle(e) {
     const item = e.currentTarget.dataset.item
     const index = e.currentTarget.dataset.index
+    // 下架或库存不足
+    if (item.status === 2 || !item.is_stock) return
 
     let myData = {
       type: 1,
@@ -51,7 +53,7 @@ create(store, {
       goods_id: item.id,
       goods_num: item.cart_number + 1
     }
-    
+
     this.addNumCart(myData).then(res => {
       // 更新购物车数值
       this.setData({
@@ -75,18 +77,30 @@ create(store, {
   },
   delGoodsHandle(e) {
     // console.log(e)
+    this.setData({
+      confirmTitle: '提示',
+      confirmContent: '确定要删除该商品吗？',
+      confirmBgColor: "#F23D32",
+      confirmText: '删除',
+      confirmDialogVisibile: true
+    })
+
     // 分为2种情况1.收藏成功2.取消收藏
     const item = e.target.dataset.item
-    const index = e.target.dataset.index
+    // const index = e.target.dataset.index
+    this.data.tempIndex = e.target.dataset.index
 
     const data = {
       goods_id: item.id,
       type: 0
     }
 
-    this.setGoodsCollection(data).then(res => {
+    this.data.tempDelGoodsData = data
+  },
+  diaConfirmHandle(params) {
+    this.setGoodsCollection(this.data.tempDelGoodsData).then(res => {
       // console.log(res)
-      this.data.collectionList.cache.splice(index, 1)
+      this.data.collectionList.cache.splice(this.data.tempIndex, 1)
       this.setData({
         'collectionList.cache': this.data.collectionList.cache
       })
@@ -147,9 +161,9 @@ create(store, {
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    this.getGoodsCollectionList().then(res => {
-      console.log(res)
-    })
+    // this.getGoodsCollectionList().then(res => {
+    //   console.log(res)
+    // })
   },
 
   /**
@@ -182,6 +196,10 @@ create(store, {
         userInfo: this.store.data.userInfo
       })
     }
+
+    this.getGoodsCollectionList().then(res => {
+      console.log(res)
+    })
   },
 
   /**

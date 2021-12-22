@@ -1,6 +1,6 @@
 <!--pages/shop/confirmOrder.wxml-->
 <!-- <text>pages/shop/confirmOrder.wxml</text> -->
-<wxs module="tools" src="./wxs/index.wxs"></wxs>
+<!-- <wxs module="tools" src="./wxs/index.wxs"></wxs> -->
 
 <view class="container container-confirmorder">
   <view class="fixed">
@@ -26,7 +26,7 @@
     <view class="l2">
       <view class="l2-1" bindtap="toOrderGoodsHandle">
         <text>商品信息</text>
-        <text>共{{tools.calc(orderData.goods_list)}}件</text>
+        <text>共{{orderData.goods_list.length}}件</text>
         <image class="icon-arrow" src="/assets/images/nav_btn_next.png" mode="aspectFill"></image>
       </view>
       <view class="l2-2">
@@ -76,7 +76,7 @@
           <view class="amount"><text>待支付</text><text>￥</text><text>{{orderData.price_total}}</text></view>
           <view class="preferential-price">已优惠{{orderData.discount_total}}</view>
         </view>
-        <view class="right btn btn-pay">去支付</view>
+        <view class="right btn btn-pay" bindtap="payHandle">去支付</view>
       </view>
     </view>
   </view>

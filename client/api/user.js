@@ -37,6 +37,7 @@ export function updateUserInfo(data) {
  * 更新微信手机
  * @param {string} encryptedData require 微信加密数据
  * @param {string} iv require 微信解密key
+ * @param {int} sale_id 业务员分享带过来的业务员id
  */
 export function updatePhone(data) {
   return request({

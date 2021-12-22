@@ -8,9 +8,11 @@
 .content {
   overflow: hidden;
 }
+
 .card-box {
   padding-bottom: 120rpx;
 }
+
 .card {
   margin: 20rpx auto 0;
   width: 702rpx;
@@ -86,6 +88,7 @@
   border-radius: 28rpx;
   font-size: 26rpx;
   color: #FFFFFF;
+  box-sizing: content-box;
 }
 
 /* 0:领取 */
@@ -112,7 +115,7 @@
 .status4 {
   background: #FFFFFF;
   border: 2rpx solid #DDDDDD;
-  color: #666666;
+  color: #666666 !important;
 }
 
 .no-data {

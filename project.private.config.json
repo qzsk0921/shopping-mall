@@ -179,6 +179,12 @@
           "pathName": "pages/mine/coupon/center",
           "query": "",
           "scene": null
+        },
+        {
+          "name": "",
+          "pathName": "pages/authorization/phone",
+          "query": "",
+          "scene": null
         }
       ]
     }

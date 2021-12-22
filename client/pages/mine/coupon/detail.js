@@ -1,6 +1,11 @@
 // pages/mine/coupon/detail.js
 import store from '../../../store/common'
 import create from '../../../utils/create'
+
+import {
+  couponDetail
+} from '../../../api/coupon'
+
 // Page({
 create(store, {
 
@@ -10,13 +15,22 @@ create(store, {
   data: {
     compatibleInfo: null, //navHeight menuButtonObject systemInfo isIphoneX
     navigationBarTitleText: '优惠券详情',
+
+    couponData: null
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-
+    const {coupon_id} = options
+    if(coupon_id) {
+      couponDetail({coupon_id}).then(res=>{
+        this.setData({
+          couponData: res.data
+        })
+      })
+    }
   },
 
   /**

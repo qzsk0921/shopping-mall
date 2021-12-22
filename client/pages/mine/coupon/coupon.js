@@ -16,7 +16,7 @@ create(store, {
     compatibleInfo: null, //navHeight menuButtonObject systemInfo isIphoneX
     navigationBarTitleText: '我的优惠券',
     tabbar: ['未使用', '已使用', '已过期'],
-    tabbarNum: [99, 0, 0],
+    tabbarNum: [0, 0, 0],
     tabIndex: 0, //0:待使用 1:已使用 -2:已过
     tabWidth: null,
     couponList: [{
@@ -70,6 +70,13 @@ create(store, {
     this.setData(objData)
     this.getMyCouponList()
   },
+  // 优惠券详情
+  toDetailHandle(e) {
+    const coupon_id = e.currentTarget.dataset.coupon_id
+    wx.navigateTo({
+      url: `/pages/mine/coupon/detail?coupon_id=${coupon_id}`,
+    })
+  },
   couponHandle(e) {
     console.log(e)
     const status = e.currentTarget.dataset.item.status
@@ -95,7 +102,7 @@ create(store, {
   },
   getMyCouponList(dataObj) {
     const tempData = {
-      page: this.data.couponMarketList[this.data.tabIndex].count,
+      page: this.data.couponList[this.data.tabIndex].count,
       page_size: this.data.page_size,
     }
 
@@ -122,9 +129,9 @@ create(store, {
             // 测试数据
             // [`couponList.cache`]: [].concat(res.data.data).concat(res.data.data).concat(res.data.data).concat(res.data.data),
             [`couponList[${this.data.tabIndex}].cache`]: res.data.data,
-            [`couponList[${this.data.tabIndex}].total_page`]: res.data.last_page
+            [`couponList[${this.data.tabIndex}].total_page`]: res.data.last_page,
+            tabbarNum: [res.data.be_user_total, 0, 0]
           })
-          // this.data.couponList[this.data.tabIndex].cache.length
         }
       }).catch(err => {
         reject(err)

@@ -47,7 +47,7 @@
         <view class="text">搜索无结果</view>
       </view>
       <view class="list" wx:else>
-        <view class="item" wx:for="{{goodsList[tabIndex].cache}}" wx:key="unique">
+        <view class="item" wx:for="{{goodsList[tabIndex].cache}}" wx:key="unique" data-id="{{item.id}}" bindtap="toGoodsDetail">
           <image class="item-image" mode="aspectFit" src="{{item.thumb}}"></image>
           <view class="item-content">
             <view class="l1">{{item.goods_name}} {{item.spec}}</view>

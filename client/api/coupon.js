@@ -37,3 +37,15 @@ export function getMyCouponList(data) {
     data
   })
 }
+
+/**
+ * 优惠券详情 Coupon/get_coupon_info
+ * @param {int} coupon_id require 优惠券id 不是我的优惠券id
+ */
+export function couponDetail(data) {
+  return request({
+    url: '/Coupon/get_coupon_info',
+    method: 'get',
+    data
+  })
+}

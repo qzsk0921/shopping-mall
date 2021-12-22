@@ -10,17 +10,17 @@
       <view class="left">
         <view class="l1">
           <text>￥</text>
-          <text>50</text>
+          <text>{{couponData.discount}}</text>
         </view>
         <view class="l2">
-          满99可用
+          满{{couponData.money_limit}}可用
         </view>
       </view>
       <view class="center separator"></view>
       <view class="right">
-        <view class="l1 l">【限时】15元新人超大红包连续包季</view>
-        <view class="l2 l one-txt-cut">酒水牛奶不可用酒水牛水牛奶不可用酒水牛奶不可</view>
-        <view class="l3 l">2021/3/21至2021/12/31</view>
+        <view class="l1 l">{{couponData.name}}</view>
+        <view class="l2 l one-txt-cut">{{couponData.content}}</view>
+        <view class="l3 l">{{couponData.time_str}}</view>
       </view>
     </view>
     <view class="specify">

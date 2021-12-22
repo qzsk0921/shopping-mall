@@ -1,5 +1,7 @@
 <!--pages/profile/profile.wxml-->
 <!-- <text>pages/profile/profile.wxml</text> -->
+<wxs module="tools" src="./wxs/index.wxs"></wxs>
+
 <view class="container container-profile">
   <view class="header">
     <image class="icon-bg" src="/assets/images/my_bk.png" mode="aspectFill"></image>
@@ -20,7 +22,7 @@
             <image wx:if="{{userInfo.is_vip}}" class="icon-badge-vip" src="/assets/images/my_members.png" mode="aspectFill"></image>
             <image wx:if="{{userInfo.is_sale}}" class="icon-badge-business" src="/assets/images/my_business.png" mode="aspectFill"></image>
           </view>
-          <view class="phone l2">{{userInfo.phone}}</view>
+          <view class="phone l2">{{tools.filterNumber(userInfo.phone)}}</view>
         </view>
       </block>
     </view>

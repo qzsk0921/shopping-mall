@@ -103,6 +103,12 @@ create(store, {
       deep: true
     }
   },
+  //跳转至商品详情页
+  toGoodsDetail(e) {
+    wx.navigateTo({
+      url: `/pages/goods/detail?id=${e.currentTarget.dataset.id}`,
+    })
+  },
   toArtHandle() {
     wx.switchTab({
       url: '/pages/shopping/shopping',

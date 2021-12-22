@@ -18,10 +18,14 @@ create(store, {
   getPhoneNumber(e) {
     console.log(e)
     if (e.detail.encryptedData) {
-      this.updatePhone({
+      const myData = {
         encryptedData: e.detail.encryptedData,
         iv: e.detail.iv,
-      }).then(res => {
+      }
+      if(this.store.data.sale_id) {
+        myData.sale_id = this.store.data.sale_id
+      }
+      this.updatePhone(myData).then(res => {
         // const data = res.data.phone
         wx.switchTab({
           url: '/pages/profile/profile',

@@ -12,10 +12,10 @@ module.exports = {
       case 2:
         text = "已抢光"
         break;
-      case 2:
+      case 3:
         text = "已领取"
         break;
-      case 2:
+      case 4:
         text = "已使用"
         break;
       default:

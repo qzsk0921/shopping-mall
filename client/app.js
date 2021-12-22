@@ -144,20 +144,19 @@ App({
       // 若想给个别页面做特殊处理 可以给特殊页面加isOverShare为true 就不会重写了
       const data = view.data
       if (!data.isOverShare) {
-        // data.isOverShare = true
-        view.onShareAppMessage = () => { //重写分享配置
-          return {
-            title: '云车在手，车源我有',
-            path: '/pages/index/index', //若无path 默认跳转分享页
-            imageUrl: '/assets/images/cloudcar.png', //若无imageUrl 截图当前页面
-            success(res) {
-              console.log('分享成功', res)
-            },
-            fail(res) {
-              console.log(res)
-            }
-          }
-        }
+        // view.onShareAppMessage = () => { //重写分享配置
+        //   return {
+        //     title: '云商城',
+        //     path: '/pages/index/index', //若无path 默认跳转分享页
+        //     imageUrl: '/assets/images/cloudcar.png', //若无imageUrl 截图当前页面
+        //     success(res) {
+        //       console.log('分享成功', res)
+        //     },
+        //     fail(res) {
+        //       console.log(res)
+        //     }
+        //   }
+        // }
       }
     })
   },

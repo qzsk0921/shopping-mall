@@ -18,6 +18,7 @@ import {
 import {
   addNumCart
 } from '../../api/cart'
+let timerSearchObject = null
 
 // Page({
 create(store, {
@@ -346,28 +347,31 @@ create(store, {
     },
     shop_id: {
       handler(nv, ov, obj) {
-        // console.log(nv)
+        console.log(nv)
         // 用用户授权地址换取店铺id
-        if (nv) {
-          if (!this.data.section1H) {
-            const that = this;
-            const query = wx.createSelectorQuery();
-            query.select('.section1').boundingClientRect(function (rect) {
-              that.setData({
-                section1H: rect.height,
-              })
-            }).exec();
-          }
+        clearTimeout(timerSearchObject)
+        timerSearchObject = setTimeout(() => {
+          if (nv) {
+            if (!this.data.section1H) {
+              const that = this;
+              const query = wx.createSelectorQuery();
+              query.select('.section1').boundingClientRect(function (rect) {
+                that.setData({
+                  section1H: rect.height,
+                })
+              }).exec();
+            }
 
-          this.getShopData({
-            shop_id: nv
-          }).then(res => {
-            // console.log(res)
-            this.setData({
-              shopData: res.data
+            this.getShopData({
+              shop_id: nv
+            }).then(res => {
+              // console.log(res)
+              this.setData({
+                shopData: res.data
+              })
             })
-          })
-        }
+          }
+        }, 500)
       },
       deep: true
     },
@@ -442,6 +446,17 @@ create(store, {
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+    // 1. 点击调用分享功能， 被邀请用户通过分享入口打开小程序并授权登录即被分享者关联为客户
+    // 2. 客户不可被其他业务员覆盖关联
+    // 3. 业务员身份变为普通用户后， 他所管理的客户可被其他业务员覆盖关联
+    const {
+      sale_id
+    } = options
+    if (sale_id) {
+      this.store.data.sale_id = sale_id
+      this.update()
+    }
+
     getApp().setWatcher(this) //设置监听器
 
     getApp().getSystemInfoCallback = (res => {

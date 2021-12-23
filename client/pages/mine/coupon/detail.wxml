@@ -3,7 +3,7 @@
 <!-- 优惠券详情 -->
 <view class="container container-coupon-detail">
   <view class="fixed">
-    <top-navigation navigationBarTitleText="{{navigationBarTitleText}}" navHeight="{{compatibleInfo.navHeight}}" navTop="{{compatibleInfo.menuButtonObject.top}}" menuButtonHeight="{{compatibleInfo.menuButtonObject.height}}" status="{{navStatus}}" color="#333" bgColor="#FFFFFF"/>
+    <top-navigation navigationBarTitleText="{{navigationBarTitleText}}" navHeight="{{compatibleInfo.navHeight}}" navTop="{{compatibleInfo.menuButtonObject.top}}" menuButtonHeight="{{compatibleInfo.menuButtonObject.height}}" status="{{navStatus}}" color="#333" bgColor="#FFFFFF" />
   </view>
   <view class="content">
     <view class="card">
@@ -25,10 +25,11 @@
     </view>
     <view class="specify">
       <view class="tit">使用说明</view>
-      <view class="l1 l">1全场通用，标注不可用券的商品除外</view>
+      <view class="l1 l">{{couponData.content}}</view>
+      <!-- <view class="l1 l">1全场通用，标注不可用券的商品除外</view>
       <view class="l2 l">2.限指定城市使用，标注不可用券的商品除外</view>
       <view class="l3 l">1全场通用，标注不可用券的商品除外</view>
-      <view class="l4 l">2.限指定城市使用，标注不可用券的商品除外</view>
+      <view class="l4 l">2.限指定城市使用，标注不可用券的商品除外</view> -->
     </view>
   </view>
 </view>

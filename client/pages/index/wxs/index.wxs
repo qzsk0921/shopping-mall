@@ -10,5 +10,20 @@ module.exports = {
       text = parseInt(last / (3600 * 24)) + '天后结束'
     }
     return text
+  },
+  parseCategory: function (list, type) {
+    var res
+    if (list) {
+      if (type === 'even') {
+        res = list.filter(function (item, index) {
+          return index % 2 === 0
+        })
+      } else if (type === 'odd') {
+        res = list.filter(function (item, index) {
+          return index % 2 === 1
+        })
+      }
+    }
+    return res
   }
 }

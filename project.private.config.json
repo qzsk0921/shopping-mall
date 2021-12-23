@@ -185,6 +185,12 @@
           "pathName": "pages/authorization/phone",
           "query": "",
           "scene": null
+        },
+        {
+          "name": "",
+          "pathName": "pages/shop/order/myOrder",
+          "query": "",
+          "scene": null
         }
       ]
     }

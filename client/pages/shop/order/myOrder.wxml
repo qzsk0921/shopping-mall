@@ -1,5 +1,8 @@
 <!--pages/shop/order/myOrder.wxml-->
 <!-- <text>pages/shop/order/myOrder.wxml</text> -->
+<wxs module="commontools" src="../../../wxs/common.wxs"></wxs>
+<wxs module="tools" src="./wxs/index.wxs"></wxs>
+
 <view class="container container-order-my">
   <view class="fixed">
     <top-navigation navigationBarTitleText="{{navigationBarTitleText}}" navHeight="{{compatibleInfo.navHeight}}" navTop="{{compatibleInfo.menuButtonObject.top}}" menuButtonHeight="{{compatibleInfo.menuButtonObject.height}}" status="{{navStatus}}" color="#333" bgColor="#FFFFFF" />
@@ -8,7 +11,7 @@
     <view class="section1">
       <view class="input-box">
         <image class="icon-search" src="/assets/images/search_icon_search.png" mode="aspectFill"></image>
-        <input class="search" placeholder="请输入商品名称、商品价格" placeholder-class="search-placeholder" type="text" />
+        <input class="search" placeholder="请输入商品名称、商品价格" placeholder-class="search-placeholder" type="text" bindblur="blurHandle" confirm-type="search" />
       </view>
     </view>
     <scroll-view class="scroll-box hide-scrollbar section2" refresher-enabled="{{refresherEnabled}}" refresher-triggered="{{triggered}}" bindscrolltolower="scrollToLower" bindrefresherrefresh="scrollToRefresherrefresh" bindrefresherpulling="scrollToRefresherPull" bindrefresherrestore="scrollToRefresherStore" bindrefresherabort="scrollToRefresherAbort" scroll-y="true">
@@ -33,34 +36,36 @@
         <view class="tabs-line" style="transform:translateX({{tabWidth*tabIndex+tabWidth/2+'px'}})translateX(-50%)">
         </view>
       </view>
-      <view class="cont" style="height:{{compatibleInfo.isIphoneX?compatibleInfo.systemInfo.screenHeight-(32+listTop)+'px':compatibleInfo.systemInfo.screenHeight-(listTop)+'px'}}">
+      <view class="cont hide-scrollbar" style="height:{{compatibleInfo.isIphoneX?compatibleInfo.systemInfo.screenHeight-(32+listTop)+'px':compatibleInfo.systemInfo.screenHeight-(listTop)+'px'}}">
         <view class="no-data" wx:if="{{orderList[tabIndex].cache.length==0}}">
           <image mode="aspectFill" src="/assets/images/empty.png"></image>
           <view class="text">暂无订单</view>
         </view>
         <view class='order-list business' wx:elif="{{orderList[tabIndex].cache.length}}">
-          <view class="card" style="{{item.translateX}}" wx:for="{{orderList[tabIndex].cache}}" wx:key="unique">
+          <view class="card" style="{{item.translateX}}" wx:for="{{orderList[tabIndex].cache}}" wx:key="unique" data-id="{{item.id}}" bindtap="toOrderHandle">
             <view class="l1">
-              <view class="left">{{item.tit}}</view>
-              <view class="right">
-                <text>{{item.tit}}</text>
+              <view class="left">{{commontools.formatTime(item.create_time*1000)}}</view>
+              <!-- 0:待支付 1:已支付 2:已取消 -->
+              <view class="right status{{item.status}}">
+                <text>{{item.status===0?'待支付':item.status===1?'已支付':'已取消'}}</text>
                 <image class="icon-arrow" src="/assets/images/nav_btn_next.png" mode="aspectFill"></image>
               </view>
             </view>
             <view class="l2">
               <view class="l2-1">
-                <image src="https://gw.alicdn.com/tps/i1/O1CN01PWx1at1LfLtyRhW1V_!!0-juitemmedia.jpg_140x10000Q75.jpg"></image>
+                <view class="image-box" style="width:{{tools.calcW(item.goods_list.length)}}rpx">
+                  <image wx:for="{{item.goods_list}}" wx:key="unique" wx:for-item="itemName" src="{{itemName.thumb}}" mode="aspectFill"></image>
+                </view>
               </view>
               <view class="l2-2">
-                <text>共 x 件</text>
+                <text>共 {{item.goods_list.length}} 件</text>
                 <text>实付</text>
-                <text>￥0.00</text>
+                <text>￥{{item.pay_money}}</text>
               </view>
             </view>
             <view class="l3">
-              <view class="btn btn-del">删除订单</view>
-              <!-- <view class="btn btn-pay">立即支付</view> -->
-              <view class="btn btn-pay">再来一单</view>
+              <view class="btn btn-del" catchtap="delOrderHandle" data-item="{{item}}">{{item.status===0?'取消订单':'删除订单'}}</view>
+              <view class="btn btn-pay btnstatus{{item.status}}" data-item="{{item}}" catchtap="payOrderHandle">{{item.status===0?'立即支付':'再来一单'}}</view>
             </view>
           </view>
         </view>

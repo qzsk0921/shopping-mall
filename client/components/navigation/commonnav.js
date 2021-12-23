@@ -32,6 +32,19 @@ create({
       }
     }
   },
+  observers: {
+    'navHeight': function (val) {
+      if(!val) {
+        wx.getSystemInfo().then(res => {
+          const navHeight = res.statusBarHeight + store.data.compatibleInfo.menuButtonObject.height + (store.data.compatibleInfo.menuButtonObject.top - res.statusBarHeight) * 2
+
+          this.setData({
+            navHeight
+          })
+        })
+      }
+    }
+  },
   options: {
     addGlobalClass: true
   },
@@ -112,6 +125,7 @@ create({
     },
     attached: function () {
       // 在组件实例进入页面节点树时执行
+      
     },
     detached: function () {
       // 在组件实例被从页面节点树移除时执行

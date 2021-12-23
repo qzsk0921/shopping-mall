@@ -9,7 +9,8 @@ export function getShopData(data) {
   return request({
     url: '/Index/home',
     method: 'get',
-    data
+    data,
+    load: 'noload'
   })
 }
 

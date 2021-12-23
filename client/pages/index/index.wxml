@@ -29,15 +29,15 @@
         </view>
       </view>
       <view class="section3 hide-scrollbar" bindtap="toCategoryHandle">
-        <view class="category-box">
+        <view class="category-box hide-scrollbar">
           <view class="l1">
-            <view class="item" wx:for="{{shopData.category}}" wx:key="unique">
+            <view class="item" wx:for="{{tools.parseCategory(shopData.category, 'odd')}}" wx:key="unique">
               <image class="icon-category" src="{{item.icon}}" mode="aspectFill" data-clickable="1"></image>
               <view class="text-category" data-clickable="1">{{item.name}}</view>
             </view>
           </view>
           <view class="l2">
-            <view class="item" wx:for="{{shopData.category}}" wx:key="unique">
+            <view class="item" wx:for="{{tools.parseCategory(shopData.category, 'even')}}" wx:key="unique">
               <image class="icon-category" src="{{item.icon}}" mode="aspectFill" data-clickable="1"></image>
               <view class="text-category" data-clickable="1">{{item.name}}</view>
             </view>

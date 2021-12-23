@@ -185,7 +185,7 @@ create(store, {
       // this.getGoodsList()
       // 不适合重新渲染
       this.setData({
-        'currentGoodsList.cache': item.cart_number + 1
+        [`currentGoodsList.cache[${index}].cart_number`]: item.cart_number + 1
       })
     })
   },

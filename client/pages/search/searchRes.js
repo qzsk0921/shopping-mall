@@ -28,20 +28,22 @@ create(store, {
     tabIndex: 0, //0:综合 1:销量 2:价格
     // tabWidth: null,
     goodsList: [{
-      cache: [{
-        "id": 3,
-        "goods_name": "商品3",
-        "price": "40.00",
-        "market_price": "100.00",
-        "is_pre_sale": 0,
-        "goods_content": "商品详情3",
-        "spec": "10g",
-        "is_vip": 0,
-        "is_sale": 1,
-        "is_shop_check": 1,
-        "thumb": "http://image.wms.wljkxys.com/202009305f742c49a5276.png",
-        "cart_number": 0
-      }], //综合
+      cache: [
+        //   {
+        //   "id": 3,
+        //   "goods_name": "商品3",
+        //   "price": "40.00",
+        //   "market_price": "100.00",
+        //   "is_pre_sale": 0,
+        //   "goods_content": "商品详情3",
+        //   "spec": "10g",
+        //   "is_vip": 0,
+        //   "is_sale": 1,
+        //   "is_shop_check": 1,
+        //   "thumb": "http://image.wms.wljkxys.com/202009305f742c49a5276.png",
+        //   "cart_number": 0
+        // }
+      ], //综合
       count: 1,
       total_page: 1,
     }, {

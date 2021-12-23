@@ -6,5 +6,9 @@ module.exports = {
       num += (item.cart_number - 0)
     })
     return num
+  },
+  // 计算我的订单页 宽度
+  calcW: function (len) {
+    return 124+(len-1)*144
   }
 }

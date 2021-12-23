@@ -1,8 +1,7 @@
 /* pages/shop/order/myOrder.wxss */
 .container-order-my {}
 
-.content {
-}
+.content {}
 
 .section1 {
   background: #ffffff;
@@ -136,8 +135,19 @@
 }
 
 .card .l2 .l2-1 {
+  overflow: auto;
+}
+
+.image-box {
+  display: flex;
+}
+
+.card .l2 .l2-1 image {
   width: 124rpx;
   height: 124rpx;
+  background: rgba(0, 0, 0, 0);
+  opacity: 1;
+  border-radius: 8rpx;
 }
 
 .card .l2 .l2-1 image:not(:first-child) {
@@ -181,6 +191,7 @@
   line-height: 60rpx;
   /* background: #FFFFFF; */
   border: 2rpx solid #DDDDDD;
+  box-sizing: content-box;
   border-radius: 36rpx;
   font-size: 26rpx;
   /* color: #333333; */
@@ -188,4 +199,30 @@
 
 .card .l3 .btn:last-child {
   margin-left: 20rpx;
+}
+
+
+.status0 {
+  color: var(--primary-color);
+}
+
+.status1 {
+  color: #0DAA4F;
+}
+
+.status2 {
+  color: #666666;
+}
+
+.btnstatus0 {
+  background: var(--primary-color);
+  color: #FFFFFF;
+  border-color: var(--primary-color);
+}
+
+.btnstatus1,
+.btnstatus2 {
+  background: #FFFFFF;
+  font-weight: bold;
+  color: #333333;
 }

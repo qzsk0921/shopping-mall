@@ -11,7 +11,8 @@ export function login(data) {
   return request({
     url: '/login/login',
     method: 'post',
-    data
+    data,
+    load: 'noload'
   })
 }
 

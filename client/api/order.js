@@ -68,3 +68,40 @@ export function getExpenseList(data) {
     data
   })
 }
+
+/**
+ * 删除订单 Order/del_order
+ * @param {string} order_id require 订单id
+ */
+export function delOrder(data) {
+  return request({
+    url: '/Order/del_order',
+    method: 'post',
+    data
+  })
+}
+
+/**
+ * 取消订单 Order/cancel_order
+ * @param {string} order_id require 订单id
+ */
+export function cancelOrder(data) {
+  return request({
+    url: '/Order/cancel_order',
+    method: 'get',
+    data
+  })
+}
+
+/**
+ * 订单列表 Order/order_list
+ * @param {string} status require ‘’:全部 0：待支付 1:已支付 2:已取消
+ * @param {string} keyword
+ */
+export function getOrderList(data) {
+  return request({
+    url: '/Order/order_list',
+    method: 'get',
+    data
+  })
+}

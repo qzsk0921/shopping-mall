@@ -87,6 +87,7 @@ export function setAddressShopInfo(data) {
   return request({
     url: '/Address/set_shop_info',
     method: 'get',
-    data
+    data,
+    load: 'noload'
   })
 }

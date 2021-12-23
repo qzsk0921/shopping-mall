@@ -76,6 +76,7 @@
 .section2 .row2 text {
   font-size: 28rpx;
   color: #888888;
+  vertical-align: middle;
 }
 
 .section2 .row2 text:nth-of-type(1) {
@@ -132,12 +133,16 @@
   overflow: scroll;
   width: calc(100% - 48rpx);
   /* height: 134rpx; */
+}
+
+.section3 .l2 .image-box {
   display: flex;
 }
 
 .section3 .l2 image {
   width: 134rpx;
   height: 134rpx;
+  border-radius: 8rpx;
 }
 
 .section3 .l2 image:not(:first-child) {
@@ -170,13 +175,17 @@
   color: #999999;
 }
 
+.section3 .l4 .discount,
+.section3 .l5 .discount {
+  color: #FC4953;
+}
+
 .section3 .l5 {
   margin-top: 42rpx;
 }
 
 .section3 .l5 text:last-child {
   font-size: 30rpx;
-  color: #FC4953;
 }
 
 .section3 .l6 {
@@ -220,6 +229,23 @@
 .section4 .l1 {
   font-size: 28rpx;
   color: #333333;
+}
+
+.section4 .l1 .sn-box {
+  display: flex;
+  align-items: center;
+}
+
+.section4 .l1 .sn-box .btn-copy {
+  margin-left: 14rpx;
+  text-align: center;
+  width: 78rpx;
+  height: 34rpx;
+  border: 1rpx solid #FF959B;
+  border-radius: 20rpx;
+  font-size: 22rpx;
+  line-height: 32rpx;
+  color: #FC4953;
 }
 
 .section5 {

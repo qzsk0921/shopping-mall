@@ -20,28 +20,9 @@ create(store, {
     tabIndex: 0, //0:待使用 1:已使用 -2:已过
     tabWidth: null,
     couponList: [{
-      cache: [{
-        price: 50,
-        condition: '满99可用',
-        tit: '优惠券标题',
-        tip: '酒水牛奶不可用',
-        timeStr: '2021/3/21至2021/12/31',
-        status: 1
-      }, {
-        price: 50,
-        condition: '满99可用',
-        tit: '优惠券标题',
-        tip: '酒水牛奶不可用',
-        timeStr: '2021/3/21至2021/12/31',
-        status: 2
-      }, {
-        price: 50,
-        condition: '满99可用',
-        tit: '优惠券标题',
-        tip: '酒水牛奶不可用',
-        timeStr: '2021/3/21至2021/12/31',
-        status: 3
-      }], //couponNouseCache 未使用
+      cache: [
+
+      ], //couponNouseCache 未使用
       count: 1,
       total_page: 1,
     }, {

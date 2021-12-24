@@ -107,11 +107,35 @@ create(store, {
   },
   //跳转至商品详情页
   toGoodsDetail(e) {
+    // 检查授权状态
+    // 未授权
+    if (!this.checkAuth()) return
+
     wx.navigateTo({
       url: `/pages/goods/detail?id=${e.currentTarget.dataset.id}`,
     })
   },
+  checkAuth() {
+    if (!this.store.data.userInfo.avatar_url) {
+      // 未授权先去授权页
+      wx.navigateTo({
+        url: '/pages/authorization/identity',
+      })
+      return false
+    } else if (!this.store.data.userInfo.phone) {
+      // 授权昵称头像还未授权手机号
+      wx.navigateTo({
+        url: '/pages/authorization/phone',
+      })
+      return false
+    }
+    return true
+  },
   toArtHandle() {
+    // 检查授权状态
+    // 未授权
+    if (!this.checkAuth()) return
+
     wx.switchTab({
       url: '/pages/shopping/shopping',
     })
@@ -296,19 +320,16 @@ create(store, {
   },
   getGoodsList(dataObj) {
     const tempData = {
-      keyword: this.data.searchKeyword
+      keyword: this.data.searchKeyword,
+      activity_id: this.data.activity_id, //活动
+      page_size: this.data.page_size,
+      page: this.data.goodsList[this.data.tabIndex].count
     }
     if (typeof dataObj === 'object') {
       Object.keys(dataObj).forEach(key => {
         tempData[key] = dataObj[key]
       })
     }
-
-    if (dataObj !== 'scrollTolwer') {
-      tempData['per_page'] = this.data.page_size
-      tempData['current_page'] = this.data.goodsList[this.data.tabIndex].count
-    }
-
 
     tempData.order_by_type = this.typeParse(this.data.tabIndex)
 
@@ -343,18 +364,19 @@ create(store, {
 
     let goodsList = this.data.goodsList
 
-    if (goodsList[this.data.tabIndex].count + 1 > goodsList.total_page) return
+    if (goodsList[this.data.tabIndex].count + 1 > goodsList[this.data.tabIndex].total_page) return
 
     this.setData({
       [`goodsList[${this.data.tabIndex}].count`]: ++goodsList[this.data.tabIndex].count
     })
 
-    this.getGoodsList('scrollToLower').then(res => {
-      goodsList.cache.push(...res.data.data)
-      this.setData({
-        [`goodsList.cache`]: goodsList.cache
-      })
-    })
+    // this.getGoodsList('scrollToLower').then(res => {
+    //   goodsList.cache.push(...res.data.data)
+    //   this.setData({
+    //     [`goodsList.cache`]: goodsList.cache
+    //   })
+    // })
+    this.getGoodsList('scrollToLower')
   },
   /**
    * 生命周期函数--监听页面加载
@@ -363,11 +385,13 @@ create(store, {
     getApp().setWatcher(this) //设置监听器
 
     const {
-      keyword
+      keyword,
+      activity_id
     } = options
 
     // console.log(keyword)
     this.setData({
+      activity_id: activity_id?activity_id:'',
       searchKeyword: keyword ? keyword : ''
     })
 

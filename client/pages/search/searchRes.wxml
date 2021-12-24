@@ -41,18 +41,17 @@
         </block>
       </view>
     </view>
-    <scroll-view class="scroll-box hide-scrollbar" refresher-enabled="{{refresherEnabled}}" refresher-triggered="{{triggered}}" bindscrolltolower="scrollToLower" bindrefresherrefresh="scrollToRefresherrefresh" bindrefresherpulling="scrollToRefresherPull" bindrefresherrestore="scrollToRefresherStore" bindrefresherabort="scrollToRefresherAbort" scroll-y="true" style="height:{{compatibleInfo.isIphoneX?compatibleInfo.systemInfo.screenHeight-(32+scrollTop)+'px':compatibleInfo.systemInfo.screenHeight-(scrollTop)+'px'}}">
+    <scroll-view class="scroll-box hide-scrollbar" refresher-enabled="{{refresherEnabled}}" refresher-triggered="{{triggered}}" bindscrolltolower="scrollToLower" bindrefresherrefresh="scrollToRefresherrefresh" bindrefresherpulling="scrollToRefresherPull" bindrefresherrestore="scrollToRefresherStore" bindrefresherabort="scrollToRefresherAbort" scroll-y="true" enhanced="true" show-scrollbar="{{false}}" style="height:{{compatibleInfo.isIphoneX?compatibleInfo.systemInfo.screenHeight-(32+scrollTop)+'px':compatibleInfo.systemInfo.screenHeight-(scrollTop)+'px'}}">
       <view class="no-data" wx:if="{{goodsList[tabIndex].cache.length==0}}">
         <image mode="aspectFill" src="/assets/images/empty.png"></image>
         <view class="text">搜索无结果</view>
       </view>
       <view class="list" wx:else>
         <view class="item" wx:for="{{goodsList[tabIndex].cache}}" wx:key="unique" data-id="{{item.id}}" bindtap="toGoodsDetail">
-          <image class="item-image" mode="aspectFit" src="{{item.thumb}}"></image>
+          <image class="item-image" mode="aspectFill" src="{{item.thumb}}"></image>
           <view class="item-content">
-            <view class="l1">{{item.goods_name}} {{item.spec}}</view>
-            <!-- <view class="cart">购物车</view> -->
-            <view class="l2">
+            <view class="l1 txt-cut">{{item.goods_name}} {{item.spec}}</view>
+            <!-- <view class="l2">
               <view wx:if="{{userInfo.avatar_url}}" class="price-box">
                 <view class="price"><text>￥</text><text>{{item.price}}</text></view>
                 <view class="del-price">￥{{item.market_price}}</view>
@@ -62,6 +61,27 @@
                 <image class="icon-shopcart" src="/assets/images/icon_car.png" mode="aspectFill"></image>
                 <view wx:if="{{item.cart_number}}" class="shopcart-info">{{item.cart_number}}</view>
               </view>
+            </view> -->
+            <view class="shopcart-box" catchtap="toArtHandle" data-item="{{item}}">
+              <image class="icon-shopcart" mode="aspectFill" src="/assets/images/icon_car.png"></image>
+              <view wx:if="{{cart_number}}" class="shopcart-info">{{cart_number}}</view>
+            </view>
+            <!-- 未授权或未资质认证的非会员 -->
+            <view class="l2 no-sign" wx:if="{{(!userInfo.phone||userInfo.is_shop_check!=1)&&!userInfo.is_sale}}">
+              请登录查看价格
+            </view>
+            <!-- 授权且资质认证的非会员 -->
+            <view class="l2" wx:elif="{{!userInfo.is_vip&&!userInfo.is_sale}}">
+              <view class="price">
+                <text>￥</text>{{item.market_price}}
+              </view>
+            </view>
+            <!-- 授权且资质认证的会员 -->
+            <view class="l2" wx:else>
+              <view class="price">
+                <text>￥</text>{{item.price}}
+              </view>
+              <view class="origin-price">￥{{item.market_price}}</view>
             </view>
           </view>
         </view>

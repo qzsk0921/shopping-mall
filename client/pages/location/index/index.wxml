@@ -10,7 +10,7 @@
   </view>
   <view wx:if="{{navigationBarTitleText==='选择收货地址'}}" class="section1">
     <input class="search" name="search" placeholder="搜索小区/写字楼等" placeholder-class="search-placeholder"
-      value="{{searchKeyword}}" bindinput="inputHandle" />
+      value="{{searchKeyword}}" bindinput="inputHandle" confirm-type="search" bindconfirm="bindconfirmHandle"/>
     <view wx:if="{{!searchKeyword}}" class="btn btn-search" bindtap="searchClickHandle">搜索</view>
     <image wx:else class="btn btn-close" src="/assets/images/search_icon_close.png" mode="aspectFill"
       bindtap="searchCloseHandle"></image>

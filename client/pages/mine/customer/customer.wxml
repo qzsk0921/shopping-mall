@@ -1,7 +1,10 @@
 <!--pages/mine/customer/customer.wxml-->
 <!-- <text>pages/mine/customer/customer.wxml</text> -->
 <view class="container container-customer">
-  <image class="tip" src="/assets/images/customer_btn_font.png" mode="aspectFill"></image>
+  <button open-type="share" class="tip">
+    <image src="/assets/images/customer_btn_font.png" mode="aspectFill"></image>
+  </button>
+
   <view class="fixed">
     <top-navigation navigationBarTitleText="{{navigationBarTitleText}}" navHeight="{{compatibleInfo.navHeight}}" navTop="{{compatibleInfo.menuButtonObject.top}}" menuButtonHeight="{{compatibleInfo.menuButtonObject.height}}" status="{{navStatus}}" color="#333" bgColor="#FFFFFF" />
   </view>

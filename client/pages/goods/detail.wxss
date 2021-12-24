@@ -83,6 +83,7 @@
   font-weight: bold;
   line-height: 54rpx;
   color: #333333;
+  padding-right: 24rpx;
 }
 
 .section2 .l3 {
@@ -90,6 +91,7 @@
   font-size: 30rpx;
   line-height: 44rpx;
   color: #AAAAAA;
+  padding-right: 24rpx;
 }
 
 .section3 {

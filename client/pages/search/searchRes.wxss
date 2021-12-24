@@ -204,7 +204,7 @@
   margin-bottom: 8rpx;
 }
 
-.section2 .scroll-box .list .item .item-content .l2 .shopcart-box {
+.section2 .scroll-box .list .item .item-content .shopcart-box {
   position: absolute;
   right: 20rpx;
   bottom: 20rpx;
@@ -212,14 +212,14 @@
   height: 56rpx;
 }
 
-.section2 .scroll-box .list .item .item-content .l2 .shopcart-box .icon-shopcart {
+.section2 .scroll-box .list .item .item-content .shopcart-box .icon-shopcart {
   width: 56rpx;
   height: 56rpx;
   background: #FFFFFF;
   border-radius: 50%;
 }
 
-.section2 .scroll-box .list .item .item-content .l2 .shopcart-box .shopcart-info {
+.section2 .scroll-box .list .item .item-content .shopcart-box .shopcart-info {
   text-align: center;
   background: #FC4953;
   position: absolute;
@@ -233,22 +233,39 @@
   padding: 0 8rpx;
 }
 
-.section2 .scroll-box .list .item .item-content .l2 .price text:first-child {
-  font-size: 24rpx;
-  font-weight: bold;
-  color: #DB0512;
+
+.section2 .scroll-box .list .item .item-content .l2 {
+  margin-top: 40rpx;
+  justify-content: flex-start;
+  align-items: center;
 }
 
-.section2 .scroll-box .list .item .item-content .l2 .price text:last-child {
+.section2 .scroll-box .list .item .item-content .l2.no-sign {
+  font-size: 24rpx;
+  color: #888888;
+  margin-bottom: 8rpx;
+}
+
+.section2 .scroll-box .list .item .item-content .l2 .price {
   font-size: 34rpx;
   font-weight: bold;
-  color: #DB0512;
+  color: #FC4953;
 }
 
-.section2 .scroll-box .list .item .item-content .l2 .del-price {
+.section2 .scroll-box .list .item .item-content .l2 .price text {
+  font-size: 24rpx;
+  font-weight: bold;
+  color: #FC4953;
+}
+
+.section2 .scroll-box .list .item .item-content .l2 .origin-price {
+  margin-left: 2rpx;
   font-size: 22rpx;
   color: #888888;
+  text-decoration: line-through;
 }
+
+
 
 .section2 .no-data {
   text-align: center;

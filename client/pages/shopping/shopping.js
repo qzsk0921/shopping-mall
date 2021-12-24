@@ -36,6 +36,7 @@ create(store, {
     checkedIds: [], //选中的id和unit_id  格式[id.unit_id]
 
     compatibleInfo: null, //navHeight menuButtonObject systemInfo isIphoneX
+    tabbarH: null, //tabbar高度
     navigationBarTitleText: '购物车',
     navStatus: 'isEmpty',
     // 购物车商品 优先判断 下架 其次判断 库存
@@ -464,9 +465,29 @@ create(store, {
   },
   //跳转至商品详情页
   toGoodsDetail(e) {
+    // 检查授权状态
+    // 未授权
+    if (!this.checkAuth()) return
+
     wx.navigateTo({
       url: `/pages/goods/detail?id=${e.currentTarget.dataset.id}`,
     })
+  },
+  checkAuth() {
+    if (!this.store.data.userInfo.avatar_url) {
+      // 未授权先去授权页
+      wx.navigateTo({
+        url: '/pages/authorization/identity',
+      })
+      return false
+    } else if (!this.store.data.userInfo.phone) {
+      // 授权昵称头像还未授权手机号
+      wx.navigateTo({
+        url: '/pages/authorization/phone',
+      })
+      return false
+    }
+    return true
   },
   // 加入购物车(猜你喜欢列表的购物车)
   addArtHandle(e) {
@@ -605,6 +626,13 @@ create(store, {
     setTabBar.call(this, {
       selected: 2
     })
+    if (!this.data.tabbarH) {
+      setTimeout(() => {
+        this.setData({
+          tabbarH: this.store.data.compatibleInfo.tabbarH
+        })
+      }, 0)
+    }
 
     getApp().setWatcher(this) //设置监听器
   },

@@ -7,7 +7,8 @@ import store from '../../store/common'
 import create from '../../utils/create'
 
 import {
-  getUserDetail
+  getUserDetail,
+  updateUserInfo
 } from '../../api/user'
 
 // Page({
@@ -164,22 +165,24 @@ create(store, {
   },
   option2Handle(e) {
     console.log(e)
-    // 未授权
-    if (!this.checkAuth()) return
-    // 已授权
-    else {
-      const id = e.currentTarget.dataset.id
-      // console.log(`Sorry, we are out of ${id}.`);
-      this.data.options2.some(item => {
-        if (item.id === id) {
-          wx.navigateTo({
-            url: item.url
-          })
-          return true
-        }
-        return false
-      })
+    // 6常见问题、7关注公众号、8设置不需要授权
+    const id = e.currentTarget.dataset.id
+    if (![6, 7, 8].includes(id)) {
+      // 未授权
+      if (!this.checkAuth()) return
     }
+
+    // 已授权
+    // console.log(`Sorry, we are out of ${id}.`);
+    this.data.options2.some(item => {
+      if (item.id === id) {
+        wx.navigateTo({
+          url: item.url
+        })
+        return true
+      }
+      return false
+    })
   },
   getUserProfile() {
     // userStore.getUserProfile().then(res => {
@@ -206,6 +209,9 @@ create(store, {
         // 上传用户信息
         updateUserInfo(res.userInfo).then(res => {
           console.log(res.msg)
+          wx.navigateTo({
+            url: '/pages/authorization/phone',
+          })
         }).catch(err => {
           console.log('更新微信信息:' + err.msg)
         })
@@ -246,6 +252,7 @@ create(store, {
         'options[0].value': res.data.like_number,
         'options[1].value': res.data.view_number
       })
+      console.log(this.data.userInfo)
       this.store.data.userInfo = res.data
       this.store.update()
     })

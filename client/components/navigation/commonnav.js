@@ -43,7 +43,21 @@ create({
           })
         })
       }
-    }
+    },
+    'navTop':function(val) {
+      if(!val) {
+        this.setData({
+          navTop:wx.getMenuButtonBoundingClientRect().top
+        })
+      }
+    },
+    'menuButtonHeight':function(val) {
+      if(!val) {
+        this.setData({
+          menuButtonHeight:wx.getMenuButtonBoundingClientRect().height
+        })
+      }
+    },
   },
   options: {
     addGlobalClass: true

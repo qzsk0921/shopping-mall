@@ -27,57 +27,60 @@ create(store, {
 
     userInfo: null,
     compatibleInfo: null, //navHeight menuButtonObject systemInfo isIphoneX
+    tabbarH: null,
     navStatus: 'category',
 
-    categoryData: [{
-      id: 1,
-      name: '蔬 菜',
-      url: 'https://gw.alicdn.com/tps/i1/O1CN01PWx1at1LfLtyRhW1V_!!0-juitemmedia.jpg_140x10000Q75.jpg'
-    }, {
-      id: 2,
-      name: '肉禽蛋品',
-      url: 'https://gw.alicdn.com/tps/i1/O1CN01PWx1at1LfLtyRhW1V_!!0-juitemmedia.jpg_140x10000Q75.jpg'
-    }, {
-      id: 3,
-      name: '蔬菜3',
-      url: 'https://gw.alicdn.com/tps/i1/O1CN01PWx1at1LfLtyRhW1V_!!0-juitemmedia.jpg_140x10000Q75.jpg'
-    }, {
-      id: 4,
-      name: '蔬菜4',
-      url: 'https://gw.alicdn.com/tps/i1/O1CN01PWx1at1LfLtyRhW1V_!!0-juitemmedia.jpg_140x10000Q75.jpg'
-    }, {
-      id: 5,
-      name: '蔬菜5',
-      url: 'https://gw.alicdn.com/tps/i1/O1CN01PWx1at1LfLtyRhW1V_!!0-juitemmedia.jpg_140x10000Q75.jpg'
-    }, {
-      id: 6,
-      name: '蔬菜6',
-      url: 'https://gw.alicdn.com/tps/i1/O1CN01PWx1at1LfLtyRhW1V_!!0-juitemmedia.jpg_140x10000Q75.jpg'
-    }, {
-      id: 7,
-      name: '蔬菜7',
-      url: 'https://gw.alicdn.com/tps/i1/O1CN01PWx1at1LfLtyRhW1V_!!0-juitemmedia.jpg_140x10000Q75.jpg'
-    }, {
-      id: 8,
-      name: '蔬菜8',
-      url: 'https://gw.alicdn.com/tps/i1/O1CN01PWx1at1LfLtyRhW1V_!!0-juitemmedia.jpg_140x10000Q75.jpg'
-    }, {
-      id: 9,
-      name: '蔬菜9',
-      url: 'https://gw.alicdn.com/tps/i1/O1CN01PWx1at1LfLtyRhW1V_!!0-juitemmedia.jpg_140x10000Q75.jpg'
-    }, {
-      id: 10,
-      name: '蔬菜10',
-      url: 'https://gw.alicdn.com/tps/i1/O1CN01PWx1at1LfLtyRhW1V_!!0-juitemmedia.jpg_140x10000Q75.jpg'
-    }, {
-      id: 11,
-      name: '蔬菜11',
-      url: 'https://gw.alicdn.com/tps/i1/O1CN01PWx1at1LfLtyRhW1V_!!0-juitemmedia.jpg_140x10000Q75.jpg'
-    }, {
-      id: 12,
-      name: '蔬菜12',
-      url: 'https://gw.alicdn.com/tps/i1/O1CN01PWx1at1LfLtyRhW1V_!!0-juitemmedia.jpg_140x10000Q75.jpg'
-    }],
+    categoryData: [
+      //   {
+      //   id: 1,
+      //   name: '蔬 菜',
+      //   url: 'https://gw.alicdn.com/tps/i1/O1CN01PWx1at1LfLtyRhW1V_!!0-juitemmedia.jpg_140x10000Q75.jpg'
+      // }, {
+      //   id: 2,
+      //   name: '肉禽蛋品',
+      //   url: 'https://gw.alicdn.com/tps/i1/O1CN01PWx1at1LfLtyRhW1V_!!0-juitemmedia.jpg_140x10000Q75.jpg'
+      // }, {
+      //   id: 3,
+      //   name: '蔬菜3',
+      //   url: 'https://gw.alicdn.com/tps/i1/O1CN01PWx1at1LfLtyRhW1V_!!0-juitemmedia.jpg_140x10000Q75.jpg'
+      // }, {
+      //   id: 4,
+      //   name: '蔬菜4',
+      //   url: 'https://gw.alicdn.com/tps/i1/O1CN01PWx1at1LfLtyRhW1V_!!0-juitemmedia.jpg_140x10000Q75.jpg'
+      // }, {
+      //   id: 5,
+      //   name: '蔬菜5',
+      //   url: 'https://gw.alicdn.com/tps/i1/O1CN01PWx1at1LfLtyRhW1V_!!0-juitemmedia.jpg_140x10000Q75.jpg'
+      // }, {
+      //   id: 6,
+      //   name: '蔬菜6',
+      //   url: 'https://gw.alicdn.com/tps/i1/O1CN01PWx1at1LfLtyRhW1V_!!0-juitemmedia.jpg_140x10000Q75.jpg'
+      // }, {
+      //   id: 7,
+      //   name: '蔬菜7',
+      //   url: 'https://gw.alicdn.com/tps/i1/O1CN01PWx1at1LfLtyRhW1V_!!0-juitemmedia.jpg_140x10000Q75.jpg'
+      // }, {
+      //   id: 8,
+      //   name: '蔬菜8',
+      //   url: 'https://gw.alicdn.com/tps/i1/O1CN01PWx1at1LfLtyRhW1V_!!0-juitemmedia.jpg_140x10000Q75.jpg'
+      // }, {
+      //   id: 9,
+      //   name: '蔬菜9',
+      //   url: 'https://gw.alicdn.com/tps/i1/O1CN01PWx1at1LfLtyRhW1V_!!0-juitemmedia.jpg_140x10000Q75.jpg'
+      // }, {
+      //   id: 10,
+      //   name: '蔬菜10',
+      //   url: 'https://gw.alicdn.com/tps/i1/O1CN01PWx1at1LfLtyRhW1V_!!0-juitemmedia.jpg_140x10000Q75.jpg'
+      // }, {
+      //   id: 11,
+      //   name: '蔬菜11',
+      //   url: 'https://gw.alicdn.com/tps/i1/O1CN01PWx1at1LfLtyRhW1V_!!0-juitemmedia.jpg_140x10000Q75.jpg'
+      // }, {
+      //   id: 12,
+      //   name: '蔬菜12',
+      //   url: 'https://gw.alicdn.com/tps/i1/O1CN01PWx1at1LfLtyRhW1V_!!0-juitemmedia.jpg_140x10000Q75.jpg'
+      // }
+    ],
     screenCategory: [{
       // 导航名称
       option: '蔬菜豆制品',
@@ -164,13 +167,31 @@ create(store, {
             })
           }).exec();
         }, 0)
-
       },
-      deep: true
+      deep: true,
+      immediate: true
     }
+  },
+  checkAuth() {
+    if (!this.store.data.userInfo.avatar_url) {
+      // 未授权先去授权页
+      wx.navigateTo({
+        url: '/pages/authorization/identity',
+      })
+      return false
+    } else if (!this.store.data.userInfo.phone) {
+      // 授权昵称头像还未授权手机号
+      wx.navigateTo({
+        url: '/pages/authorization/phone',
+      })
+      return false
+    }
+    return true
   },
   // 加入购物车
   addArtHandle(e) {
+    if (!this.checkAuth()) return
+
     const item = e.currentTarget.dataset.item
     const index = e.currentTarget.dataset.index
 
@@ -401,6 +422,8 @@ create(store, {
     return type
   },
   goodsDetailHandle(e) {
+    if (!this.checkAuth()) return
+
     const id = e.currentTarget.dataset.id
     wx.navigateTo({
       url: `/pages/goods/detail?id=${id}`,
@@ -473,6 +496,14 @@ create(store, {
     setTabBar.call(this, {
       selected: 1
     })
+
+    if (!this.data.tabbarH) {
+      setTimeout(() => {
+        this.setData({
+          tabbarH: this.store.data.compatibleInfo.tabbarH
+        })
+      }, 0)
+    }
   },
 
   /**

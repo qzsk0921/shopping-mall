@@ -36,9 +36,29 @@ create(store, {
   },
   //跳转至商品详情页
   toGoodsDetail(e) {
+    // 检查授权状态
+    // 未授权
+    if (!this.checkAuth()) return
+
     wx.navigateTo({
       url: `/pages/goods/detail?id=${e.currentTarget.dataset.id}`,
     })
+  },
+  checkAuth() {
+    if (!this.store.data.userInfo.avatar_url) {
+      // 未授权先去授权页
+      wx.navigateTo({
+        url: '/pages/authorization/identity',
+      })
+      return false
+    } else if (!this.store.data.userInfo.phone) {
+      // 授权昵称头像还未授权手机号
+      wx.navigateTo({
+        url: '/pages/authorization/phone',
+      })
+      return false
+    }
+    return true
   },
   // 加入购物车
   addArtHandle(e) {

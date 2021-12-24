@@ -26,9 +26,12 @@ create(store, {
    * 页面的初始数据
    */
   data: {
+    isOverShare: true,
+
     userInfo: null,
 
-    compatibleInfo: null, //navHeight menuButtonObject systemInfo isIphoneX
+    compatibleInfo: null, //navHeight menuButtonObject systemInfo isIphoneX isIphone
+    tabbarH: null,
     navStatus: 'location',
     // swiper
     background: ['demo-text-1', 'demo-text-2', 'demo-text-3'],
@@ -335,6 +338,7 @@ create(store, {
           })
           // 通过shop_id获取商城商品
         }).catch(err => {
+          console.log('err' + err)
           // 出现异常或当前地址没有符合店铺
           this.store.data.shop_id = 0
           this.update()
@@ -415,14 +419,45 @@ create(store, {
       url: '/pages/category/category',
     })
   },
+  // 去搜索结果页
+  activityHandle(e) {
+    const activity_id = e.currentTarget.dataset.activity_id
+    wx.navigateTo({
+      url: `/pages/search/searchRes?activity_id=${activity_id}`,
+    })
+  },
   //跳转至商品详情页
   toGoodsDetail(e) {
+    // 检查授权状态
+    // 未授权
+    if (!this.checkAuth()) return
+
     wx.navigateTo({
       url: `/pages/goods/detail?id=${e.currentTarget.dataset.id}`,
     })
   },
+  checkAuth() {
+    if (!this.store.data.userInfo.avatar_url) {
+      // 未授权先去授权页
+      wx.navigateTo({
+        url: '/pages/authorization/identity',
+      })
+      return false
+    } else if (!this.store.data.userInfo.phone) {
+      // 授权昵称头像还未授权手机号
+      wx.navigateTo({
+        url: '/pages/authorization/phone',
+      })
+      return false
+    }
+    return true
+  },
   // 加入购物车
   addArtHandle(e) {
+    // 检查授权状态
+    // 未授权
+    if (!this.checkAuth()) return
+
     const item = e.currentTarget.dataset.item
     let myData = {
       type: 1,
@@ -467,7 +502,9 @@ create(store, {
 
       this.store.data.compatibleInfo.systemInfo = res.systemInfo
       this.store.data.compatibleInfo.navHeight = res.navHeight
-      this.store.data.compatibleInfo.isIphoneX = res.isIPhone
+      this.store.data.compatibleInfo.isIphoneX = res.isIphoneX
+      this.store.data.compatibleInfo.isIphone = res.isIphone
+
       this.update()
     })
 
@@ -489,21 +526,27 @@ create(store, {
    * 生命周期函数--监听页面初次渲染完成
    */
   onReady: function () {
+    // 在页面渲染完成OnReady回调 获取元素高度时，如果不加定时器，获取的元素的高度还是没渲染完异步数据前的高度
     const that = this;
     const query = wx.createSelectorQuery();
 
-    // 在页面渲染完成OnReady回调 获取元素高度时，如果不加定时器，获取的元素的高度还是没渲染完异步数据前的高度
-    query.select('.fixed').boundingClientRect(function (rect) {
-      // console.log(rect)
-      that.setData({
-        // scrollViewHeight: that.store.data.systemInfo.screenHeight - (rect.height + 50),
-        fixed: rect.height,
-      })
-    }).exec();
-
-
-
     setTabBar.call(this)
+
+    setTimeout(() => {
+
+      query.select('.fixed').boundingClientRect(function (rect) {
+        that.setData({
+          // scrollViewHeight: that.store.data.systemInfo.screenHeight - (rect.height + 50),
+          fixed: rect.height,
+        })
+      }).exec();
+
+      this.setData({
+        tabbarH: this.store.data.compatibleInfo.tabbarH
+      })
+      console.log(this.data.tabbarH)
+    }, 100)
+
   },
 
   /**
@@ -588,7 +631,18 @@ create(store, {
    * 用户点击右上角分享
    */
   onShareAppMessage: function () {
-
+    return {
+      title: '联合快采，省时省心更省钱',
+      //两种情况 商品详情,帮卖商品详情
+      path: 'pages/index/index',
+      imageUrl: '/assets/images/share2.jpg',
+      success(res) {
+        console.log('分享成功', res)
+      },
+      fail(res) {
+        console.log(res)
+      }
+    }
   },
   getLocation() {
     const that = this;

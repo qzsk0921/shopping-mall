@@ -3,5 +3,6 @@
     "top-navigation": "/components/navigation/commonnav",
     "json-add": "/components/Dialog/json-add"
   },
-  "navigationStyle": "custom"
+  "navigationStyle": "custom",
+  "disableScroll": true
 }

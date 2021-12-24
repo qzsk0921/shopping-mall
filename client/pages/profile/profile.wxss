@@ -32,7 +32,7 @@
 }
 
 .header .userInfo .btn-box {
-  padding-top: 18rpx;
+  /* padding-top: 18rpx; */
 }
 
 .header .userInfo .btn-box .login-text {
@@ -43,10 +43,11 @@
   font-weight: normal;
   text-align: left;
   line-height: 1;
+  padding: 18rpx 0 16rpx;
 }
 
 .header .userInfo .btn-box .tip {
-  margin-top: 16rpx;
+  /* margin-top: 16rpx; */
   font-size: 20rpx;
   color: #FFFFFF;
   opacity: 0.66;

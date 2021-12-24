@@ -106,17 +106,15 @@ create(store, {
     })
   },
   getShopCertType(dataObj) {
-    const tempData = {}
+    const tempData = {
+      page_size: this.data.page_size,
+      page: this.data.goodsList[this.data.tabIndex].count
+    }
 
     if (typeof dataObj === 'object') {
       Object.keys(dataObj).forEach(key => {
         tempData[key] = dataObj[key]
       })
-    }
-
-    if (dataObj !== 'scrollTolwer') {
-      tempData['per_page'] = this.data.page_size
-      tempData['current_page'] = this.data.shops.count
     }
 
     return new Promise((resolve, reject) => {

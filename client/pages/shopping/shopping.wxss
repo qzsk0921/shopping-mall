@@ -325,7 +325,9 @@
   opacity: 0;
 }
 
-.section3 {}
+.section3 {
+  padding: 0 24rpx 0;
+}
 
 .section3 .tit {
   display: flex;
@@ -632,6 +634,7 @@
 
 .no-data {
   text-align: center;
+  margin-bottom: 80rpx;
 }
 
 .no-data image {

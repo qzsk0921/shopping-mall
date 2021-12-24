@@ -53,30 +53,37 @@ App({
       const systemInfo = res
       const navHeight = res.statusBarHeight + store.data.compatibleInfo.menuButtonObject.height + (store.data.compatibleInfo.menuButtonObject.top - res.statusBarHeight) * 2
       const model = res.model
-      if (model.search('iPhone X') != -1 || model.search('iPhone 13 Pro') != -1) {
-        wx.setStorageSync('model', model)
-        // store.data.isIphoneX = true
-        this.setMyStore(systemInfo, navHeight, true)
+      if (res.system.includes('iOS')) {
+        if (model.search('iPhone X') != -1 || model.search('iPhone 13 Pro') != -1) {
+          wx.setStorageSync('model', model)
+          // store.data.isIphoneX = true
+          this.setMyStore(systemInfo, navHeight, true, true)
+        } else {
+          this.setMyStore(systemInfo, navHeight, false, true)
+        }
       } else {
-        this.setMyStore(systemInfo, navHeight, false)
+        this.setMyStore(systemInfo, navHeight, false, false)
       }
+
     }).catch(err => {
       console.log(err)
     })
 
   },
-  setMyStore(systemInfo, navHeight, isIPhone) {
+  setMyStore(systemInfo, navHeight, isIphoneX, isIphone) {
     if (this.getSystemInfoCallback) {
       // console.log('app getSystemInfoCallback')
       this.getSystemInfoCallback({
         systemInfo,
         navHeight,
-        isIphoneX
+        isIphoneX,
+        isIphone
       })
     } else {
       store.data.compatibleInfo.systemInfo = systemInfo
       store.data.compatibleInfo.navHeight = navHeight
-      store.data.compatibleInfo.isIphoneX = isIPhone
+      store.data.compatibleInfo.isIphoneX = isIphoneX
+      store.data.compatibleInfo.isIphone = isIphone
       store.update()
     }
     console.log(store.data.compatibleInfo)

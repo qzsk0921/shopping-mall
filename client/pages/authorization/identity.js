@@ -41,6 +41,9 @@ create(store, {
         // 上传用户信息
         updateUserInfo(res.userInfo).then(res => {
           console.log(res.msg)
+          wx.redirectTo({
+            url: '/pages/authorization/phone',
+          })
         }).catch(err => {
           console.log('更新微信信息:' + err.msg)
         })

@@ -138,13 +138,13 @@ create(store, {
    * 用户点击右上角分享
    */
   onShareAppMessage: function (res) {
+    console.log(res)
     // if (res.from === 'button') {
     // 来自页面内转发按钮
     return {
-      title: `${this.store.userInfo.nick_name}邀请您使用旺莱联采`,
-      // path: `pages/detail/detail?id=${this.data.detail.id}&u=${this.data.jinzhu_id}&s=${this.store.data.userInfo.id}&s_id=${this.store.data.userInfo.is_sale_role?this.store.data.userInfo.is_sale_role:''}`,
+      title: `${this.store.data.userInfo.nick_name}邀请您使用旺莱联采`,
       //两种情况 商品详情,帮卖商品详情
-      path: `pages/index/index?sale_id=${this.store.userInfo.id}`,
+      path: `pages/index/index?sale_id=${this.store.data.userInfo.id}`,
       imageUrl: '/assets/images/share1.jpg',
       success(res) {
         console.log('分享成功', res)

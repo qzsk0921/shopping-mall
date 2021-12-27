@@ -6,6 +6,10 @@ import {
   addNumCart
 } from '../../api/cart'
 
+import {
+  deepClone
+} from '../../utils/util'
+
 // Component({
 create({
   /**
@@ -28,8 +32,16 @@ create({
         //   userInfo: store.data.userInfo
         // })
 
+        // 购物车默认数量是1，不是0
+        const myGoodsDetail = deepClone(this.data.goodsDetail)
+        myGoodsDetail.unit_arr.forEach(item => {
+          if (!item.cart_number) {
+            item.cart_number = 1
+          }
+        })
+
         this.setData({
-          myGoodsDetail: this.data.goodsDetail
+          myGoodsDetail
         })
 
         // 没有初始化过才使用默认第一个规格
@@ -126,13 +138,23 @@ create({
       }
 
       this.addNumCart(myData).then(res => {
+
         // 更新详情页购物车数据
-        this.triggerEvent('updateCartHandle')
+        wx.showToast({
+          icon: 'none',
+          title: '购物车操作成功',
+        })
+
+        setTimeout(() => {
+          this.triggerEvent('updateCartHandle')
+        }, 1000)
 
         console.log(res)
       }).catch(err => {
+        setTimeout(function () {
+          this.triggerEvent('updateCartHandle')
+        }, 1000)
         // 恢复设置
-        this.triggerEvent('updateCartHandle')
       })
     },
     addNumCart(data) {

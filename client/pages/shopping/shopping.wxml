@@ -28,18 +28,18 @@
       <!-- 购物车 -->
       <view class="section2">
         <checkbox-group bindchange="checkboxChange">
-          <view class="item {{item.status===2?'mask-box':item.is_stock?'':'mask-box'}}" wx:for="{{cartData.cache}}" wx:key="unique" data-disabled="{{item.status===2?0:item.is_stock?1:0}}">
+          <view class="item {{item.status===2?'mask-box':item.is_stock?'':'mask-box'}}" wx:for="{{cartData.cache}}" wx:key="unique" data-disabled="{{item.status===2?0:item.is_stock?1:0}}" data-id="{{item.id}}" bindtap="toGoodsDetail">
             <!-- 关闭按钮 -->
-            <image class="btn-close" src="/assets/images/car_icon_del.png" mode="aspectFill" data-item="{{item}}" data-index="{{index}}" bindtap="delGoodsHandle">
+            <image class="btn-close" src="/assets/images/car_icon_del.png" mode="aspectFill" data-item="{{item}}" data-index="{{index}}" catchtap="delGoodsHandle">
             </image>
             <!-- <view class="btn-close"></view> -->
             <!-- 选择商品数量 -->
             <view class="goods-quantity-control">
               <!-- 预售商品不做限制 -->
               <view class="tip {{(item.stock<=item.cart_number&&!item.is_pre_sale)?'active':''}}">达最大数量</view>
-              <image class="reduce" src="/assets/images/car_icon_reduce.png" mode="aspectFill" data-item="{{item}}" bindtap="reduceHandle"></image>
+              <image class="reduce" src="/assets/images/car_icon_reduce.png" mode="aspectFill" data-item="{{item}}" catchtap="reduceHandle"></image>
               <input class="quantity" type="number" value="{{item.cart_number}}" data-item="{{item}}" data-index="{{index}}" disabled="true" bindblur="inputBlurHandle" />
-              <image class="add" src="/assets/images/car_icon_add.png" mode="aspectFill" data-item="{{item}}" bindtap="addHandle"></image>
+              <image class="add" src="/assets/images/car_icon_add.png" mode="aspectFill" data-item="{{item}}" catchtap="addHandle"></image>
             </view>
             <view class="left">
               <!-- <view class="checkbox-box {{item.checked?'checked':''}}"> -->
@@ -140,7 +140,7 @@
     <view class="amount-box">
       <view class="left">
         <view class="left-t"><text>总计</text> <text class="price">￥{{totalPrice/100}}</text></view>
-        <view wx:if="{{discountPrice}}" class="left-b">已优惠{{discountPrice/100}}</view>
+        <view wx:if="{{discountPrice}}" class="left-b">已优惠{{discountPrice/1000}}</view>
       </view>
       <view class="right">
         <view class="btn btn-pay" bindtap="confirmationOrderHandle">结算({{cartData.total}})</view>

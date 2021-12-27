@@ -77,7 +77,7 @@
     <view class="col1" bindtap="toCartHandle">
       <view class="shopcart-box">
         <image class="icon-shopcart" mode="aspectFill" src="/assets/images/goods_btn_car.png"></image>
-        <view class="shopcart-info">{{goodsDetail.cart_number}}</view>
+        <view wx:if="{{goodsDetail.cart_number}}" class="shopcart-info">{{goodsDetail.cart_number}}</view>
       </view>
       <view>购物车</view>
     </view>

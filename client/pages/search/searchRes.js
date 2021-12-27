@@ -8,6 +8,7 @@ import {
 
 import {
   getCartData,
+  addNumCart
 } from '../../api/cart'
 
 let timer
@@ -139,6 +140,38 @@ create(store, {
     wx.switchTab({
       url: '/pages/shopping/shopping',
     })
+  },
+  addArtHandle(e) {
+    // 检查授权状态
+    // 未授权
+    if (!this.checkAuth()) return
+
+    const item = e.currentTarget.dataset.item
+    let myData = {
+      type: item.type ? item.type : 1,
+      shop_id: this.store.data.shop_id,
+      goods_id: item.id,
+      goods_num: item.cart_number + 1
+      // goods_num: 1
+    }
+    this.addNumCart(myData).then(
+      res => {
+        this.setData({
+          cart_number: this.data.cart_number + 1,
+        })
+
+        this.data.goodsList[this.data.tabIndex].cache.some((it, index) => {
+          if (it.id === item.id) {
+            it.cart_number += 1
+            this.setData({
+              [`goodsList[${this.data.tabIndex}].cache[${index}]`]: it
+            })
+            return true
+          }
+          return false
+        })
+      }
+    )
   },
   // 搜索框获取焦点
   focusHandle(e) {
@@ -318,6 +351,15 @@ create(store, {
       })
     })
   },
+  addNumCart(data) {
+    return new Promise((resolve, reject) => {
+      addNumCart(data).then(res => {
+        resolve(res)
+      }).catch(err => {
+        reject(err)
+      })
+    })
+  },
   getGoodsList(dataObj) {
     const tempData = {
       keyword: this.data.searchKeyword,
@@ -391,7 +433,7 @@ create(store, {
 
     // console.log(keyword)
     this.setData({
-      activity_id: activity_id?activity_id:'',
+      activity_id: activity_id ? activity_id : '',
       searchKeyword: keyword ? keyword : ''
     })
 
@@ -435,6 +477,36 @@ create(store, {
       this.setData({
         cart_number: res.data.total
       })
+
+      // 更新分类信息(主要是购物车数量)goodsList
+      if (this.data.goodsList[this.data.tabIndex].cache.length) {
+        if (res.data.list.length) {
+          this.data.goodsList[this.data.tabIndex].cache.forEach((item, index) => {
+            const ress = res.data.list.some(it => {
+              if (item.id === it.id) {
+                this.setData({
+                  [`goodsList[${this.data.tabIndex}].cache[${index}].cart_number`]: it.cart_number
+                })
+                return true
+              }
+              return false
+            })
+
+            if (!ress) {
+              this.setData({
+                [`goodsList[${this.data.tabIndex}].cache[${index}].cart_number`]: 0
+              })
+            }
+          })
+        } else {
+          // 购物车为空，全部清零
+          this.data.goodsList[this.data.tabIndex].cache.forEach((item, index) => {
+            this.setData({
+              [`goodsList[${this.data.tabIndex}].cache[${index}].cart_number`]: 0
+            })
+          })
+        }
+      }
     })
   },
 

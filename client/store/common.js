@@ -40,7 +40,10 @@ export default {
       // id: null,
     },
     shop_id: null, //店铺ID
-    address_id: wx.getStorageSync('address_id') || null //当前使用的收货地址
+    address_id: wx.getStorageSync('address_id') || null, //当前使用的收货地址
+
+    cart: [], //购物车
+
     // logs: [],
     // b: { 
     //   arr: [{ name: '数值项目1' }] ,

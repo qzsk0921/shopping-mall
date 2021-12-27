@@ -247,11 +247,24 @@ create(store, {
     console.log(this.data.userInfo)
     // console.log('profile show')
     getUserDetail().then(res => {
-      this.setData({
+      const myData = {
         userInfo: res.data,
         'options[0].value': res.data.like_number,
-        'options[1].value': res.data.view_number
-      })
+        'options[1].value': res.data.view_number,
+      }
+      // 我的客户入口需要是业务员才有
+      if (!res.data.is_sale) {
+        this.data.options2.some((item, index) => {
+          if (item.id === 5) {
+            this.data.options2.splice(index, 1)
+          }
+
+          myData.options2 = this.data.options2
+        })
+      }
+
+      this.setData(myData)
+
       console.log(this.data.userInfo)
       this.store.data.userInfo = res.data
       this.store.update()

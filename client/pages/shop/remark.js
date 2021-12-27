@@ -16,7 +16,7 @@ create(store, {
     compatibleInfo: null, //navHeight menuButtonObject systemInfo isIphoneX
     navigationBarTitleText: '备注',
 
-    prepareList: ['提前联系', '货放隔壁店铺当面验收', '送到电话联系', '送到别打电话', '当面验收', '晚点送到', '货到厨房', '店门没锁请把货放店内', '货放隔壁店铺当面验收'],
+    prepareList: [],
     currentCount: 0,
     content: ''
   },
@@ -74,6 +74,16 @@ create(store, {
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+    // 备注回填
+    const {
+      remark
+    } = options
+    if (remark) {
+      this.setData({
+        content: remark
+      })
+    }
+
     this.getRemarkList().then(res => {
       this.setData({
         prepareList: res.data

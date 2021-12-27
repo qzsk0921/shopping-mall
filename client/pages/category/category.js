@@ -157,7 +157,7 @@ create(store, {
     },
     firstCategory: {
       handler(nv, ov, obj) {
-        console.log(nv)
+        // console.log(nv)
         const that = this;
         setTimeout(() => {
           const query = wx.createSelectorQuery();
@@ -196,7 +196,7 @@ create(store, {
     const index = e.currentTarget.dataset.index
 
     let myData = {
-      type: 1,
+      type: item.type ? item.type : 1,
       shop_id: this.store.data.shop_id,
       goods_id: item.id,
       goods_num: item.cart_number + 1
@@ -205,6 +205,10 @@ create(store, {
       // 更新详情页购物车数据
       // this.getGoodsList()
       // 不适合重新渲染
+      wx.showToast({
+        icon: 'none',
+        title: '加入购物车成功',
+      })
       this.setData({
         [`currentGoodsList.cache[${index}].cart_number`]: item.cart_number + 1
       })
@@ -534,6 +538,36 @@ create(store, {
       this.setData({
         userInfo: this.store.data.userInfo
       })
+    }
+
+    // 更新分类信息(主要是购物车数量)
+    if (this.data.currentGoodsList.cache.length) {
+      if (this.store.data.cart.length) {
+        this.data.currentGoodsList.cache.forEach((item, index) => {
+          const res = this.store.data.cart.some(it => {
+            if (item.id === it.id) {
+              this.setData({
+                [`currentGoodsList.cache[${index}].cart_number`]: it.cart_number
+              })
+              return true
+            }
+            return false
+          })
+
+          if (!res) {
+            this.setData({
+              [`currentGoodsList.cache[${index}].cart_number`]: 0
+            })
+          }
+        })
+      } else {
+        // 购物车为空，全部清零
+        this.data.currentGoodsList.cache.forEach((item, index) => {
+          this.setData({
+            [`currentGoodsList.cache[${index}].cart_number`]: 0
+          })
+        })
+      }
     }
   },
 

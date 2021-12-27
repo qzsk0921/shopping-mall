@@ -62,10 +62,10 @@ create(store, {
   certCheck() {
     // 若用户没有通过资质认证，显示弹窗如下图
     // 若用户资质认证已申请，待审核，提示弹窗如下图
-    // -2:未申请 0:审核中 1:已通过 -1:已删除
+    // -2:未申请 0:审核中 1:已通过 2:未通过 -1:已删除
     const status = this.store.data.userInfo.is_shop_check
     if (status != 1) {
-      if (status === 2) {
+      if (status === -2 || status === 2) {
         this.setData({
           confirmTitle: '温馨提示',
           confirmContent: '请进行资质认证后再开通会员',

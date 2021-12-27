@@ -152,7 +152,7 @@ create(store, {
                   if (this.store.data.userInfo.is_vip) {
                     // 会员
                     totalPrice += (item.price * 100 * item.cart_number)
-                    discountPrice += ((item.market_price * 100 - item.price * 100) * item.cart_number)
+                    discountPrice += ((item.market_price * 1000 - item.price * 1000) * item.cart_number)
                   } else {
                     // 非会员
                     totalPrice += (item.market_price * 100 * item.cart_number)
@@ -194,7 +194,7 @@ create(store, {
               if (this.store.data.userInfo.is_vip) {
                 // 会员
                 totalPrice += (item.price * 100 * item.cart_number)
-                discountPrice += ((item.market_price * 100 - item.price * 100) * item.cart_number)
+                discountPrice += ((item.market_price * 1000 - item.price * 1000) * item.cart_number)
               } else {
                 // 非会员
                 totalPrice += (item.market_price * 100 * item.cart_number)
@@ -213,6 +213,16 @@ create(store, {
       },
       deep: true
     }
+  },
+  //跳转至商品详情页
+  toGoodsDetail(e) {
+    // 检查授权状态
+    // 未授权
+    if (!this.checkAuth()) return
+
+    wx.navigateTo({
+      url: `/pages/goods/detail?id=${e.currentTarget.dataset.id}`,
+    })
   },
   // 增加商品数量
   addHandle(e) {
@@ -290,6 +300,11 @@ create(store, {
   //   }
   // },
   couponHandle() {
+    // 授权校验
+    if (!this.checkAuth()) return
+    // 资质校验
+    if (!this.certCheck()) return
+
     // 1.有购物券 跳转至我的购物券 2.没购物券 跳转至领券中心页面
     if (this.data.cartData.coupon_total) {
       wx.navigateTo({
@@ -373,19 +388,33 @@ create(store, {
     // -2:未申请 0:审核中 1:已通过 -1:已删除
     const status = this.store.data.userInfo.is_shop_check
     if (status != 1) {
-      if (status === 2) {
-        this.setData({
-          confirmTitle: '温馨提示',
-          confirmContent: '请进行资质认证后再开通会员',
-          confirmBgColor: "#FF723A",
-          confirmDialogVisibile: true
+      // wx.showToast({
+      //   icon: 'none',
+      //   title: '请先到【个人中心】-【资质认证】提交认证',
+      // })
+      if (status === -2 || status === 2) {
+        // this.setData({
+        //   confirmTitle: '温馨提示',
+        //   confirmContent: '请进行资质认证后再开通会员',
+        //   confirmBgColor: "#FF723A",
+        //   confirmDialogVisibile: true,
+        //   confirmText: '确定'
+        // })
+        wx.showToast({
+          icon: 'none',
+          title: '请先到【个人中心】-【资质认证】提交认证',
         })
       } else if (status === 0) {
-        this.setData({
-          confirmTitle: '温馨提示',
-          confirmContent: '资质认证审核中，请等待审核过后再开通会员',
-          confirmBgColor: "#FF723A",
-          confirmDialogVisibile: true
+        // this.setData({
+        //   confirmTitle: '温馨提示',
+        //   confirmContent: '资质认证审核中，请等待审核过后再开通会员',
+        //   confirmBgColor: "#FF723A",
+        //   confirmDialogVisibile: true,
+        //   confirmText: '确定'
+        // })
+        wx.showToast({
+          icon: 'none',
+          title: '正在审核当中，加急请联系2085025',
         })
       }
       return false
@@ -465,13 +494,12 @@ create(store, {
   },
   //跳转至商品详情页
   toGoodsDetail(e) {
-    // 检查授权状态
-    // 未授权
-    if (!this.checkAuth()) return
-
-    wx.navigateTo({
-      url: `/pages/goods/detail?id=${e.currentTarget.dataset.id}`,
-    })
+    const dataset = e.currentTarget.dataset
+    if (dataset.disabled) {
+      wx.navigateTo({
+        url: `/pages/goods/detail?id=${e.currentTarget.dataset.id}`,
+      })
+    }
   },
   checkAuth() {
     if (!this.store.data.userInfo.avatar_url) {
@@ -491,6 +519,9 @@ create(store, {
   },
   // 加入购物车(猜你喜欢列表的购物车)
   addArtHandle(e) {
+    // 授权校验
+    if (!this.checkAuth()) return
+
     const item = e.currentTarget.dataset.item
     let myData = {
       type: 1,
@@ -711,7 +742,9 @@ create(store, {
    * 生命周期函数--监听页面隐藏
    */
   onHide: function () {
-
+    console.log('onHide')
+    this.store.data.cart = this.data.cartData.cache
+    this.update()
   },
 
   /**

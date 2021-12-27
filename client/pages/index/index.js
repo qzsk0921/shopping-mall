@@ -375,7 +375,7 @@ create(store, {
               })
             })
           }
-        }, 500)
+        }, 1000)
       },
       deep: true
     },
@@ -471,6 +471,11 @@ create(store, {
         shop_id: this.store.data.shop_id
       }).then(res => {
         // console.log(res)
+        wx.showToast({
+          icon: 'none',
+          title: '加入购物车成功',
+        })
+        
         this.setData({
           shopData: res.data
         })
@@ -514,7 +519,7 @@ create(store, {
     //第一次登陆提示json动图 显示一次 来过吗 0 没来过 1 来过
     const jsonAddDialogVisibile = wx.getStorageSync('jsonAddDialogVisibile')
     // console.log(jsonAddDialogVisibile)
-    if (jsonAddDialogVisibile) {
+    if (!jsonAddDialogVisibile) {
       this.setData({
         jsonAddDialogVisibile: 1
       })

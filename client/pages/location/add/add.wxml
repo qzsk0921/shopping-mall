@@ -33,9 +33,9 @@
           </view>
         </view> -->
       </view>
-      <button class="btn-submit btn" form-type="submit">保存收获地址</button>
+      <button class="btn-submit btn" form-type="submit">保存收货地址</button>
     </form>
-    <view wx:if="{{type==='edit'}}" class="btn btn-del" bindtap="addressDelHandle">删除收获地址</view>
+    <view wx:if="{{type==='edit'}}" class="btn btn-del" bindtap="addressDelHandle">删除收货地址</view>
   </view>
 </view>
 

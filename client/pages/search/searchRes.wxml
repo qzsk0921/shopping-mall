@@ -62,9 +62,9 @@
                 <view wx:if="{{item.cart_number}}" class="shopcart-info">{{item.cart_number}}</view>
               </view>
             </view> -->
-            <view class="shopcart-box" catchtap="toArtHandle" data-item="{{item}}">
+            <view class="shopcart-box" catchtap="addArtHandle" data-item="{{item}}">
               <image class="icon-shopcart" mode="aspectFill" src="/assets/images/icon_car.png"></image>
-              <view wx:if="{{cart_number}}" class="shopcart-info">{{cart_number}}</view>
+              <view wx:if="{{item.cart_number}}" class="shopcart-info">{{item.cart_number}}</view>
             </view>
             <!-- 未授权或未资质认证的非会员 -->
             <view class="l2 no-sign" wx:if="{{(!userInfo.phone||userInfo.is_shop_check!=1)&&!userInfo.is_sale}}">

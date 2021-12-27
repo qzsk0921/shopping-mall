@@ -51,7 +51,7 @@
 .extend {
   position: absolute;
   width: 78rpx;
-  height: 128rpx;
+  height: 132rpx;
   right: 0;
   top: 24rpx;
   background: #FFFFFF;
@@ -359,4 +359,20 @@ scroll-view.isIphoneX {
 
 .tree-select__content .tree-select__item .right {
   padding-left: 24rpx;
+}
+
+.section2 .no-data {
+  text-align: center;
+}
+
+.section2 .no-data image {
+  margin-top: 120rpx;
+  width: 383rpx;
+  height: 300rpx;
+}
+
+.section2 .no-data .text {
+  margin-top: 30rpx;
+  font-size: 30rpx;
+  color: #949EA8;
 }

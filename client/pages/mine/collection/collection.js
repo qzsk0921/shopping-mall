@@ -56,6 +56,10 @@ create(store, {
 
     this.addNumCart(myData).then(res => {
       // 更新购物车数值
+      wx.showToast({
+        icon: 'none',
+        title: '加入购物车成功',
+      })
       this.setData({
         [`collectionList.cache[${index}].cart_number`]: item.cart_number + 1
       })

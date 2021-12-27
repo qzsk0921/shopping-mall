@@ -179,6 +179,7 @@
 }
 
 .content>.l4 .remark {
+  text-align: right;
   margin-right: 46rpx;
   width: 364rpx;
   height: 28rpx;

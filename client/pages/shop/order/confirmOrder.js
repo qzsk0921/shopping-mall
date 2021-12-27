@@ -106,7 +106,7 @@ create(store, {
   // 进入备注页面
   toRemarkHandle() {
     wx.navigateTo({
-      url: '/pages/shop/remark',
+      url: `/pages/shop/remark?remark=${this.data.remark}`,
     })
   },
   // 开通和续费的vip相关处理

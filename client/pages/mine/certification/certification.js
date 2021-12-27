@@ -60,6 +60,8 @@ create(store, {
 
     // 校验
     if (!this.formValidate(formData)) return
+
+
     // 提交 退回个人中心页面
     this.addShopCert(formData).then(res => {
       wx.showToast({

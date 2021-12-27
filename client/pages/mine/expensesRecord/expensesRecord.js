@@ -72,7 +72,8 @@ create(store, {
     for (let i = 0; i < 41; i++) {
       yearArrStr += dateObj.getFullYear() + (i - 20) + ','
     }
-    return yearArrStr.split(',').map(item => item - 0)
+    
+    return yearArrStr.split(',').map(item => item - 0).slice(0,-1)
   },
   /**
    * 生命周期函数--监听页面加载

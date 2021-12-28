@@ -291,7 +291,7 @@
 }
 
 .section6 .r {
-  padding: 24rpx 5rpx 0 0rpx;
+  padding: 24rpx 5rpx 24rpx 0rpx;
   display: flex;
   align-items: center;
   overflow: scroll;

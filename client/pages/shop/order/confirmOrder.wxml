@@ -10,7 +10,7 @@
     <!-- 收货地址 -->
     <view class="l1 {{orderData.address_info.address?'':'noaddress'}}" bindtap="toAddressHandle">
       <block wx:if="{{orderData.address_info.address}}">
-        <view class="l1-1">{{orderData.address_info.address}}</view>
+        <view class="l1-1">{{orderData.address_info.name}}{{orderData.address_info.user_address}}</view>
         <view class="l1-2">
           <image class="icon-avatar" src="/assets/images/order_head.png" mode="aspectFill"></image>
           <text>{{orderData.address_info.consignee_name}}</text>
@@ -66,7 +66,7 @@
           <!-- <text>开通会员，本单最高立减</text> -->
           <text>{{userInfo.is_vip?'已为您累计节省':'开通会员，本单最高立减'}}</text>
           <text>￥</text>
-          <text>{{userInfo.is_vip?orderData.user_total_discount:'￥20'}}</text>
+          <text>{{userInfo.is_vip?orderData.user_total_discount:'20'}}</text>
         </view>
         <view class="right btn btn-register" bindtap="vipHandle">{{userInfo.is_vip?'立即续费':'立即开通'}}</view>
       </view>

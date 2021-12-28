@@ -14,9 +14,10 @@
 }
 
 .content>.l1 {
+  padding: 25rpx 73rpx 30rpx 0;
   overflow: hidden;
   margin: 20rpx 24rpx 0;
-  height: 142rpx;
+  /* height: 142rpx; */
   background: #FFFFFF;
   border-radius: 16rpx;
   padding-left: 24rpx;
@@ -32,14 +33,14 @@
 }
 
 .content>.l1 .l1-1 {
-  margin-top: 30rpx;
   font-size: 30rpx;
   font-weight: 500;
   color: #333333;
+  line-height: 40rpx;
 }
 
 .content>.l1 .l1-2 {
-  margin-top: 24rpx;
+  margin-top: 19rpx;
   font-size: 28rpx;
   color: #888888;
   display: flex;
@@ -229,7 +230,7 @@
 }
 
 .foot>.l5 .left text:nth-of-type(3) {
-  font-size: 38rpx;
+  font-size: 26rpx;
   font-weight: bold;
   color: #FF5626;
 }

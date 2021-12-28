@@ -156,10 +156,21 @@ create(store, {
     }
     this.addNumCart(myData).then(
       res => {
-        this.setData({
-          cart_number: this.data.cart_number + 1,
+        // 更新大购物车数量（顶部）
+        getCartData({
+          shop_id: this.store.data.shop_id
+        }).then(res => {
+          let cart_number = 0
+          res.data.list.forEach(item => {
+            cart_number += item.cart_number
+          })
+
+          this.setData({
+            cart_number
+          })
         })
 
+        // 更新小购物车数量
         this.data.goodsList[this.data.tabIndex].cache.some((it, index) => {
           if (it.id === item.id) {
             it.cart_number += 1
@@ -169,6 +180,11 @@ create(store, {
             return true
           }
           return false
+        })
+
+        wx.showToast({
+          icon: 'none',
+          title: '加入购物车成功',
         })
       }
     )
@@ -261,7 +277,8 @@ create(store, {
     // }
     this.setData({
       searchKeyword: e.detail.value,
-      visibileSearchDialog: false
+      visibileSearchDialog: false,
+      [`goodsList[${this.data.tabIndex}].count`]: 1
     })
 
     this.getGoodsList()
@@ -318,7 +335,7 @@ create(store, {
         currentPriceSort: null
       })
     } else if (index === 1) {
-      type = 2
+      type = 1
       this.setData({
         currentPriceSort: null
       })
@@ -474,8 +491,13 @@ create(store, {
     getCartData({
       shop_id: this.store.data.shop_id
     }).then(res => {
+      let cart_number = 0
+      res.data.list.forEach(item => {
+        cart_number += item.cart_number
+      })
+
       this.setData({
-        cart_number: res.data.total
+        cart_number
       })
 
       // 更新分类信息(主要是购物车数量)goodsList

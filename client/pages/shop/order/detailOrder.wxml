@@ -20,7 +20,7 @@
       </view>
     </view>
     <view class="section2">
-      <view class="row1">{{orderData.receiving_address}}</view>
+      <view class="row1">{{orderData.receiving_address_name}}{{orderData.receiving_address_user_name}}</view>
       <view class="row2">
         <image class="icon-head" src="/assets/images/order_head.png" mode="aspectFill"></image>
         <text>{{orderData.receiving_name}}</text>

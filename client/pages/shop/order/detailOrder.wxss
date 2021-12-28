@@ -51,9 +51,9 @@
 
 .section2 {
   margin: 20rpx auto 0;
-  padding: 30rpx 24rpx 30rpx;
+  padding: 25rpx 24rpx 30rpx;
   width: 702rpx;
-  height: 142rpx;
+  /* height: 142rpx; */
   background: #FFFFFF;
   border-radius: 16rpx;
 }
@@ -62,10 +62,11 @@
   font-size: 30rpx;
   font-weight: 500;
   color: #333333;
+  line-height: 40rpx;
 }
 
 .section2 .row2 {
-  margin-top: 24rpx;
+  margin-top: 19rpx;
 }
 
 .section2 .row2 .icon-head {

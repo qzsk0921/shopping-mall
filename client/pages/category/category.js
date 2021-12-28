@@ -204,7 +204,7 @@ create(store, {
     this.addNumCart(myData).then(res => {
       // 更新详情页购物车数据
       // this.getGoodsList()
-      // 不适合重新渲染
+      // 不重新渲染
       wx.showToast({
         icon: 'none',
         title: '加入购物车成功',

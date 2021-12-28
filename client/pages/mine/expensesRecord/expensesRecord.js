@@ -15,7 +15,7 @@ create(store, {
     compatibleInfo: null, //navHeight menuButtonObject systemInfo isIphoneX
     navigationBarTitleText: '消费记录',
 
-    index: 20,
+    index: 10,
 
     data: {
       "total_money": 0,
@@ -69,11 +69,11 @@ create(store, {
     let yearArrStr = ''
     const dateObj = new Date()
 
-    for (let i = 0; i < 41; i++) {
-      yearArrStr += dateObj.getFullYear() + (i - 20) + ','
+    for (let i = 0; i < 21; i++) {
+      yearArrStr += dateObj.getFullYear() + (i - 10) + ','
     }
-    
-    return yearArrStr.split(',').map(item => item - 0).slice(0,-1)
+
+    return yearArrStr.split(',').filter(item => item - 0)
   },
   /**
    * 生命周期函数--监听页面加载

@@ -184,8 +184,9 @@ create(store, {
 
     if (this.data.shopType) {
       this.setData({
-        'certificationInfo.shop_type_str': this.data.shopType.id,
-        type: this.data.shopType.name,
+        // 'certificationInfo.shop_type_str': this.data.shopType.id,
+        'certificationInfo.shop_type_str': this.data.shopType.map(item=>item.id).join(),
+        type: this.data.shopType.map(item=>item.name).join(),
       })
     }
 

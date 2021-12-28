@@ -28,6 +28,15 @@
   color: #999999;
 }
 
+.content .form-section .form-item input {
+  height: 100%;
+  width: calc(100% - 196rpx);
+}
+
+.content .form-section .form-item .input-placeholder {
+  line-height: 106rpx;
+}
+
 .content .form-section .form-item.form-item-address {
   position: relative;
 }

@@ -94,7 +94,7 @@
               </view>
             </view>
             <view class="r hide-scrollbar">
-              <view class="item" wx:for="{{item.goods_list}}" wx:key="unique" wx:for-item="itemName" data-id="{{item.id}}" bindtap="toGoodsDetail">
+              <view class="item" wx:for="{{item.goods_list}}" wx:key="unique" wx:for-item="itemName" data-id="{{itemName.id}}" bindtap="toGoodsDetail">
                 <image class="icon-newmarket l1" src="{{itemName.thumb}}" mode="aspectFill"></image>
                 <!-- <view class="l2">￥{{item.price}}</view> -->
                 <!-- 未授权或未资质认证的非会员 -->

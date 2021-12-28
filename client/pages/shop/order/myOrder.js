@@ -398,12 +398,15 @@ create(store, {
           title: '取消成功',
         })
 
-        // toast结束后 返回上一个页面
-        setTimeout(() => {
-          wx.navigateBack({
-            delta: 0,
-          })
-        }, 500)
+        this.setData({
+          tabIndex: this.data.tabIndex
+        })
+        // toast结束后 更新列表
+        // setTimeout(() => {
+        //   wx.navigateBack({
+        //     delta: 0,
+        //   })
+        // }, 500)
       })
     } else {
       this.delOrder({
@@ -414,12 +417,10 @@ create(store, {
           title: '删除成功',
         })
 
-        // toast结束后 返回上一个页面
-        setTimeout(() => {
-          wx.navigateBack({
-            delta: 0,
-          })
-        }, 500)
+        // toast结束后 更新列表
+        this.setData({
+          tabIndex: this.data.tabIndex
+        })
 
       })
     }
@@ -500,7 +501,7 @@ create(store, {
           title: msg,
           icon: 'none'
         })
-        
+
         console.log(res)
       }
     }).catch(res => {

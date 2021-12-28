@@ -5,7 +5,9 @@ import config from '../../../config/index'
 const QQMapWX = require('../../../lib/qqmap-wx-jssdk.js');
 
 import {
-  getAddressList
+  getAddressList,
+  setAddressShopInfo,
+  checkAddress
 } from '../../../api/location'
 
 let qqmapsdk, timer;
@@ -131,10 +133,37 @@ create(store, {
     });
   },
   poiTapHandle(e) {
-    // console.log(444)
-    console.log(e)
-    const ind = e.target.dataset.index
-    // this.data.pois[ind]
+    const dataset = e.currentTarget.dataset
+    console.log(dataset)
+
+    const myData = {
+      address: dataset.item.title,
+      longitude: dataset.item.location.lng,
+      latitude: dataset.item.location.lat,
+      id: dataset.item.id
+    }
+
+    // 验证配送范围
+    this.checkAddress(myData).then(res => {
+      // 在配送范围
+      const myyData = {
+        address: dataset.item.title,
+        longitude: dataset.item.location.lng,
+        latitude: dataset.item.location.lat,
+        type: 2, //1:通过地址选择 2:首页选择地址
+      }
+      this.setAddressShopInfo(myyData).then(res => {
+        // 在配送范围里跳转到首页，不在配送范围提示
+        myyData.address = res.data.address
+        this.store.data.currentAddress = myyData
+        // this.store.data.location = dataset.item
+        this.update()
+
+        wx.switchTab({
+          url: '../../index/index',
+        })
+      })
+    })
   },
   // 当前定位地址点击
   locationClickHandle() {
@@ -187,7 +216,7 @@ create(store, {
       this.update()
 
       wx.setStorageSync('address_id', dataset.item.id)
-      
+
       wx.navigateBack({
         delta: 0,
       })
@@ -238,6 +267,24 @@ create(store, {
     data = data ? data : {}
     return new Promise((resolve, reject) => {
       getAddressList(data).then(res => {
+        resolve(res)
+      }).catch(err => {
+        reject(err)
+      })
+    })
+  },
+  setAddressShopInfo(data) {
+    return new Promise((resolve, reject) => {
+      setAddressShopInfo(data).then(res => {
+        resolve(res)
+      }).catch(err => {
+        reject(err)
+      })
+    })
+  },
+  checkAddress(data) {
+    return new Promise((resolve, reject) => {
+      checkAddress(data).then(res => {
         resolve(res)
       }).catch(err => {
         reject(err)

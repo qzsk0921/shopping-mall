@@ -13,72 +13,74 @@ create(store, {
   data: {
     compatibleInfo: null, //navHeight menuButtonObject systemInfo isIphoneX
     navigationBarTitleText: '店铺类型',
-    currentId: null, //选中的类型
+    // currentId: null, //选中的类型
+    currentIds: [], //选中的类型（多选）
     shops: {
-      cache: [{
-          "id": 1,
-          "name": "烧烤店",
-          "category_str": "1,2",
-          "sort": 6,
-          "status": 1,
-          "create_time": 222222
-        },
-        {
-          "id": 4,
-          "name": "烧烤店3",
-          "category_str": "1,2",
-          "sort": 5,
-          "status": 1,
-          "create_time": 222222
-        },
-        {
-          "id": 5,
-          "name": "烧烤店4",
-          "category_str": "1,2",
-          "sort": 2,
-          "status": 1,
-          "create_time": 222222
-        },
-        {
-          "id": 6,
-          "name": "烧烤店5",
-          "category_str": "1,2",
-          "sort": 2,
-          "status": 1,
-          "create_time": 222222
-        },
-        {
-          "id": 7,
-          "name": "烧烤店6",
-          "category_str": "1,2",
-          "sort": 2,
-          "status": 1,
-          "create_time": 222222
-        },
-        {
-          "id": 9,
-          "name": "烧烤店8",
-          "category_str": "1,2",
-          "sort": 2,
-          "status": 1,
-          "create_time": 222222
-        },
-        {
-          "id": 10,
-          "name": "烧烤店9",
-          "category_str": "1,2",
-          "sort": 2,
-          "status": 1,
-          "create_time": 222222
-        },
-        {
-          "id": 8,
-          "name": "烧烤店7",
-          "category_str": "1,2",
-          "sort": 1,
-          "status": 1,
-          "create_time": 222222
-        }
+      cache: [
+        // {
+        //   "id": 1,
+        //   "name": "烧烤店",
+        //   "category_str": "1,2",
+        //   "sort": 6,
+        //   "status": 1,
+        //   "create_time": 222222
+        // },
+        // {
+        //   "id": 4,
+        //   "name": "烧烤店3",
+        //   "category_str": "1,2",
+        //   "sort": 5,
+        //   "status": 1,
+        //   "create_time": 222222
+        // },
+        // {
+        //   "id": 5,
+        //   "name": "烧烤店4",
+        //   "category_str": "1,2",
+        //   "sort": 2,
+        //   "status": 1,
+        //   "create_time": 222222
+        // },
+        // {
+        //   "id": 6,
+        //   "name": "烧烤店5",
+        //   "category_str": "1,2",
+        //   "sort": 2,
+        //   "status": 1,
+        //   "create_time": 222222
+        // },
+        // {
+        //   "id": 7,
+        //   "name": "烧烤店6",
+        //   "category_str": "1,2",
+        //   "sort": 2,
+        //   "status": 1,
+        //   "create_time": 222222
+        // },
+        // {
+        //   "id": 9,
+        //   "name": "烧烤店8",
+        //   "category_str": "1,2",
+        //   "sort": 2,
+        //   "status": 1,
+        //   "create_time": 222222
+        // },
+        // {
+        //   "id": 10,
+        //   "name": "烧烤店9",
+        //   "category_str": "1,2",
+        //   "sort": 2,
+        //   "status": 1,
+        //   "create_time": 222222
+        // },
+        // {
+        //   "id": 8,
+        //   "name": "烧烤店7",
+        //   "category_str": "1,2",
+        //   "sort": 1,
+        //   "status": 1,
+        //   "create_time": 222222
+        // }
       ],
       count: 1,
       total_page: 1,
@@ -89,26 +91,52 @@ create(store, {
   selectHandle(e) {
     // 店铺类型选择
     const item = e.target.dataset.item
-    if (item.id === this.data.currentId) return
-    this.setData({
-      currentId: item.id
-    })
+
+    if (this.data.currentIds.length) {
+      let res = true
+      res = this.data.currentIds.some((it, index) => {
+        if (it.id === item.id) {
+          this.data.currentIds.splice(index, 1)
+          this.setData({
+            currentIds: this.data.currentIds
+          })
+          return true
+        }
+        return false
+      })
+
+      if (!res) {
+        this.setData({
+          currentIds: this.data.currentIds.concat(item)
+        })
+      }
+    } else {
+      this.setData({
+        currentIds: [].concat(item)
+      })
+    }
+
+    // if (item.id === this.data.currentId) return
+    // this.setData({
+    //   currentId: item.id
+    // })
 
     // 在提交成功后，返回首页需要刷新（带上参数）
     const pages = getCurrentPages();
     const prevPage = pages[pages.length - 2]; //上一个页面
     //直接调用上一个页面的setData()方法，把数据存到上一个页面中去
     prevPage.setData({
-      shopType: item
+      // shopType: item
+      shopType: this.data.currentIds
     })
-    wx.navigateBack({
-      delta: 0,
-    })
+    // wx.navigateBack({
+    //   delta: 0,
+    // })
   },
   getShopCertType(dataObj) {
     const tempData = {
       page_size: this.data.page_size,
-      page: this.data.goodsList[this.data.tabIndex].count
+      page: this.data.shops.count
     }
 
     if (typeof dataObj === 'object') {

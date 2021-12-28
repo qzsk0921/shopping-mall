@@ -214,14 +214,16 @@ create(store, {
       deep: true
     }
   },
-  //跳转至商品详情页
+  //跳转至商品详情页(购物车商品和猜你喜欢商品)
   toGoodsDetail(e) {
+    const dataset = e.currentTarget.dataset
+    if (!dataset.disabled) return
     // 检查授权状态
     // 未授权
     if (!this.checkAuth()) return
 
     wx.navigateTo({
-      url: `/pages/goods/detail?id=${e.currentTarget.dataset.id}`,
+      url: `/pages/goods/detail?id=${dataset.id}`,
     })
   },
   // 增加商品数量
@@ -239,15 +241,19 @@ create(store, {
 
     this.addNumCart(cartData).then(res => {
       this.getCartData()
-      // this.setData({
-      //   [`cartData.cache[${index}].cart_number`]: Number(item.cart_number) + 1,
-      // })
+      // 更新猜你喜欢
+      this.data.recommendList.cache.forEach((it, index) => {
+        if (item.id === it.id) {
+          this.setData({
+            [`recommendList.cache[${index}].cart_number`]: item.cart_number + 1
+          })
+          return true
+        }
+        return false
+      })
     }).catch(err => {
       console.log(err.msg)
       this.getCartData()
-      // this.setData({
-      //   [`cartData.cache[${index}].cart_number`]: Number(item.cart_number),
-      // })
     })
   },
   // 减少商品数量
@@ -266,6 +272,16 @@ create(store, {
 
     this.addNumCart(cartData).then(res => {
       this.getCartData()
+      // 更新猜你喜欢
+      this.data.recommendList.cache.forEach((it, index) => {
+        if (item.id === it.id) {
+          this.setData({
+            [`recommendList.cache[${index}].cart_number`]: item.cart_number - 1
+          })
+          return true
+        }
+        return false
+      })
     })
   },
   // 输入商品数量
@@ -392,7 +408,7 @@ create(store, {
       //   icon: 'none',
       //   title: '请先到【个人中心】-【资质认证】提交认证',
       // })
-      if (status === -2 || status === 2) {
+      if (status === -2 || status === 2 || status === -1) {
         // this.setData({
         //   confirmTitle: '温馨提示',
         //   confirmContent: '请进行资质认证后再开通会员',
@@ -444,6 +460,17 @@ create(store, {
     this.delCart(this.data.tempDelGoodsData).then(res => {
       // 更新购物车数据
       this.getCartData()
+
+      // 更新猜你喜欢的购物车数量
+      this.data.recommendList.cache.forEach((it, index) => {
+        if (this.data.tempDelGoodsData.goods_id === it.id) {
+          this.setData({
+            [`recommendList.cache[${index}].cart_number`]: 0
+          })
+          return true
+        }
+        return false
+      })
     })
   },
   // 单选
@@ -492,15 +519,6 @@ create(store, {
       checkedIds: arr
     })
   },
-  //跳转至商品详情页
-  toGoodsDetail(e) {
-    const dataset = e.currentTarget.dataset
-    if (dataset.disabled) {
-      wx.navigateTo({
-        url: `/pages/goods/detail?id=${e.currentTarget.dataset.id}`,
-      })
-    }
-  },
   checkAuth() {
     if (!this.store.data.userInfo.avatar_url) {
       // 未授权先去授权页
@@ -521,22 +539,50 @@ create(store, {
   addArtHandle(e) {
     // 授权校验
     if (!this.checkAuth()) return
-
-    const item = e.currentTarget.dataset.item
+    const dataset = e.currentTarget.dataset
     let myData = {
-      type: 1,
+      type: dataset.item.type ? dataset.item.type : 1,
       shop_id: this.store.data.shop_id,
-      goods_id: item.id,
-      goods_num: item.cart_number + 1
+      goods_id: dataset.item.id,
+      goods_num: dataset.item.cart_number + 1
       // goods_num: 1
     }
+
     this.addNumCart(myData).then(res => {
-      // // 更新详情页购物车数据
-      // this.getCartData({
-      //   shop_id: this.store.data.shop_id
-      // }).then(res => {
-      //   // console.log(res)
-      // })
+      // this.getCartData()
+      wx.showToast({
+        icon: 'none',
+        title: '加入购物车成功',
+      })
+      // 更新购物车数据
+      const ress = this.data.cartData.cache.some((item, index) => {
+        if (item.id === dataset.item.id) {
+          this.setData({
+            [`cartData.cache[${index}].cart_number`]: dataset.item.cart_number + 1
+          })
+          return true
+        }
+        return false
+      })
+
+      // 购物车需要新增一个商品
+      if(!ress) {
+        this.getCartData()
+      }
+
+      // 猜你喜欢 同步数据
+      let indexArr = [],
+        tempData = {}
+      this.data.recommendList.cache.forEach((item, index) => {
+        if (item.id === dataset.item.id)
+          indexArr.push(index)
+      })
+
+      indexArr.forEach(ind => {
+        tempData[`recommendList.cache[${ind}].cart_number`] = dataset.item.cart_number + 1
+      })
+
+      this.setData(tempData)
     })
   },
   scrollToLower(e) {

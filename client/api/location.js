@@ -91,3 +91,19 @@ export function setAddressShopInfo(data) {
     load: 'noload'
   })
 }
+
+/**
+ * 用户搜索地址验证 Address/check_address
+ * @param {int} longitude require 经度
+ * @param {int} latitude require 纬度
+ * @param {int} address require 地址名称
+ * @param {int} district 区id
+ */
+export function checkAddress(data) {
+  return request({
+    url: '/Address/check_address',
+    method: 'get',
+    data,
+    // load: 'noload'
+  })
+}

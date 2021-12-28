@@ -13,7 +13,7 @@
         </view>
         <view class="form-item form-item-phone">
           <label>手机号</label>
-          <input type="number" name="consignee_phone" placeholder="请填写手机号" placeholder-class="input-placeholder" value="{{deliveryAddress.consignee_phone}}" bindblur="handleInputChange" disabled="{{generateOrderSuccess}}" />
+          <input type="number" name="consignee_phone" placeholder="请填写手机号" placeholder-class="input-placeholder" value="{{deliveryAddress.consignee_phone}}" bindblur="handleInputChange" disabled="{{generateOrderSuccess}}" maxlength="11" />
         </view>
         <view class="form-item form-item-address">
           <label>收货地址</label>

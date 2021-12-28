@@ -28,7 +28,7 @@
       <!-- 购物车 -->
       <view class="section2">
         <checkbox-group bindchange="checkboxChange">
-          <view class="item {{item.status===2?'mask-box':item.is_stock?'':'mask-box'}}" wx:for="{{cartData.cache}}" wx:key="unique" data-disabled="{{item.status===2?0:item.is_stock?1:0}}" data-id="{{item.id}}" bindtap="toGoodsDetail">
+          <view class="item {{item.status===2?'mask-box':item.is_stock?'':'mask-box'}}" wx:for="{{cartData.cache}}" wx:key="unique" data-disabled="{{item.status===2?0:item.is_stock?1:0}}">
             <!-- 关闭按钮 -->
             <image class="btn-close" src="/assets/images/car_icon_del.png" mode="aspectFill" data-item="{{item}}" data-index="{{index}}" catchtap="delGoodsHandle">
             </image>
@@ -48,13 +48,13 @@
                 <checkbox value="{{item.id+'.'+item.unit_id}}" checked="{{tools.checkedCheck(item.id+'.'+item.unit_id, checkedIds)}}" disabled="{{(item.status===2||item.status===3)?1:item.is_stock?0:1}}" />
               </view>
             </view>
-            <view class="center">
+            <view class="center" data-id="{{item.id}}" bindtap="toGoodsDetail" data-disabled="{{item.status===2?0:item.is_stock?1:0}}">
               <view class="icon-goods-box">
                 <view class="mask">{{(item.status===2||item.status===3)?'已下架':item.is_stock?'':'库存不足'}}</view>
                 <image class="icon-goods" src="{{item.thumb}}" mode="aspectFill"></image>
               </view>
             </view>
-            <view class="right">
+            <view class="right" data-id="{{item.id}}" bindtap="toGoodsDetail" data-disabled="{{item.status===2?0:item.is_stock?1:0}}">
               <view class="l1 txt-cut">
                 <view wx:if="{{item.is_pre_sale===1 || item.activity_info.activity_name}}" class="tag {{item.is_pre_sale===1?'pre_sale':item.activity_info.activity_name?'new_activity':''}}">{{item.is_pre_sale===1?'预售专区':item.activity_info.activity_name?'新品上市':''}}</view>
                 {{item.goods_name}} {{item.spec}}
@@ -91,8 +91,8 @@
         <view></view>
       </view>
       <view class="item-box">
-        <view class="item" wx:for="{{recommendList.cache}}" wx:key="unique" wx:for-item="itemName">
-          <image class="icon-pri" src="{{itemName.thumb}}" mode="aspectFill" data-id="{{itemName.id}}" bindtap="toGoodsDetail"></image>
+        <view class="item" wx:for="{{recommendList.cache}}" wx:key="unique" wx:for-item="itemName" wx:for-index="idx">
+          <image class="icon-pri" src="{{itemName.thumb}}" mode="aspectFill" data-id="{{itemName.id}}" data-disabled="true" bindtap="toGoodsDetail"></image>
           <view class="cont">
             <view class="l12-box">
               <view class="l1 txt-cut">
@@ -119,7 +119,7 @@
               <view class="origin-price">￥{{itemName.market_price}}</view>
             </view>
           </view>
-          <view class="shopcart-box" catchtap="addArtHandle" data-item="{{itemName}}">
+          <view class="shopcart-box" catchtap="addArtHandle" data-item="{{itemName}}" data-index="{{idx}}">
             <image class="icon-shopcart" mode="aspectFill" src="/assets/images/icon_car.png"></image>
             <view wx:if="{{itemName.cart_number}}" class="shopcart-info">{{itemName.cart_number}}</view>
           </view>

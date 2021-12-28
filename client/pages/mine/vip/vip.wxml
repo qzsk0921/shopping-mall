@@ -12,7 +12,7 @@
     <view class="row1">{{userInfo.nick_name}}</view>
     <!-- <view class="row2">还未开通会员</view> -->
     <view class="row2">{{userInfo.is_vip?'有效期至：'+tools.formatTime(userInfo.vip_info.expire_time*1000, 'yy-mm-dd'):'还未开通会员'}}</view>
-    <view wx:if="{{userInfo.is_vip}}" class="row3 vip"><text>累计已</text><text>省{{userInfo.vip_info.discount}}元</text></view>
+    <view wx:if="{{userInfo.is_vip}}" class="row3 vip"><text>累计已</text><text>省{{userInfo.user_total_discount}}元</text></view>
     <view wx:else class="row3">开通既享受更多优惠价格</view>
   </view>
   <view class="section2">

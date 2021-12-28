@@ -151,11 +151,11 @@ create(store, {
                 if (![2, 3].includes(item.status) && item.is_stock) {
                   if (this.store.data.userInfo.is_vip) {
                     // 会员
-                    totalPrice += (item.price * 100 * item.cart_number)
+                    totalPrice += (item.price * 1000 * item.cart_number)
                     discountPrice += ((item.market_price * 1000 - item.price * 1000) * item.cart_number)
                   } else {
                     // 非会员
-                    totalPrice += (item.market_price * 100 * item.cart_number)
+                    totalPrice += (item.market_price * 1000 * item.cart_number)
                   }
                   total += 1
                 }
@@ -193,11 +193,11 @@ create(store, {
             if (![2, 3].includes(item.status) && item.is_stock && this.data.checkedIds.includes(item.id + '.' + item.unit_id)) {
               if (this.store.data.userInfo.is_vip) {
                 // 会员
-                totalPrice += (item.price * 100 * item.cart_number)
+                totalPrice += (item.price * 1000 * item.cart_number)
                 discountPrice += ((item.market_price * 1000 - item.price * 1000) * item.cart_number)
               } else {
                 // 非会员
-                totalPrice += (item.market_price * 100 * item.cart_number)
+                totalPrice += (item.market_price * 1000 * item.cart_number)
               }
               total += 1
             }
@@ -712,6 +712,8 @@ create(store, {
     }
 
     getApp().setWatcher(this) //设置监听器
+    
+    this.getRecommendList()
   },
 
   /**
@@ -781,7 +783,7 @@ create(store, {
       })
     })
 
-    this.getRecommendList()
+    // this.getRecommendList()
   },
 
   /**

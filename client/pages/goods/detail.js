@@ -138,13 +138,31 @@ create(store, {
     })
   },
   // 更新购物车数量
-  updateCartHandle(e) {console.log(3333)
+  updateCartHandle(e) {
+    // console.log(e)
     this.getGoodsDetail({
       id: this.data.goods_id
     }).then(res => {
       this.setData({
         goodsDetail: res.data
       })
+
+      // 更新上一个页面购物车数据(这里主要是购物车页面的猜你喜欢的购物车数量)
+      this.updatePrevpageData(this.data.goods_id, res.data.cart_number)
+    })
+  },
+  // 更新上一个页面购物车数据
+  updatePrevpageData(id, num) {
+    // 在提交成功后，返回上一页（带上参数）
+    const pages = getCurrentPages();
+    const prevPage = pages[pages.length - 2]; //上一个页面
+    //直接调用上一个页面的setData()方法，把数据存到上一个页面中去
+    prevPage.data.recommendList.cache.forEach((it, index) => {
+      if (id == it.id) {
+        prevPage.setData({
+          [`recommendList.cache[${index}].cart_number`]: num
+        })
+      }
     })
   },
   getGoodsDetail(data) {

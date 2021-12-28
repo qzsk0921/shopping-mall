@@ -143,7 +143,7 @@
           <view class="left-t"><text>总计</text> <text class="price">￥***</text></view>
         </block>
         <block wx:else>
-          <view class="left-t"><text>总计</text> <text class="price">￥{{totalPrice/100}}</text></view>
+          <view class="left-t"><text>总计</text> <text class="price">￥{{totalPrice/1000}}</text></view>
           <view wx:if="{{discountPrice}}" class="left-b">已优惠{{discountPrice/1000}}</view>
         </block>
       </view>

@@ -275,14 +275,17 @@
 }
 
 .section2 .item .right .l4.no-sign {
-  margin: 42rpx 0 22rpx;
+  /* margin: 42rpx 0 22rpx; */
+  margin: 42rpx 0 39rpx;
+  font-size: 26rpx;
+  color: #888888;
 }
 
-.section2 .item .right .l4.no-sign text {
+/* .section2 .item .right .l4.no-sign text {
   line-height: 37rpx;
   font-size: 22rpx;
   color: #888888
-}
+} */
 
 .section2 .item .left {
   width: 80rpx;
@@ -672,4 +675,8 @@
 
 .section3 .l12-box {
   height: 127rpx;
+}
+.section3 .no-sign {
+  font-size: 24rpx;
+  color: #888888
 }

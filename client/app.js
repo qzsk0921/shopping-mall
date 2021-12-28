@@ -20,6 +20,13 @@ App({
           wx.setStorageSync('token', res.data.token)
           // userStore.getUserDetail()
           getUserDetail().then(res => {
+            // 业务代码 1:正常 0:禁用 -1:不存在-------------------------------------------------
+            if (res.data.status === 0) {
+              wx.reLaunch({
+                url: '/pages/authorization/forbidden',
+              })
+            }
+
             this.globalData.userInfo = res.data
             store.data.userInfo = res.data
             store.update()
@@ -30,6 +37,13 @@ App({
       })
     } else {
       getUserDetail().then(res => {
+        // 业务代码 1:正常 0:禁用 -1:不存在-------------------------------------------------
+        if (res.data.status === 0) {
+          wx.reLaunch({
+            url: '/pages/authorization/forbidden',
+          })
+        }
+
         this.globalData.userInfo = res.data
         store.data.userInfo = res.data
         store.update()

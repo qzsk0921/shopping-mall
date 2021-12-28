@@ -1,6 +1,11 @@
 // pages/mine/set/set.js
 import store from '../../../store/common'
 import create from '../../../utils/create'
+
+import {
+  getFAQdetail
+} from '../../../api/faq'
+
 // Page({
 create(store, {
 
@@ -17,19 +22,19 @@ create(store, {
         url: ''
       },
       {
-        id: 2,
+        id: 7,
         name: '关于我们',
         val: '',
         url: ''
       },
       {
-        id: 3,
+        id: 9,
         name: '用户协议',
         val: '',
         url: ''
       },
       {
-        id: 4,
+        id: 10,
         name: '隐私协议',
         val: '',
         url: ''
@@ -37,7 +42,14 @@ create(store, {
     ]
   },
   cellHandle(e) {
-    console.log('cellHandle')
+    // console.log('cellHandle')
+    // 隐私协议10，用户协议9，关于我们7
+    const id = e.currentTarget.dataset.id
+    if (id === 1) return
+    // 借faq页面一用
+    wx.navigateTo({
+      url: `/pages/mine/faq/detail?id=${id}`,
+    })
   },
   /**
    * 生命周期函数--监听页面加载

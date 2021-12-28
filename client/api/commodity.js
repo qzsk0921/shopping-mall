@@ -18,11 +18,12 @@ export function getShopData(data) {
  * 商品分类
  * @param {int} pid require 0:父级 其他:父级分类id
  */
-export function getCategoryList(data) {
+export function getCategoryList(data, noload) {
   return request({
     url: '/Category/get_category_list',
     method: 'post',
-    data
+    data,
+    load: noload ? 'noload' : ''
   })
 }
 

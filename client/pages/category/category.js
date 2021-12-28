@@ -350,7 +350,7 @@ create(store, {
   },
   getCategoryList(data) {
     return new Promise((resolve, reject) => {
-      getCategoryList(data).then(res => {
+      getCategoryList(data,'noload').then(res => {
         resolve(res)
       }).catch(err => {
         reject(err)

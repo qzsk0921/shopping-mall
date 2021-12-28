@@ -191,6 +191,12 @@
           "pathName": "pages/shop/order/myOrder",
           "query": "",
           "scene": null
+        },
+        {
+          "name": "",
+          "pathName": "pages/authorization/forbidden",
+          "query": "",
+          "scene": null
         }
       ]
     }

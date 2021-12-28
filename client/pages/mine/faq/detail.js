@@ -12,7 +12,7 @@ create(store, {
    */
   data: {
     compatibleInfo: null, //navHeight menuButtonObject systemInfo isIphoneX
-    navigationBarTitleText: '常见问题',
+    navigationBarTitleText: '',
   },
 
   /**

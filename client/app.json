@@ -3,6 +3,7 @@
     "pages/index/index",
     "pages/authorization/identity",
     "pages/authorization/phone",
+    "pages/authorization/forbidden",
     "pages/logs/logs",
     "pages/profile/profile",
     "pages/category/category",

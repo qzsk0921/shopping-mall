@@ -6,7 +6,7 @@
   <view class="fixed">
     <top-navigation navigationBarTitleText="{{navigationBarTitleText}}" navHeight="{{compatibleInfo.navHeight}}" navTop="{{compatibleInfo.menuButtonObject.top}}" menuButtonHeight="{{compatibleInfo.menuButtonObject.height}}" status="{{navStatus}}" color="#333" />
   </view>
-  <view class="content hide-scrollbar" style="height:{{compatibleInfo.isIphoneX?compatibleInfo.systemInfo.screenHeight-(32+contentTop)+'px':compatibleInfo.systemInfo.screenHeight-(contentTop)+'px'}}">
+  <view class="content hide-scrollbar" style="height:{{compatibleInfo.isIphoneX?compatibleInfo.systemInfo.screenHeight-(contentTop+footerH)+'px':compatibleInfo.systemInfo.screenHeight-(contentTop+footerH)+'px'}}">
     <view class="swiper-box section1">
       <swiper indicator-dots="{{indicatorDots}}" autoplay="{{autoplay}}" interval="{{interval}}" duration="{{duration}}" indicator-color="rgba(255, 255, 255, .6)" indicator-active-color="#ffffff" circular="true" bindchange="bindchangeHandle">
         <block wx:for="{{goodsDetail.goods_banner_arr}}" wx:key="*this">
@@ -17,7 +17,7 @@
         </block>
       </swiper>
       <view class="tip">
-        {{currentSwiperIndex}} / {{goodsDetail.goods_banner_arr.length}}
+        {{goodsDetail.goods_banner_arr.length?currentSwiperIndex:0}} / {{goodsDetail.goods_banner_arr.length}}
       </view>
     </view>
     <view class="section2">

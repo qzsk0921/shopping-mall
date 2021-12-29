@@ -235,6 +235,13 @@ create(store, {
         contentTop: rect.top,
       })
     }).exec();
+
+    query.select('.footer').boundingClientRect(function (rect) {
+      // console.log(rect)
+      that.setData({
+        footerH: rect.height,
+      })
+    }).exec();
   },
 
   /**

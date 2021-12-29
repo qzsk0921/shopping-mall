@@ -83,9 +83,9 @@ create(store, {
     // console.log(e)
     this.setData({
       confirmTitle: '提示',
-      confirmContent: '确定要删除该商品吗？',
+      confirmContent: '确定取消收藏该商品吗？',
       confirmBgColor: "#F23D32",
-      confirmText: '删除',
+      confirmText: '确定',
       confirmDialogVisibile: true
     })
 

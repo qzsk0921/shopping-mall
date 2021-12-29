@@ -50,21 +50,14 @@
         <view class="item" wx:for="{{goodsList[tabIndex].cache}}" wx:key="unique" data-id="{{item.id}}" bindtap="toGoodsDetail">
           <image class="item-image" mode="aspectFill" src="{{item.thumb}}"></image>
           <view class="item-content">
-            <view class="l1 txt-cut">{{item.goods_name}} {{item.spec}}</view>
-            <!-- <view class="l2">
-              <view wx:if="{{userInfo.avatar_url}}" class="price-box">
-                <view class="price"><text>￥</text><text>{{item.price}}</text></view>
-                <view class="del-price">￥{{item.market_price}}</view>
-              </view>
-              <view wx:else class="price-box no-sign">请登录查看价格</view>
-              <view class="shopcart-box">
-                <image class="icon-shopcart" src="/assets/images/icon_car.png" mode="aspectFill"></image>
-                <view wx:if="{{item.cart_number}}" class="shopcart-info">{{item.cart_number}}</view>
-              </view>
-            </view> -->
             <view class="shopcart-box" catchtap="addArtHandle" data-item="{{item}}">
               <image class="icon-shopcart" mode="aspectFill" src="/assets/images/icon_car.png"></image>
               <view wx:if="{{item.cart_number}}" class="shopcart-info">{{item.cart_number}}</view>
+            </view>
+            <!-- <view class="l1 txt-cut">{{item.goods_name}} {{item.spec}}</view> -->
+            <view class="l1 txt-cut" style="{{compatibleInfo.isIphone?'display: block !important;overflow: hidden;max-height: 95rpx;':''}}">
+              <view wx:if="{{item.is_pre_sale===1 || item.activity_info.activity_name}}" class="tag {{item.is_pre_sale===1?'pre_sale':item.activity_info.activity_name?'new_activity':''}}">{{item.is_pre_sale===1?'预售专区':item.activity_info.activity_name?'新品上市':''}}</view>
+              <view>{{item.goods_name}} {{item.spec}}</view>
             </view>
             <!-- 未授权或未资质认证的非会员 -->
             <view class="l2 no-sign" wx:if="{{(!userInfo.phone||userInfo.is_shop_check!=1)&&!userInfo.is_sale}}">

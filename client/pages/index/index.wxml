@@ -13,7 +13,7 @@
       <input class="search" name="search" placeholder="蔬菜" placeholder-class="search-placeholder" value="{{searchKeyword}}" confirm-type="search" bindconfirm="bindconfirmHandle" disabled="true" />
       <view class="btn btn-search" bindtap="btnSearchCancelHandle">搜索</view>
     </view>
-    <view class="cont hide-scrollbar" style="height:{{compatibleInfo.isIphoneX?compatibleInfo.systemInfo.screenHeight-(tabbarH+32+section1H+fixed)+'px':compatibleInfo.systemInfo.screenHeight-(tabbarH+section1H+fixed)+'px'}}">
+    <view class="cont hide-scrollbar" style="height:{{compatibleInfo.isIphoneX?compatibleInfo.systemInfo.screenHeight-(tabbarH+section1H+fixed)+'px':compatibleInfo.systemInfo.screenHeight-(tabbarH+section1H+fixed)+'px'}}">
       <view class="bg">
       </view>
       <view class="section2" bindtap="swiperHandle">
@@ -120,9 +120,9 @@
           <image class="icon-pri" src="{{item.thumb}}" mode="aspectFill"></image>
           <view class="cont">
             <view class="l12-box">
-              <view class="l1">
+              <view class="l1 txt-cut" style="{{compatibleInfo.isIphone?'display: block !important;overflow: hidden;max-height: 80rpx;':''}}">
                 <view wx:if="{{item.is_pre_sale===1 || item.activity_info.activity_name}}" class="tag {{item.is_pre_sale===1?'pre_sale':item.activity_info.activity_name?'new_activity':''}}">{{item.is_pre_sale===1?'预售专区':item.activity_info.activity_name?'新品上市':''}}</view>
-                <text>{{item.goods_name}} {{item.spec}}</text>
+                <view>{{item.goods_name}} {{item.spec}}</view>
               </view>
               <view class="unit">{{item.unitName}}</view>
             </view>
@@ -169,7 +169,7 @@
               <image class="icon-pri" src="{{itemName.thumb}}" mode="aspectFill"></image>
               <view class="cont">
                 <view class="l12-box">
-                  <view class="l1">
+                  <view class="l1 txt-cut" style="overflow: hidden;{{compatibleInfo.isIphone?'display: block !important;max-height: 80rpx;':''}}">
                     <view wx:if="{{itemName.is_pre_sale===1 || itemName.activity_info.activity_name}}" class="tag {{itemName.is_pre_sale===1?'pre_sale':itemName.activity_info.activity_name?'new_activity':''}}">{{itemName.is_pre_sale===1?'预售专区':itemName.activity_info.activity_name?'新品上市':''}}</view>
                     {{itemName.goods_name}} {{itemName.spec}}
                   </view>

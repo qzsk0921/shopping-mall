@@ -222,6 +222,7 @@ create(store, {
       })
     } else {
       // 个人中心点击进我的地址
+      // 如果是从个人中心那进入的收货地址列表页，点击收货地址，无需做事件详情，不用跳转到首页
       this.store.data.currentAddress = {
         address: dataset.item.name,
         longitude: dataset.item.longitude,
@@ -235,9 +236,9 @@ create(store, {
 
       wx.setStorageSync('address_id', dataset.item.id)
 
-      wx.switchTab({
-        url: '../../index/index',
-      })
+      // wx.switchTab({
+      //   url: '../../index/index',
+      // })
     }
   },
   addrEditHandle(e) {

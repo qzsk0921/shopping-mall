@@ -18,9 +18,9 @@
           <image class="icon-pri" src="{{item.thumb}}" mode="aspectFill"></image>
           <view class="cont">
             <view class="l12-box">
-              <view class="l1 txt-cut">
+              <view class="l1 txt-cut" style="{{compatibleInfo.isIphone?'display: block !important;overflow: hidden;max-height: 95rpx;':''}}">
                 <view wx:if="{{item.is_pre_sale===1 || item.activity_info.activity_name}}" class="tag {{item.is_pre_sale===1?'pre_sale':item.activity_info.activity_name?'new_activity':''}}">{{item.is_pre_sale===1?'预售专区':item.activity_info.activity_name?'新品上市':''}}</view>
-                <text>{{item.goods_name}} {{item.spec}}</text>
+                <view>{{item.goods_name}} {{item.spec}}</view>
               </view>
               <view class="unit">{{itemName.unitName}}打发方式</view>
             </view>

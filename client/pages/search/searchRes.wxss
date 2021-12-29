@@ -84,7 +84,7 @@
   height: 72rpx;
 }
 
-.section2 .l1>view {
+.section2 .tabs-nav>view {
   flex: 1;
   text-align: center;
   line-height: 72rpx;
@@ -182,10 +182,29 @@
 
 .section2 .scroll-box .list .item .item-content .l1 {
   font-size: 26rpx;
-  font-weight: bold;
   line-height: 40rpx;
+  font-weight: bold;
   color: #333333;
-  height: 80rox;
+}
+
+.section2 .scroll-box .list .item .item-content .l1 .tag {
+  float: left;
+  margin: 8rpx 6rpx 0 0;
+  text-align: center;
+  width: 96rpx;
+  height: 28rpx;
+  border-radius: 8rpx;
+  font-size: 20rpx;
+  line-height: 28rpx;
+  color: #FFFFFF;
+}
+
+.section2 .scroll-box .list .item .item-content .l1 .tag.new_activity {
+  background: #FF7753;
+}
+
+.section2 .scroll-box .list .item .item-content .l1 .tag.pre_sale {
+  background: #22B862;
 }
 
 .section2 .scroll-box .list .item .item-content .l2 {

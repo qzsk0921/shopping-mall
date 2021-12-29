@@ -739,3 +739,7 @@
 .l12-box {
   height: 127rpx;
 }
+
+.l12-box .l1 {
+  width: calc(100% - 20rpx);
+}

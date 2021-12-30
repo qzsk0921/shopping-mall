@@ -17,8 +17,45 @@ create(store, {
 
     compatibleInfo: null, //navHeight menuButtonObject systemInfo isIphoneX
     navigationBarTitleText: '我的客户',
+
+    customerTotal: '', //客户数
     customerList: {
-      cache: [], //couponNouseCache 未使用
+      cache: [
+        // {
+        //   "id": 1,
+        //   "sales_id": 1,
+        //   "user_id": 1,
+        //   "bind_time": 1639813599,
+        //   "create_time": 1639813577,
+        //   "user_info": {
+        //     "nick_name": "hgao",
+        //     "avatar_url": "https://gw.alicdn.com/tps/i1/O1CN01PWx1at1LfLtyRhW1V_!!0-juitemmedia.jpg_140x10000Q75.jpg",
+        //     "phone": "1221"
+        //   },
+        //   "shop_info": {
+        //     "name": "福州斯克路德饭店",
+        //     "leader_name": "科斯加",
+        //     "leader_phone": "422222"
+        //   }
+        // },
+        // {
+        //   "id": 2,
+        //   "sales_id": 1,
+        //   "user_id": 1,
+        //   "bind_time": 1639813599,
+        //   "create_time": 1639813577,
+        //   "user_info": {
+        //     "nick_name": "hgao",
+        //     "avatar_url": "https://gw.alicdn.com/tps/i1/O1CN01PWx1at1LfLtyRhW1V_!!0-juitemmedia.jpg_140x10000Q75.jpg",
+        //     "phone": "1221"
+        //   },
+        //   "shop_info": {
+        //     "name": "",
+        //     "leader_name": "",
+        //     "leader_phone": ""
+        //   }
+        // }
+      ], //couponNouseCache 未使用
       count: 1,
       total_page: 1,
     },
@@ -28,7 +65,7 @@ create(store, {
   watch: {
     customerList: {
       handler(nv, ov, obj) {
-        console.log(nv)
+        // console.log(nv)
         if (nv.length) {
           const that = this;
           const query = wx.createSelectorQuery();
@@ -42,6 +79,15 @@ create(store, {
       },
       deep: true
     }
+  },
+  cardHandle(e) {
+    // 跳转至消费记录页面
+    const customerid = e.currentTarget.dataset.customerid
+
+    wx.navigateTo({
+      url: `/pages/mine/expensesRecord/expensesRecord?id=${customerid}`,
+    })
+
   },
   getCustomerList(dataObj) {
     const tempData = {
@@ -70,8 +116,9 @@ create(store, {
           this.setData({
             // 测试数据
             // [`customerList.cache`]: [].concat(res.data.data).concat(res.data.data).concat(res.data.data).concat(res.data.data),
-            'customerList.cache': res.data.data,
-            'customerList.total_page': res.data.last_page
+            // 'customerList.cache': res.data.data,
+            // 'customerList.total_page': res.data.last_page
+            customerTotal: res.data.total
           })
           resolve(res)
         }

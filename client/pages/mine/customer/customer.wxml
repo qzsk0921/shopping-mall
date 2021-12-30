@@ -1,5 +1,7 @@
 <!--pages/mine/customer/customer.wxml-->
 <!-- <text>pages/mine/customer/customer.wxml</text> -->
+<wxs module="commontools" src="../../../wxs/common.wxs"></wxs>
+
 <view class="container container-customer">
   <button open-type="share" class="tip">
     <image src="/assets/images/customer_btn_font.png" mode="aspectFill"></image>
@@ -16,30 +18,19 @@
     <block wx:else>
       <view class="l1">
         <image src="/assets/images/customer_icon.png" mode="aspectFill"></image>
-        <text>现有客户:3</text>
+        <text>现有客户:{{customerTotal}}</text>
       </view>
       <view class="l2 scroll" style="height:{{compatibleInfo.isIphoneX?compatibleInfo.systemInfo.screenHeight-(32+scrollTop)+'px':compatibleInfo.systemInfo.screenHeight-(scrollTop)+'px'}}">
-        <view class="card">
+        <view class="card" wx:for="{{customerList.cache}}" wx:key="unique" data-customerid="{{item.user_id}}" bindtap="cardHandle">
           <image class="arrow" src="/assets/images/nav_btn_next.png" mode="aspectFill"></image>
           <view class="left">
-            <image src="https://gw.alicdn.com/tps/i1/O1CN01PWx1at1LfLtyRhW1V_!!0-juitemmedia.jpg_140x10000Q75.jpg" mode="aspectFill"></image>
+            <image src="{{item.user_info.avatar_url}}" mode="aspectFill"></image>
           </view>
           <view class="right">
-            <view class="row1">微信授权昵称</view>
-            <view class="row2">用户填写的店铺名称</view>
-            <view class="row3"><text>负责人名称</text><text>13466896366</text></view>
-            <view class="row4">关联时间：2021-2-12 12:27:32</view>
-          </view>
-        </view>
-        <view class="card">
-          <view class="left">
-            <image src="https://gw.alicdn.com/tps/i1/O1CN01PWx1at1LfLtyRhW1V_!!0-juitemmedia.jpg_140x10000Q75.jpg" mode="aspectFill"></image>
-          </view>
-          <view class="right">
-            <view class="row1">微信授权昵称</view>
-            <view class="row2">用户填写的店铺名称</view>
-            <view class="row3"><text>负责人名称</text><text>13466896366</text></view>
-            <view class="row4">关联时间：2021-2-12 12:27:32</view>
+            <view class="row1">{{item.user_info.nick_name}}</view>
+            <view class="row2">{{item.shop_info.name}}</view>
+            <view class="row3"><text>负责人名称</text><text>{{item.shop_info.leader_name}}</text></view>
+            <view class="row4">关联时间：{{commontools.formatTime(item.bind_time*1000)}}</view>
           </view>
         </view>
       </view>

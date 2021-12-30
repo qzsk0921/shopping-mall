@@ -49,6 +49,7 @@
   background: #FFFFFF;
   display: flex;
   margin-top: 12rpx;
+  padding-left: 24rpx;
 }
 
 .card .arrow {
@@ -92,6 +93,10 @@
   margin-top: 18rpx;
   font-size: 26rpx;
   color: #333333;
+}
+
+.content .l2 .card .right .row3 text:first-child {
+  margin-right: 24rpx;
 }
 
 .content .l2 .card .right .row4 {

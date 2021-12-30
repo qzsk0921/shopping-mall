@@ -22,7 +22,7 @@
         </view>
         <view class="form-item form-item-phone">
           <label>联系方式</label>
-          <input type="digit" name="phone" placeholder="请输入店铺负责人联系方式" placeholder-class="input-placeholder" name="leader_phone" value="{{certificationInfo.phone}}" bindblur="handleInputChange" disabled="{{generateOrderSuccess}}" maxlength="11"/>
+          <input type="digit" name="phone" placeholder="请输入店铺负责人联系方式" placeholder-class="input-placeholder" name="leader_phone" value="{{certificationInfo.phone}}" bindblur="handleInputChange" disabled="{{generateOrderSuccess}}" maxlength="11" />
         </view>
         <view class="form-item form-item-address arrow">
           <label>收货地址</label>
@@ -50,4 +50,10 @@
   </view>
   <!-- 已删除 -->
   <view wx:if="{{status===-1}}"></view>
+  <!-- 未通过 -->
+  <view wx:if="{{status===2}}" class="nocert">
+    <image src="/assets/images/certification_img_lose.png" mode="aspectFill"></image>
+    <text>很遗憾，审核失败</text>
+    <view class="btn btn-reset" bindtap="resetHandle">重新认证</view>
+  </view>
 </view>

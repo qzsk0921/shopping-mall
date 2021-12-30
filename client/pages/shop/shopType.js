@@ -115,23 +115,6 @@ create(store, {
         currentIds: [].concat(item)
       })
     }
-
-    // if (item.id === this.data.currentId) return
-    // this.setData({
-    //   currentId: item.id
-    // })
-
-    // 在提交成功后，返回首页需要刷新（带上参数）
-    const pages = getCurrentPages();
-    const prevPage = pages[pages.length - 2]; //上一个页面
-    //直接调用上一个页面的setData()方法，把数据存到上一个页面中去
-    prevPage.setData({
-      // shopType: item
-      shopType: this.data.currentIds
-    })
-    // wx.navigateBack({
-    //   delta: 0,
-    // })
   },
   getShopCertType(dataObj) {
     const tempData = {
@@ -151,6 +134,21 @@ create(store, {
       }).catch(err => {
         reject(err)
       })
+    })
+  },
+  // 使用
+  useHandle() {
+    // 在提交成功后，返回首页需要刷新（带上参数）
+    const pages = getCurrentPages();
+    const prevPage = pages[pages.length - 2]; //上一个页面
+    //直接调用上一个页面的setData()方法，把数据存到上一个页面中去
+    prevPage.setData({
+      // shopType: item
+      shopType: this.data.currentIds
+    })
+
+    wx.navigateBack({
+      delta: 0,
     })
   },
   /**

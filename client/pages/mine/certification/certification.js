@@ -142,6 +142,12 @@ create(store, {
       })
     })
   },
+  // 资质认证审核失败 点击按钮重新认证
+  resetHandle() {
+    this.setData({
+      status: -2
+    })
+  },
   /**
    * 生命周期函数--监听页面加载
    */
@@ -185,8 +191,8 @@ create(store, {
     if (this.data.shopType) {
       this.setData({
         // 'certificationInfo.shop_type_str': this.data.shopType.id,
-        'certificationInfo.shop_type_str': this.data.shopType.map(item=>item.id).join(),
-        type: this.data.shopType.map(item=>item.name).join(),
+        'certificationInfo.shop_type_str': this.data.shopType.map(item => item.id).join(),
+        type: this.data.shopType.map(item => item.name).join(),
       })
     }
 

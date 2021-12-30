@@ -45,13 +45,22 @@ create(store, {
           })
         }
 
-        getExpenseList({
-          year: this.data.yearArr[nv]
-        }).then(res => {
-          this.setData({
-            // data: res.data
+        setTimeout(() => {
+          let tempData = {
+            year: this.data.yearArr[nv]
+          }
+
+          if (this.data.user_id) {
+            tempData.user_id = this.data.user_id
+          }
+
+          getExpenseList(tempData).then(res => {
+            this.setData({
+              list: res.data.list
+            })
           })
-        })
+        }, 0)
+
       },
       immediate: true
     }
@@ -80,6 +89,13 @@ create(store, {
    */
   onLoad: function (options) {
     getApp().setWatcher(this) //设置监听器
+
+    const {
+      id
+    } = options
+    if (id) {
+      this.data.user_id = id
+    }
   },
 
   /**

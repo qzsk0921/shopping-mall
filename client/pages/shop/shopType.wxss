@@ -26,3 +26,18 @@
   width: 30rpx;
   height: 30rpx;
 }
+
+.btn-use {
+  position: fixed;
+  bottom: 48rpx;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 616rpx;
+  height: 80rpx;
+  background: linear-gradient(90deg, #FF9B74 0%, #FF521D 100%);
+  border-radius: 40rpx;
+  font-size: 32rpx;
+  line-height: 80rpx;
+  text-align: center;
+  color: #FFFFFF;
+}

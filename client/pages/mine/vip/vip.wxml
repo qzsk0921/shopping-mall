@@ -9,7 +9,10 @@
   </view>
   <view class="section1">
     <image class="icon-bgvip" src="/assets/images/members_head_bk.png" mode="aspectFill"></image>
-    <view class="row1">{{userInfo.nick_name}}</view>
+    <view class="row1">
+      <view class="nickname">{{userInfo.nick_name}}</view>
+      <view wx:if="{{userInfo.is_vip}}" class="tag">{{userInfo.vip_info.vip_name}}</view>
+    </view>
     <!-- <view class="row2">还未开通会员</view> -->
     <view class="row2">{{userInfo.is_vip?'有效期至：'+tools.formatTime(userInfo.vip_info.expire_time*1000, 'yy-mm-dd'):'还未开通会员'}}</view>
     <view wx:if="{{userInfo.is_vip}}" class="row3 vip"><text>累计已</text><text>省{{userInfo.user_total_discount}}元</text></view>
@@ -17,8 +20,8 @@
   </view>
   <view class="section2">
     <view class="tit">套餐选择</view>
-    <view class="row{{index+1}} row {{currentVipId===item.id?'active':''}}" wx:for="{{vipList}}" wx:key="unique" data-id="{{item.id}}" bindtap="vipItemHandle">
-      <image class="icon-level left" src="/assets/images/order_members.png" mode="aspectFill"></image>
+    <view class="row{{index+1}} row {{currentVipId===item.id?'active':''}}" wx:for="{{vipList}}" wx:key="unique" data-item="{{item}}" bindtap="vipItemHandle">
+      <image class="icon-level left" src="{{item.icon}}" mode="aspectFill"></image>
       <view class="center">
         <view class="row1">{{item.name}}</view>
         <view class="row2">{{item.introduce}}</view>
@@ -28,7 +31,7 @@
   </view>
   <view class="section3 footer">
     <view class="left"><text>￥</text><text>{{tool.parsePrice(currentVipId,vipList)}}</text></view>
-    <view class="right btn btn-open" bindtap="addVipHandle">{{userInfo.is_vip?'立即续费':'立即开通'}}</view>
+    <view class="right btn btn-open {{btnDisable?'disable':''}}" bindtap="addVipHandle">{{btnText}}</view>
   </view>
 </view>
 

@@ -11,5 +11,6 @@
       {{item.name}}
       <image class="icon-right {{tools.matchId(item.id,currentIds)?'active':''}}" src="/assets/images/add_icon_on.png" mode="aspectFill"></image>
     </view>
+    <view class="btn btn-use" bindtap="useHandle">使用</view>
   </view>
 </view>

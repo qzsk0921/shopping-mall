@@ -4,11 +4,22 @@ import {
   getUserDetail
 } from './api/user.js'
 
+import {
+  setTrack
+} from './api/data'
+
 import store from './store/common'
 // import create from './utils/create'
 
 App({
   onLaunch() {
+    // 统计时长埋点
+    setTrack({
+      type: 1
+    }).then(res => {
+      this.globalData.page_id = res.data.page_id
+    })
+
     const token = wx.getStorageSync('token')
     if (!token) {
       wx.login().then(res => {

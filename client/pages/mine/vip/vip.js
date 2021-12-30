@@ -52,12 +52,58 @@ create(store, {
       // }
     ],
 
-    currentVipId: null
+    currentVipId: null,
+
+    btnDisable: false,
+    btnText: '', //立即开通 立即续费 立即升级
+  },
+  watch: {
+    currentVipId: {
+      handler(nv, ov, obj) {
+        let btnText = null
+        if (this.store.data.userInfo.is_vip) {
+          let it
+          setTimeout(() => {
+            this.data.vipList.some(item => {
+              if (item.id === nv) {
+                return it = item
+              }
+              return false
+            })
+
+            if (this.data.myVipPrice == it.price) {
+              btnText = '立即续费'
+            } else if (this.data.myVipPrice < it.price) {
+              btnText = '立即升级'
+            } else {
+              btnText = '立即开通'
+            }
+          }, 0)
+
+        } else {
+          btnText = '立即开通'
+        }
+
+        setTimeout(() => {
+          this.setData({
+            btnText
+          })
+        }, 0)
+      },
+      // immediate: true
+    }
   },
   vipItemHandle(e) {
+    const dataset = e.currentTarget.dataset
     this.setData({
-      currentVipId: e.currentTarget.dataset.id
+      currentVipId: dataset.item.id
     })
+    // 选择比自己等级低的会员不能续费
+    // myVipPrice
+    this.setData({
+      btnDisable: this.data.myVipPrice > dataset.item.price
+    })
+
   },
   certCheck() {
     // 若用户没有通过资质认证，显示弹窗如下图
@@ -65,10 +111,17 @@ create(store, {
     // -2:未申请 0:审核中 1:已通过 2:未通过 -1:已删除
     const status = this.store.data.userInfo.is_shop_check
     if (status != 1) {
-      if (status === -2 || status === 2 || status === -1) {
+      if (status === -2 || status === -1) {
         this.setData({
           confirmTitle: '温馨提示',
           confirmContent: '请进行资质认证后再开通会员',
+          confirmBgColor: "#FF723A",
+          confirmDialogVisibile: true
+        })
+      } else if (status === 2) {
+        this.setData({
+          confirmTitle: '温馨提示',
+          confirmContent: '资质认证审核失败，请重新进行认证申请',
           confirmBgColor: "#FF723A",
           confirmDialogVisibile: true
         })
@@ -90,18 +143,18 @@ create(store, {
     const status = this.store.data.userInfo.is_shop_check
     // 跳转至进货申请
     // console.log('跳转至进货申请')
-    if (status === -2) {
+    if (status != 1) {
       wx.navigateTo({
         url: '/pages/mine/certification/certification',
       })
     }
-
   },
   addVipHandle(e) {
     console.log('addVipHandle')
 
     if (!this.certCheck()) return
 
+    if (this.data.btnDisable) return
     this.addVip({
       id: this.data.currentVipId
     }).then(res => {
@@ -165,14 +218,24 @@ create(store, {
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+    getApp().setWatcher(this) //设置监听器
+
+    let currentVip = null
     this.getVipList().then(res => {
+      res.data.data.some(item => {
+        if (item.name === this.store.data.userInfo.vip_info.vip_name)
+          return currentVip = item
+        return false
+      })
+
       this.setData({
         vipList: res.data.data,
-        currentVipId: res.data.data[0].id
+        currentVipId: currentVip ? currentVip.id : res.data.data[0].id,
+        myVipPrice: currentVip ? currentVip.price : 0
       })
     })
-  },
 
+  },
   /**
    * 生命周期函数--监听页面初次渲染完成
    */

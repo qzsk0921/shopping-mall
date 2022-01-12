@@ -98,9 +98,9 @@ create(store, {
     return new Promise((resolve, reject) => {
       getMyCouponList(tempData).then(res => {
         if (dataObj === 'scrollToLower') {
-          this.data.couponList.cache.push(...res.data.data)
+          this.data.couponList[this.data.tabIndex].cache.push(...res.data.data)
           this.setData({
-            [`couponList[${this.data.tabIndex}].cache`]: this.data.couponList.cache,
+            [`couponList[${this.data.tabIndex}].cache`]: this.data.couponList[this.data.tabIndex].cache,
             [`couponList[${this.data.tabIndex}].total_page`]: res.data.last_page
           })
           resolve(res)

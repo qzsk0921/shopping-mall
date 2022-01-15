@@ -122,6 +122,8 @@ create(store, {
       } else {
         return true
       }
+    } else {
+      return false
     }
   },
   addShopCert(data) {

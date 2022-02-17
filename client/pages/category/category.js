@@ -247,8 +247,20 @@ create(store, {
     // 不是分类选项则不执行
     if (!id) return
 
+    this.firstCategorySwitch(id)
+  },
+  firstCategorySwitch(id) {
+    let currentScrollTopId ///content滚动id
+    // 滚动居中处理
+    if (this.data.firstCategory.map(item => item.id).includes(id - 2)) {
+      currentScrollTopId = 'a' + (id - 2)
+    } else {
+      currentScrollTopId = 'a' + id
+    }
+
     this.setData({
       currentFirstCategoryId: id,
+      currentScrollTopId,
     })
 
     this.getCategoryList({
@@ -277,8 +289,17 @@ create(store, {
     // console.log('subFirstCategoryHandle')
     const id = e.detail
 
+    let currentScrollTopId ///content滚动id
+    // 滚动居中处理
+    if (this.data.firstCategory.map(item => item.id).includes(id - 2)) {
+      currentScrollTopId = 'a' + (id - 2)
+    } else {
+      currentScrollTopId = 'a' + id
+    }
+
     this.setData({
       currentFirstCategoryId: id,
+      currentScrollTopId
     })
 
     this.getCategoryList({
@@ -350,7 +371,7 @@ create(store, {
   },
   getCategoryList(data) {
     return new Promise((resolve, reject) => {
-      getCategoryList(data,'noload').then(res => {
+      getCategoryList(data, 'noload').then(res => {
         resolve(res)
       }).catch(err => {
         reject(err)
@@ -528,6 +549,11 @@ create(store, {
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
+    // 首页选择分类定位到对应分类
+    if (this.store.data.currentFirstCategoryId) {
+      this.firstCategorySwitch(this.store.data.currentFirstCategoryId)
+    }
+
     if (!this.data.compatibleInfo.navHeight) {
       this.setData({
         compatibleInfo: this.store.data.compatibleInfo

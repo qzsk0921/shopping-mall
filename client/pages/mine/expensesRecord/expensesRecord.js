@@ -78,7 +78,7 @@ create(store, {
     let yearArrStr = ''
     const dateObj = new Date()
 
-    for (let i = 0; i < 21; i++) {
+    for (let i = 0; i < 11; i++) {
       yearArrStr += dateObj.getFullYear() + (i - 10) + ','
     }
 

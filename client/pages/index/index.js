@@ -414,7 +414,10 @@ create(store, {
     })
   },
   // 跳转至分类页面
-  toCategoryHandle() {
+  toCategoryHandle(e) {
+    this.store.data.currentFirstCategoryId = e.currentTarget.dataset.item.id
+    this.update()
+
     wx.switchTab({
       url: '/pages/category/category',
     })
@@ -475,7 +478,7 @@ create(store, {
           icon: 'none',
           title: '加入购物车成功',
         })
-        
+
         this.setData({
           shopData: res.data
         })

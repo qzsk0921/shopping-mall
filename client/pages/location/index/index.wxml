@@ -34,7 +34,7 @@
         </view>
         <view class="l2-r">
           <image class="icon-location" src="/assets/images/add_icon_location.png" mode="aspectFill"></image>
-          <view class="btn btn-relocate">重新定位</view>
+          <view class="btn btn-relocate" catchtap="repositionHandle">重新定位</view>
         </view>
       </view>
     </view>

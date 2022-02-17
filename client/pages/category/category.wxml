@@ -9,12 +9,14 @@
       <dropdown-menu-category opened="{{categoryOpened}}" bindsubClickable="subClickableHandle" bindsubFirstCategoryHandle="subFirstCategoryHandle" categoryData="{{firstCategory}}" currentFirstCategoryId="{{currentFirstCategoryId}}" />
       <!-- <view class="category-box hide-scrollbar" bindtap="firstCategoryHandle" style="width:{{categoryBoxW}}rpx"> -->
       <view class="category-box hide-scrollbar" bindtap="firstCategoryHandle">
-        <view class="item-box" style="width:{{categoryBoxW}}rpx;">
-          <view class="item {{currentFirstCategoryId===item.id?'category-active':''}}" wx:for="{{firstCategory}}" data-clickable="1" data-id="{{item.id}}">
-            <image class="icon-category" src="{{item.icon}}" mode="aspectFill" data-clickable="1" data-id="{{item.id}}"></image>
-            <view class="text-category" data-clickable="1" data-id="{{item.id}}">{{item.name}}</view>
+        <scroll-view scroll-x="true" scroll-into-view="{{currentScrollTopId}}" scroll-with-animation="true">
+          <view class="item-box" style="width:{{categoryBoxW}}rpx;">
+            <view class="item {{currentFirstCategoryId===item.id?'category-active':''}}" wx:for="{{firstCategory}}" data-clickable="1" data-id="{{item.id}}" id="a{{item.id}}">
+              <image class="icon-category" src="{{item.icon}}" mode="aspectFill" data-clickable="1" data-id="{{item.id}}"></image>
+              <view class="text-category" data-clickable="1" data-id="{{item.id}}">{{item.name}}</view>
+            </view>
           </view>
-        </view>
+        </scroll-view>
         <view class="extend" bindtap="extendHandle" data-clickable="1">
           <view class="text-box" data-clickable="1"><text data-clickable="1">全</text><text data-clickable="1">部</text>
           </view>

@@ -179,6 +179,54 @@ create(store, {
       url: '../../index/index',
     })
   },
+  // 重新定位
+  repositionHandle() {
+    // console.log('repositionHandle')
+    this.getLocation()
+  },
+  getLocation() {
+    const that = this;
+    wx.getLocation({
+      type: 'wgs84',
+      success: function (res) {
+        let latitude = res.latitude
+        let longitude = res.longitude
+        wx.request({
+          url: `https://apis.map.qq.com/ws/geocoder/v1/?location=${latitude},${longitude}&key=${config.tencentKey}`,
+          success: res => {
+            console.log(res)
+            const result = res.data.result
+
+            that.store.data.currentAddress = {
+              address: result.formatted_addresses.recommend,
+              longitude: result.location.lng,
+              latitude: result.location.lat,
+              type: 2, //1:通过地址选择 2:首页选择地址
+            }
+            that.store.data.location = result
+            that.update()
+
+            that.setData({
+              currentAddress: that.store.data.currentAddress
+            })
+          }
+        })
+      },
+      fail: function (err) {
+        console.log(err)
+        that.setData({
+          location: {
+            formatted_addresses: {
+              recommend: '定位失败'
+            }
+          }
+        })
+      },
+      complete: function () {
+        console.log('complete')
+      }
+    })
+  },
   // 我的收货地址点击
   addrClickHandle(e) {
     console.log(e)

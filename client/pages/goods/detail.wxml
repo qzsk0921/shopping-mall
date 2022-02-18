@@ -12,7 +12,7 @@
         <block wx:for="{{goodsDetail.goods_banner_arr}}" wx:key="*this">
           <swiper-item>
             <!-- <view class="swiper-item {{item}}"></view> -->
-            <image class="icon-banner" src="{{item}}" mode="aspectFill"></image>
+            <image class="icon-banner" src="{{item}}" mode="aspectFill" bindtap="previewImg" data-urls="{{goodsDetail.goods_banner_arr}}" data-url="{{item}}"></image>
           </swiper-item>
         </block>
       </swiper>
@@ -69,7 +69,7 @@
         </view>
       </view>
       <view class="l4">
-        <image wx:for="{{goodsDetail.goods_image_arr}}" wx:key="unique" class="icon-goods" src="{{item}}" mode="aspectFill"></image>
+        <image wx:for="{{goodsDetail.goods_image_arr}}" wx:key="unique" class="icon-goods" src="{{item}}" mode="aspectFill" bindtap="previewImg" data-urls="{{goodsDetail.goods_image_arr}}" data-url="{{item}}"></image>
       </view>
     </view>
   </view>

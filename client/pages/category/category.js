@@ -252,8 +252,11 @@ create(store, {
   firstCategorySwitch(id) {
     let currentScrollTopId ///content滚动id
     // 滚动居中处理
-    if (this.data.firstCategory.map(item => item.id).includes(id - 2)) {
+    const myArr = this.data.firstCategory.map(item => item.id)
+    if (myArr.includes(id - 2)) {
       currentScrollTopId = 'a' + (id - 2)
+    } else if (myArr.includes(id - 1)) {
+      currentScrollTopId = 'a' + (id - 1)
     } else {
       currentScrollTopId = 'a' + id
     }
@@ -289,10 +292,13 @@ create(store, {
     // console.log('subFirstCategoryHandle')
     const id = e.detail
 
-    let currentScrollTopId ///content滚动id
     // 滚动居中处理
-    if (this.data.firstCategory.map(item => item.id).includes(id - 2)) {
+    let currentScrollTopId ///content滚动id
+    const myArr = this.data.firstCategory.map(item => item.id)
+    if (myArr.includes(id - 2)) {
       currentScrollTopId = 'a' + (id - 2)
+    } else if (myArr.includes(id - 1)) {
+      currentScrollTopId = 'a' + (id - 1)
     } else {
       currentScrollTopId = 'a' + id
     }

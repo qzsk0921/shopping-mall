@@ -165,6 +165,17 @@ create(store, {
       }
     })
   },
+  /**
+   * 图片点击事件
+   * */
+  previewImg: function (e) {
+    const dataset = e.currentTarget.dataset;
+    //图片预览，预览后会重新加载onshow方法
+    wx.previewImage({
+      urls: dataset.urls,
+      current: dataset.url, // 当前显示图片的http链接
+    })
+  },
   getGoodsDetail(data) {
     return new Promise((resolve, reject) => {
       getGoodsDetail(data).then(res => {

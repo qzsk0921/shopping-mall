@@ -133,6 +133,7 @@
   height: 36rpx;
   border: 3rpx solid #e5e5e5;
   border-radius: 50%;
+  box-sizing: border-box;
 }
 
 .card .rright .radio-box .radio {

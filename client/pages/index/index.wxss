@@ -167,7 +167,7 @@
   width: 28rpx;
   height: 28rpx;
   margin-right: 4rpx;
-  vertical-align: middle;
+  vertical-align: top;
 }
 
 /* 预收专栏 */

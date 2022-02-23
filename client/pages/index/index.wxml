@@ -31,13 +31,15 @@
       <view class="section3 hide-scrollbar">
         <view class="category-box hide-scrollbar">
           <view class="l1">
-            <view class="item" wx:for="{{tools.parseCategory(shopData.category, 'odd')}}" wx:key="unique" bindtap="toCategoryHandle" data-item="{{item}}" >
+            <!-- <view class="item" wx:for="{{tools.parseCategory(shopData.category, 'even')}}" wx:key="unique" bindtap="toCategoryHandle" data-item="{{item}}" > -->
+            <view class="item" wx:for="{{tools.parseCategory(shopData.category, 'firstLine')}}" wx:key="unique" bindtap="toCategoryHandle" data-item="{{item}}">
               <image class="icon-category" src="{{item.icon}}" mode="aspectFill" data-clickable="1"></image>
               <view class="text-category" data-clickable="1">{{item.name}}</view>
             </view>
           </view>
           <view class="l2">
-            <view class="item" wx:for="{{tools.parseCategory(shopData.category, 'even')}}" wx:key="unique" bindtap="toCategoryHandle" data-item="{{item}}" >
+            <!-- <view class="item" wx:for="{{tools.parseCategory(shopData.category, 'odd')}}" wx:key="unique" bindtap="toCategoryHandle" data-item="{{item}}"> -->
+            <view class="item" wx:for="{{tools.parseCategory(shopData.category, 'lastLine')}}" wx:key="unique" bindtap="toCategoryHandle" data-item="{{item}}">
               <image class="icon-category" src="{{item.icon}}" mode="aspectFill" data-clickable="1"></image>
               <view class="text-category" data-clickable="1">{{item.name}}</view>
             </view>

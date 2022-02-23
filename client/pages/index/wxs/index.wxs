@@ -22,6 +22,14 @@ module.exports = {
         res = list.filter(function (item, index) {
           return index % 2 === 1
         })
+      } else if (type === 'firstLine') {
+        res = list.filter(function (item, index) {
+          return index < parseInt(list.length / 2)
+        })
+      } else if (type === 'lastLine') {
+        res = list.filter(function (item, index) {
+          return index >= parseInt(list.length / 2)
+        })
       }
     }
     return res

@@ -99,6 +99,12 @@ create(store, {
         imgName: 'my_icon_set',
         name: '设置',
         url: '/pages/mine/set/set?from=mine'
+      },
+      {
+        id: 9,
+        imgName: 'my_icon_set',
+        name: '联系客服',
+        url: '/pages/mine/set/set?from=mine'
       }
     ]
   },
@@ -167,6 +173,7 @@ create(store, {
     console.log(e)
     // 6常见问题、7关注公众号、8设置不需要授权
     const id = e.currentTarget.dataset.id
+
     if (![6, 7, 8].includes(id)) {
       // 未授权
       if (!this.checkAuth()) return

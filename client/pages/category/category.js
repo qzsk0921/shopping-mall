@@ -266,6 +266,9 @@ create(store, {
       currentScrollTopId,
     })
 
+    this.store.data.currentFirstCategoryId = id
+    this.update()
+
     this.getCategoryList({
       pid: id
     }).then(res => {
@@ -491,39 +494,6 @@ create(store, {
   onLoad: function (options) {
     getApp().setWatcher(this) //设置监听器
 
-    this.getCategoryList({
-      pid: 0
-    }).then(res => {
-      this.setData({
-        firstCategory: res.data,
-        currentFirstCategoryId: res.data[0].id
-      })
-
-      // 计算第一分类宽度
-      this.calcCategoryW(res.data.length)
-
-      this.getCategoryList({
-        pid: res.data[0].id
-      }).then(ress => {
-        if (ress.data.length) {
-          this.setData({
-            currentSecondCategoryId: ress.data[0].id,
-            secondCategory: ress.data
-          })
-
-          if (ress.data.length) {
-            this.getGoodsList({
-              category_id: ress.data[0].id
-            })
-          }
-        } else {
-          this.setData({
-            secondCategory: []
-          })
-        }
-      })
-    })
-
     setTabBar.call(this, {
       selected: 1
     })
@@ -556,8 +526,30 @@ create(store, {
    */
   onShow: function () {
     // 首页选择分类定位到对应分类
-    if (this.store.data.currentFirstCategoryId) {
-      this.firstCategorySwitch(this.store.data.currentFirstCategoryId)
+    if (!this.data.firstCategory.length) {
+      this.getCategoryList({
+        pid: 0
+      }).then(res => {
+
+        this.setData({
+          firstCategory: res.data,
+          currentFirstCategoryId: res.data[0].id
+        })
+        // 计算第一分类宽度
+        this.calcCategoryW(res.data.length)
+
+        if (this.store.data.currentFirstCategoryId) {
+          this.firstCategorySwitch(this.store.data.currentFirstCategoryId)
+        } else {
+          this.firstCategorySwitch(res.data[0].id)
+        }
+      })
+    } else {
+      if (this.store.data.currentFirstCategoryId) {
+        this.firstCategorySwitch(this.store.data.currentFirstCategoryId)
+      } else {
+        this.firstCategorySwitch(this.data.firstCategory[0].id)
+      }
     }
 
     if (!this.data.compatibleInfo.navHeight) {

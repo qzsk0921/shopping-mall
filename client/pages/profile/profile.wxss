@@ -164,6 +164,21 @@
   color: #666666;
 }
 
+.contact-item .btn-contact image {
+  vertical-align: top;
+}
+
+.btn-contact {
+  width: 100% !important;
+  background: #FFFFFF;
+}
+
+.btn-contact view {
+  color: #888888 !important;
+  font-size: 24rpx !important;
+  line-height: 1;
+}
+
 .body .l2 {
   display: flex;
   flex-wrap: wrap;

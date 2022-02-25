@@ -46,10 +46,18 @@
       </view>
     </view>
     <view class="l2">
-      <view class="item" wx:for="{{options2}}" wx:key="unique" bindtap="option2Handle" data-id="{{item.id}}">
-        <image class="icon-option2" src="/assets/images/{{item.imgName}}.png" mode="aspectFill"></image>
-        <view>{{item.name}}</view>
-      </view>
+      <block wx:for="{{options2}}" wx:key="unique">
+        <view wx:if="{{item.id==9}}" class="item contact-item">
+          <button class="btn-contact" open-type="contact">
+            <image class="icon-option2" src="/assets/images/{{item.imgName}}.png" mode="aspectFill"></image>
+            <view>{{item.name}}</view>
+          </button>
+        </view>
+        <view wx:else class="item" bindtap="option2Handle" data-id="{{item.id}}">
+          <image class="icon-option2" src="/assets/images/{{item.imgName}}.png" mode="aspectFill"></image>
+          <view>{{item.name}}</view>
+        </view>
+      </block>
     </view>
   </view>
 </view>

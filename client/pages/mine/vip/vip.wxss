@@ -99,6 +99,7 @@
   border-radius: 16rpx;
   display: flex;
   align-items: center;
+  padding-right: 30rpx;
 }
 
 .section2 .row .left {

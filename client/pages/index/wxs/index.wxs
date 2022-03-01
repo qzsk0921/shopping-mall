@@ -33,5 +33,14 @@ module.exports = {
       }
     }
     return res
+  },
+  parseTabbar: function (group_goods) {
+    if (group_goods) {
+      var res = null
+      res = group_goods.map(function (item) {
+        return item.name
+      })
+      return res
+    }
   }
 }

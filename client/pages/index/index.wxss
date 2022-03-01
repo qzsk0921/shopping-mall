@@ -324,8 +324,8 @@
 }
 
 /* 热门推荐 */
-.section7 {
-  margin: 20rpx 24rpx 0;
+/* .section7 {
+  margin: 24rpx 24rpx 0;
   display: flex;
   justify-content: space-between;
   flex-wrap: wrap;
@@ -350,7 +350,6 @@
 }
 
 .section7 .item .cont .l1 {
-  /* height: 88rpx; */
   line-height: 48rpx;
   font-size: 28rpx;
   font-weight: bold;
@@ -361,7 +360,7 @@
   margin-top: 14rpx;
   display: flex;
   align-items: flex-end;
-}
+} */
 
 .section7 .item .cont .l2.no-sign,
 .section8 .item .cont .l2.no-sign {
@@ -370,7 +369,7 @@
   margin-bottom: 8rpx;
 }
 
-.section7 .item .cont .l2 .price {
+/* .section7 .item .cont .l2 .price {
   font-size: 34rpx;
   font-weight: bold;
   color: #FC4953;
@@ -432,9 +431,9 @@
 
 .section7-1 image {
   margin-left: 10rpx;
-  width: 8rpx;
-  height: 16rpx;
-}
+  width: 10rpx;
+  height: 18rpx;
+} */
 
 /* 分类商品 */
 .section7 {
@@ -557,12 +556,12 @@
 
 .section7-1 image {
   margin-left: 10rpx;
-  width: 8rpx;
-  height: 16rpx;
+  width: 10rpx;
+  height: 18rpx;
 }
 
 /* 分类商品 */
-.section8 {
+/* .section8 {
   margin: 20rpx 24rpx 0;
 }
 
@@ -630,7 +629,6 @@
 }
 
 .section8 .item .cont .l1 {
-  /* height: 88rpx; */
   line-height: 48rpx;
   font-size: 28rpx;
   font-weight: bold;
@@ -727,6 +725,119 @@
 
 .section8 .item .cont .l1 .tag.pre_sale {
   background: #22B862;
+} */
+.section8>view {
+  margin: 20rpx 24rpx 0;
+  background: #FFFFFF;
+  border-radius: 16rpx;
+}
+
+.section8 .tit-box {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 24rpx;
+  height: 86rpx;
+}
+
+.section8 .tit-box .tit {
+  font-size: 34rpx;
+  font-weight: bold;
+  color: #333333;
+}
+
+.section8 .tit-box .recommend view {
+  display: inline-block;
+  margin-right: 10rpx;
+  font-size: 24rpx;
+  color: #888888;
+}
+
+.section8 .tit-box .recommend image {
+  width: 10rpx;
+  height: 18rpx;
+  vertical-align: middle;
+}
+
+.section8 .item-box {
+  overflow: auto;
+  white-space: nowrap;
+  padding-left: 24rpx;
+  /* display: flex; */
+}
+
+.section8 .item {
+  margin-right: 24rpx;
+  display: inline-block;
+  margin-bottom: 20rpx;
+  width: 336rpx;
+  background: #FFFFFF;
+  border-radius: 16rpx;
+  overflow: hidden;
+  position: relative;
+}
+
+.section8 .item .icon-pri {
+  width: 100%;
+  height: 336rpx;
+}
+
+.section8 .item .cont {
+  padding: 12rpx 20rpx 28rpx;
+}
+
+.section8 .item .cont .l1 {
+  line-height: 48rpx;
+  font-size: 28rpx;
+  font-weight: bold;
+  color: #333333;
+}
+
+.section8 .item .cont .l2 {
+  margin-top: 14rpx;
+  display: flex;
+  align-items: flex-end;
+}
+
+.section8 .item .cont .l2 .price {
+  font-size: 34rpx;
+  font-weight: bold;
+  color: #FC4953;
+}
+
+.section8 .item .cont .l2 .price text {
+  font-size: 24rpx;
+  font-weight: bold;
+  color: #FC4953;
+}
+
+.section8 .item .cont .l2 .origin-price {
+  margin-left: 2rpx;
+  font-size: 22rpx;
+  color: #888888;
+  text-decoration: line-through;
+}
+
+.section8 .item .shopcart-box {
+  position: absolute;
+  right: 20rpx;
+  bottom: 20rpx;
+  width: 56rpx;
+  height: 56rpx;
+}
+
+.section8 .item .shopcart-box .shopcart-info {
+  text-align: center;
+  background: #FC4953;
+  position: absolute;
+  top: -6rpx;
+  right: -6rpx;
+  border-radius: 12rpx;
+  font-size: 20rpx;
+  line-height: 24rpx;
+  color: #FFFFFF;
+  min-height: 24rpx;
+  padding: 0 8rpx;
 }
 
 .unit {
@@ -742,4 +853,66 @@
 
 .l12-box .l1 {
   width: calc(100% - 20rpx);
+}
+
+
+.tabs-nav {
+  margin-top: 44rpx;
+  display: flex;
+  position: relative;
+  white-space: nowrap;
+  padding: 0 24rpx;
+}
+
+.tabs-nav .tab {
+  text-align: center;
+  position: relative;
+  margin:0 16rpx;
+}
+
+.tabs-nav .tab.active .text {
+  color: #FF723A;
+}
+
+.tabs-nav .tab.active .subtext {
+  color: #FFFFFF;
+  background: #FF723A;
+}
+
+.tabs-nav .tab .text {
+  font-size: 30rpx;
+  font-weight: bold;
+  color: #333333;
+}
+
+.tabs-nav .tab .subtext {
+  margin-top: 8rpx;
+  font-size: 24rpx;
+  width: 128rpx;
+  height: 36rpx;
+  border-radius: 20rpx;
+  color: #999999;
+  line-height: 36rpx;
+}
+
+.tabs-nav .tab.active {
+  color: #333333;
+}
+
+
+.tabs-nav .tab>view {
+  display: inline-block;
+}
+
+.tabs-nav .tabs-line {
+  box-sizing: border-box;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  /* z-index: 1; */
+  transition-duration: .3s;
+  width: 55rpx;
+  height: 8rpx;
+  border-radius: 10rpx;
+  background: #4980F9;
 }

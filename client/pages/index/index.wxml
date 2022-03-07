@@ -7,8 +7,6 @@
     <top-navigation navigationBarTitleText="{{navigationBarTitleText}}" navHeight="{{compatibleInfo.navHeight}}" navTop="{{compatibleInfo.menuButtonObject.top}}" menuButtonHeight="{{compatibleInfo.menuButtonObject.height}}" status="{{navStatus}}" location="{{currentAddress}}" color="#333" bgColor="#FF723A" />
   </view>
   <view wx:if="{{shop_id}}" class="content">
-    <!-- <view class="bg">
-    </view> -->
     <view class="section1 input-box" bindtap="searchHandle">
       <input class="search" name="search" placeholder="蔬菜" placeholder-class="search-placeholder" value="{{searchKeyword}}" confirm-type="search" bindconfirm="bindconfirmHandle" disabled="true" />
       <view class="btn btn-search" bindtap="btnSearchCancelHandle">搜索</view>

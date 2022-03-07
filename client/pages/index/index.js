@@ -47,286 +47,286 @@ create(store, {
     duration: 500,
 
     shopData: {
-      "shop_id": "1",
-      "banner": [{
-          "id": 8,
-          "type": 1,
-          "link_type": 1,
-          "name": "banner7",
-          "image_url": "https://sharepuls.xcmbkj.com/app_memu_1.png",
-          "link": ""
-        },
-        {
-          "id": 7,
-          "type": 1,
-          "link_type": 1,
-          "name": "banner7",
-          "image_url": "https://sharepuls.xcmbkj.com/app_memu_1.png",
-          "link": ""
-        },
-        {
-          "id": 6,
-          "type": 1,
-          "link_type": 1,
-          "name": "banner6",
-          "image_url": "https://sharepuls.xcmbkj.com/app_memu_1.png",
-          "link": ""
-        },
-        {
-          "id": 5,
-          "type": 1,
-          "link_type": 1,
-          "name": "banner5",
-          "image_url": "https://sharepuls.xcmbkj.com/app_memu_1.png",
-          "link": ""
-        },
-        {
-          "id": 4,
-          "type": 1,
-          "link_type": 1,
-          "name": "banner4",
-          "image_url": "https://sharepuls.xcmbkj.com/app_memu_1.png",
-          "link": ""
-        },
-        {
-          "id": 1,
-          "type": 1,
-          "link_type": 1,
-          "name": "banner1",
-          "image_url": "https://sharepuls.xcmbkj.com/app_memu_1.png",
-          "link": ""
-        }
-      ],
-      "category": [{
-          "id": 2,
-          "name": "分类2",
-          "icon": "https://sharepuls.xcmbkj.com/app_memu_1.png?"
-        },
-        {
-          "id": 1,
-          "name": "分类1",
-          "icon": "https://sharepuls.xcmbkj.com/app_memu_1.png?1"
-        },
-        {
-          "id": 3,
-          "name": "分类3",
-          "icon": "https://sharepuls.xcmbkj.com/app_memu_1.png?"
-        }
-      ],
-      "pre_goods": [{
-          "id": 2,
-          "goods_name": "商品2",
-          "price": 0,
-          "market_price": "100.00",
-          "spec": "",
-          "is_pre_sale": 1,
-          "is_vip": 1,
-          "is_sale": 0,
-          "is_shop_check": 0,
-          "thumb": "http://image.wms.wljkxys.com/202009305f742c49a5276.png",
-          "cart_number": 0,
-          "stock": 0,
-          "activity_info": []
-        },
-        {
-          "id": 10,
-          "goods_name": "商品10",
-          "price": 0,
-          "market_price": "100.00",
-          "spec": "",
-          "is_pre_sale": 1,
-          "is_vip": 1,
-          "is_sale": 0,
-          "is_shop_check": 0,
-          "thumb": "http://image.wms.wljkxys.com/202009305f742c49a5276.png",
-          "cart_number": 0,
-          "stock": 0,
-          "activity_info": []
-        }
-      ],
-      "activity_goods": [{
-        "id": 2,
-        "name": "限时抢购",
-        "short_name": "很好",
-        "type": 2,
-        "start_time": 1638950997,
-        "end_time": 1658950997,
-        "goods_list": [{
-          "id": 3,
-          "goods_name": "商品3",
-          "price": 0,
-          "market_price": "100.00",
-          "spec": "",
-          "is_pre_sale": 0,
-          "is_vip": 1,
-          "is_sale": 0,
-          "is_shop_check": 0,
-          "thumb": "http://image.wms.wljkxys.com/202009305f742c49a5276.png",
-          "cart_number": 0,
-          "stock": 0,
-          "activity_info": {
-            "activity_id": 2,
-            "activity_name": "限时抢购",
-            "short_name": "很好",
-            "type": 2,
-            "start_time": 1638950997,
-            "end_time": 1658950997
-          }
-        }]
-      }],
-      "group_goods": [{
-        "id": 1,
-        "name": "商品分组1",
-        "goods_list": [{
-          "id": 1,
-          "goods_name": "商品1",
-          "price": 0,
-          "market_price": "100.00",
-          "spec": "",
-          "is_pre_sale": 0,
-          "is_vip": 1,
-          "is_sale": 0,
-          "is_shop_check": 0,
-          "thumb": "http://image.wms.wljkxys.com/202009305f742c49a5276.png",
-          "cart_number": 0,
-          "stock": 0,
-          "activity_info": {
-            "activity_id": 2,
-            "activity_name": "限时抢购",
-            "short_name": "很好",
-            "type": 2,
-            "start_time": 1638950997,
-            "end_time": 1658950997
-          }
-        }]
-      }],
-      "shop_type_goods": [{
-          "id": 4,
-          "name": "子分类1",
-          "icon": "https://sharepuls.xcmbkj.com/app_memu_1.png?",
-          "goods_list": [{
-              "id": 4,
-              "goods_name": "商品4",
-              "price": 0,
-              "market_price": "100.00",
-              "spec": "",
-              "is_pre_sale": 0,
-              "is_vip": 1,
-              "is_sale": 0,
-              "is_shop_check": 0,
-              "thumb": "http://image.wms.wljkxys.com/202009305f742c49a5276.png",
-              "cart_number": 0,
-              "stock": 0,
-              "activity_info": []
-            },
-            {
-              "id": 8,
-              "goods_name": "商品8",
-              "price": 0,
-              "market_price": "100.00",
-              "spec": "",
-              "is_pre_sale": 0,
-              "is_vip": 1,
-              "is_sale": 0,
-              "is_shop_check": 0,
-              "thumb": "http://image.wms.wljkxys.com/202009305f742c49a5276.png",
-              "cart_number": 0,
-              "stock": 0,
-              "activity_info": []
-            },
-            {
-              "id": 9,
-              "goods_name": "商品9",
-              "price": 0,
-              "market_price": "100.00",
-              "spec": "",
-              "is_pre_sale": 0,
-              "is_vip": 1,
-              "is_sale": 0,
-              "is_shop_check": 0,
-              "thumb": "http://image.wms.wljkxys.com/202009305f742c49a5276.png",
-              "cart_number": 0,
-              "stock": 0,
-              "activity_info": []
-            },
-            {
-              "id": 10,
-              "goods_name": "商品10",
-              "price": 0,
-              "market_price": "100.00",
-              "spec": "",
-              "is_pre_sale": 1,
-              "is_vip": 1,
-              "is_sale": 0,
-              "is_shop_check": 0,
-              "thumb": "http://image.wms.wljkxys.com/202009305f742c49a5276.png",
-              "cart_number": 0,
-              "stock": 0,
-              "activity_info": []
-            }
-          ]
-        },
-        {
-          "id": 5,
-          "name": "子分类2",
-          "icon": "https://sharepuls.xcmbkj.com/app_memu_1.png?",
-          "goods_list": [{
-            "id": 5,
-            "goods_name": "商品5",
-            "price": 0,
-            "market_price": "100.00",
-            "spec": "",
-            "is_pre_sale": 0,
-            "is_vip": 1,
-            "is_sale": 0,
-            "is_shop_check": 0,
-            "thumb": "http://image.wms.wljkxys.com/202009305f742c49a5276.png",
-            "cart_number": 0,
-            "stock": 0,
-            "activity_info": []
-          }]
-        },
-        {
-          "id": 6,
-          "name": "子分类3",
-          "icon": "https://sharepuls.xcmbkj.com/app_memu_1.png?",
-          "goods_list": [{
-            "id": 6,
-            "goods_name": "商品6",
-            "price": 0,
-            "market_price": "100.00",
-            "spec": "",
-            "is_pre_sale": 0,
-            "is_vip": 1,
-            "is_sale": 0,
-            "is_shop_check": 0,
-            "thumb": "http://image.wms.wljkxys.com/202009305f742c49a5276.png",
-            "cart_number": 0,
-            "stock": 0,
-            "activity_info": []
-          }]
-        },
-        {
-          "id": 7,
-          "name": "子分类4",
-          "icon": "https://sharepuls.xcmbkj.com/app_memu_1.png?",
-          "goods_list": [{
-            "id": 7,
-            "goods_name": "商品7",
-            "price": 0,
-            "market_price": "100.00",
-            "spec": "",
-            "is_pre_sale": 0,
-            "is_vip": 1,
-            "is_sale": 0,
-            "is_shop_check": 0,
-            "thumb": "http://image.wms.wljkxys.com/202009305f742c49a5276.png",
-            "cart_number": 0,
-            "stock": 0,
-            "activity_info": []
-          }]
-        }
-      ]
+      // "shop_id": "1",
+      // "banner": [{
+      //     "id": 8,
+      //     "type": 1,
+      //     "link_type": 1,
+      //     "name": "banner7",
+      //     "image_url": "https://sharepuls.xcmbkj.com/app_memu_1.png",
+      //     "link": ""
+      //   },
+      //   {
+      //     "id": 7,
+      //     "type": 1,
+      //     "link_type": 1,
+      //     "name": "banner7",
+      //     "image_url": "https://sharepuls.xcmbkj.com/app_memu_1.png",
+      //     "link": ""
+      //   },
+      //   {
+      //     "id": 6,
+      //     "type": 1,
+      //     "link_type": 1,
+      //     "name": "banner6",
+      //     "image_url": "https://sharepuls.xcmbkj.com/app_memu_1.png",
+      //     "link": ""
+      //   },
+      //   {
+      //     "id": 5,
+      //     "type": 1,
+      //     "link_type": 1,
+      //     "name": "banner5",
+      //     "image_url": "https://sharepuls.xcmbkj.com/app_memu_1.png",
+      //     "link": ""
+      //   },
+      //   {
+      //     "id": 4,
+      //     "type": 1,
+      //     "link_type": 1,
+      //     "name": "banner4",
+      //     "image_url": "https://sharepuls.xcmbkj.com/app_memu_1.png",
+      //     "link": ""
+      //   },
+      //   {
+      //     "id": 1,
+      //     "type": 1,
+      //     "link_type": 1,
+      //     "name": "banner1",
+      //     "image_url": "https://sharepuls.xcmbkj.com/app_memu_1.png",
+      //     "link": ""
+      //   }
+      // ],
+      // "category": [{
+      //     "id": 2,
+      //     "name": "分类2",
+      //     "icon": "https://sharepuls.xcmbkj.com/app_memu_1.png?"
+      //   },
+      //   {
+      //     "id": 1,
+      //     "name": "分类1",
+      //     "icon": "https://sharepuls.xcmbkj.com/app_memu_1.png?1"
+      //   },
+      //   {
+      //     "id": 3,
+      //     "name": "分类3",
+      //     "icon": "https://sharepuls.xcmbkj.com/app_memu_1.png?"
+      //   }
+      // ],
+      // "pre_goods": [{
+      //     "id": 2,
+      //     "goods_name": "商品2",
+      //     "price": 0,
+      //     "market_price": "100.00",
+      //     "spec": "",
+      //     "is_pre_sale": 1,
+      //     "is_vip": 1,
+      //     "is_sale": 0,
+      //     "is_shop_check": 0,
+      //     "thumb": "http://image.wms.wljkxys.com/202009305f742c49a5276.png",
+      //     "cart_number": 0,
+      //     "stock": 0,
+      //     "activity_info": []
+      //   },
+      //   {
+      //     "id": 10,
+      //     "goods_name": "商品10",
+      //     "price": 0,
+      //     "market_price": "100.00",
+      //     "spec": "",
+      //     "is_pre_sale": 1,
+      //     "is_vip": 1,
+      //     "is_sale": 0,
+      //     "is_shop_check": 0,
+      //     "thumb": "http://image.wms.wljkxys.com/202009305f742c49a5276.png",
+      //     "cart_number": 0,
+      //     "stock": 0,
+      //     "activity_info": []
+      //   }
+      // ],
+      // "activity_goods": [{
+      //   "id": 2,
+      //   "name": "限时抢购",
+      //   "short_name": "很好",
+      //   "type": 2,
+      //   "start_time": 1638950997,
+      //   "end_time": 1658950997,
+      //   "goods_list": [{
+      //     "id": 3,
+      //     "goods_name": "商品3",
+      //     "price": 0,
+      //     "market_price": "100.00",
+      //     "spec": "",
+      //     "is_pre_sale": 0,
+      //     "is_vip": 1,
+      //     "is_sale": 0,
+      //     "is_shop_check": 0,
+      //     "thumb": "http://image.wms.wljkxys.com/202009305f742c49a5276.png",
+      //     "cart_number": 0,
+      //     "stock": 0,
+      //     "activity_info": {
+      //       "activity_id": 2,
+      //       "activity_name": "限时抢购",
+      //       "short_name": "很好",
+      //       "type": 2,
+      //       "start_time": 1638950997,
+      //       "end_time": 1658950997
+      //     }
+      //   }]
+      // }],
+      // "group_goods": [{
+      //   "id": 1,
+      //   "name": "商品分组1",
+      //   "goods_list": [{
+      //     "id": 1,
+      //     "goods_name": "商品1",
+      //     "price": 0,
+      //     "market_price": "100.00",
+      //     "spec": "",
+      //     "is_pre_sale": 0,
+      //     "is_vip": 1,
+      //     "is_sale": 0,
+      //     "is_shop_check": 0,
+      //     "thumb": "http://image.wms.wljkxys.com/202009305f742c49a5276.png",
+      //     "cart_number": 0,
+      //     "stock": 0,
+      //     "activity_info": {
+      //       "activity_id": 2,
+      //       "activity_name": "限时抢购",
+      //       "short_name": "很好",
+      //       "type": 2,
+      //       "start_time": 1638950997,
+      //       "end_time": 1658950997
+      //     }
+      //   }]
+      // }],
+      // "shop_type_goods": [{
+      //     "id": 4,
+      //     "name": "子分类1",
+      //     "icon": "https://sharepuls.xcmbkj.com/app_memu_1.png?",
+      //     "goods_list": [{
+      //         "id": 4,
+      //         "goods_name": "商品4",
+      //         "price": 0,
+      //         "market_price": "100.00",
+      //         "spec": "",
+      //         "is_pre_sale": 0,
+      //         "is_vip": 1,
+      //         "is_sale": 0,
+      //         "is_shop_check": 0,
+      //         "thumb": "http://image.wms.wljkxys.com/202009305f742c49a5276.png",
+      //         "cart_number": 0,
+      //         "stock": 0,
+      //         "activity_info": []
+      //       },
+      //       {
+      //         "id": 8,
+      //         "goods_name": "商品8",
+      //         "price": 0,
+      //         "market_price": "100.00",
+      //         "spec": "",
+      //         "is_pre_sale": 0,
+      //         "is_vip": 1,
+      //         "is_sale": 0,
+      //         "is_shop_check": 0,
+      //         "thumb": "http://image.wms.wljkxys.com/202009305f742c49a5276.png",
+      //         "cart_number": 0,
+      //         "stock": 0,
+      //         "activity_info": []
+      //       },
+      //       {
+      //         "id": 9,
+      //         "goods_name": "商品9",
+      //         "price": 0,
+      //         "market_price": "100.00",
+      //         "spec": "",
+      //         "is_pre_sale": 0,
+      //         "is_vip": 1,
+      //         "is_sale": 0,
+      //         "is_shop_check": 0,
+      //         "thumb": "http://image.wms.wljkxys.com/202009305f742c49a5276.png",
+      //         "cart_number": 0,
+      //         "stock": 0,
+      //         "activity_info": []
+      //       },
+      //       {
+      //         "id": 10,
+      //         "goods_name": "商品10",
+      //         "price": 0,
+      //         "market_price": "100.00",
+      //         "spec": "",
+      //         "is_pre_sale": 1,
+      //         "is_vip": 1,
+      //         "is_sale": 0,
+      //         "is_shop_check": 0,
+      //         "thumb": "http://image.wms.wljkxys.com/202009305f742c49a5276.png",
+      //         "cart_number": 0,
+      //         "stock": 0,
+      //         "activity_info": []
+      //       }
+      //     ]
+      //   },
+      //   {
+      //     "id": 5,
+      //     "name": "子分类2",
+      //     "icon": "https://sharepuls.xcmbkj.com/app_memu_1.png?",
+      //     "goods_list": [{
+      //       "id": 5,
+      //       "goods_name": "商品5",
+      //       "price": 0,
+      //       "market_price": "100.00",
+      //       "spec": "",
+      //       "is_pre_sale": 0,
+      //       "is_vip": 1,
+      //       "is_sale": 0,
+      //       "is_shop_check": 0,
+      //       "thumb": "http://image.wms.wljkxys.com/202009305f742c49a5276.png",
+      //       "cart_number": 0,
+      //       "stock": 0,
+      //       "activity_info": []
+      //     }]
+      //   },
+      //   {
+      //     "id": 6,
+      //     "name": "子分类3",
+      //     "icon": "https://sharepuls.xcmbkj.com/app_memu_1.png?",
+      //     "goods_list": [{
+      //       "id": 6,
+      //       "goods_name": "商品6",
+      //       "price": 0,
+      //       "market_price": "100.00",
+      //       "spec": "",
+      //       "is_pre_sale": 0,
+      //       "is_vip": 1,
+      //       "is_sale": 0,
+      //       "is_shop_check": 0,
+      //       "thumb": "http://image.wms.wljkxys.com/202009305f742c49a5276.png",
+      //       "cart_number": 0,
+      //       "stock": 0,
+      //       "activity_info": []
+      //     }]
+      //   },
+      //   {
+      //     "id": 7,
+      //     "name": "子分类4",
+      //     "icon": "https://sharepuls.xcmbkj.com/app_memu_1.png?",
+      //     "goods_list": [{
+      //       "id": 7,
+      //       "goods_name": "商品7",
+      //       "price": 0,
+      //       "market_price": "100.00",
+      //       "spec": "",
+      //       "is_pre_sale": 0,
+      //       "is_vip": 1,
+      //       "is_sale": 0,
+      //       "is_shop_check": 0,
+      //       "thumb": "http://image.wms.wljkxys.com/202009305f742c49a5276.png",
+      //       "cart_number": 0,
+      //       "stock": 0,
+      //       "activity_info": []
+      //     }]
+      //   }
+      // ]
     },
     // 分组有分页时需要
     // groupGoods: [

@@ -105,7 +105,7 @@
                 </block>
                 <!-- 授权且资质认证的非会员 -->
                 <block wx:elif="{{!userInfo.is_vip&&!userInfo.is_sale}}">
-                  <view class="l2">￥{{itemName.price}}</view>
+                  <view class="l2">￥{{itemName.market_price}}</view>
                 </block>
                 <!-- 授权且资质认证的会员 -->
                 <block wx:else>
@@ -220,16 +220,22 @@
                   </view>
                   <view class="unit">{{itemName.unitName}}</view>
                 </view>
-                <!-- 未授权 -->
-                <view class="l2 no-sign" wx:if="{{!userInfo.phone}}">
+                <!-- 未授权或未资质认证的非会员 -->
+                <view class="l2 no-sign" wx:if="{{(!userInfo.phone||userInfo.is_shop_check!=1)&&!userInfo.is_sale}}">
                   请登录查看价格
                 </view>
-                <!-- 授权 -->
+                <!-- 授权且资质认证的非会员 -->
+                <view class="l2" wx:elif="{{!userInfo.is_vip&&!userInfo.is_sale}}">
+                  <view class="price">
+                    <text>￥</text>{{itemName.market_price}}
+                  </view>
+                </view>
+                <!-- 授权且资质认证的会员 -->
                 <view class="l2" wx:else>
                   <view class="price">
                     <text>￥</text>{{itemName.price}}
                   </view>
-                  <view class="origin-price">￥{{itemName.market_price}}</view>
+                  <view class="origin-price">￥{{itemName.price}}</view>
                 </view>
               </view>
               <view class="shopcart-box" catchtap="addArtHandle" data-item="{{itemName}}">
@@ -240,54 +246,57 @@
           </view>
         </view>
       </view>
-      <view class="tabs-nav" bindtap='changeTab'>
-        <view wx:for="{{tools.parseTabbar(shopData.group_goods)}}" wx:key="unique" data-index="{{index}}" class="tab {{tabIndex==index?'active':''}}">
-          <view class="tab-box">
-            <view class="text" data-index="{{index}}" style="color:{{tabIndex==index?item.name_color:item.name_default_color}}">{{item}}</view>
-            <view class="subtext" data-index="{{index}}" style="color:{{tabIndex==index?item.sub_name_color:item.sub_name_default_color}};background:{{tabIndex==index?item.sub_name_background_color:item.sub_name_default_background_color}}">{{item}}{{item}}</view>
+      <!-- 新热门商品分组 -->
+      <block wx:if="{{shopData.group_goods.length}}">
+        <view class="tabs-nav" bindtap='changeTab'>
+          <view wx:for="{{tools.parseTabbar(shopData.group_goods)}}" wx:key="unique" data-index="{{index}}" class="tab {{tabIndex==index?'active':''}}">
+            <view class="tab-box" data-index="{{index}}">
+              <view class="text" data-index="{{index}}" style="color:{{tabIndex==index?item.name_color:item.name_default_color}}">{{item.name}}</view>
+              <view wx:if="{{item.sub_name}}" class="subtext" data-index="{{index}}" style="color:{{tabIndex==index?item.sub_name_color:item.sub_name_default_color}};background:{{tabIndex==index?item.sub_name_background_color:item.sub_name_default_background_color}}">{{item.sub_name}}</view>
+            </view>
+          </view>
+          <!-- <view class="tabs-line" style="transform:translateX({{tabWidth*tabIndex+tabWidth/2+'px'}})translateX(-50%)"></view> -->
+        </view>
+        <view class="section7">
+          <view class="item" wx:for="{{shopData.group_goods[tabIndex].goods_list}}" wx:key="unique" data-id="{{item.id}}" bindtap="toGoodsDetail">
+            <image class="icon-pri" src="{{item.thumb}}" mode="aspectFill"></image>
+            <view class="cont">
+              <view class="l12-box">
+                <view class="l1 txt-cut" style="{{compatibleInfo.isIphone?'display: block !important;overflow: hidden;max-height: 80rpx;':''}}">
+                  <view wx:if="{{item.is_pre_sale===1 || item.activity_info.activity_name}}" class="tag {{item.is_pre_sale===1?'pre_sale':item.activity_info.activity_name?'new_activity':''}}">{{item.is_pre_sale===1?'预售专区':item.activity_info.activity_name?'新品上市':''}}</view>
+                  <view>{{item.goods_name}} {{item.spec}}</view>
+                </view>
+                <view class="unit">{{item.unitName}}</view>
+              </view>
+              <!-- 未授权或未资质认证的非会员 -->
+              <view class="l2 no-sign" wx:if="{{(!userInfo.phone||userInfo.is_shop_check!=1)&&!userInfo.is_sale}}">
+                请登录查看价格
+              </view>
+              <!-- 授权且资质认证的非会员 -->
+              <view class="l2" wx:elif="{{!userInfo.is_vip&&!userInfo.is_sale}}">
+                <view class="price">
+                  <text>￥</text>{{item.market_price}}
+                </view>
+              </view>
+              <!-- 授权且资质认证的会员 -->
+              <view class="l2" wx:else>
+                <view class="price">
+                  <text>￥</text>{{item.price}}
+                </view>
+                <view class="origin-price">￥{{item.market_price}}</view>
+              </view>
+            </view>
+            <view class="shopcart-box" catchtap="addArtHandle" data-item="{{item}}">
+              <image class="icon-shopcart" mode="aspectFill" src="/assets/images/icon_car.png"></image>
+              <view wx:if="{{item.cart_number}}" class="shopcart-info">{{item.cart_number}}</view>
+            </view>
           </view>
         </view>
-        <!-- <view class="tabs-line" style="transform:translateX({{tabWidth*tabIndex+tabWidth/2+'px'}})translateX(-50%)"></view> -->
-      </view>
-      <view class="section7">
-        <view class="item" wx:for="{{shopData.group_goods[tabIndex].goods_list}}" wx:key="unique" data-id="{{item.id}}" bindtap="toGoodsDetail">
-          <image class="icon-pri" src="{{item.thumb}}" mode="aspectFill"></image>
-          <view class="cont">
-            <view class="l12-box">
-              <view class="l1 txt-cut" style="{{compatibleInfo.isIphone?'display: block !important;overflow: hidden;max-height: 80rpx;':''}}">
-                <view wx:if="{{item.is_pre_sale===1 || item.activity_info.activity_name}}" class="tag {{item.is_pre_sale===1?'pre_sale':item.activity_info.activity_name?'new_activity':''}}">{{item.is_pre_sale===1?'预售专区':item.activity_info.activity_name?'新品上市':''}}</view>
-                <view>{{item.goods_name}} {{item.spec}}</view>
-              </view>
-              <view class="unit">{{item.unitName}}</view>
-            </view>
-            <!-- 未授权或未资质认证的非会员 -->
-            <view class="l2 no-sign" wx:if="{{(!userInfo.phone||userInfo.is_shop_check!=1)&&!userInfo.is_sale}}">
-              请登录查看价格
-            </view>
-            <!-- 授权且资质认证的非会员 -->
-            <view class="l2" wx:elif="{{!userInfo.is_vip&&!userInfo.is_sale}}">
-              <view class="price">
-                <text>￥</text>{{item.market_price}}
-              </view>
-            </view>
-            <!-- 授权且资质认证的会员 -->
-            <view class="l2" wx:else>
-              <view class="price">
-                <text>￥</text>{{item.price}}
-              </view>
-              <view class="origin-price">￥{{item.market_price}}</view>
-            </view>
-          </view>
-          <view class="shopcart-box" catchtap="addArtHandle" data-item="{{item}}">
-            <image class="icon-shopcart" mode="aspectFill" src="/assets/images/icon_car.png"></image>
-            <view wx:if="{{item.cart_number}}" class="shopcart-info">{{item.cart_number}}</view>
-          </view>
+        <view class="section7-1" wx:if="{{shopData.group_goods[0].goods_list.length}}" bindtap="toSearchResHandle">
+          <text>更多推荐</text>
+          <image src="/assets/images/nav_btn_next.png" mode="aspectFill"></image>
         </view>
-      </view>
-      <view class="section7-1" wx:if="{{shopData.group_goods[0].goods_list.length}}" bindtap="toSearchResHandle">
-        <text>更多推荐</text>
-        <image src="/assets/images/nav_btn_next.png" mode="aspectFill"></image>
-      </view>
+      </block>
     </view>
   </view>
 </view>

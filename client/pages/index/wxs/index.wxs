@@ -38,7 +38,7 @@ module.exports = {
     if (group_goods) {
       var res = null
       res = group_goods.map(function (item) {
-        return item.name
+        return item
       })
       return res
     }

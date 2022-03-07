@@ -377,6 +377,12 @@ create(store, {
         wx.navigateTo({
           url: `/pages/shop/order/confirmOrder?preData=${pre}`,
         })
+      }).catch(err => {
+        console.log(err)
+        if (err.msg === '地址不存在') {
+          wx.removeStorageSync('address_id')
+          this.confirmationOrderHandle()
+        }
       })
     }
   },

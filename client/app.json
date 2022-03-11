@@ -32,6 +32,7 @@
     "pages/mine/customer/customer",
     "pages/mine/faq/index",
     "pages/mine/faq/detail",
+    "pages/mine/focus/index",
     "pages/mine/set/set"
   ],
   "window": {

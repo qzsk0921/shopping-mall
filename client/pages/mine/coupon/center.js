@@ -27,6 +27,13 @@ create(store, {
     refresherEnabled: false,
     triggered: false,
   },
+  // 优惠券详情
+  toDetailHandle(e) {
+    const coupon_id = e.currentTarget.dataset.coupon_id
+    wx.navigateTo({
+      url: `/pages/mine/coupon/detail?coupon_id=${coupon_id}`,
+    })
+  },
   getCouponHandle(e) {
     const dataset = e.currentTarget.dataset
 
@@ -47,8 +54,8 @@ create(store, {
         })
       })
 
-    } else if (dataset.item.coupon_status === 1) {
-      // 立即使用
+    } else if ([1,3].includes(dataset.item.coupon_status)) {
+      // 立即使用||已领取
       // 跳转至分类页面
       wx.switchTab({
         url: '/pages/category/category',

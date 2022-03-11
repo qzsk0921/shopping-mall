@@ -429,6 +429,32 @@ create(store, {
     //   deep: true
     // }
   },
+  toCouponHandle() {
+    // 授权校验
+    if (!this.checkAuth()) return
+    // 资质校验
+    if (!this.certCheck()) return
+
+    wx.navigateTo({
+      url: '/pages/mine/coupon/center',
+    })
+  },
+  touchMove(e) {
+    // console.log('touchMove')
+    let {
+      shrink
+    } = this.data
+    if (!shrink) this.setData({
+      shrink: true
+    })
+    clearTimeout(this.timer)
+    this.timer = setTimeout(res => {
+      this.setData({
+        shrink: false
+      })
+      clearTimeout(this.timer)
+    }, 400)
+  },
   changeTab(e) {
     console.log(e)
     const index = e.target.dataset.index
@@ -445,11 +471,19 @@ create(store, {
       url: '/pages/search/search',
     })
   },
-  toSearchResHandle() {
+  toSearchResHandle(e) {
     console.log('toSearchResHandle')
-    wx.navigateTo({
-      url: '/pages/search/searchRes',
-    })
+    console.log(e)
+    const id = e.currentTarget.dataset.id
+    if(id) {
+      wx.navigateTo({
+        url: `/pages/search/searchRes?category_id=${id}`,
+      })
+    } else {
+      wx.navigateTo({
+        url: '/pages/search/searchRes',
+      })
+    }
   },
   // 跳转至分类页面
   toCategoryHandle(e) {
@@ -489,6 +523,46 @@ create(store, {
       wx.navigateTo({
         url: '/pages/authorization/phone',
       })
+      return false
+    }
+    return true
+  },
+  // 资质认证检查
+  certCheck() {
+    // 若用户没有通过资质认证，显示弹窗如下图
+    // 若用户资质认证已申请，待审核，提示弹窗如下图
+    // -2:未申请 0:审核中 1:已通过 -1:已删除
+    const status = this.store.data.userInfo.is_shop_check
+    if (status != 1) {
+      // wx.showToast({
+      //   icon: 'none',
+      //   title: '请先到【个人中心】-【资质认证】提交认证',
+      // })
+      if (status === -2 || status === 2 || status === -1) {
+        // this.setData({
+        //   confirmTitle: '温馨提示',
+        //   confirmContent: '请进行资质认证后再开通会员',
+        //   confirmBgColor: "#FF723A",
+        //   confirmDialogVisibile: true,
+        //   confirmText: '确定'
+        // })
+        wx.showToast({
+          icon: 'none',
+          title: '请先到【个人中心】-【资质认证】提交认证',
+        })
+      } else if (status === 0) {
+        // this.setData({
+        //   confirmTitle: '温馨提示',
+        //   confirmContent: '资质认证审核中，请等待审核过后再开通会员',
+        //   confirmBgColor: "#FF723A",
+        //   confirmDialogVisibile: true,
+        //   confirmText: '确定'
+        // })
+        wx.showToast({
+          icon: 'none',
+          title: '正在审核当中，加急请联系2085025',
+        })
+      }
       return false
     }
     return true
@@ -672,7 +746,21 @@ create(store, {
   onReachBottom: function () {
 
   },
-
+  onPageScroll: function () {
+    let {
+      shrink
+    } = this.data
+    if (!shrink) this.setData({
+      shrink: true
+    })
+    clearTimeout(this.timer)
+    this.timer = setTimeout(res => {
+      this.setData({
+        shrink: false
+      })
+      clearTimeout(this.timer)
+    }, 200)
+  },
   /**
    * 用户点击右上角分享
    */

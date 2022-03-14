@@ -202,7 +202,7 @@ create(store, {
           title: msg,
           icon: 'none'
         })
-        
+
         console.log(res)
       }
     }).catch(res => {
@@ -253,11 +253,11 @@ create(store, {
       })
     }
 
-    if (!this.data.userInfo) {
-      this.setData({
-        userInfo: this.store.data.userInfo
-      })
-    }
+    // if (!this.data.userInfo) {
+    this.setData({
+      userInfo: this.store.data.userInfo
+    })
+    // }
 
     // 修改地址等信息
     if (this.data.shopAddress) {

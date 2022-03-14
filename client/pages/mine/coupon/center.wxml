@@ -44,7 +44,7 @@
             <view class="l2 l one-txt-cut">{{item.content}}</view>
             <view class="l3 l">{{item.time_str}}</view>
           </view>
-          <view class="rright btn btn-coupon status{{item.coupon_status}}" bindtap="getCouponHandle" data-item="{{item}}" data-index="{{index}}">
+          <view class="rright btn btn-coupon status{{item.coupon_status}}" catchtap="getCouponHandle" data-item="{{item}}" data-index="{{index}}">
             {{tools.parsePouponStatus(item.coupon_status)}}
           </view>
         </view>

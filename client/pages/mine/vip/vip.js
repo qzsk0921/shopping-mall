@@ -7,6 +7,10 @@ import {
   addVip
 } from '../../../api/vip'
 
+import {
+  getUserDetail
+} from '../../../api/user.js'
+
 // Page({
 create(store, {
 
@@ -167,10 +171,24 @@ create(store, {
         'paySign': payModel.paySign,
         'success': function (res) {
           console.log(res)
-          // 支付成功后，返回个人中心，刷新个人中心页面
-          wx.navigateBack({
-            delta: 0,
+          getUserDetail().then(res => {
+            // 业务代码 1:正常 0:禁用 -1:不存在-------------------------------------------------
+            if (res.data.status === 0) {
+              wx.reLaunch({
+                url: '/pages/authorization/forbidden',
+              })
+            }
+
+            getApp().globalData.userInfo = res.data
+            store.data.userInfo = res.data
+            store.update()
+
+            // 支付成功后，返回个人中心，刷新个人中心页面
+            wx.navigateBack({
+              delta: 0,
+            })
           })
+
           // 获取消息下发权限(只在支付回调或tap手势事件能调用)
           // wx.requestSubscribeMessage({
           //   tmplIds: ['mtwGRB07oFL2fJgoiIipKVCYFFHS0vytiw2rTHqtAz8', 'gB9gMYOrOkLl-yTHdBP5vUS5rgwsTW1hjUYNml-57Go'],

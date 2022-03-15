@@ -183,6 +183,8 @@ create(store, {
   repositionHandle() {
     // console.log('repositionHandle')
     this.getLocation()
+    // 用 wx.onLocationChange 监听地理位置变化
+    // wx.onLocationChange()
   },
   getLocation() {
     const that = this;
@@ -214,13 +216,18 @@ create(store, {
       },
       fail: function (err) {
         console.log(err)
-        that.setData({
-          location: {
-            formatted_addresses: {
-              recommend: '定位失败'
-            }
-          }
+        wx.showToast({
+          title: '频繁调用会增加电量损耗',
+          icon: 'none'
         })
+
+        // that.setData({
+        //   location: {
+        //     formatted_addresses: {
+        //       recommend: '定位失败'
+        //     }
+        //   }
+        // })
       },
       complete: function () {
         console.log('complete')

@@ -9,7 +9,7 @@
       <dropdown-menu-category opened="{{categoryOpened}}" bindsubClickable="subClickableHandle" bindsubFirstCategoryHandle="subFirstCategoryHandle" categoryData="{{firstCategory}}" currentFirstCategoryId="{{currentFirstCategoryId}}" />
       <!-- <view class="category-box hide-scrollbar" bindtap="firstCategoryHandle" style="width:{{categoryBoxW}}rpx"> -->
       <view class="category-box hide-scrollbar" bindtap="firstCategoryHandle">
-        <scroll-view scroll-x="true" scroll-into-view="{{currentScrollTopId}}" scroll-with-animation="true">
+        <scroll-view scroll-x="true" scroll-into-view="{{currentScrollTopId}}" enhanced="true" show-scrollbar="{{false}}" scroll-with-animation="true">
           <view class="item-box" style="width:{{categoryBoxW}}rpx;">
             <view class="item {{currentFirstCategoryId===item.id?'category-active':''}}" wx:for="{{firstCategory}}" data-clickable="1" data-id="{{item.id}}" id="a{{item.id}}">
               <image class="icon-category" src="{{item.icon}}" mode="aspectFill" data-clickable="1" data-id="{{item.id}}"></image>

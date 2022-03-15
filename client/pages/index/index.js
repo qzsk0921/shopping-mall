@@ -394,9 +394,15 @@ create(store, {
               }).exec();
             }
 
-            this.getShopData({
+            let paramData = {
               shop_id: nv
-            }).then(res => {
+            }
+
+            if (this.data.sale_id) {
+              paramData.sale_id = this.data.sale_id
+            }
+
+            this.getShopData(paramData).then(res => {
               // console.log(res)
               this.setData({
                 shopData: res.data,
@@ -475,7 +481,7 @@ create(store, {
     console.log('toSearchResHandle')
     console.log(e)
     const id = e.currentTarget.dataset.id
-    if(id) {
+    if (id) {
       wx.navigateTo({
         url: `/pages/search/searchRes?category_id=${id}`,
       })
@@ -608,6 +614,7 @@ create(store, {
       sale_id
     } = options
     if (sale_id) {
+      this.data.sale_id = sale_id
       this.store.data.sale_id = sale_id
       this.update()
     }

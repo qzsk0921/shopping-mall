@@ -29,7 +29,7 @@
           <view class="right">
             <view class="row1">{{item.user_info.nick_name}}</view>
             <view class="row2">{{item.shop_info.name}}</view>
-            <view class="row3"><text>负责人名称</text><text>{{item.shop_info.leader_name}}</text></view>
+            <view class="row3"><text>{{item.shop_info.leader_name}}</text><text>{{item.shop_info.leader_phone}}</text></view>
             <view class="row4">关联时间：{{commontools.formatTime(item.bind_time*1000)}}</view>
           </view>
         </view>

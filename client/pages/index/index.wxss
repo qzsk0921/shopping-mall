@@ -872,8 +872,11 @@
   padding: 0 8rpx;
 }
 
-.unit {
+.section8 .unit {
   font-size: 22rpx;
+}
+
+.unit {
   font-size: 24rpx;
   line-height: 41rpx;
   color: #888888;

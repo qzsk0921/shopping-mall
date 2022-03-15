@@ -149,7 +149,7 @@ create(store, {
               if (nv.includes(item.id + '.' + item.unit_id)) {
                 // 有库存并且未下架或删除
                 if (![2, 3].includes(item.status) && item.is_stock) {
-                  if (this.store.data.userInfo.is_vip) {
+                  if (this.store.data.userInfo.is_vip || this.store.data.userInfo.is_sale) {
                     // 会员
                     totalPrice += (item.price * 1000 * item.cart_number)
                     discountPrice += ((item.market_price * 1000 - item.price * 1000) * item.cart_number)
@@ -191,7 +191,7 @@ create(store, {
           nv.forEach((item, index) => {
             // 有库存并且未下架或删除
             if (![2, 3].includes(item.status) && item.is_stock && this.data.checkedIds.includes(item.id + '.' + item.unit_id)) {
-              if (this.store.data.userInfo.is_vip) {
+              if (this.store.data.userInfo.is_vip || this.store.data.userInfo.is_sale) {
                 // 会员
                 totalPrice += (item.price * 1000 * item.cart_number)
                 discountPrice += ((item.market_price * 1000 - item.price * 1000) * item.cart_number)
@@ -373,7 +373,11 @@ create(store, {
       })
 
       this.preOrder(orderData).then(res => {
+        // 进入订单确认页若开通会员返回订单确认页需要更新数据
+        getApp().globalData.orderData = orderData
+
         const pre = JSON.stringify(res.data)
+
         wx.navigateTo({
           url: `/pages/shop/order/confirmOrder?preData=${pre}`,
         })
@@ -573,6 +577,11 @@ create(store, {
 
       // 购物车需要新增一个商品
       if (!ress) {
+        console.log(this.data.checkedIds)
+        console.log(dataset.item)
+        // this.setData({
+        // checkedIds: this.data.checkedIds.length ? this.data.checkedIds.concat([`${dataset.item.id}.${dataset.item.unit_id}`]) : [`${dataset.item.id}.${dataset.item.unit_id}`]
+        // })
         this.getCartData()
       }
 

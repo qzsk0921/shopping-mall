@@ -152,6 +152,7 @@
 .reduce {
   width: 44rpx;
   height: 44rpx;
+  padding: 15rpx;
 }
 
 .quantity {
@@ -168,6 +169,7 @@
 .add {
   width: 44rpx;
   height: 44rpx;
+  padding: 15rpx;
 }
 
 .section2 .item .center {

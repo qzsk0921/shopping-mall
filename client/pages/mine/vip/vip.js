@@ -11,6 +11,10 @@ import {
   getUserDetail
 } from '../../../api/user.js'
 
+import {
+  preOrder
+} from '../../../api/order'
+
 // Page({
 create(store, {
 
@@ -159,6 +163,9 @@ create(store, {
     if (!this.certCheck()) return
 
     if (this.data.btnDisable) return
+
+    const that = this
+
     this.addVip({
       id: this.data.currentVipId
     }).then(res => {
@@ -183,10 +190,26 @@ create(store, {
             store.data.userInfo = res.data
             store.update()
 
-            // 支付成功后，返回个人中心，刷新个人中心页面
-            wx.navigateBack({
-              delta: 0,
-            })
+            const pages = getCurrentPages() //获取加载的页面
+            const prevPage = pages[pages.length - 2] //获取上个页面的对象
+            if (prevPage.route === 'pages/shop/order/confirmOrder') {
+              // 如果上一页是订单确认页，开通之后更新订单确认页数据
+              if (getApp().globalData.orderData) {
+                that.preOrder(getApp().globalData.orderData).then(res => {
+                  prevPage.setData({
+                    orderData: res.data
+                  })
+                  wx.navigateBack({
+                    delta: 0,
+                  })
+                })
+              }
+            } else {
+              // 支付成功后，返回个人中心，刷新个人中心页面
+              wx.navigateBack({
+                delta: 0,
+              })
+            }
           })
 
           // 获取消息下发权限(只在支付回调或tap手势事件能调用)
@@ -226,6 +249,15 @@ create(store, {
   addVip(data) {
     return new Promise((resolve, reject) => {
       addVip(data).then(res => {
+        resolve(res)
+      }).catch(err => {
+        reject(err)
+      })
+    })
+  },
+  preOrder(data) {
+    return new Promise((resolve, reject) => {
+      preOrder(data).then(res => {
         resolve(res)
       }).catch(err => {
         reject(err)

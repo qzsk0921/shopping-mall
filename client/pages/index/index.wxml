@@ -216,18 +216,18 @@
                     <view wx:if="{{itemName.is_pre_sale===1 || itemName.activity_info.activity_name}}" class="tag {{itemName.is_pre_sale===1?'pre_sale':itemName.activity_info.activity_name?'new_activity':''}}">{{itemName.is_pre_sale===1?'预售专区':itemName.activity_info.activity_name?'新品上市':''}}</view>
                     <view>{{itemName.goods_name}} {{itemName.spec}}</view>
                   </view>
-                  <view class="unit">{{itemName.goods_content}}</view>
+                  <view class="unit one-txt-cut">{{itemName.goods_content}}</view>
                 </view>
                 <!-- 未授权或未资质认证的非会员 -->
                 <view class="l2 no-sign" wx:if="{{(!userInfo.phone||userInfo.is_shop_check!=1)&&!userInfo.is_sale}}">
                   请登录查看价格
                 </view>
                 <!-- 授权且资质认证的非会员 -->
-                <!-- <view class="l2" wx:elif="{{!userInfo.is_vip&&!userInfo.is_sale}}">
+                <view class="l2" wx:elif="{{!userInfo.is_vip&&!userInfo.is_sale}}">
                   <view class="price">
                     <text>￥</text>{{itemName.market_price}}
                   </view>
-                </view> -->
+                </view>
                 <!-- 授权且资质认证的会员 -->
                 <view class="l2" wx:else>
                   <view class="price">
@@ -264,7 +264,7 @@
                   <view wx:if="{{item.is_pre_sale===1 || item.activity_info.activity_name}}" class="tag {{item.is_pre_sale===1?'pre_sale':item.activity_info.activity_name?'new_activity':''}}">{{item.is_pre_sale===1?'预售专区':item.activity_info.activity_name?'新品上市':''}}</view>
                   <view>{{item.goods_name}} {{item.spec}}</view>
                 </view>
-                <view class="unit">{{item.goods_content}}</view>
+                <view class="unit one-txt-cut">{{item.goods_content}}</view>
               </view>
               <!-- 未授权或未资质认证的非会员 -->
               <view class="l2 no-sign" wx:if="{{(!userInfo.phone||userInfo.is_shop_check!=1)&&!userInfo.is_sale}}">

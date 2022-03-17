@@ -182,9 +182,39 @@ create(store, {
   // 重新定位
   repositionHandle() {
     // console.log('repositionHandle')
-    this.getLocation()
     // 用 wx.onLocationChange 监听地理位置变化
     // wx.onLocationChange()
+    const that = this
+    // 查询一下用户是否授权了地理位置 scope.userLocation
+    wx.getSetting({
+      success(res) {
+        console.log(res)
+        if (!res.authSetting['scope.userLocation']) {
+          wx.openSetting({
+            success(res) {
+              console.log(res.authSetting)
+              // res.authSetting = {
+              //   "scope.userInfo": true,
+              //   "scope.userLocation": true
+              // }
+              if (res.authSetting['scope.userLocation']) {
+                wx.authorize({
+                  scope: 'scope.userLocation',
+                  success() {
+                    that.getLocation()
+                  },
+                  fail(err) {
+                    console.log(err)
+                  }
+                })
+              }
+            }
+          })
+        } else {
+          that.getLocation()
+        }
+      }
+    })
   },
   getLocation() {
     const that = this;
@@ -205,10 +235,12 @@ create(store, {
               latitude: result.location.lat,
               type: 2, //1:通过地址选择 2:首页选择地址
             }
+
             that.store.data.location = result
             that.update()
 
             that.setData({
+              location: result,
               currentAddress: that.store.data.currentAddress
             })
           }
@@ -220,14 +252,6 @@ create(store, {
           title: '频繁调用会增加电量损耗',
           icon: 'none'
         })
-
-        // that.setData({
-        //   location: {
-        //     formatted_addresses: {
-        //       recommend: '定位失败'
-        //     }
-        //   }
-        // })
       },
       complete: function () {
         console.log('complete')
@@ -398,8 +422,9 @@ create(store, {
 
     this.setData({
       location: this.store.data.location,
-      address_id: this.store.data.address_id
+      address_id: this.store.data.address_id,
     })
+
     // 更新收货地址列表
     this.getAddressList().then(res => {
       this.setData({

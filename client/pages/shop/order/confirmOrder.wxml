@@ -62,17 +62,20 @@
       <!-- 开通会员 -->
       <!-- 开通 -->
       <!-- 1:非vip 2:正常vip 3:快到期的vip -->
-      <view class="l5 register" wx:if="{{orderData.show_vip_notice!=2}}">
+      <view class="l5 {{orderData.show_vip_notice===3?'register1':'register'}}" wx:if="{{orderData.show_vip_notice!=2}}">
         <view class="left">
-          <image class="icon-member" src="/assets/images/order_members.png" mode="aspectFill"></image>
-          <!-- <text>开通会员，本单最高立减</text> -->
-          <!-- <text>{{userInfo.is_vip?'已为您累计节省':'开通会员，本单最高立减'}}</text> -->
-          <text>{{orderData.show_vip_notice===3?'已为您累计节省':'开通会员，本单最高立减'}}</text>
-          <text>￥</text>
-          <text>{{userInfo.is_vip?orderData.user_total_discount:'20'}}</text>
+          <view class="left-r1">
+            <image class="icon-member" src="/assets/images/order_members.png" mode="aspectFill"></image>
+            <!-- <text>开通会员，本单最高立减</text> -->
+            <!-- <text>{{userInfo.is_vip?'已为您累计节省':'开通会员，本单最高立减'}}</text> -->
+            <text>{{orderData.show_vip_notice===3?'已为您累计节省':'开通会员，本单最高立减'}}</text>
+            <text>￥</text>
+            <text>{{userInfo.is_vip?orderData.user_total_discount:'20'}}</text>
+          </view>
+          <view wx:if="{{orderData.show_vip_notice===3}}" class="left-r2">还有<text>{{orderData.vip_remain_day}}</text> 天，你的优惠权益即将过期</view>
         </view>
         <!-- <view class="right btn btn-register" bindtap="vipHandle">{{userInfo.is_vip?'立即续费':'立即开通'}}</view> -->
-        <view class="right btn btn-register" bindtap="vipHandle">{{orderData.show_vip_notice===3?'立即续费':'立即开通'}}</view>
+        <view class="right btn btn-register" bindtap="vipHandle">{{orderData.show_vip_notice===3?'我要优惠':'立即开通'}}</view>
       </view>
       <!-- 去支付 -->
       <view class="l6">

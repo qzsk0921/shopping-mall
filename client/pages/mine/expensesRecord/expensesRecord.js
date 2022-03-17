@@ -5,6 +5,11 @@ import create from '../../../utils/create'
 import {
   getExpenseList
 } from '../../../api/order'
+
+import {
+  getCustomerInfo
+} from '../../../api/customer'
+
 // Page({
 create(store, {
 
@@ -54,6 +59,12 @@ create(store, {
 
           if (this.data.user_id) {
             tempData.user_id = this.data.user_id
+            getCustomerInfo(tempData).then(res => {
+              this.setData({
+                expensesData: res.data,
+              })
+            })
+            return
           }
 
           getExpenseList(tempData).then(res => {

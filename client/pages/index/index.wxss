@@ -965,3 +965,8 @@
 .shrink {
   transform: translateX(164rpx);
 }
+
+.broadcast {
+  font-size: 24rpx;
+  color: #333333;
+}

@@ -104,7 +104,8 @@ create(store, {
   vipItemHandle(e) {
     const dataset = e.currentTarget.dataset
     this.setData({
-      currentVipId: dataset.item.id
+      currentVipId: dataset.item.id,
+      currentVipPrice: dataset.item.price
     })
     // 选择比自己等级低的会员不能续费
     // myVipPrice
@@ -188,11 +189,20 @@ create(store, {
 
             // v2用户开通或续费成功后，停留再当前页面，并刷新当前页面
             that.setData({
-              userInfo: res.data
+              userInfo: res.data,
+              myVipPrice: that.data.currentVipPrice,
+              // currentVipId: that.data.currentVipId,
+              btnText: '立即续费'
             })
-            
+
             getApp().globalData.userInfo = store.data.userInfo = res.data
             store.update()
+
+            const title = that.data.btnText === '立即续费' ? '续费成功' : that.data.btnText === '立即升级' ? '升级成功' : '开通成功'
+            wx.showToast({
+              title,
+              icon: 'none'
+            })
 
             const pages = getCurrentPages() //获取加载的页面
             const prevPage = pages[pages.length - 2] //获取上个页面的对象
@@ -236,8 +246,6 @@ create(store, {
           })
           console.log(res)
         }
-      }).catch(res => {
-        console.log(res)
       })
     })
   },
@@ -285,7 +293,8 @@ create(store, {
       this.setData({
         vipList: res.data.data,
         currentVipId: currentVip ? currentVip.id : res.data.data[0].id,
-        myVipPrice: currentVip ? currentVip.price : 0
+        myVipPrice: currentVip ? currentVip.price : 0,
+        currentVipPrice: res.data.data[0].price
       })
     })
 

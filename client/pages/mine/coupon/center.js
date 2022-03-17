@@ -113,7 +113,7 @@ create(store, {
     this.setData({
       'couponMarketList.count': ++couponMarketList.count
     })
-    this.getcouponMarketList('scrollToLower')
+    this.getCouponMarketList('scrollToLower')
   },
   /**
    * 生命周期函数--监听页面加载

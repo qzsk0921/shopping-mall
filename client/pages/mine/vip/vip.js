@@ -186,8 +186,12 @@ create(store, {
               })
             }
 
-            getApp().globalData.userInfo = res.data
-            store.data.userInfo = res.data
+            // v2用户开通或续费成功后，停留再当前页面，并刷新当前页面
+            that.setData({
+              userInfo: res.data
+            })
+            
+            getApp().globalData.userInfo = store.data.userInfo = res.data
             store.update()
 
             const pages = getCurrentPages() //获取加载的页面
@@ -199,16 +203,16 @@ create(store, {
                   prevPage.setData({
                     orderData: res.data
                   })
-                  wx.navigateBack({
-                    delta: 0,
-                  })
+                  // wx.navigateBack({
+                  //   delta: 0,
+                  // })
                 })
               }
             } else {
-              // 支付成功后，返回个人中心，刷新个人中心页面
-              wx.navigateBack({
-                delta: 0,
-              })
+              // // 支付成功后，返回个人中心，刷新个人中心页面
+              // wx.navigateBack({
+              //   delta: 0,
+              // })
             }
           })
 

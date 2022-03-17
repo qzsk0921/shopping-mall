@@ -18,6 +18,11 @@ import {
 import {
   addNumCart
 } from '../../api/cart'
+
+import {
+  setTrack
+} from '../../api/data'
+
 let timerSearchObject = null
 
 // Page({
@@ -364,6 +369,17 @@ create(store, {
           this.setData({
             shop_id: res.data.shop_id
           })
+
+          if (!getApp().globalData.page_id) {
+            // 统计时长埋点
+            setTrack({
+              type: 1,
+              shop_id: res.data.shop_id
+            }).then(res => {
+              getApp().globalData.page_id = res.data.page_id
+            })
+          }
+
           // 通过shop_id获取商城商品
         }).catch(err => {
           console.log('err' + err)

@@ -81,50 +81,50 @@ create(store, {
       //   url: 'https://gw.alicdn.com/tps/i1/O1CN01PWx1at1LfLtyRhW1V_!!0-juitemmedia.jpg_140x10000Q75.jpg'
       // }
     ],
-    screenCategory: [{
-      // 导航名称
-      option: '蔬菜豆制品',
-      id: 'a1',
-      currentOptionId: '',
-      // 该导航下所有的可选项
-      content: [{
-        type: 1, //预售
-        option: '元宝优选调和油20L/捅',
-        desc: '商品描述，最多1行，超过显…',
-        id: 1,
-        price: '13.9',
-        originPrice: '25.9',
-        store: 1, //库存
-        url: 'https://gw.alicdn.com/tps/i1/O1CN01PWx1at1LfLtyRhW1V_!!0-juitemmedia.jpg_140x10000Q75.jpg'
-      }, {
-        type: 2, //新品
-        option: '阿尔卑斯饮用天然矿泉水500ml*6',
-        desc: '商品描述，最多1行，超过显…',
-        id: 2,
-        price: '13.9',
-        originPrice: '25.9',
-        store: 0, //库存
-        url: 'https://gw.alicdn.com/tps/i1/O1CN01PWx1at1LfLtyRhW1V_!!0-juitemmedia.jpg_140x10000Q75.jpg'
-      }, {
-        type: 2,
-        option: '阿尔卑斯饮用天然矿泉水500ml*6',
-        desc: '商品描述，最多1行，超过显…',
-        id: 3,
-        price: '13.9',
-        originPrice: '25.9',
-        store: 23, //库存
-        url: 'https://gw.alicdn.com/tps/i1/O1CN01PWx1at1LfLtyRhW1V_!!0-juitemmedia.jpg_140x10000Q75.jpg'
-      }, {
-        type: 2,
-        option: '阿尔卑斯饮用天然矿泉水500ml*6',
-        desc: '商品描述，最多1行，超过显…',
-        id: 4,
-        price: '13.9',
-        originPrice: '25.9',
-        store: 0, //库存
-        url: 'https://gw.alicdn.com/tps/i1/O1CN01PWx1at1LfLtyRhW1V_!!0-juitemmedia.jpg_140x10000Q75.jpg'
-      }]
-    }],
+    // screenCategory: [{
+    //   // 导航名称
+    //   option: '蔬菜豆制品',
+    //   id: 'a1',
+    //   currentOptionId: '',
+    //   // 该导航下所有的可选项
+    //   content: [{
+    //     type: 1, //预售
+    //     option: '元宝优选调和油20L/捅',
+    //     desc: '商品描述，最多1行，超过显…',
+    //     id: 1,
+    //     price: '13.9',
+    //     originPrice: '25.9',
+    //     store: 1, //库存
+    //     url: 'https://gw.alicdn.com/tps/i1/O1CN01PWx1at1LfLtyRhW1V_!!0-juitemmedia.jpg_140x10000Q75.jpg'
+    //   }, {
+    //     type: 2, //新品
+    //     option: '阿尔卑斯饮用天然矿泉水500ml*6',
+    //     desc: '商品描述，最多1行，超过显…',
+    //     id: 2,
+    //     price: '13.9',
+    //     originPrice: '25.9',
+    //     store: 0, //库存
+    //     url: 'https://gw.alicdn.com/tps/i1/O1CN01PWx1at1LfLtyRhW1V_!!0-juitemmedia.jpg_140x10000Q75.jpg'
+    //   }, {
+    //     type: 2,
+    //     option: '阿尔卑斯饮用天然矿泉水500ml*6',
+    //     desc: '商品描述，最多1行，超过显…',
+    //     id: 3,
+    //     price: '13.9',
+    //     originPrice: '25.9',
+    //     store: 23, //库存
+    //     url: 'https://gw.alicdn.com/tps/i1/O1CN01PWx1at1LfLtyRhW1V_!!0-juitemmedia.jpg_140x10000Q75.jpg'
+    //   }, {
+    //     type: 2,
+    //     option: '阿尔卑斯饮用天然矿泉水500ml*6',
+    //     desc: '商品描述，最多1行，超过显…',
+    //     id: 4,
+    //     price: '13.9',
+    //     originPrice: '25.9',
+    //     store: 0, //库存
+    //     url: 'https://gw.alicdn.com/tps/i1/O1CN01PWx1at1LfLtyRhW1V_!!0-juitemmedia.jpg_140x10000Q75.jpg'
+    //   }]
+    // }],
 
     firstCategory: [], //第一分类
     secondCategory: [], //第二分类
@@ -278,11 +278,9 @@ create(store, {
           secondCategory: res.data
         })
 
-        if (res.data.length) {
-          this.getGoodsList({
-            category_id: res.data[0].id
-          })
-        }
+        this.getGoodsList({
+          category_id: res.data[0].id
+        })
       } else {
         this.setData({
           secondCategory: []
@@ -320,11 +318,9 @@ create(store, {
           secondCategory: res.data
         })
 
-        if (res.data.length) {
-          this.getGoodsList({
-            category_id: res.data[0].id
-          })
-        }
+        this.getGoodsList({
+          category_id: res.data[0].id
+        })
       } else {
         this.setData({
           secondCategory: []

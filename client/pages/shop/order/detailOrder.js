@@ -94,6 +94,10 @@ create(store, {
   // 取消订单 删除订单
   delOrderHandle(e) {
     const myOrderData = this.data.orderData
+
+    const pages = getCurrentPages();
+    const prevPage = pages[pages.length - 2]; //上一个页面
+    
     // 0:待支付 1:已支付 2:已取消
     if (myOrderData.status === 0) {
       this.cancelOrder({
@@ -103,6 +107,13 @@ create(store, {
           icon: 'none',
           title: '取消成功',
         })
+
+        // 如果上一页是订单列表需要更新订单列表
+        if (prevPage.route === 'pages/shop/order/myOrder') {
+          prevPage.setData({
+            tabIndex: prevPage.data.tabIndex
+          })
+        }
 
         // toast结束后 返回上一个页面
         setTimeout(() => {
@@ -119,6 +130,13 @@ create(store, {
           icon: 'none',
           title: '删除成功',
         })
+
+        // 如果上一页是订单列表需要更新订单列表
+        if (prevPage.route === 'pages/shop/order/myOrder') {
+          prevPage.setData({
+            tabIndex: prevPage.data.tabIndex
+          })
+        }
 
         // toast结束后 返回上一个页面
         setTimeout(() => {

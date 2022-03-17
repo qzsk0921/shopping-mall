@@ -565,7 +565,8 @@
 }
 
 .section7 .l12-box {
-  height: 129rpx;
+  /* height: 129rpx; */
+  height: 138rpx;
 }
 
 .section7 .l12-box .l1 {
@@ -801,7 +802,7 @@
 }
 
 .section8 .item .cont .l1 {
-  line-height: 38rpx;
+  line-height: 36rpx;
   font-size: 26rpx;
   font-weight: bold;
   color: #333333;
@@ -809,7 +810,7 @@
 
 .section8 .item .cont .l1 .tag {
   float: left;
-  margin: 8rpx 6rpx 0 0;
+  margin: 5rpx 6rpx 0 0;
   text-align: center;
   width: 88rpx;
   height: 28rpx;
@@ -828,7 +829,7 @@
 }
 
 .section8 .item .cont .l2 {
-  margin-top: 14rpx;
+  margin-top: 26rpx;
 }
 
 .section8 .item .cont .l2 .price {
@@ -853,7 +854,7 @@
 .section8 .item .shopcart-box {
   position: absolute;
   right: 0;
-  top: 127rpx;
+  top: 143rpx;
   width: 48rpx;
   height: 48rpx;
 }

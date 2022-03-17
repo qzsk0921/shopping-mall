@@ -161,11 +161,20 @@ create(store, {
                 }
               }
             })
-            this.setData({
+
+            let tempData = {
               totalPrice,
               discountPrice,
               'cartData.total': total
-            })
+            }
+
+            if (!this.data.select_all) {
+              if (nv.length === this.data.cartData.cache.length) {
+                tempData.select_all = true
+              }
+            }
+
+            this.setData(tempData)
           } else {
             this.setData({
               totalPrice: 0,
@@ -469,7 +478,16 @@ create(store, {
   diaConfirmHandle(params) {
     this.delCart(this.data.tempDelGoodsData).then(res => {
       // 更新购物车数据
-      this.getCartData()
+      this.getCartData().then(res => {
+        // 更新checkedIds全选按钮
+        const checkedIds = this.data.checkedIds.filter((item, index) => {
+          return item.split('.')[0] !== this.data.tempDelGoodsData.goods_id && item.split('.')[1] !== this.data.tempDelGoodsData.unit_id
+        })
+
+        this.setData({
+          checkedIds
+        })
+      })
 
       // 更新猜你喜欢的购物车数量
       this.data.recommendList.cache.forEach((it, index) => {
@@ -559,14 +577,15 @@ create(store, {
     }
 
     this.addNumCart(myData).then(res => {
-      // this.getCartData()
+
       wx.showToast({
         icon: 'none',
         title: '加入购物车成功',
       })
+
       // 更新购物车数据
       const ress = this.data.cartData.cache.some((item, index) => {
-        if (item.id === dataset.item.id) {
+        if (item.id === dataset.item.id && item.unit_id === dataset.item.unit_arr[0].id) {
           this.setData({
             [`cartData.cache[${index}].cart_number`]: dataset.item.cart_number + 1
           })
@@ -575,15 +594,14 @@ create(store, {
         return false
       })
 
-      // 购物车需要新增一个商品
-      if (!ress) {
-        console.log(this.data.checkedIds)
-        console.log(dataset.item)
-        // this.setData({
-        // checkedIds: this.data.checkedIds.length ? this.data.checkedIds.concat([`${dataset.item.id}.${dataset.item.unit_id}`]) : [`${dataset.item.id}.${dataset.item.unit_id}`]
-        // })
-        this.getCartData()
-      }
+      this.getCartData().then(res => {
+        // 购物车需要新增一个商品
+        if (!ress) {
+          this.setData({
+            checkedIds: this.data.checkedIds.length ? this.data.checkedIds.concat([`${dataset.item.id}.${dataset.item.unit_arr[0].id}`]) : [`${dataset.item.id}.${dataset.item.unit_arr[0].id}`]
+          })
+        }
+      })
 
       // 猜你喜欢 同步数据
       let indexArr = [],

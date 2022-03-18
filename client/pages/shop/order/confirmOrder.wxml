@@ -70,7 +70,7 @@
             <!-- <text>{{userInfo.is_vip?'已为您累计节省':'开通会员，本单最高立减'}}</text> -->
             <text>{{orderData.show_vip_notice===3?'已为您累计节省':'开通会员，本单最高立减'}}</text>
             <text>￥</text>
-            <text>{{userInfo.is_vip?orderData.user_total_discount:'20'}}</text>
+            <text>{{userInfo.is_vip?orderData.user_total_discount:orderData.vip_discount_money}}</text>
           </view>
           <view wx:if="{{orderData.show_vip_notice===3}}" class="left-r2">还有<text>{{orderData.vip_remain_day}}</text> 天，你的优惠权益即将过期</view>
         </view>

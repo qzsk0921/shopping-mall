@@ -5,7 +5,8 @@ import {
   getOrderDetail,
   cancelOrder,
   delOrder,
-  addOrder
+  addOrder,
+  rePay
 } from '../../../api/order'
 // Page({
 create(store, {
@@ -97,7 +98,7 @@ create(store, {
 
     const pages = getCurrentPages();
     const prevPage = pages[pages.length - 2]; //上一个页面
-    
+
     // 0:待支付 1:已支付 2:已取消
     if (myOrderData.status === 0) {
       this.cancelOrder({
@@ -170,7 +171,10 @@ create(store, {
         orderData.is_use_coupon = 0
       }
 
-      this.addOrder(orderData).then(res => {
+      // this.addOrder(orderData).then(res => {
+      this.rePay({
+        order_id: myOrderData.id
+      }).then(res => {
         console.log(res)
         // 调起微信支付
         this.wxPay(res.data)
@@ -268,6 +272,15 @@ create(store, {
   getOrderDetail(data) {
     return new Promise((resolve, reject) => {
       getOrderDetail(data).then(res => {
+        resolve(res)
+      }).catch(err => {
+        reject(err)
+      })
+    })
+  },
+  rePay(data) {
+    return new Promise((resolve, reject) => {
+      rePay(data).then(res => {
         resolve(res)
       }).catch(err => {
         reject(err)

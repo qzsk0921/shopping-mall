@@ -967,6 +967,28 @@
 }
 
 .broadcast {
+  margin: 20rpx 24rpx;
   font-size: 24rpx;
   color: #333333;
+  width: 702rpx;
+  height: 68rpx;
+  background: #FFFFFF;
+  border-radius: 16rpx;
+  display: flex;
+  overflow: hidden;
+}
+
+.icon-broadcast {
+  width: 34rpx;
+  height: 34rpx;
+  margin: 18rpx 28rpx 0 17rpx;
+}
+
+.broadcast-list {
+  width: calc(100% - 79rpx);
+}
+
+.broadcast-list .item {
+  padding-right: 24rpx;
+  line-height: 68rpx;
 }

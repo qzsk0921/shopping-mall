@@ -2,7 +2,8 @@
 import store from '../../../store/common'
 import create from '../../../utils/create'
 import {
-  addOrder
+  addOrder,
+  rePay
 } from '../../../api/order'
 // Page({
 create(store, {
@@ -164,17 +165,35 @@ create(store, {
       }
       orderData.goods.push(temp)
     })
-    this.addOrder(orderData).then(res => {
-      console.log(res)
-      // 支付金额为0元时，可直接支付成功进入订单详情页，无需调起支付
-      if (res.data.pay_status === 1) {
-        wx.navigateTo({
-          url: `/pages/shop/order/detailOrder?order_id=${res.data.order_id}`,
-        })
-      }
-      // 调起微信支付
-      this.wxPay(res.data)
-    })
+    
+    if (this.data.order_id) {
+      this.rePay({
+        order_id: this.data.order_id
+      }).then(res => {
+        console.log(res)
+        // 支付金额为0元时，可直接支付成功进入订单详情页，无需调起支付
+        if (res.data.pay_status === 1) {
+          wx.navigateTo({
+            url: `/pages/shop/order/detailOrder?order_id=${res.data.order_id}`,
+          })
+        }
+        // 调起微信支付
+        this.wxPay(res.data)
+      })
+    } else {
+      this.addOrder(orderData).then(res => {
+        console.log(res)
+        this.data.order_id = res.data.order_id
+        // 支付金额为0元时，可直接支付成功进入订单详情页，无需调起支付
+        if (res.data.pay_status === 1) {
+          wx.navigateTo({
+            url: `/pages/shop/order/detailOrder?order_id=${res.data.order_id}`,
+          })
+        }
+        // 调起微信支付
+        this.wxPay(res.data)
+      })
+    }
   },
   // 微信支付
   wxPay(payModel) {
@@ -223,6 +242,16 @@ create(store, {
   addOrder(data) {
     return new Promise((resolve, reject) => {
       addOrder(data).then(res => {
+        resolve(res)
+      }).catch(err => {
+        reject(err)
+      })
+    })
+  },
+
+  rePay(data) {
+    return new Promise((resolve, reject) => {
+      rePay(data).then(res => {
         resolve(res)
       }).catch(err => {
         reject(err)

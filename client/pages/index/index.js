@@ -613,7 +613,8 @@ create(store, {
       type: 1,
       shop_id: this.store.data.shop_id,
       goods_id: item.id,
-      goods_num: item.cart_number + 1
+      // goods_num: item.cart_number + 1
+      goods_num: item.one_cart_number + 1
     }
     this.addNumCart(myData).then(res => {
       // 更新详情页购物车数据
@@ -799,7 +800,7 @@ create(store, {
    * 生命周期函数--监听页面隐藏
    */
   onHide: function () {
-    
+
   },
 
   /**

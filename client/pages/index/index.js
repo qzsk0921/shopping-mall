@@ -767,7 +767,9 @@ create(store, {
     }
 
     // 兼容广播
-    this.data.aBroadcastCount = 1
+    this.setData({
+      aBroadcastCount: 1
+    })
   },
   addNumCart(data) {
     return new Promise((resolve, reject) => {

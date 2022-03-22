@@ -50,18 +50,10 @@
           </view>
         </view>
       </view>
-      <view class="section4">
-        <view class="l">
-          <image src="/assets/images/home_trucks.png"></image>
-          <text>联合快采，省时省心更省钱</text>
-        </view>
-        <view class="c">
-          <image src="/assets/images/home_cost.png"></image>
-          <text>满198配送</text>
-        </view>
-        <view class="r">
-          <image src="/assets/images/home_call.png"></image>
-          <text>(0592)208 5025</text>
+      <view wx:if="{{shopData.illustrate_list.length}}" class="section4">
+        <view class="l" wx:for="{{shopData.illustrate_list}}" wx:key="unique">
+          <image src="{{item.icon}}"></image>
+          <text>{{item.content}}</text>
         </view>
       </view>
       <!-- 预收专栏 -->

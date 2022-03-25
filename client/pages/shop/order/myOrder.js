@@ -319,6 +319,7 @@ create(store, {
   changeTab(e) {
     console.log(e)
     const index = e.target.dataset.index
+    if (index == this.data.tabIndex) return
 
     let objData = {
       tabIndex: index,

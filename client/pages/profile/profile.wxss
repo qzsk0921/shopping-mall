@@ -4,7 +4,7 @@
 .header {
   display: inline-block;
   width: 100vw;
-  height: 448rpx;
+  height: calc(450rpx + env(safe-area-inset-bottom));
   position: relative;
 }
 
@@ -18,7 +18,8 @@
 }
 
 .header .userInfo {
-  margin-top: 153rpx;
+  /* margin-top: 153rpx; */
+  margin-top: calc(153rpx + env(safe-area-inset-bottom));
   padding-left: 20rpx;
   display: flex;
 }

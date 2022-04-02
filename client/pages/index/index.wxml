@@ -14,7 +14,7 @@
     <view class="cont hide-scrollbar" style="height:{{compatibleInfo.isIphoneX?compatibleInfo.systemInfo.screenHeight-(tabbarH+section1H+fixed)+'px':compatibleInfo.systemInfo.screenHeight-(tabbarH+section1H+fixed)+'px'}}" bindtouchmove="touchMove">
       <view class="bg">
       </view>
-      <view class="section2" bindtap="swiperHandle">
+      <view wx:if="{{shopData.banner.length}}" class="section2" bindtap="swiperHandle">
         <view class="page-section page-section-spacing swiper">
           <swiper indicator-dots="{{indicatorDots}}" autoplay="{{autoplay}}" interval="{{interval}}" duration="{{duration}}" indicator-color="rgba(255, 255, 255, .6)" indicator-active-color="#ffffff" circular="true">
             <block wx:for="{{shopData.banner}}" wx:key="*this">

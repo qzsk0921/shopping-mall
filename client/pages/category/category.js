@@ -11,7 +11,8 @@ import {
 } from '../../api/commodity'
 
 import {
-  addNumCart
+  addNumCart,
+  getCartData
 } from '../../api/cart'
 
 // Page({
@@ -147,9 +148,11 @@ create(store, {
           const query = wx.createSelectorQuery();
           query.select('.tree-select__tip').boundingClientRect(function (rect) {
             // console.log(rect)
-            that.setData({
-              contentTipH: rect.height,
-            })
+            if (rect) {
+              that.setData({
+                contentTipH: rect.height,
+              })
+            }
           }).exec();
         }
       },
@@ -202,6 +205,10 @@ create(store, {
       // goods_num: item.cart_number + 1,
       goods_num: item.one_cart_number + 1
     }
+
+    console.log(item.one_cart_number)
+    console.log(myData)
+
     this.addNumCart(myData).then(res => {
       // 更新详情页购物车数据
       // this.getGoodsList()
@@ -251,7 +258,7 @@ create(store, {
 
     this.firstCategorySwitch(item)
   },
-  firstCategorySwitch(item) {
+  firstCategorySwitch(item, render) {
     let currentScrollTopId ///content滚动id
     // 滚动居中处理
     const myArr = this.data.firstCategory.map(item => item.index)
@@ -263,7 +270,7 @@ create(store, {
         return true
       } else return false
     })
-    
+
     if (myArr.includes(item.index - 2)) {
       currentScrollTopId = 'a' + (item.index - 2)
     } else if (myArr.includes(item.index - 1)) {
@@ -281,24 +288,28 @@ create(store, {
     this.store.data.currentFirstCategory = item
     this.update()
 
-    this.getCategoryList({
-      pid: item.id
-    }).then(res => {
-      if (res.data.length) {
-        this.setData({
-          currentSecondCategoryId: res.data[0].id,
-          secondCategory: res.data
-        })
+    if (!render) {
+      this.getCategoryList({
+        pid: item.id
+      }).then(res => {
+        console.log(res)
+        if (res.data.length) {
+          this.setData({
+            currentSecondCategoryId: res.data[0].id,
+            secondCategory: res.data
+          })
 
-        this.getGoodsList({
-          category_id: res.data[0].id
-        })
-      } else {
-        this.setData({
-          secondCategory: []
-        })
-      }
-    })
+          this.getGoodsList({
+            category_id: res.data[0].id
+          })
+
+        } else {
+          this.setData({
+            secondCategory: []
+          })
+        }
+      })
+    }
   },
   // 子组件切换一级分类
   subFirstCategoryHandle(e) {
@@ -500,6 +511,26 @@ create(store, {
       categoryBoxW
     })
   },
+
+  getCartData(dataObj) {
+    const tempData = {
+      shop_id: this.store.data.shop_id
+    }
+
+    if (typeof dataObj === 'object') {
+      Object.keys(dataObj).forEach(key => {
+        tempData[key] = dataObj[key]
+      })
+    }
+
+    return new Promise((resolve, reject) => {
+      getCartData(tempData).then(res => {
+        resolve(res)
+      }).catch(err => {
+        reject(err)
+      })
+    })
+  },
   /**
    * 生命周期函数--监听页面加载
    */
@@ -563,7 +594,56 @@ create(store, {
       })
     } else {
       if (this.store.data.currentFirstCategory) {
-        this.firstCategorySwitch(this.store.data.currentFirstCategory)
+        if (getApp().globalData.from === 'index') {
+          this.firstCategorySwitch(this.store.data.currentFirstCategory)
+        } else {
+          this.firstCategorySwitch(this.store.data.currentFirstCategory, true)
+          // 不刷新渲染时 其他switchtab页面切换到分类页时更新购物车数量
+          this.getCartData().then(res => {
+            for (let i = 0; i < res.data.list.length; i++) {
+              if (res.data.list[i].is_min_number) {
+                res.data.list[i].one_cart_number = res.data.list[i].cart_number
+              }
+
+              setTimeout(() => {
+                for (let j = i + 1; j < res.data.list.length; j++) {
+                  if (res.data.list[i].id === res.data.list[j].id) {
+                    res.data.list[j].cart_number = res.data.list[i].cart_number += res.data.list[j].cart_number
+                  }
+                }
+
+                this.data.currentGoodsList.cache.forEach((it, idx) => {
+                  let ress = false
+                  res.data.list.forEach((item) => {
+                    if (item.id === it.id) {
+                      ress = true
+                      this.setData({
+                        [`currentGoodsList.cache[${idx}].cart_number`]: item.cart_number,
+                      })
+
+                      if (item.is_min_number) {
+                        this.setData({
+                          [`currentGoodsList.cache[${idx}].one_cart_number`]: item.one_cart_number,
+                        })
+                      } else {
+                        this.setData({
+                          [`currentGoodsList.cache[${idx}].one_cart_number`]: 0,
+                        })
+                      }
+                    }
+                  })
+
+                  if (!ress) {
+                    this.setData({
+                      [`currentGoodsList.cache[${idx}].cart_number`]: 0,
+                      [`currentGoodsList.cache[${idx}].one_cart_number`]: 0,
+                    })
+                  }
+                })
+              }, 0)
+            }
+          })
+        }
       } else {
         this.firstCategorySwitch(this.data.firstCategory[0])
       }
@@ -580,43 +660,13 @@ create(store, {
         userInfo: this.store.data.userInfo
       })
     }
-
-    // 更新分类信息(主要是购物车数量)
-    if (this.data.currentGoodsList.cache.length) {
-      if (this.store.data.cart.length) {
-        this.data.currentGoodsList.cache.forEach((item, index) => {
-          const res = this.store.data.cart.some(it => {
-            if (item.id === it.id) {
-              this.setData({
-                [`currentGoodsList.cache[${index}].cart_number`]: it.cart_number
-              })
-              return true
-            }
-            return false
-          })
-
-          if (!res) {
-            this.setData({
-              [`currentGoodsList.cache[${index}].cart_number`]: 0
-            })
-          }
-        })
-      } else {
-        // 购物车为空，全部清零
-        this.data.currentGoodsList.cache.forEach((item, index) => {
-          this.setData({
-            [`currentGoodsList.cache[${index}].cart_number`]: 0
-          })
-        })
-      }
-    }
   },
 
   /**
    * 生命周期函数--监听页面隐藏
    */
   onHide: function () {
-
+    getApp().globalData.from === ''
   },
 
   /**

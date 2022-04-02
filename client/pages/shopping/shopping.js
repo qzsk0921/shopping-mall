@@ -251,14 +251,21 @@ create(store, {
         // goods_num: 1, //-1为扣减
         unit_id: item.unit_id
       }
+
       this.addNumCart(cartData).then(res => {
         this.getCartData()
         // 更新猜你喜欢
         this.data.recommendList.cache.forEach((it, index) => {
           if (item.id === it.id) {
-            this.setData({
+            let tempData = {
               [`recommendList.cache[${index}].cart_number`]: ++it.cart_number,
-            })
+            }
+
+            if (item.is_min_number) {
+              tempData[`recommendList.cache[${index}].one_cart_number`] = ++it.one_cart_number
+            }
+
+            this.setData(tempData)
           }
 
           if (index == this.data.recommendList.cache.length - 1) {
@@ -268,7 +275,7 @@ create(store, {
           }
         })
       }).catch(err => {
-        console.log(err.msg)
+        console.log(err)
         this.getCartData()
         btnflag = true
       })
@@ -280,7 +287,11 @@ create(store, {
       btnflag = false
       const item = e.currentTarget.dataset.item
       // 不能小于0
-      if (item.cart_number - 1 <= -1) return
+      if (item.cart_number - 1 <= 0) {
+        btnflag = true
+        return
+      }
+
       const cartData = {
         type: item.type,
         shop_id: this.store.data.shop_id,
@@ -295,10 +306,15 @@ create(store, {
         // 更新猜你喜欢
         this.data.recommendList.cache.forEach((it, index) => {
           if (item.id === it.id) {
-            this.setData({
+            let tempData = {
               [`recommendList.cache[${index}].cart_number`]: it.cart_number - 1,
-              [`recommendList.cache[${index}].one_cart_number`]: it.cart_number - 1
-            })
+            }
+
+            if (item.is_min_number) {
+              tempData[`recommendList.cache[${index}].one_cart_number`] = it.one_cart_number - 1
+            }
+
+            this.setData(tempData)
           }
 
           if (index == this.data.recommendList.cache.length - 1) {
@@ -492,7 +508,9 @@ create(store, {
       goods_id: item.id,
       unit_id: item.unit_id
     }
+
     this.data.tempDelGoodsData = cartData
+    this.data.temp_del_item = item //当前要删除商品的数量（购物车多单位，猜你喜欢单单位商品）
   },
   diaConfirmHandle(params) {
     this.delCart(this.data.tempDelGoodsData).then(res => {
@@ -512,7 +530,8 @@ create(store, {
       this.data.recommendList.cache.forEach((it, index) => {
         if (this.data.tempDelGoodsData.goods_id === it.id) {
           this.setData({
-            [`recommendList.cache[${index}].cart_number`]: 0
+            [`recommendList.cache[${index}].cart_number`]: this.data.recommendList.cache[index].cart_number - this.data.temp_del_item.cart_number,
+            [`recommendList.cache[${index}].one_cart_number`]: this.data.temp_del_item.is_min_number === 1 ? this.data.recommendList.cache[index].one_cart_number - this.data.temp_del_itemthe_cart_number : this.data.temp_del_item.one_cart_number
           })
           return true
         }
@@ -587,6 +606,7 @@ create(store, {
     // 授权校验
     if (!this.checkAuth()) return
     const dataset = e.currentTarget.dataset
+    console.log(dataset.item.cart_number, dataset.item.one_cart_number)
     let myData = {
       type: dataset.item.type ? dataset.item.type : 1,
       shop_id: this.store.data.shop_id,
@@ -634,7 +654,7 @@ create(store, {
 
       indexArr.forEach(ind => {
         tempData[`recommendList.cache[${ind}].cart_number`] = dataset.item.cart_number + 1
-        tempData[`recommendList.cache[${ind}].one_cart_number`] = dataset.item.cart_number + 1
+        tempData[`recommendList.cache[${ind}].one_cart_number`] = dataset.item.one_cart_number + 1
       })
 
       this.setData(tempData)
@@ -824,35 +844,57 @@ create(store, {
     // })
 
     this.getCartData().then(res => {
-      let arr = []
-
       for (let i = 0; i < res.data.list.length; i++) {
-        for (let j = i + 1; j < res.data.list.length; j++) {
-          if (res.data.list[i].id === res.data.list[j].id) {
-            res.data.list[j].cart_number = res.data.list[i].cart_number += res.data.list[j].cart_number
+        if (res.data.list[i].is_min_number) {
+          res.data.list[i].one_cart_number = res.data.list[i].cart_number
+        }
+        setTimeout(() => {
+          let arr = []
+          for (let j = i + 1; j < res.data.list.length; j++) {
+            if (res.data.list[i].id === res.data.list[j].id) {
+              res.data.list[j].cart_number = res.data.list[i].cart_number += res.data.list[j].cart_number
+            }
           }
-        }
-      }
-      // 全选或全不选 的处理
-      res.data.list.forEach(item => {
-        // 有库存并且未下架或删除
-        if (![2, 3].includes(item.status) && item.is_stock) {
-          if (this.data.select_all) arr = arr.concat(item.id + '.' + item.unit_id)
-        }
+          // 返回该页面更新猜你喜欢的购物车数量
+          this.data.recommendList.cache.forEach((it, idx) => {
+            let ress = false
+            // 全选或全不选 的处理
+            res.data.list.forEach((item) => {
+              // 有库存并且未下架或删除
+              if (![2, 3].includes(item.status) && item.is_stock) {
+                if (this.data.select_all) arr = arr.concat(item.id + '.' + item.unit_id)
+              }
+              if (item.id === it.id) {
+                ress = true
+                this.setData({
+                  [`recommendList.cache[${idx}].cart_number`]: item.cart_number,
+                })
 
-        // 返回该页面更新猜你喜欢的购物车数量
-        this.data.recommendList.cache.forEach((it, index) => {
-          if (item.id === it.id) {
-            this.setData({
-              [`recommendList.cache[${index}].cart_number`]: item.cart_number,
+                if (item.is_min_number) {
+                  this.setData({
+                    [`recommendList.cache[${idx}].one_cart_number`]: item.one_cart_number,
+                  })
+                } else {
+                  this.setData({
+                    [`recommendList.cache[${idx}].one_cart_number`]: 0,
+                  })
+                }
+              }
             })
-          }
-        })
-      })
 
-      this.setData({
-        checkedIds: arr
-      })
+            if (!ress) {
+              this.setData({
+                [`recommendList.cache[${idx}].cart_number`]: 0,
+                [`recommendList.cache[${idx}].one_cart_number`]: 0,
+              })
+            }
+          })
+
+          this.setData({
+            checkedIds: arr
+          })
+        }, 0)
+      }
     })
 
     // this.getRecommendList()

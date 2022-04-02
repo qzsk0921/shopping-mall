@@ -522,6 +522,7 @@ create(store, {
   },
   // 跳转至分类页面
   toCategoryHandle(e) {
+    getApp().globalData.from = 'index'
     this.store.data.currentFirstCategoryId = e.currentTarget.dataset.item.id
     this.store.data.currentFirstCategory = e.currentTarget.dataset.item
     this.update()
@@ -889,6 +890,9 @@ create(store, {
       fail: function (err) {
         console.log(err)
         that.setData({
+          currentAddress: {
+            address: '未授权'
+          },
           location: {
             formatted_addresses: {
               recommend: '定位失败'

@@ -7,6 +7,7 @@
   padding-bottom: 60rpx;
   overflow: auto;
   position: relative;
+  min-height: 513rpx;
 }
 
 .bg {
@@ -371,6 +372,10 @@
   font-size: 24rpx;
   color: #888888;
   margin-bottom: 8rpx;
+}
+
+.section8 .item .cont .l2.no-sign {
+  font-size: 20rpx;
 }
 
 /* .section7 .item .cont .l2 .price {

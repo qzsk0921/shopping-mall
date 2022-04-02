@@ -238,7 +238,6 @@ create(store, {
       })
     }
 
-
     clearTimeout(timer);
     timer = setTimeout(function () {
       if (val.length > 0) {
@@ -505,35 +504,44 @@ create(store, {
         cart_number
       })
 
-      // 更新分类信息(主要是购物车数量)goodsList
-      if (this.data.goodsList[this.data.tabIndex].cache.length) {
-        if (res.data.list.length) {
-          this.data.goodsList[this.data.tabIndex].cache.forEach((item, index) => {
-            const ress = res.data.list.some(it => {
-              if (item.id === it.id) {
-                this.setData({
-                  [`goodsList[${this.data.tabIndex}].cache[${index}].cart_number`]: item.cart_number
-                })
-                return true
-              }
-              return false
-            })
-
-            if (!ress) {
-              this.setData({
-                [`goodsList[${this.data.tabIndex}].cache[${index}].cart_number`]: 0
-              })
-            }
-          })
-        } else {
-          // 购物车为空，全部清零
-          this.data.goodsList[this.data.tabIndex].cache.forEach((item, index) => {
-            this.setData({
-              [`goodsList[${this.data.tabIndex}].cache[${index}].cart_number`]: 0
-            })
-          })
+      for (let i = 0; i < res.data.list.length; i++) {
+        for (let j = i + 1; j < res.data.list.length; j++) {
+          if (res.data.list[i].id === res.data.list[j].id) {
+            res.data.list[j].cart_number = res.data.list[i].cart_number += res.data.list[j].cart_number
+          }
         }
       }
+      this.store.data.cart = res.data.list
+      this.update()
+      // // 更新分类信息(主要是购物车数量)goodsList
+      // if (this.data.goodsList[this.data.tabIndex].cache.length) {
+      //   if (res.data.list.length) {
+      //     this.data.goodsList[this.data.tabIndex].cache.forEach((item, index) => {
+      //       const ress = res.data.list.some(it => {
+      //         if (item.id === it.id) {
+      //           this.setData({
+      //             [`goodsList[${this.data.tabIndex}].cache[${index}].cart_number`]: it.cart_number
+      //           })
+      //           return true
+      //         }
+      //         return false
+      //       })
+
+      //       if (!ress) {
+      //         this.setData({
+      //           [`goodsList[${this.data.tabIndex}].cache[${index}].cart_number`]: 0
+      //         })
+      //       }
+      //     })
+      //   } else {
+      //     // 购物车为空，全部清零
+      //     this.data.goodsList[this.data.tabIndex].cache.forEach((item, index) => {
+      //       this.setData({
+      //         [`goodsList[${this.data.tabIndex}].cache[${index}].cart_number`]: 0
+      //       })
+      //     })
+      //   }
+      // }
     })
   },
 

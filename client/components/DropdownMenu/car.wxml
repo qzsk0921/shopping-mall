@@ -6,7 +6,7 @@
   <view class="mask" bindtap="mask"></view>
   <view class="dropdown-item-down__content" style="{{opened?'transform:translateY('+(-height)+'px)':''}}" catchtap="dropdownItemTapHandle">
     <view class="l1">
-      <image class="left" src="{{myGoodsDetail.goods_image_arr[0]}}" mode="aspectFill"></image>
+      <image class="left" src="{{myGoodsDetail.thumb}}" mode="aspectFill"></image>
       <view class="right">
         <!-- 授权未资质认证的非会员 -->
         <block wx:if="{{(!userInfo.phone||userInfo.is_shop_check!=1)&&!userInfo.is_sale}}">

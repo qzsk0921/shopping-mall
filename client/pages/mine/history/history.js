@@ -69,7 +69,7 @@ create(store, {
       type: 1,
       shop_id: this.store.data.shop_id,
       goods_id: item.id,
-      goods_num: item.cart_number + 1
+      goods_num: item.one_cart_number + 1
     }
     this.addNumCart(myData).then(res => {
       // 更改购物车数值
@@ -77,8 +77,10 @@ create(store, {
         icon: 'none',
         title: '加入购物车成功',
       })
+
       this.setData({
-        [`historyList.cache[${index}].cart_number`]: item.cart_number + 1
+        [`historyList.cache[${index}].cart_number`]: item.cart_number + 1,
+        [`historyList.cache[${index}].one_cart_number`]: item.one_cart_number + 1,
       })
     })
   },

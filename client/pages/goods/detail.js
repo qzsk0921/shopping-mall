@@ -7,6 +7,11 @@ import {
   setGoodsCollection
 } from '../../api/commodity'
 
+import {
+  getCartData
+} from '../../api/cart'
+let prevPage = null
+
 // Page({
 create(store, {
 
@@ -139,6 +144,8 @@ create(store, {
   },
   // 更新购物车数量
   updateCartHandle(e) {
+    // 在提交成功后，返回上一页（带上参数）
+
     // console.log(e)
     this.getGoodsDetail({
       id: this.data.goods_id
@@ -147,23 +154,75 @@ create(store, {
         goodsDetail: res.data
       })
 
+      const one_cart_number = res.data.unit_arr.filter(item => item.is_min_number)[0].cart_number
+
       // 更新上一个页面购物车数据(这里主要是购物车页面的猜你喜欢的购物车数量)
-      this.updatePrevpageData(this.data.goods_id, res.data.cart_number)
+      this.updatePrevpageData(this.data.goods_id, res.data.cart_number, one_cart_number)
     })
   },
   // 更新上一个页面购物车数据
-  updatePrevpageData(id, num) {
-    // 在提交成功后，返回上一页（带上参数）
-    const pages = getCurrentPages();
-    const prevPage = pages[pages.length - 2]; //上一个页面
+  updatePrevpageData(id, num, one_number) {
     //直接调用上一个页面的setData()方法，把数据存到上一个页面中去
-    prevPage.data.recommendList.cache.forEach((it, index) => {
-      if (id == it.id) {
-        prevPage.setData({
-          [`recommendList.cache[${index}].cart_number`]: num
-        })
-      }
-    })
+    // 购物车页面
+    if (prevPage.route === 'pages/shopping/shopping') {
+      prevPage.data.recommendList.cache.forEach((it, index) => {
+        if (id == it.id) {
+          prevPage.setData({
+            [`recommendList.cache[${index}].cart_number`]: num,
+            [`recommendList.cache[${index}].one_cart_number`]: one_number
+          })
+        }
+      })
+    } else if (prevPage.route === 'pages/category/category' || prevPage.route === 'pages/search/searchRes' || prevPage.route === 'pages/mine/history/history') {
+      getCartData({
+        shop_id: this.store.data.shop_id
+      }).then(res => {
+        // let arr = []
+        // for (let i = 0; i < res.data.list.length; i++) {
+        //   for (let j = i + 1; j < res.data.list.length; j++) {
+        //     if (res.data.list[i].id === res.data.list[j].id) {
+        //       res.data.list[j].cart_number = res.data.list[i].cart_number += res.data.list[j].cart_number
+        //     }
+        //   }
+        // }
+
+        this.store.data.cart = res.data.list
+        this.update()
+
+        if (prevPage.route === 'pages/category/category') {
+          // 更新分类信息(主要是购物车数量)
+          prevPage.data.currentGoodsList.cache.forEach((it, index) => {
+            if (id == it.id) {
+              prevPage.setData({
+                [`currentGoodsList.cache[${index}].cart_number`]: num,
+                [`currentGoodsList.cache[${index}].one_cart_number`]: one_number
+              })
+            }
+          })
+        } else if (prevPage.route === 'pages/search/searchRes') {
+          // 更新分类信息(主要是购物车数量)goodsList
+          prevPage.data.goodsList[prevPage.data.tabIndex].cache.forEach((it, index) => {
+            if (id == it.id) {
+              prevPage.setData({
+                [`goodsList[${prevPage.data.tabIndex}].cache[${index}].cart_number`]: num,
+                [`goodsList[${prevPage.data.tabIndex}].cache[${index}].one_cart_number`]: one_number
+              })
+            }
+          })
+        } else if (prevPage.route === 'pages/mine/history/history') {
+          // 更新分类信息(主要是购物车数量)
+          prevPage.data.historyList.cache.forEach((it, index) => {
+            if (id == it.id) {
+              prevPage.setData({
+                [`historyList.cache[${index}].cart_number`]: num,
+                [`historyList.cache[${index}].one_cart_number`]: one_number
+              })
+            }
+          })
+        }
+
+      })
+    }
   },
   /**
    * 图片点击事件
@@ -259,6 +318,9 @@ create(store, {
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
+    const pages = getCurrentPages()
+    prevPage = pages[pages.length - 2]; //上一个页面
+
     if (!this.data.compatibleInfo.navHeight) {
       this.setData({
         compatibleInfo: this.store.data.compatibleInfo

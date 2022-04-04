@@ -56,6 +56,18 @@ create(store, {
       // })
     }
   },
+  // 用户协议 9
+  protocolServerHandle() {
+    wx.navigateTo({
+      url: '/pages/mine/faq/detail?id=9',
+    })
+  },
+  // 隐私协议 10
+  protocolPrivateHandle() {
+    wx.navigateTo({
+      url: '/pages/mine/faq/detail?id=10',
+    })
+  },
   updatePhone(data) {
     return new Promise((resolve, reject) => {
       updatePhone(data).then(res => {

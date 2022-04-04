@@ -197,6 +197,12 @@
           "pathName": "pages/authorization/forbidden",
           "query": "",
           "scene": null
+        },
+        {
+          "name": "",
+          "pathName": "pages/authorization/phone",
+          "query": "",
+          "scene": null
         }
       ]
     }

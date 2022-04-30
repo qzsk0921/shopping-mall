@@ -5,6 +5,10 @@ import {
   addOrder,
   rePay
 } from '../../../api/order'
+
+import {
+  getAddressList,
+} from '../../../api/location'
 // Page({
 create(store, {
 
@@ -165,35 +169,20 @@ create(store, {
       }
       orderData.goods.push(temp)
     })
-    
-    if (this.data.order_id) {
-      this.rePay({
-        order_id: this.data.order_id
-      }).then(res => {
-        console.log(res)
-        // 支付金额为0元时，可直接支付成功进入订单详情页，无需调起支付
-        if (res.data.pay_status === 1) {
-          wx.navigateTo({
-            url: `/pages/shop/order/detailOrder?order_id=${res.data.order_id}`,
-          })
-        }
-        // 调起微信支付
-        this.wxPay(res.data)
-      })
-    } else {
-      this.addOrder(orderData).then(res => {
-        console.log(res)
-        this.data.order_id = res.data.order_id
-        // 支付金额为0元时，可直接支付成功进入订单详情页，无需调起支付
-        if (res.data.pay_status === 1) {
-          wx.navigateTo({
-            url: `/pages/shop/order/detailOrder?order_id=${res.data.order_id}`,
-          })
-        }
-        // 调起微信支付
-        this.wxPay(res.data)
-      })
-    }
+
+    this.addOrder(orderData).then(res => {
+      console.log(res)
+      this.data.order_id = res.data.order_id
+      // 支付金额为0元时，可直接支付成功进入订单详情页，无需调起支付
+      if (res.data.pay_status === 1) {
+        wx.navigateTo({
+          url: `/pages/shop/order/detailOrder?order_id=${res.data.order_id}`,
+        })
+      }
+      // 调起微信支付
+      this.wxPay(res.data)
+    })
+
   },
   // 微信支付
   wxPay(payModel) {
@@ -235,6 +224,10 @@ create(store, {
         })
 
         console.log(res)
+
+        wx.navigateTo({
+          url: `/pages/shop/order/detailOrder?order_id=${payModel.order_id}`,
+        })
       }
     })
   },
@@ -303,6 +296,14 @@ create(store, {
       console.log(this.data.shopAddress)
       this.setData({
         'orderData.address_info': this.data.shopAddress
+      })
+    }
+    // 如果有本地缓存的id匹配地址
+    if (this.store.data.address_id) {
+      getAddressList().then(res => {
+        this.setData({
+          'orderData.address_info': res.data.data.filter(item => item.id === this.store.data.address_id)[0]
+        })
       })
     }
   },

@@ -169,10 +169,24 @@ create(store, {
               'cartData.total': total
             }
 
+            // if (totalPrice != this.data.totalPrice) {
+            //   tempData.totalPrice = totalPrice
+            // }
+
+            // if (discountPrice != this.data.discountPrice) {
+            //   tempData.discountPrice = discountPrice
+            // }
+
+            // if (total != this.data.cartData.total) {
+            //   tempData['cartData.total'] = total
+            // }
+
             if (!this.data.select_all) {
-              if (nv.length === this.data.cartData.cache.length) {
-                tempData.select_all = true
-              }
+              setTimeout(() => {
+                if (nv.length === this.data.cartData.cache.length) {
+                  tempData.select_all = true
+                }
+              }, 0)
             }
 
             this.setData(tempData)
@@ -775,6 +789,7 @@ create(store, {
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+    console.log('onload')
     setTabBar.call(this, {
       selected: 2
     })
@@ -844,55 +859,112 @@ create(store, {
     // })
 
     this.getCartData().then(res => {
+      let arr = []
+
       for (let i = 0; i < res.data.list.length; i++) {
         if (res.data.list[i].is_min_number) {
           res.data.list[i].one_cart_number = res.data.list[i].cart_number
         }
         setTimeout(() => {
-          let arr = []
           for (let j = i + 1; j < res.data.list.length; j++) {
             if (res.data.list[i].id === res.data.list[j].id) {
               res.data.list[j].cart_number = res.data.list[i].cart_number += res.data.list[j].cart_number
             }
           }
-          // 返回该页面更新猜你喜欢的购物车数量
-          this.data.recommendList.cache.forEach((it, idx) => {
-            let ress = false
-            // 全选或全不选 的处理
-            res.data.list.forEach((item) => {
-              // 有库存并且未下架或删除
-              if (![2, 3].includes(item.status) && item.is_stock) {
-                if (this.data.select_all) arr = arr.concat(item.id + '.' + item.unit_id)
-              }
-              if (item.id === it.id) {
-                ress = true
+
+          if (this.data.recommendList.cache.length) {
+            // 返回该页面更新猜你喜欢的购物车数量
+            this.data.recommendList.cache.forEach((it, idx) => {
+              let ress = false
+              // 全选或全不选 的处理
+              res.data.list.forEach((item) => {
+                // 有库存并且未下架或删除
+                if (![2, 3].includes(item.status) && item.is_stock) {
+                  if (this.data.select_all) {
+                    arr = arr.concat(item.id + '.' + item.unit_id)
+                  } else {
+                    arr = this.data.checkedIds
+                  }
+                }
+                if (item.id === it.id) {
+                  ress = true
+                  this.setData({
+                    [`recommendList.cache[${idx}].cart_number`]: item.cart_number,
+                  })
+
+                  if (item.is_min_number) {
+                    this.setData({
+                      [`recommendList.cache[${idx}].one_cart_number`]: item.one_cart_number,
+                    })
+                  } else {
+                    this.setData({
+                      [`recommendList.cache[${idx}].one_cart_number`]: 0,
+                    })
+                  }
+                }
+              })
+
+              if (!ress) {
                 this.setData({
-                  [`recommendList.cache[${idx}].cart_number`]: item.cart_number,
+                  [`recommendList.cache[${idx}].cart_number`]: 0,
+                  [`recommendList.cache[${idx}].one_cart_number`]: 0,
+                })
+              }
+
+              if (i === res.data.list.length - 1 && idx === this.data.recommendList.cache.length - 1) {
+                this.setData({
+                  checkedIds: arr
+                })
+              }
+            })
+          } else {
+            setTimeout(() => {
+              // 返回该页面更新猜你喜欢的购物车数量
+              this.data.recommendList.cache.forEach((it, idx) => {
+                let ress = false
+                // 全选或全不选 的处理
+                res.data.list.forEach((item) => {
+                  // 有库存并且未下架或删除
+                  if (![2, 3].includes(item.status) && item.is_stock) {
+                    if (this.data.select_all) {
+                      arr = arr.concat(item.id + '.' + item.attribute_value_str)
+                    } else {
+                      arr = this.data.checkedIds
+                    }
+                  }
+                  if (item.id === it.id) {
+                    ress = true
+                    this.setData({
+                      [`recommendList.cache[${idx}].cart_number`]: item.cart_number,
+                    })
+
+                    if (item.is_min_number) {
+                      this.setData({
+                        [`recommendList.cache[${idx}].one_cart_number`]: item.one_cart_number,
+                      })
+                    } else {
+                      this.setData({
+                        [`recommendList.cache[${idx}].one_cart_number`]: 0,
+                      })
+                    }
+                  }
                 })
 
-                if (item.is_min_number) {
+                if (!ress) {
                   this.setData({
-                    [`recommendList.cache[${idx}].one_cart_number`]: item.one_cart_number,
-                  })
-                } else {
-                  this.setData({
+                    [`recommendList.cache[${idx}].cart_number`]: 0,
                     [`recommendList.cache[${idx}].one_cart_number`]: 0,
                   })
                 }
-              }
-            })
 
-            if (!ress) {
-              this.setData({
-                [`recommendList.cache[${idx}].cart_number`]: 0,
-                [`recommendList.cache[${idx}].one_cart_number`]: 0,
+                if (i === res.data.list.length - 1 && idx === this.data.recommendList.cache.length - 1) {
+                  this.setData({
+                    checkedIds: arr
+                  })
+                }
               })
-            }
-          })
-
-          this.setData({
-            checkedIds: arr
-          })
+            }, 1500)
+          }
         }, 0)
       }
     })

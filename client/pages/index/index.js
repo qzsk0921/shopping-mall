@@ -636,6 +636,12 @@ create(store, {
     })
   },
   startABroadcast() {
+
+    // 公告只有1条不做动画
+    if (this.data.shopData.notice_list.length < 2) {
+      return
+    }
+
     const aBroadcast = wx.createAnimation({
       duration: 500,
       timingFunction: 'linear',

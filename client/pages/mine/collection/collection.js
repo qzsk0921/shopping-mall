@@ -36,6 +36,14 @@ create(store, {
   //跳转至商品详情页
   itemHandle(e) {
     // console.log('itemHandle')
+    // 该商品的拼团活动已结束 0:新建 1:上架 2:下架 3:删除
+
+    const item = e.currentTarget.dataset.item
+
+    if (item.status === 2 || item.status === 3) {
+      return
+    }
+
     wx.navigateTo({
       url: `/pages/goods/detail?id=${e.currentTarget.dataset.id}`,
     })

@@ -146,7 +146,7 @@
   align-items: center;
   background: #FFFFFF;
   border-radius: 16rpx;
-  margin: 81rpx 24rpx 0;
+  margin: 61rpx 24rpx 0;
   height: 160rpx;
 }
 

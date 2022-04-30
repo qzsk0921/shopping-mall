@@ -40,6 +40,15 @@ create(store, {
     // 未授权
     if (!this.checkAuth()) return
 
+    if (item.status === 2 || item.status === 3) {
+      // 浏览记录不分是不是拼团商品
+      wx.showToast({
+        title: '该商品已下架',
+        icon: 'none'
+      })
+      return
+    }
+
     wx.navigateTo({
       url: `/pages/goods/detail?id=${e.currentTarget.dataset.id}`,
     })

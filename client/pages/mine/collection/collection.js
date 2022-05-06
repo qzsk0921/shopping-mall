@@ -45,7 +45,7 @@ create(store, {
     }
 
     wx.navigateTo({
-      url: `/pages/goods/detail?id=${e.currentTarget.dataset.id}`,
+      url: `/pages/goods/detail?id=${item.id}`,
     })
   },
   // 加入购物车

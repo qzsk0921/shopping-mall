@@ -42,14 +42,14 @@
       </view>
     </view>
     <!-- 折扣商品 -->
-    <view class="section2">
+    <view wx:if="{{preList.length}}" class="section2">
       <view class="l1">
         <view></view>
-        <text>折扣商品</text>
+        <text>预售商品</text>
         <view></view>
       </view>
       <view class="l2">
-        <view class="item" wx:for="{{discountList}}" wx:key="unique">
+        <view class="item" wx:for="{{preList}}" wx:key="unique">
           <view class="left">
             <image class="icon-goods" src="{{item.thumb}}" mode="aspectFill"></image>
           </view>

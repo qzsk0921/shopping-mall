@@ -267,8 +267,9 @@ create(store, {
   },
   // 唤起购物车弹窗
   awakenCarHandle() {
+
     // 未资质认证导航至认证页
-    if (this.data.userInfo.is_shop_check != 1) {
+    if (this.data.userInfo.is_shop_check != 1 && !this.data.userInfo.is_sale) {
       wx.navigateTo({
         url: '/pages/mine/certification/certification',
       })
@@ -279,29 +280,7 @@ create(store, {
       ['dialog.car.opened']: 1
     })
   },
-  /**
-   * 生命周期函数--监听页面加载
-   */
-  onLoad: function (options) {
-    const {
-      id
-    } = options
-
-    this.data.goods_id = id
-
-    this.getGoodsDetail({
-      id
-    }).then(res => {
-      this.setData({
-        goodsDetail: res.data
-      })
-    })
-  },
-
-  /**
-   * 生命周期函数--监听页面初次渲染完成
-   */
-  onReady: function () {
+  getHeight() {
     const that = this;
     const query = wx.createSelectorQuery();
     // 在页面渲染完成OnReady回调 获取元素高度时，如果不加定时器，获取的元素的高度还是没渲染完异步数据前的高度
@@ -318,6 +297,33 @@ create(store, {
         footerH: rect.height,
       })
     }).exec();
+  },
+  /**
+   * 生命周期函数--监听页面加载
+   */
+  onLoad: function (options) {
+    const {
+      id
+    } = options
+
+    this.data.goods_id = id
+
+    this.getGoodsDetail({
+      id,
+      shop_id: store.data.shop_id
+    }).then(res => {
+      this.setData({
+        goodsDetail: res.data,
+      })
+      this.getHeight()
+    })
+  },
+
+  /**
+   * 生命周期函数--监听页面初次渲染完成
+   */
+  onReady: function () {
+
   },
 
   /**

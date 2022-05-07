@@ -31,7 +31,7 @@
       </view>
       <view class='card-box' wx:elif="{{couponList.cache.length}}">
         <!-- <radio-group bindchange="radioboxChange"> -->
-          <view class="card" wx:for="{{couponList.cache}}" wx:key="unique">
+          <view class="card {{!item.is_can_use?'disable':''}}" wx:for="{{couponList.cache}}" wx:key="unique">
             <view class="left">
               <view class="l1">
                 <text>￥</text>

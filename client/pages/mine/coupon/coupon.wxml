@@ -31,7 +31,7 @@
       <view class="tabs-line" style="transform:translateX({{tabWidth*tabIndex+tabWidth/2+'px'}})translateX(-50%)">
       </view>
     </view>
-    <view class="section2">
+    <view class="section2 hide-scrollbar" style="height:{{compatibleInfo.isIphoneX?compatibleInfo.systemInfo.screenHeight-(32+fixed+tabHeight)+'px':compatibleInfo.systemInfo.screenHeight-(fixed+tabHeight)+'px'}}">
       <view class="no-data" wx:if="{{couponList[tabIndex].cache.length==0}}">
         <image mode="aspectFill" src="/assets/images/empty.png"></image>
         <view class="text">暂无更多内容</view>

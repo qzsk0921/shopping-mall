@@ -200,7 +200,7 @@
           </view> -->
           <view class="tit-box">
             <view class="tit">{{item.name}}</view>
-            <view class="recommend" bindtap="toSearchResHandle" data-id="{{item.id}}">
+            <view class="recommend" bindtap="toSearchResHandle" data-type="category" data-id="{{item.id}}">
               <view>更多推荐</view>
               <image src="/assets/images/nav_btn_next.png" mode="aspectFill"></image>
             </view>
@@ -228,10 +228,21 @@
                 </view>
                 <!-- 授权且资质认证的会员 -->
                 <view class="l2" wx:else>
-                  <view class="price">
-                    <text>￥</text>{{itemName.price}}
-                  </view>
-                  <view class="origin-price">￥{{itemName.price}}</view>
+                  <block wx:if="{{itemName.price===itemName.market_price}}">
+                    <!-- <view class="price">
+                      <text>￥</text>{{itemName.price}}
+                    </view> -->
+                    <view class="price">
+                      <text>￥</text>{{itemName.price}}
+                    </view>
+                    <view class="origin-price">￥{{itemName.market_price}}</view>
+                  </block>
+                  <block wx:else>
+                    <view class="price">
+                      <text>￥</text>{{itemName.price}}
+                    </view>
+                    <view class="origin-price">￥{{itemName.market_price}}</view>
+                  </block>
                 </view>
                 <view class="shopcart-box" catchtap="addArtHandle" data-item="{{itemName}}">
                   <image class="icon-shopcart" mode="aspectFill" src="/assets/images/icon_car.png"></image>
@@ -276,10 +287,21 @@
               </view>
               <!-- 授权且资质认证的会员 -->
               <view class="l2" wx:else>
-                <view class="price">
-                  <text>￥</text>{{item.price}}
-                </view>
-                <view class="origin-price">￥{{item.market_price}}</view>
+                <block wx:if="{{item.price===item.market_price}}">
+                  <!-- <view class="price">
+                    <text>￥</text>{{item.price}}
+                  </view> -->
+                  <view class="price">
+                    <text>￥</text>{{item.price}}
+                  </view>
+                  <view class="origin-price">￥{{item.market_price}}</view>
+                </block>
+                <block wx:else>
+                  <view class="price">
+                    <text>￥</text>{{item.price}}
+                  </view>
+                  <view class="origin-price">￥{{item.market_price}}</view>
+                </block>
               </view>
             </view>
             <view class="shopcart-box" catchtap="addArtHandle" data-item="{{item}}">
@@ -288,7 +310,7 @@
             </view>
           </view>
         </view>
-        <view class="section7-1" wx:if="{{shopData.group_goods[0].goods_list.length}}" bindtap="toSearchResHandle">
+        <view class="section7-1" wx:if="{{shopData.group_goods[0].goods_list.length}}" bindtap="toSearchResHandle" data-type="group">
           <text>更多推荐</text>
           <image src="/assets/images/nav_btn_next.png" mode="aspectFill"></image>
         </view>

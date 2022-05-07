@@ -160,6 +160,9 @@ create(store, {
   },
   // 更新上一个页面购物车数据
   updatePrevpageData(id, num, one_number, detail) {
+
+    this.store.data.checkedIds = this.store.data.checkedIds.concat(detail.goods_id + '.' + detail.unit_id)
+
     // 在提交成功后，返回上一页（带上参数）
     const pages = getCurrentPages();
     const prevPage = pages[pages.length - 2]; //上一个页面
@@ -167,9 +170,9 @@ create(store, {
     // 购物车页面
     if (prevPage.route === 'pages/shopping/shopping') {
 
-      prevPage.setData({
-        'checkedIds': prevPage.data.checkedIds.concat(detail.goods_id + '.' + detail.unit_id)
-      })
+      // prevPage.setData({
+      //   'checkedIds': prevPage.data.checkedIds.concat(detail.goods_id + '.' + detail.unit_id)
+      // })
 
       prevPage.data.recommendList.cache.forEach((it, index) => {
         if (id == it.id) {
@@ -193,7 +196,6 @@ create(store, {
         // }
 
         this.store.data.cart = res.data.list
-        this.update()
 
         if (prevPage.route === 'pages/category/category') {
           // 更新分类信息(主要是购物车数量)
@@ -226,9 +228,9 @@ create(store, {
             }
           })
         }
-
       })
     }
+    this.update()
   },
   /**
    * 图片点击事件

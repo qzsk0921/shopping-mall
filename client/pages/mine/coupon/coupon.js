@@ -377,6 +377,7 @@ create(store, {
       console.log(rect.width)
       that.setData({
         tabWidth: rect.width,
+        tabHeight: rect.height,
       })
     }).exec();
 

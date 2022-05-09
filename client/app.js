@@ -8,6 +8,9 @@ import {
   setTrack
 } from './api/data'
 
+import {
+  getSetting
+} from './api/setting'
 import store from './store/common'
 // import create from './utils/create'
 
@@ -47,7 +50,6 @@ App({
             url: '/pages/authorization/forbidden',
           })
         }
-
         this.globalData.userInfo = res.data
         store.data.userInfo = res.data
         store.update()
@@ -83,6 +85,19 @@ App({
     this.getSystemInfo()
     // 版本更新
     this.update()
+    // 公共配置参数
+    this.getSetting({
+      type: 'mp_link,expire_time,stop_content'
+    }).then(res => {
+      if (this.getSettingCallback) {
+        console.log('app getSettingCallback')
+        this.getSettingCallback(res.data)
+      } else {
+        store.data.setting = res.data
+        store.update()
+        console.log(store.data.setting)
+      }
+    })
   },
   getSystemInfo() {
     const _this = this
@@ -231,7 +246,15 @@ App({
       // 新版本下载失败
     })
   },
-
+  getSetting(data) {
+    return new Promise((resolve, reject) => {
+      getSetting(data).then(res => {
+        resolve(res)
+      }).catch(err => {
+        reject(err)
+      })
+    })
+  },
   login(data) {
     return new Promise((resolve, reject) => {
       login(data).then(res => {

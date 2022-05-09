@@ -710,6 +710,14 @@ create(store, {
       this.update()
     })
 
+    getApp().getSettingCallback = (setting) => {
+      this.setData({
+        setting
+      })
+      this.store.data.setting = setting
+      this.update()
+    }
+    
     // 定位授权
     this.getLocation()
 

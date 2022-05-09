@@ -229,13 +229,10 @@
                 <!-- 授权且资质认证的会员 -->
                 <view class="l2" wx:else>
                   <block wx:if="{{itemName.price===itemName.market_price}}">
-                    <!-- <view class="price">
-                      <text>￥</text>{{itemName.price}}
-                    </view> -->
                     <view class="price">
                       <text>￥</text>{{itemName.price}}
                     </view>
-                    <view class="origin-price">￥{{itemName.market_price}}</view>
+                    <!-- <view class="origin-price">￥{{itemName.market_price}}</view> -->
                   </block>
                   <block wx:else>
                     <view class="price">
@@ -288,13 +285,10 @@
               <!-- 授权且资质认证的会员 -->
               <view class="l2" wx:else>
                 <block wx:if="{{item.price===item.market_price}}">
-                  <!-- <view class="price">
-                    <text>￥</text>{{item.price}}
-                  </view> -->
                   <view class="price">
                     <text>￥</text>{{item.price}}
                   </view>
-                  <view class="origin-price">￥{{item.market_price}}</view>
+                  <!-- <view class="origin-price">￥{{item.market_price}}</view> -->
                 </block>
                 <block wx:else>
                   <view class="price">

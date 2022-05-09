@@ -36,10 +36,18 @@
             </view>
             <!-- 授权且资质认证的会员 -->
             <view class="l2" wx:else>
-              <view class="price">
-                <text>￥</text>{{item.price}}
-              </view>
-              <view class="origin-price">￥{{item.market_price}}</view>
+              <block wx:if="{{item.price===item.market_price}}">
+                <view class="price">
+                  <text>￥</text>{{item.price}}
+                </view>
+                <!-- <view class="origin-price">￥{{item.market_price}}</view> -->
+              </block>
+              <block wx:else>
+                <view class="price">
+                  <text>￥</text>{{item.price}}
+                </view>
+                <view class="origin-price">￥{{item.market_price}}</view>
+              </block>
             </view>
           </view>
           <view class="shopcart-box" catchtap="addArtHandle" data-item="{{item}}" data-index="{{index}}">

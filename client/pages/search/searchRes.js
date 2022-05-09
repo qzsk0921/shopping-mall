@@ -157,6 +157,8 @@ create(store, {
     }
     this.addNumCart(myData).then(
       res => {
+        this.store.data.checkedIds = this.store.data.checkedIds.concat(item.id + '.' + item.unit_arr[0].id)
+
         // 更新大购物车数量（顶部）
         getCartData({
           shop_id: this.store.data.shop_id

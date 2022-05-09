@@ -17,22 +17,42 @@ image {
 }
 
 .btn-phone {
-  margin-top: 1004rpx;
-  width: 474rpx;
+  margin: 1004rpx auto 0;
+  width: 474rpx !important;
   height: 88rpx;
   line-height: 88rpx;
   background: linear-gradient(90deg, #11D363 0%, #00B86C 100%);
   border-radius: 44rpx;
   color: #FFFFFF;
   letter-spacing: 2rpx;
+  font-weight: normal;
 }
 
 .right {
   margin-top: 146rpx;
   font-size: 24rpx;
   color: #888888;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
-.right text:not(:first-child) {
+.right text:nth-of-type(n+2) {
   color: #139E67;
+}
+
+.radio_box {
+  position: relative;
+  padding: 16rpx;
+  width: 36rpx;
+  height: 36rpx;
+  box-sizing: content-box;
+}
+
+.radio_img {
+  position: absolute;
+  top: 16rpx;
+  left: 16rpx;
+  width: 36rpx !important;
+  height: 36rpx !important;
 }

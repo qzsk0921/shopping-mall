@@ -85,8 +85,14 @@
                   </view>
                   <!-- 授权且资质认证的会员 -->
                   <view class="l4" wx:else>
-                    <text>￥</text><text>{{item.price}}</text>
-                    <text>￥{{item.market_price}}</text>
+                    <block wx:if="{{item.price===item.market_price}}">
+                      <text>￥</text><text>{{item.price}}</text>
+                      <!-- <text>￥{{item.market_price}}</text> -->
+                    </block>
+                    <block wx:else>
+                      <text>￥</text><text>{{item.price}}</text>
+                      <text>￥{{item.market_price}}</text>
+                    </block>
                   </view>
                 </view>
               </view>

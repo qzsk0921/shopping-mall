@@ -38,11 +38,17 @@
       </view>
       <!-- 授权且资质认证的会员 -->
       <view class="l1" wx:else>
-        <text>￥</text><text>{{goodsDetail.price}}</text>
-        <view wx:if="{{goodsDetail.is_pre_sale===1 || goodsDetail.activity_info.activity_name}}" class="tag {{goodsDetail.is_pre_sale===1?'pre_sale':goodsDetail.activity_info.activity_name?'new_activity':''}}">{{goodsDetail.is_pre_sale===1?'预售专区':goodsDetail.activity_info.activity_name?'新品上市':''}}</view>
-        <text>￥{{goodsDetail.market_price}}</text>
+        <block wx:if="{{goodsDetail.price===goodsDetail.market_price}}">
+          <text>￥</text><text>{{goodsDetail.price}}</text>
+          <view wx:if="{{goodsDetail.is_pre_sale===1 || goodsDetail.activity_info.activity_name}}" class="tag {{goodsDetail.is_pre_sale===1?'pre_sale':goodsDetail.activity_info.activity_name?'new_activity':''}}">{{goodsDetail.is_pre_sale===1?'预售专区':goodsDetail.activity_info.activity_name?'新品上市':''}}</view>
+          <!-- <text>￥{{goodsDetail.market_price}}</text> -->
+        </block>
+        <block wx:else>
+          <text>￥</text><text>{{goodsDetail.price}}</text>
+          <view wx:if="{{goodsDetail.is_pre_sale===1 || goodsDetail.activity_info.activity_name}}" class="tag {{goodsDetail.is_pre_sale===1?'pre_sale':goodsDetail.activity_info.activity_name?'new_activity':''}}">{{goodsDetail.is_pre_sale===1?'预售专区':goodsDetail.activity_info.activity_name?'新品上市':''}}</view>
+          <text>￥{{goodsDetail.market_price}}</text>
+        </block>
       </view>
-
       <view class="l2">{{goodsDetail.goods_name}}</view>
       <view class="l3">{{goodsDetail.goods_content}}</view>
     </view>

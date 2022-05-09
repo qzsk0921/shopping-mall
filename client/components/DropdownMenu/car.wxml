@@ -24,13 +24,24 @@
         </block>
         <!-- 授权且资质认证的会员 -->
         <block wx:else>
-          <view class="l1-1">
-            <text>￥</text>
-            <text>{{tools.filterUnit(myGoodsDetail.unit_arr,currentUnitId).price}}</text>
-          </view>
-          <view class="l1-2">
-            <text>￥{{tools.filterUnit(myGoodsDetail.unit_arr,currentUnitId).market_price}}</text>
-          </view>
+          <block wx:if="{{tools.filterUnit(myGoodsDetail.unit_arr,currentUnitId).price===tools.filterUnit(myGoodsDetail.unit_arr,currentUnitId).market_price}}">
+            <view class="l1-1">
+              <text>￥</text>
+              <text>{{tools.filterUnit(myGoodsDetail.unit_arr,currentUnitId).price}}</text>
+            </view>
+            <!-- <view class="l1-2">
+              <text>￥{{tools.filterUnit(myGoodsDetail.unit_arr,currentUnitId).market_price}}</text>
+            </view> -->
+          </block>
+          <block wx:else>
+            <view class="l1-1">
+              <text>￥</text>
+              <text>{{tools.filterUnit(myGoodsDetail.unit_arr,currentUnitId).price}}</text>
+            </view>
+            <view class="l1-2">
+              <text>￥{{tools.filterUnit(myGoodsDetail.unit_arr,currentUnitId).market_price}}</text>
+            </view>
+          </block>
         </block>
       </view>
     </view>

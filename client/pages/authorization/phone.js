@@ -13,16 +13,30 @@ create(store, {
    * 页面的初始数据
    */
   data: {
-
+    is_select: 0, //协议
+  },
+  // 选择阅读协议
+  agreementHandle() {
+    this.setData({
+      is_select: !this.data.is_select
+    })
   },
   getPhoneNumber(e) {
+    if (!this.data.is_select) {
+      wx.showToast({
+        icon: 'none',
+        title: '请阅读并同意用户协议与隐私政策',
+      })
+      return false
+    }
+
     console.log(e)
     if (e.detail.encryptedData) {
       const myData = {
         encryptedData: e.detail.encryptedData,
         iv: e.detail.iv,
       }
-      if(this.store.data.sale_id) {
+      if (this.store.data.sale_id) {
         myData.sale_id = this.store.data.sale_id
       }
       this.updatePhone(myData).then(res => {
@@ -81,7 +95,13 @@ create(store, {
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-
+    getApp().getSettingCallback = (setting) => {
+      this.setData({
+        setting
+      })
+      this.store.data.setting = setting
+      this.update()
+    }
   },
 
   /**
@@ -95,7 +115,11 @@ create(store, {
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-
+    if (!this.data.setting) {
+      this.setData({
+        setting: this.store.data.setting
+      })
+    }
   },
 
   /**

@@ -1,6 +1,11 @@
 <!--pages/goods/detail.wxml-->
 <!-- <text>pages/goods/detail.wxml</text> -->
 <view class="container container-goods-detail">
+  <view class="canvas-box">
+    <canvas canvas-id="canvas" class="canvas" style="width: {{canvasWidth}}px; height: {{canvasHeight}}px;"></canvas>
+    <!-- <canvas class="handWriting2" canvas-id="handWriting2" type="2d">
+  </canvas> -->
+  </view>
   <!-- 购物车下拉弹窗 -->
   <dropdown-car bindtap="dropdownMenuCarMaskTap" bindupdateCartHandle="updateCartHandle" opened="{{dialog.car.opened}}" bindsubClickable="subClickableHandle" goodsDetail="{{goodsDetail}}" userInfo="{{userInfo}}"></dropdown-car>
   <view class="fixed">
@@ -26,7 +31,10 @@
         <view wx:if="{{goodsDetail.is_pre_sale===1 || goodsDetail.activity_info.activity_name}}" class="tag {{goodsDetail.is_pre_sale===1?'pre_sale':goodsDetail.activity_info.activity_name?'new_activity':''}}">{{goodsDetail.is_pre_sale===1?'预售专区':goodsDetail.activity_info.activity_name?'新品上市':''}}</view>
         <text>￥{{goodsDetail.market_price}}</text>
       </view> -->
-
+      <button open-type="share" class="share-recommend" data-type="recommend">
+        <image src="/assets/images/details_icon_share.png" mode="aspectFill"></image>
+        <view>推荐给朋友</view>
+      </button>
       <!-- 已授权未资质认证的非会员 -->
       <view class="l1 no-sign" wx:if="{{(!userInfo.phone||userInfo.is_shop_check!=1)&&!userInfo.is_sale}}">
         <text>￥</text><text>***</text>
@@ -38,7 +46,7 @@
       </view>
       <!-- 授权且资质认证的会员 -->
       <view class="l1" wx:else>
-        <block wx:if="{{goodsDetail.price===goodsDetail.market_price}}">
+        <block wx:if="{{goodsDetail.price==goodsDetail.market_price}}">
           <text>￥</text><text>{{goodsDetail.price}}</text>
           <view wx:if="{{goodsDetail.is_pre_sale===1 || goodsDetail.activity_info.activity_name}}" class="tag {{goodsDetail.is_pre_sale===1?'pre_sale':goodsDetail.activity_info.activity_name?'new_activity':''}}">{{goodsDetail.is_pre_sale===1?'预售专区':goodsDetail.activity_info.activity_name?'新品上市':''}}</view>
           <!-- <text>￥{{goodsDetail.market_price}}</text> -->

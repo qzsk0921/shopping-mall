@@ -186,7 +186,8 @@
         {
           "name": "",
           "pathName": "pages/authorization/forbidden",
-          "query": "",
+          "query": "remark=rrrrrr",
+          "launchMode": "default",
           "scene": null
         },
         {

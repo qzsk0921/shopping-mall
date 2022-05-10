@@ -30,7 +30,7 @@ App({
             // 业务代码 1:正常 0:禁用 -1:不存在-------------------------------------------------
             if (res.data.status === 0) {
               wx.reLaunch({
-                url: '/pages/authorization/forbidden',
+                url: `/pages/authorization/forbidden?remark=${res.data.remark}`,
               })
             }
 
@@ -47,7 +47,7 @@ App({
         // 业务代码 1:正常 0:禁用 -1:不存在-------------------------------------------------
         if (res.data.status === 0) {
           wx.reLaunch({
-            url: '/pages/authorization/forbidden',
+            url: `/pages/authorization/forbidden?remark=${res.data.remark}`,
           })
         }
         this.globalData.userInfo = res.data

@@ -10,6 +10,11 @@ import {
 import {
   getCartData
 } from '../../api/cart'
+
+import {
+  drawCanvas
+} from '../../utils/business'
+
 let prevPage = null
 
 // Page({
@@ -379,7 +384,41 @@ create(store, {
   /**
    * 用户点击右上角分享
    */
-  onShareAppMessage: function () {
+  async onShareAppMessage(e) {
+    console.log(e)
+    if (e.from === 'button') {
 
+      if (e.target.dataset.type === 'recommend') {
+        const imageUrl = await drawCanvas(this, this.data.goodsDetail.price, this.data.goodsDetail.thumb, '/assets/images/share_img2.png')
+
+        // 推荐给好友
+        let queryString = `id=${this.data.goodsDetail.id}`
+
+        return {
+          title: this.data.goodsDetail.goods_name,
+          path: `/pages/goods/detail?${queryString}&navStatus=isEntryWithShare`, //若无path 默认跳转分享页
+          // imageUrl: this.data.goodsDetail.thumb, //若无imageUrl 截图当前页面
+          imageUrl,
+          success(res) {
+            console.log('分享成功', res)
+          },
+          fail(res) {
+            console.log(res)
+          }
+        }
+      }
+    } else {
+      return {
+        title: this.data.goodsDetail.goods_name,
+        path: `/pages/goods/detail?id=${this.data.goodsDetail.id}&navStatus=isEntryWithShare`, //若无path 默认跳转分享页
+        imageUrl: this.data.goodsDetail.thumb, //若无imageUrl 截图当前页面
+        success(res) {
+          console.log('分享成功', res)
+        },
+        fail(res) {
+          console.log(res)
+        }
+      }
+    }
   }
 })

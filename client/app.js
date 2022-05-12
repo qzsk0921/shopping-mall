@@ -87,7 +87,7 @@ App({
     this.update()
     // 公共配置参数
     this.getSetting({
-      type: 'mp_link,expire_time,stop_content'
+      type: 'mp_link,expire_time,stop_content,small'
     }).then(res => {
       if (this.getSettingCallback) {
         console.log('app getSettingCallback')

@@ -14,7 +14,7 @@
         <view class="text">暂无更多内容</view>
       </view>
       <view class="item-box" wx:else>
-        <view class="item" wx:for="{{historyList.cache}}" wx:key="unique" data-id="{{item.id}}" bindtap="toGoodsDetail">
+        <view class="item" wx:for="{{historyList.cache}}" wx:key="unique" data-item="{{item}}" bindtap="toGoodsDetail">
           <image class="icon-pri" src="{{item.thumb}}" mode="aspectFill"></image>
           <view class="cont">
             <view class="l12-box">

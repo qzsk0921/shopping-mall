@@ -53,7 +53,7 @@ create(store, {
     const item = e.currentTarget.dataset.item
     const index = e.currentTarget.dataset.index
     // 下架或库存不足
-    if (item.status === 2 || !item.is_stock) return
+    // if (item.status === 2 || !item.is_stock) return
 
     let myData = {
       type: 1,
@@ -63,6 +63,8 @@ create(store, {
     }
 
     this.addNumCart(myData).then(res => {
+      this.store.data.checkedIds = this.store.data.checkedIds.concat(item.id + '.' + item.unit_arr[0].id)
+
       // 更新购物车数值
       wx.showToast({
         icon: 'none',

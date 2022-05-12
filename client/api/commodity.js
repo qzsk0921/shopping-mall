@@ -109,3 +109,26 @@ export function getKeyList(data) {
     data
   })
 }
+
+/**
+ * 快速补货列表 user/get_hot_sale_list
+ */
+export function getReplenishmentList(data) {
+  return request({
+    url: '/user/get_hot_sale_list',
+    method: 'get',
+    data
+  })
+}
+
+/**
+ * 快速补货删除商品 user/close_hot_goods
+ * @param {int} goods_id require 商品id
+ */
+export function delReplenishment(data) {
+  return request({
+    url: '/user/close_hot_goods',
+    method: 'get',
+    data
+  })
+}

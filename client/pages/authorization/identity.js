@@ -63,14 +63,14 @@ create(store, {
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    // getApp().getSettingCallback = (setting) => {
-    //   this.setData({
-    //     setting
-    //   })
-    //   console.log(this.data.setting)
-    //   this.store.data.setting = setting
-    //   this.update()
-    // }
+    getApp().getSettingCallback = (setting) => {
+      this.setData({
+        setting
+      })
+      console.log(this.data.setting)
+      this.store.data.setting = setting
+      this.update()
+    }
 
     if (wx.getUserProfile) {
       this.setData({
@@ -90,11 +90,11 @@ create(store, {
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-    // if (!this.data.setting) {
-    //   this.setData({
-    //     setting: this.store.data.setting
-    //   })
-    // }
+    if (!this.data.setting) {
+      this.setData({
+        setting: this.store.data.setting
+      })
+    }
   },
 
   /**

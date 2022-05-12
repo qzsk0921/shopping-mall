@@ -39,7 +39,7 @@ create(store, {
     // 检查授权状态
     // 未授权
     if (!this.checkAuth()) return
-
+    const item = e.currentTarget.dataset.item
     if (item.status === 2 || item.status === 3) {
       // 浏览记录不分是不是拼团商品
       wx.showToast({
@@ -50,7 +50,7 @@ create(store, {
     }
 
     wx.navigateTo({
-      url: `/pages/goods/detail?id=${e.currentTarget.dataset.id}`,
+      url: `/pages/goods/detail?id=${item.id}`,
     })
   },
   checkAuth() {
@@ -81,6 +81,8 @@ create(store, {
       goods_num: item.one_cart_number + 1
     }
     this.addNumCart(myData).then(res => {
+      this.store.data.checkedIds = this.store.data.checkedIds.concat(item.id + '.' + item.unit_arr[0].id)
+
       // 更改购物车数值
       wx.showToast({
         icon: 'none',

@@ -11,7 +11,7 @@
       <input class="search" name="search" placeholder="蔬菜" placeholder-class="search-placeholder" value="{{searchKeyword}}" confirm-type="search" bindconfirm="bindconfirmHandle" disabled="true" />
       <view class="btn btn-search" bindtap="btnSearchCancelHandle">搜索</view>
     </view>
-    <view class="cont hide-scrollbar" style="height:{{compatibleInfo.isIphoneX?compatibleInfo.systemInfo.screenHeight-(tabbarH+section1H+fixed)+'px':compatibleInfo.systemInfo.screenHeight-(tabbarH+section1H+fixed)+'px'}}" bindtouchmove="touchMove">
+    <view class="cont hide-scrollbar" style="height:{{compatibleInfo.isIphoneX?compatibleInfo.systemInfo.screenHeight-(tabbarH+section1H+fixed)+'px':compatibleInfo.systemInfo.screenHeight-(tabbarH+section1H+fixed)+'px'}}" bindtouchstart="touchStart" bindtouchmove="touchMove">
       <view class="bg">
       </view>
       <view wx:if="{{shopData.banner.length}}" class="section2" bindtap="swiperHandle">
@@ -205,8 +205,8 @@
               <image src="/assets/images/nav_btn_next.png" mode="aspectFill"></image>
             </view>
           </view>
-          <view class="item-box">
-            <view class="item" wx:for="{{item.goods_list}}" wx:key="unique" wx:for-item="itemName" data-id="{{itemName.id}}" bindtap="toGoodsDetail">
+          <view class="item-box hide-scrollbar">
+            <view class="item hide-scrollbar" wx:for="{{item.goods_list}}" wx:key="unique" wx:for-item="itemName" data-id="{{itemName.id}}" bindtap="toGoodsDetail">
               <image class="icon-pri" src="{{itemName.thumb}}" mode="aspectFill"></image>
               <view class="cont">
                 <view class="l12-box">

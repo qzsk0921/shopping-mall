@@ -185,8 +185,8 @@
         },
         {
           "name": "",
-          "pathName": "pages/authorization/forbidden",
-          "query": "remark=rrrrrr",
+          "pathName": "pages/authorization/identity",
+          "query": "",
           "launchMode": "default",
           "scene": null
         },
@@ -194,6 +194,13 @@
           "name": "",
           "pathName": "pages/authorization/phone",
           "query": "",
+          "scene": null
+        },
+        {
+          "name": "",
+          "pathName": "pages/mine/set/set",
+          "query": "",
+          "launchMode": "default",
           "scene": null
         }
       ]

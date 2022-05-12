@@ -778,10 +778,11 @@
 }
 
 .section8 .item-box {
-  overflow: auto;
-  /* white-space: nowrap; */
+  overflow-x: auto;
   padding-left: 24rpx;
-  /* display: flex; */
+  white-space: nowrap;
+  /* max-height: 392rpx;
+  overflow-y: hidden; */
 }
 
 .section8 .item {
@@ -790,7 +791,6 @@
   width: 190rpx;
   background: #FFFFFF;
   border-radius: 16rpx;
-  /* overflow: hidden; */
   position: relative;
 }
 
@@ -811,6 +811,7 @@
   font-size: 26rpx;
   font-weight: bold;
   color: #333333;
+  white-space: break-spaces;
 }
 
 .section8 .item .cont .l1 .tag {

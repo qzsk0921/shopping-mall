@@ -121,6 +121,7 @@
 }
 
 .section2 .l3 {
+  display: inline-block;
   margin-top: 8rpx;
   font-size: 30rpx;
   line-height: 44rpx;

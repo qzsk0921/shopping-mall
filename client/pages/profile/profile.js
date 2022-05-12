@@ -24,11 +24,17 @@ create(store, {
     options: [{
         id: 1,
         value: 0,
+        name: '快速补货',
+        url: '/pages/mine/replenishment/replenishment?from=mine'
+      },
+      {
+        id: 2,
+        value: 0,
         name: '我的收藏',
         url: '/pages/mine/collection/collection?from=mine'
       },
       {
-        id: 2,
+        id: 3,
         value: 0,
         name: '浏览记录',
         url: '/pages/mine/history/history?from=mine'
@@ -54,6 +60,12 @@ create(store, {
       }
     ],
     options2: [{
+        id: 0,
+        imgName: 'my_icon_replenishment',
+        name: '快速补货',
+        url: '/pages/mine/replenishment/replenishment?from=mine'
+      },
+      {
         id: 1,
         imgName: 'my_icon_coupons',
         name: '优惠券',
@@ -257,8 +269,9 @@ create(store, {
     getUserDetail().then(res => {
       const myData = {
         userInfo: res.data,
-        'options[0].value': res.data.like_number,
-        'options[1].value': res.data.view_number,
+        'options[0].value': res.data.hot_goods_number,
+        'options[1].value': res.data.like_number,
+        'options[2].value': res.data.view_number,
       }
       // 我的客户入口需要是业务员才有
       if (!res.data.is_sale) {

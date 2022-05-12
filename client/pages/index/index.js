@@ -24,7 +24,7 @@ import {
 } from '../../api/data'
 
 let timerSearchObject = null
-
+let systemInfoCallbackFlag = 0
 // Page({
 create(store, {
   /**
@@ -474,21 +474,30 @@ create(store, {
       url: '/pages/mine/coupon/center',
     })
   },
+  touchStart(e) {
+    // console.log(e)
+    this.data.pageYStart = e.changedTouches[0].pageY
+  },
   touchMove(e) {
+    // console.log(e)
     // console.log('touchMove')
-    let {
-      shrink
-    } = this.data
-    if (!shrink) this.setData({
-      shrink: true
-    })
-    clearTimeout(this.timer)
-    this.timer = setTimeout(res => {
-      this.setData({
-        shrink: false
+    // 只对竖向滚动才执行
+    this.data.pageYMove = e.changedTouches[0].pageY
+    if (Math.abs(this.data.pageYStart - this.data.pageYMove) > 100) {
+      let {
+        shrink
+      } = this.data
+      if (!shrink) this.setData({
+        shrink: true
       })
       clearTimeout(this.timer)
-    }, 400)
+      this.timer = setTimeout(res => {
+        this.setData({
+          shrink: false
+        })
+        clearTimeout(this.timer)
+      }, 400)
+    }
   },
   changeTab(e) {
     console.log(e)
@@ -545,7 +554,6 @@ create(store, {
     // 检查授权状态
     // 未授权
     if (!this.checkAuth()) return
-
     wx.navigateTo({
       url: `/pages/goods/detail?id=${e.currentTarget.dataset.id}`,
     })
@@ -621,6 +629,8 @@ create(store, {
       goods_num: item.one_cart_number + 1
     }
     this.addNumCart(myData).then(res => {
+      this.store.data.checkedIds = this.store.data.checkedIds.concat(item.id + '.' + item.unit_arr[0].id)
+
       // 更新详情页购物车数据
       this.getShopData({
         shop_id: this.store.data.shop_id
@@ -697,6 +707,7 @@ create(store, {
     getApp().setWatcher(this) //设置监听器
 
     getApp().getSystemInfoCallback = (res => {
+      systemInfoCallbackFlag = 1
       console.log(res)
       this.setData({
         compatibleInfo: res
@@ -717,7 +728,7 @@ create(store, {
       this.store.data.setting = setting
       this.update()
     }
-    
+
     // 定位授权
     this.getLocation()
 
@@ -753,7 +764,7 @@ create(store, {
 
 
       this.setData({
-        tabbarH: this.store.data.compatibleInfo.tabbarH
+        tabbarH: systemInfoCallbackFlag ? this.data.compatibleInfo.tabbarH : this.store.data.compatibleInfo.tabbarH
       })
 
       console.log(this.data.tabbarH)

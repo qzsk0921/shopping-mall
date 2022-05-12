@@ -389,13 +389,21 @@ create(store, {
     if (e.from === 'button') {
 
       if (e.target.dataset.type === 'recommend') {
+        wx.showLoading({
+          title: '',
+        })
+
         const imageUrl = await drawCanvas(this, this.data.goodsDetail.price, this.data.goodsDetail.thumb, '/assets/images/share_img2.png')
+
+        wx.hideLoading({
+          success: (res) => {},
+        })
 
         // 推荐给好友
         let queryString = `id=${this.data.goodsDetail.id}`
 
         return {
-          title: this.data.goodsDetail.goods_name,
+          title: `${this.data.userInfo.nick_name} 超值推荐您购买 ${this.data.goodsDetail.goods_name}`,
           path: `/pages/goods/detail?${queryString}&navStatus=isEntryWithShare`, //若无path 默认跳转分享页
           // imageUrl: this.data.goodsDetail.thumb, //若无imageUrl 截图当前页面
           imageUrl,

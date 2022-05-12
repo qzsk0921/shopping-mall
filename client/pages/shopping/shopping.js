@@ -22,6 +22,7 @@ import {
 
 let timerSearchObject = null,
   btnflag = true //按钮截流
+let systemInfoCallbackFlag = 0
 
 // Page({
 create(store, {
@@ -37,7 +38,7 @@ create(store, {
     checkedIds: [], //选中的id和unit_id  格式[id.unit_id]
 
     compatibleInfo: null, //navHeight menuButtonObject systemInfo isIphoneX
-    tabbarH: null, //tabbar高度
+    // tabbarH: null, //tabbar高度
     navigationBarTitleText: '购物车',
     navStatus: 'isEmpty',
     // 购物车商品 优先判断 下架 其次判断 库存
@@ -185,8 +186,8 @@ create(store, {
               setTimeout(() => {
                 if (nv.length === this.data.cartData.cache.length) {
                   tempData.select_all = true
-                  this.setData(tempData)
                 }
+                this.setData(tempData)
               }, 0)
             } else {
               this.setData(tempData)
@@ -795,13 +796,21 @@ create(store, {
     setTabBar.call(this, {
       selected: 2
     })
-    if (!this.data.tabbarH) {
-      setTimeout(() => {
-        this.setData({
-          tabbarH: this.store.data.compatibleInfo.tabbarH
-        })
-      }, 0)
-    }
+
+    getApp().getSystemInfoCallback = (res => {
+      systemInfoCallbackFlag = 1
+      console.log(res)
+      this.setData({
+        compatibleInfo: res
+      })
+
+      this.store.data.compatibleInfo.systemInfo = res.systemInfo
+      this.store.data.compatibleInfo.navHeight = res.navHeight
+      this.store.data.compatibleInfo.isIphoneX = res.isIphoneX
+      this.store.data.compatibleInfo.isIphone = res.isIphone
+
+      this.update()
+    })
 
     getApp().setWatcher(this) //设置监听器
 
@@ -841,7 +850,7 @@ create(store, {
   onShow: function () {
     if (!this.data.compatibleInfo.navHeight) {
       this.setData({
-        compatibleInfo: this.store.data.compatibleInfo
+        compatibleInfo: systemInfoCallbackFlag ? this.data.compatibleInfo : this.store.data.compatibleInfo
       })
     }
 

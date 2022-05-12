@@ -58,7 +58,7 @@
         </block>
       </view>
       <view class="l2">{{goodsDetail.goods_name}}</view>
-      <view class="l3">{{goodsDetail.goods_content}}</view>
+      <text class="l3">{{goodsDetail.goods_content}}</text>
     </view>
     <view class="section3">
       <view class="l1">详情</view>
@@ -75,7 +75,7 @@
       <view class="l3">
         <view class="col1 col">
           <text class="name">规格</text>
-          <text class="val">{{goodsDetail.spec}}</text>
+          <text class="val">{{goodsDetail.spec?goodsDetail.spec:'--'}}</text>
         </view>
         <view class="col2 col">
           <text class="name">单位</text>

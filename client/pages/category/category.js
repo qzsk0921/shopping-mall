@@ -163,20 +163,20 @@ create(store, {
     firstCategory: {
       handler(nv, ov, obj) {
         // console.log(nv)
-        if (!this.data.section1H) {
-          const that = this;
-          setTimeout(() => {
-            const query = wx.createSelectorQuery();
-            query.select('.section1').boundingClientRect(function (rect) {
-              that.setData({
-                section1H: rect.height,
-              })
-            }).exec();
-          }, 0)
-        }
+        // if (!this.data.section1H) {
+        //   const that = this;
+        //   setTimeout(() => {
+        //     const query = wx.createSelectorQuery();
+        //     query.select('.section1').boundingClientRect(function (rect) {
+        //       that.setData({
+        //         section1H: rect.height,
+        //       })
+        //     }).exec();
+        //   }, 0)
+        // }
       },
       deep: true,
-      immediate: true
+      // immediate: true
     }
   },
   checkAuth() {
@@ -286,7 +286,6 @@ create(store, {
     this.setData({
       currentFirstCategoryId: item.id,
       currentScrollTopId,
-      currentSecondCategoryIndex: 0
     })
 
     this.store.data.currentFirstCategoryId = item.id
@@ -294,6 +293,10 @@ create(store, {
     this.update()
 
     if (!render) {
+      this.setData({
+        currentSecondCategoryIndex: 0
+      })
+
       this.getCategoryList({
         pid: item.id
       }).then(res => {
@@ -442,6 +445,10 @@ create(store, {
           resolve(res)
           console.log(this.data.currentGoodsList)
         } else {
+          this.setData({
+            [`currentGoodsList.cache`]: [],
+          })
+
           this.setData({
             [`currentGoodsList.cache`]: res.data.data,
             [`currentGoodsList.total_page`]: res.data.last_page

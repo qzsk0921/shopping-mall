@@ -397,21 +397,12 @@ create(store, {
     },
     shop_id: {
       handler(nv, ov, obj) {
+        const that = this;
         console.log(nv)
         // 用用户授权地址换取店铺id
         clearTimeout(timerSearchObject)
         timerSearchObject = setTimeout(() => {
           if (nv) {
-            const that = this;
-            const query = wx.createSelectorQuery();
-            if (!this.data.section1H) {
-              query.select('.section1').boundingClientRect(function (rect) {
-                that.setData({
-                  section1H: rect.height,
-                })
-              }).exec();
-            }
-
             let paramData = {
               shop_id: nv
             }
@@ -431,6 +422,8 @@ create(store, {
               this.setData({
                 shopData: res.data,
               })
+
+              const query = wx.createSelectorQuery();
 
               query.select('.broadcast').boundingClientRect(function (rect) {
                 that.data.broadcastH = rect.height
@@ -761,7 +754,6 @@ create(store, {
           fixed: rect.height,
         })
       }).exec();
-
 
       this.setData({
         tabbarH: systemInfoCallbackFlag ? this.data.compatibleInfo.tabbarH : this.store.data.compatibleInfo.tabbarH

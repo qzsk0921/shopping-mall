@@ -1,5 +1,6 @@
 /* pages/category/category.wxss */
-.container-category {}
+.container-category {
+}
 
 .container-category .content {
   position: relative;

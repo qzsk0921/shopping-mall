@@ -293,6 +293,16 @@ create(store, {
       console.log(this.data.userInfo)
       this.store.data.userInfo = res.data
       this.store.update()
+
+      if (res.data.nick_name) {
+        const toastVisibile = wx.getStorageSync('toastVisibile')
+        if (!toastVisibile) {
+          this.setData({
+            toastVisibile: 1
+          })
+          wx.setStorageSync('toastVisibile', 1)
+        }
+      }
     })
   },
 

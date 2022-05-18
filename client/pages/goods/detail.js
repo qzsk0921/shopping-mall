@@ -309,16 +309,27 @@ create(store, {
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+    console.log(options)
+    let param = {
+      shop_id: this.store.data.shop_id
+    }
+
     const {
-      id
+      id,
+      is_verification_auth
     } = options
 
-    this.data.goods_id = id
+    // 分享到朋友圈 不验证登录 https://developers.weixin.qq.com/miniprogram/dev/framework/open-ability/share-timeline.html
+    if (is_verification_auth) {
+      param.is_verification_auth = is_verification_auth
+    }
 
-    this.getGoodsDetail({
-      id,
-      shop_id: store.data.shop_id
-    }).then(res => {
+    this.data.goods_id = id
+    param.id = id
+
+    this.setData(param)
+
+    this.getGoodsDetail(param).then(res => {
       this.setData({
         goodsDetail: res.data,
       })
@@ -428,6 +439,22 @@ create(store, {
         fail(res) {
           console.log(res)
         }
+      }
+    }
+  },
+  /**
+   * 分享到朋友圈
+   */
+  onShareTimeline: function (e) {
+    return {
+      title: this.data.goodsDetail.goods_name,
+      query: `id=${this.data.goodsDetail.id}&is_verification_auth=-1`, //若无path 默认跳转分享页
+      imageUrl: this.data.goodsDetail.thumb, //若无imageUrl 截图当前页面
+      success(res) {
+        console.log('分享成功', res)
+      },
+      fail(res) {
+        console.log(res)
       }
     }
   }

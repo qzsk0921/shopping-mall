@@ -3,5 +3,6 @@
     "top-navigation": "/components/navigation/commonnav",
     "dropdown-car": "/components/DropdownMenu/car"
   },
-  "navigationStyle": "custom"
+  "navigationStyle": "custom",
+  "navigationBarTitleText": "旺莱餐饮"
 }

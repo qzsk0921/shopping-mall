@@ -181,6 +181,9 @@ create(store, {
   },
   // 重新定位
   repositionHandle() {
+    wx.showLoading({
+      title: '',
+    })
     // console.log('repositionHandle')
     // 用 wx.onLocationChange 监听地理位置变化
     // wx.onLocationChange()
@@ -221,6 +224,11 @@ create(store, {
     wx.getLocation({
       type: 'wgs84',
       success: function (res) {
+        
+        wx.hideLoading({
+          success: (res) => {},
+        })
+        
         let latitude = res.latitude
         let longitude = res.longitude
         wx.request({

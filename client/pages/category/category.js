@@ -214,6 +214,7 @@ create(store, {
     console.log(myData)
 
     this.addNumCart(myData).then(res => {
+      this.store.data.checkedIds = this.store.data.checkedIds.concat(item.id + '.' + item.unit_arr[0].id)
       // 更新详情页购物车数据
       // this.getGoodsList()
       // 不重新渲染

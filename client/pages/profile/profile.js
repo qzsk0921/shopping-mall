@@ -119,7 +119,8 @@ create(store, {
         name: '联系客服',
         url: '/pages/mine/set/set?from=mine'
       }
-    ]
+    ],
+    popupVisible: 0 //点击昵称更新信息
   },
   optionsTapHandle(e) {
     // 检查授权状态
@@ -229,13 +230,38 @@ create(store, {
         // 上传用户信息
         updateUserInfo(res.userInfo).then(res => {
           console.log(res.msg)
-          wx.navigateTo({
-            url: '/pages/authorization/phone',
-          })
+
+          if (!this.store.data.userInfo.phone) {
+            wx.navigateTo({
+              url: '/pages/authorization/phone',
+            })
+          } else {
+            getUserDetail().then(res => {
+
+              this.setData({
+                userInfo: res.data
+              })
+
+              this.store.data.userInfo = res.data
+              this.store.update()
+            })
+          }
         }).catch(err => {
           console.log('更新微信信息:' + err.msg)
         })
       }
+    })
+  },
+  // 点击昵称更新信息提示
+  popupHandle() {
+    this.setData({
+      popupVisible: 0
+    })
+  },
+  noUpdateHandle() {
+    wx.showToast({
+      icon: 'none',
+      title: '每月只能更新一次',
     })
   },
   /**
@@ -295,12 +321,12 @@ create(store, {
       this.store.update()
 
       if (res.data.nick_name) {
-        const toastVisibile = wx.getStorageSync('toastVisibile')
-        if (!toastVisibile) {
+        const popupVisible = wx.getStorageSync('popupVisible')
+        if (!popupVisible) {
           this.setData({
-            toastVisibile: 1
+            popupVisible: 1
           })
-          wx.setStorageSync('toastVisibile', 1)
+          wx.setStorageSync('popupVisible', 1)
         }
       }
     })

@@ -198,7 +198,8 @@ create(store, {
         // wx.switchTab({
         //   url: '/pages/profile/profile',
         // })
-
+        
+        // 支付成功后，杀掉订单确认页，刷新个人中心页面
         wx.navigateTo({
           url: `/pages/shop/order/detailOrder?order_id=${payModel.order_id}`,
         })

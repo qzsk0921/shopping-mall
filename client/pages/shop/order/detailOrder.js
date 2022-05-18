@@ -342,7 +342,13 @@ create(store, {
    * 生命周期函数--监听页面卸载
    */
   onUnload: function () {
-
+    const pages = getCurrentPages()
+    if (pages[pages.length - 2].route !== 'pages/shop/order/myOrder') {
+      console.log('销毁的页面:' + pages)
+      wx.navigateBack({
+        delta: pages.length - 3,
+      })
+    }
   },
 
   /**

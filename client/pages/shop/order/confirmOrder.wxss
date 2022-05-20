@@ -88,7 +88,9 @@
 }
 
 .content>.l2 .l2-2 {
-  overflow: auto;
+  overflow-x: auto;
+  height: 134rpx;
+  white-space: nowrap;
 }
 
 .content>.l2 .l2-2 .icon-goods {
@@ -97,6 +99,10 @@
   height: 134rpx;
   background: rgba(0, 0, 0, 0);
   border-radius: 8rpx;
+}
+
+.content>.l2 .l2-2 .icon-goods:last-child {
+  margin-right: 40rpx;
 }
 
 .content>.l2 .l2-3 {

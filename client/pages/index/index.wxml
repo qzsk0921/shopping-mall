@@ -14,8 +14,9 @@
     <view class="cont hide-scrollbar" style="height:{{compatibleInfo.isIphoneX?compatibleInfo.systemInfo.screenHeight-(tabbarH+53+fixed)+'px':compatibleInfo.systemInfo.screenHeight-(tabbarH+53+fixed)+'px'}}" bindtouchstart="touchStart" bindtouchmove="touchMove">
       <view class="bg">
       </view>
-      <view wx:if="{{!shopData.banner.length}}">
-        <image class="icon-iload" src="https://retailers-qn.xcmbkj.com/miniprogram/iload.png" mode="aspectFill"></image>
+      <view wx:if="{{!shopData.banner.length}}" style="width: 100vw;height: 100vh;">
+        <!-- <image class="icon-iload" src="https://retailers-qn.xcmbkj.com/miniprogram/iload.png" mode="aspectFill"></image> -->
+        <image class="icon-iload" src="https://retailers-qn.xcmbkj.com/miniprogram/l2.png" mode="aspectFill"></image>
       </view>
       <view wx:if="{{shopData.banner.length}}" class="section2" bindtap="swiperHandle">
         <view class="page-section page-section-spacing swiper">

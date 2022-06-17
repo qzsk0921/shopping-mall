@@ -3,7 +3,8 @@ import store from '../../../store/common'
 import create from '../../../utils/create'
 import {
   addOrder,
-  rePay
+  rePay,
+  preOrder
 } from '../../../api/order'
 
 import {
@@ -198,7 +199,7 @@ create(store, {
         // wx.switchTab({
         //   url: '/pages/profile/profile',
         // })
-        
+
         // 支付成功后，杀掉订单确认页，刷新个人中心页面
         wx.navigateTo({
           url: `/pages/shop/order/detailOrder?order_id=${payModel.order_id}`,
@@ -253,10 +254,24 @@ create(store, {
     })
   },
 
+  preOrder(data) {
+    return new Promise((resolve, reject) => {
+      preOrder(data).then(res => {
+        resolve(res)
+      }).catch(err => {
+        reject(err)
+      })
+    })
+  },
+
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+
+    this.data.loaded = true
+    this.data.orderParam = getApp().globalData.orderData
+
     const {
       preData
     } = options
@@ -280,6 +295,20 @@ create(store, {
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
+    if (!this.data.loaded) {
+      this.preOrder(this.data.orderParam).then(res => {
+        this.setData({
+          orderData: res.data
+        })
+      }).catch(err => {
+        console.log(err)
+        // if (err.msg === '地址不存在') {
+        //   wx.removeStorageSync('address_id')
+        //   this.confirmationOrderHandle()
+        // }
+      })
+    }
+
     if (!this.data.compatibleInfo.navHeight) {
       this.setData({
         compatibleInfo: this.store.data.compatibleInfo
@@ -313,7 +342,8 @@ create(store, {
    * 生命周期函数--监听页面隐藏
    */
   onHide: function () {
-
+    console.log('onHide')
+    this.data.loaded = false
   },
 
   /**

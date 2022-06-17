@@ -222,13 +222,14 @@ create(store, {
   getLocation() {
     const that = this;
     wx.getLocation({
-      type: 'wgs84',
+      isHighAccuracy: true,
+      type: 'gcj02',
       success: function (res) {
-        
+
         wx.hideLoading({
           success: (res) => {},
         })
-        
+
         let latitude = res.latitude
         let longitude = res.longitude
         wx.request({
@@ -453,7 +454,7 @@ create(store, {
    * 生命周期函数--监听页面隐藏
    */
   onHide: function () {
-
+    
   },
 
   /**

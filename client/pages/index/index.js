@@ -25,6 +25,19 @@ import {
 
 let timerSearchObject = null
 let systemInfoCallbackFlag = 0
+
+let aBroadcast = wx.createAnimation({
+  duration: 500,
+  timingFunction: 'linear',
+  delay: 3000
+})
+
+let reABroadcast = wx.createAnimation({
+  duration: 0,
+  timingFunction: 'linear',
+  delay: 0
+})
+
 // Page({
 create(store, {
   /**
@@ -647,12 +660,6 @@ create(store, {
       return
     }
 
-    const aBroadcast = wx.createAnimation({
-      duration: 500,
-      timingFunction: 'linear',
-      delay: 3000
-    })
-
     this.data.aBroadcastCount += 1
 
     aBroadcast.translateY(-((this.data.aBroadcastCount - 1) * this.data.broadcastH)).step()
@@ -666,15 +673,9 @@ create(store, {
 
       this.data.aBroadcastCount = 1
 
-      const aBroadcast = wx.createAnimation({
-        duration: 0,
-        timingFunction: 'linear',
-        delay: 0
-      })
-
-      aBroadcast.translateY(0).step()
+      reABroadcast.translateY(0).step()
       this.setData({
-        aBroadcast: aBroadcast.export(),
+        aBroadcast: reABroadcast.export(),
       })
       this.startABroadcast()
     } else {
@@ -823,7 +824,12 @@ create(store, {
    * 生命周期函数--监听页面隐藏
    */
   onHide: function () {
+    console.log('onhide')
 
+    reABroadcast.translateY(0).step()
+    this.setData({
+      aBroadcast: reABroadcast.export(),
+    })
   },
 
   /**
@@ -881,7 +887,8 @@ create(store, {
   getLocation() {
     const that = this;
     wx.getLocation({
-      type: 'wgs84',
+      isHighAccuracy: true,
+      type: 'gcj02',
       success: function (res) {
         let latitude = res.latitude
         let longitude = res.longitude

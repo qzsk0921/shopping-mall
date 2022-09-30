@@ -70,6 +70,18 @@ create(store, {
       // })
     }
   },
+  // 拒绝
+  rejectHandle() {
+    wx.navigateBack({
+      delta: 1,
+      fail(err) {
+        console.log(err)
+        wx.switchTab({
+          url: '/pages/index/index',
+        })
+      }
+    })
+  },
   // 用户协议 9
   protocolServerHandle() {
     wx.navigateTo({

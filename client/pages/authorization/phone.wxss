@@ -56,3 +56,15 @@ image {
   width: 36rpx !important;
   height: 36rpx !important;
 }
+
+.btn-reject {
+  text-align: center;
+  margin: 30rpx auto 0;
+  font-size: 32rpx;
+  line-height: 80rpx;
+  color: #AAAAAA;
+  width: 616rpx;
+  height: 80rpx;
+  background: #F6F6F6;
+  border-radius: 40rpx;
+}

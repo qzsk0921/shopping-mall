@@ -50,7 +50,7 @@
             </view>
           </view>
           <!-- <view style="position:absolute;top:10px;">{{tabbarH+' '+section1H+' '+fixed+' '+contentTipH}}</view> -->
-          <scroll-view class="hide-scrollbar" scroll-y="true" show-scrollbar="{{false}}" style="height:{{compatibleInfo.isIphoneX?compatibleInfo.systemInfo.screenHeight-(tabbarH+90+fixed+contentTipH)+'px':compatibleInfo.systemInfo.screenHeight-(tabbarH+90+fixed+contentTipH)+'px'}}">
+          <scroll-view class="hide-scrollbar" scroll-y="true" show-scrollbar="{{false}}" style="height:{{compatibleInfo.isIphoneX?compatibleInfo.systemInfo.screenHeight-(tabbarH+90+fixed+contentTipH)+'px':compatibleInfo.systemInfo.screenHeight-(tabbarH+90+fixed+contentTipH)+'px'}}" bindscrolltolower="scrollToLower" bindrefresherrefresh="scrollToRefresherrefresh" bindrefresherpulling="scrollToRefresherPull" bindrefresherrestore="scrollToRefresherStore">
             <view class="tree-select__item-box hide-scrollbar">
               <view class="no-data" wx:if="{{currentGoodsList.cache.length==0}}">
                 <image mode="aspectFill" src="/assets/images/empty.png"></image>

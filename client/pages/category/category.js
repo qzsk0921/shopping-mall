@@ -372,7 +372,8 @@ create(store, {
     const index = e.target.dataset.index
     this.setData({
       currentSecondCategoryId: id,
-      currentSecondCategoryIndex: index
+      currentSecondCategoryIndex: index,
+      'currentGoodsList.count': 1
     })
     this.getGoodsList({
       category_id: id
@@ -500,16 +501,22 @@ create(store, {
       url: `/pages/goods/detail?id=${id}`,
     })
   },
-  scrollToLower() {
+  scrollToLower(e) {
     console.log(e)
     console.log('scrollToLower')
 
     let currentGoodsList = this.data.currentGoodsList
 
-    if (currentGoodsList[this.data.tabIndex].count + 1 > currentGoodsList.total_page) return
+    // if (currentGoodsList[this.data.tabIndex].count + 1 > currentGoodsList.total_page) return
+
+    // this.setData({
+    //   [`currentGoodsList[${this.data.tabIndex}].count`]: ++currentGoodsList[this.data.tabIndex].count
+    // })
+
+    if (currentGoodsList.count + 1 > currentGoodsList.total_page) return
 
     this.setData({
-      [`currentGoodsList[${this.data.tabIndex}].count`]: ++currentGoodsList[this.data.tabIndex].count
+      [`currentGoodsList.count`]: ++currentGoodsList.count
     })
 
     this.getGoodsList('scrollToLower').then(res => {
